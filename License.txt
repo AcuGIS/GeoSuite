@@ -1,6 +1,5 @@
 GeoHelm:
 Copyright © 2017 Cited, Inc.
-See the CREDITS file for authorship
 Licensed GPL v3
                     
                     
