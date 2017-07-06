@@ -1,0 +1,102 @@
+#!/usr/bin/perl
+
+require './geohelm-lib.pl';
+foreign_require('postgresql', 'postgresql-lib.pl');
+
+#extension info key(name) : values(label, url, status, version, deps)
+my %ext_info  = (	'postgis' 	=> ['PostGIS', 	 'http://postgis.net', 	0, undef, undef],
+					'pgrouting' => ['PgRouting', 'http://pgrouting.org',0, undef, 'postgis'],
+					'hstore'	=> ['hStore',	 'https://www.postgresql.org/docs/9.0/static/hstore.html', 0, undef, undef],
+					'postgis_topology'		=> ['PostGIS Topology', 	'http://postgis.net', 	0, undef, 'postgis'],
+					'fuzzystrmatch'			=> ['FuzzyStringMatch', 	'http://postgis.net', 	0, undef, undef],
+					'address_standardizer'	=> ['Address Standardizer', 'http://postgis.net', 	0, undef, undef],
+					#'pointcloud'			=> ['Pointcloud', 	 		'https://github.com/pgpointcloud', 	0, undef],
+					#'pointcloud_postgis'	=> ['Pointcloud PostGIS', 	'https://github.com/pgpointcloud', 	0, undef],
+					);
+
+&ui_print_header(undef, $text{'pg_ext_title'}, "");
+
+#TODO: Check if packages are installed
+my @pg_dbs = postgresql::list_databases();
+
+if ($ENV{REQUEST_METHOD} eq "POST") {
+	&ReadParseMime();
+}else{
+	&ReadParse();
+}
+my $sel_db = $in{'ext_db'} || 'postgres';
+
+
+foreach my $ename (keys %ext_info){
+	my $t = postgresql::execute_sql_safe($sel_db, "select extversion from pg_extension where extname = '$ename'");
+	$ext_info{$ename}[3] = $t->{'data'}->[0]->[0];
+	$ext_info{$ename}[2]  = $ext_info{$ename}[3] ? 1 : 0;
+}
+
+if ($ENV{REQUEST_METHOD} eq "POST") {
+
+	foreach my $ename (keys %ext_info){	#for each extension
+		if($in{$ename.'_status'} != $ext_info{$ename}[2]){	#if extension status changed
+			#print "Changed: $ename <br>";
+			if($in{$ename.'_status'} == 1){	#yes = Install
+				my $t = postgresql::execute_sql_safe($sel_db, "CREATE EXTENSION $ename");
+				$ext_info{$ename}[2] = $in{$ename.'_status'};
+			}elsif($in{$ename.'_status'} == 0){
+				my $t = postgresql::execute_sql_safe($sel_db, "DROP EXTENSION $ename");
+				$ext_info{$ename}[2] = $in{$ename.'_status'};
+			}
+
+			my $t = postgresql::execute_sql_safe($sel_db, "select extversion from pg_extension where extname = '$ename'");
+			$ext_info{$ename}[3] = $t->{'data'}->[0]->[0];
+		}
+	}
+}
+
+print &ui_form_start("edit_pg_ext.cgi", "form-data");
+print &ui_table_start($text{'pg_ext_edit'}, "width=100%", 2);
+
+print <<EOF;
+<script type="text/javascript">
+function update_select(){
+	var extSel = document.getElementById('ext_db');
+	var db_name = extSel.options[extSel.selectedIndex].value;
+
+	window.location='edit_pg_ext.cgi?ext_db='+db_name;
+}
+</script>
+EOF
+
+my @opt_dbs = ();
+foreach my $db_name (@pg_dbs) {
+	push(@opt_dbs, [ $db_name, $db_name]);
+}
+print &ui_table_row($text{'pg_ext_database'},
+						&ui_select("ext_db", $sel_db, \@opt_dbs, 1, 0, undef, undef, 'onchange="update_select()"'),
+						2);
+print ui_table_hr();
+
+foreach my $ename (sort keys %ext_info){
+	#'<a href="'.$ext_inf{$ename}[1].'" class="icon_link"><img class="ui_icon ui_icon_protected" src="images/'.$ename.'.png" alt=""></a>'
+	my $row_label = $ext_info{$ename}[0];
+	if($ext_info{$ename}[3]){
+		$row_label .= '    (ver. '.$ext_info{$ename}[3].')';
+	}elsif($ext_info{$ename}[4]){
+
+		$row_label .= '    (<tt>requires ';
+
+		@deps = split(/,/, $ext_info{$ename}[4]);
+		foreach my $dep (@deps) {
+			$row_label .= $ext_info{$dep}[0];
+		}
+		$row_label .= ')</tt>';
+	}
+
+	print &ui_table_row($row_label,
+			ui_yesno_radio($ename.'_status', $ext_info{$ename}[2]),
+			2);
+}
+
+print &ui_table_end();
+print &ui_form_end([ [ "", $text{'pg_ext_save'} ] ]);
+
+&ui_print_footer("", $text{'index_return'});
