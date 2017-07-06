@@ -12,7 +12,7 @@ require './geohelm-lib.pl';
 
 print &ui_tabs_start(\@tabs, "mode", $in{'mode'} || "install", 1);
 
-# Display installation form
+
 print &ui_tabs_start_tab("mode", "install");
 print "$text{'wars_desc1'}<p>\n";
 
@@ -31,7 +31,7 @@ print &ui_form_end([ [ "", $text{'war_installok'} ] ]);
 print &ui_tabs_end_tab();
 
 
-# Display deletion form
+
 print &ui_tabs_start_tab("mode", "delete");
 print "$text{'wars_desc2'}<p>\n";
 
