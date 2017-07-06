@@ -13,7 +13,7 @@ use File::Path 'rmtree';
 
 tomcat_service_ctl('stop');
 
-#delete each of the specified directories
+
 my $catalina_home = get_catalina_home();
 foreach $d (@mods) {
 	print "Removing $catalina_home/$d<br>";
