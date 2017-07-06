@@ -29,14 +29,15 @@ The entire module can even be uninstalled and all components will continue to ru
 <code>Fedora 25 x64</code><br />
 <code>Scientific Linux 7 x64 (requires manual installation for epel or use Quick Start Script)</code><br />
 
-<p>Server Requirements: Disk: <code>5 GB</code>, Memory: <code>1 GB (Minimum, &gt;=2 GB Reccomended) </code></p> 
-
-<p>User Access:<code>root access required</code></p>
-
-<p>Software Requirements: <code>Webmin</code></p>
+## System Requirements: <br />
+Disk: <code>5 GB</code><br />
+Memory: <code>1 GB (Minimum) </code><br /> 
+User Access:<code>root access required</code><br />
+Software Requirements: <code>Webmin</code><br />
 
 ## Quick Start
-A Quick Start is available at: [GeoHelm Quick Start](https://geohelm.org/quick-start.html).  The Quick Start does save a few minutes, but even <a href="https://geohelm.org/install/">standard installation</a>  only takes about 10 minutes. 
+A Quick Start is available at: [GeoHelm Quick Start](https://geohelm.org/quick-start.html). <br /> 
+The Quick Start does save a few minutes, but even <a href="https://geohelm.org/install/">standard installation</a>  only takes about 10 minutes. 
 
 ## Documentation
 GeoHelm Documentation is available at [GeoHelm Docs](https://geohelm.org/)
@@ -46,4 +47,4 @@ GeoHelm Documentation is available at [GeoHelm Docs](https://geohelm.org/)
 
 ![GeoHelm Installed](https://geohelm.org/img/software-images/GeoHelmDashBoard.gif)
 
-AcuGIS, GeoHelm &copy; 2017 Cited, Inc. All Rights Reserved.
+[AcuGIS](https://www.acugis.com/), [GeoHelm](https://geohelm.org) &copy; 2017 [Cited, Inc. ](https://www.citedcorp.com)Cited, Inc. All Rights Reserved.
