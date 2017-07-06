@@ -3,15 +3,13 @@
 require './geohelm-lib.pl';
 foreign_require('postgresql', 'postgresql-lib.pl');
 
-#extension info key(name) : values(label, url, status, version, deps)
+
 my %ext_info  = (	'postgis' 	=> ['PostGIS', 	 'http://postgis.net', 	0, undef, undef],
 					'pgrouting' => ['PgRouting', 'http://pgrouting.org',0, undef, 'postgis'],
 					'hstore'	=> ['hStore',	 'https://www.postgresql.org/docs/9.0/static/hstore.html', 0, undef, undef],
 					'postgis_topology'		=> ['PostGIS Topology', 	'http://postgis.net', 	0, undef, 'postgis'],
 					'fuzzystrmatch'			=> ['FuzzyStringMatch', 	'http://postgis.net', 	0, undef, undef],
-					'address_standardizer'	=> ['Address Standardizer', 'http://postgis.net', 	0, undef, undef],
-					#'pointcloud'			=> ['Pointcloud', 	 		'https://github.com/pgpointcloud', 	0, undef],
-					#'pointcloud_postgis'	=> ['Pointcloud PostGIS', 	'https://github.com/pgpointcloud', 	0, undef],
+					'address_standardizer'	=> ['Address Standardizer', 'http://postgis.net', 	0, undef, undef],					
 					);
 
 &ui_print_header(undef, $text{'pg_ext_title'}, "");
@@ -37,7 +35,7 @@ if ($ENV{REQUEST_METHOD} eq "POST") {
 
 	foreach my $ename (keys %ext_info){	#for each extension
 		if($in{$ename.'_status'} != $ext_info{$ename}[2]){	#if extension status changed
-			#print "Changed: $ename <br>";
+			
 			if($in{$ename.'_status'} == 1){	#yes = Install
 				my $t = postgresql::execute_sql_safe($sel_db, "CREATE EXTENSION $ename");
 				$ext_info{$ename}[2] = $in{$ename.'_status'};
@@ -76,7 +74,7 @@ print &ui_table_row($text{'pg_ext_database'},
 print ui_table_hr();
 
 foreach my $ename (sort keys %ext_info){
-	#'<a href="'.$ext_inf{$ename}[1].'" class="icon_link"><img class="ui_icon ui_icon_protected" src="images/'.$ename.'.png" alt=""></a>'
+	
 	my $row_label = $ext_info{$ename}[0];
 	if($ext_info{$ename}[3]){
 		$row_label .= '    (ver. '.$ext_info{$ename}[3].')';
