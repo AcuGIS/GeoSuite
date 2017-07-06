@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-require './tomcat-lib.pl';
+require './tomcat-lib.pl'; #require
 
 sub install_tomcat_from_archive{
 	my $tomcat_ver = latest_tomcat_version();
