@@ -55,8 +55,8 @@ sub get_installed_oracle_jdk_versions{
     opendir(DIR, '/usr/java/') or return @dirs;
     @dirs
         = grep {
-	    /^jdk1.8.[0-9]+_[0-9]+/ # Oracle JDK directory name
-          && -d "/usr/java/$_"  # and is a directory
+	    /^jdk1.8.[0-9]+_[0-9]+/ 
+          && -d "/usr/java/$_"  
 	} readdir(DIR);
     closedir(DIR);
 
