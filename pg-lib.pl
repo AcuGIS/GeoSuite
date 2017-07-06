@@ -1,7 +1,7 @@
 BEGIN { push(@INC, ".."); };
 use WebminCore;
 
-require '../webmin/webmin-lib.pl';	#for OS detection
+require '../webmin/webmin-lib.pl';	#require
 foreign_require('software', 'software-lib.pl');
 foreign_require('postgresql', 'postgresql-lib.pl');
 
