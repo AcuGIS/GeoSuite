@@ -4,7 +4,7 @@ use File::Path 'rmtree';
 
 require './java-lib.pl';
 require './tomcat-lib.pl';
-require '../webmin/webmin-lib.pl';	#for OS detection
+require '../webmin/webmin-lib.pl';	#For OS Fetection
 &ReadParse();
 
 &error_setup($text{'delete_err'});
