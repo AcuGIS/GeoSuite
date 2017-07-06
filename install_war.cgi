@@ -25,7 +25,6 @@ my @suffixlist = ('\.zip', '\.war');
 my $unzip_dir = '';
 my @wars;
 
-#Check if its a .zip or .jar
 print "Source: $file<br>";
 if($file_suffix eq ".zip"){
 	$unzip_dir = unzip_me($file);
@@ -56,7 +55,7 @@ foreach $war (@wars) {
 }
 
 if($unzip_dir ne ''){
-	&rmtree($unzip_dir);	#remove temp dir
+	&rmtree($unzip_dir);	
 }
 
 tomcat_service_ctl('restart');
