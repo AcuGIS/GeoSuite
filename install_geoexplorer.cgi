@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 require './geohelm-lib.pl';
-require '../webmin/webmin-lib.pl';	#for OS detection
+require '../webmin/webmin-lib.pl';	#require
 
 if ($ENV{REQUEST_METHOD} eq "POST") {
 	&ReadParseMime();
@@ -24,7 +24,6 @@ if($in{'dismiss'}){
 	exit 0;
 }
 
-#setup geoexplorer in apache configure file
 my $gs_proxy_file = '';
 my %osinfo = &detect_operating_system();
 if( $osinfo{'real_os_type'} =~ /centos/i){	#CentOS
@@ -43,7 +42,6 @@ if(-f $gs_proxy_file){
 	close $fh;
 }
 
-#call tomcat install war page
 my $url = &urlize("http://cdn.acugis.com/geohelm/external/geoexplorer.war");
 &redirect("./install_war.cgi?source=2&url=$url&return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm");
 
