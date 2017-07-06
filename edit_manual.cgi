@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-# Show a page for manually editing an Tomcat server.xml config file
+
 
 require './geohelm-lib.pl';
 &ReadParse();
@@ -7,7 +7,6 @@ require './geohelm-lib.pl';
 
 my $catalina_home = get_catalina_home();
 
-# Work out and show the files
 @files = (	"$catalina_home/bin/setenv.sh",
 			"$catalina_home/conf/context.xml",
 			"$catalina_home/conf/server.xml",
@@ -19,10 +18,9 @@ $in{'file'} ||= $files[0];
 print &ui_form_start("edit_manual.cgi");
 print "<b>$text{'manual_file'}</b>\n";
 print &ui_select("file", $in{'file'}, [ map { [ $_ ] } @files ], 1, 0, undef, undef, 'onchange="this.form.submit()"'),"\n";
-#print &ui_submit($text{'manual_ok'});
 print &ui_form_end();
 
-# Show the file contents
+
 print &ui_form_start("save_manual.cgi", "form-data");
 print &ui_hidden("file", $in{'file'}),"\n";
 $data = &read_file_contents($in{'file'});
