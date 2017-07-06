@@ -2,7 +2,7 @@
 
 require './geohelm-lib.pl';
 require './pg-lib.pl';
-require '../webmin/webmin-lib.pl';	#for OS detection
+require '../webmin/webmin-lib.pl';	
 
 sub setup_apache_for_geoserver(){
 	my $gs_proxy_file = '';
