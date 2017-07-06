@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-require './geohelm-lib.pl';
+require './geohelm-lib.pl'; #require
 use File::Path 'rmtree';
 
 sub latest_leafletjs_version(){
