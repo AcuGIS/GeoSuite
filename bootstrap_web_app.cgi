@@ -11,7 +11,6 @@ sub setup_bootstrap_web_app(){
 		return 0;
 	}
 
-	#download bootstrap web app zip
 	my $url = "https://cdn.acugis.com/geohelm/docs.tar.bz2";
 	$progress_callback_url = $url;
 	&error_setup(&text('install_err3', $url));
