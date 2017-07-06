@@ -16,7 +16,7 @@ sub latest_openlayers_version(){
 	my $latest_ver = '0.0.0';
 	open(my $fh, '<', $tmpfile) or die "open:$!";
 	while(my $line = <$fh>){
-		#Downloads for the v4.2.0 release
+		
 		if($line =~ /Downloads\sfor\sthe\sv([0-9\.]+)\srelease/){
 			$latest_ver = $1;
 			last;
@@ -54,7 +54,7 @@ if($in{'dismiss'}){
 		return 0;
 	}
 
-	#get OpenLayers version
+	
 	my $ol_ver = latest_openlayers_version();
 
 	my $tmpfile = transname("v${ol_ver}.zip");
