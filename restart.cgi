@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-require './geohelm-lib.pl';
+require './geohelm-lib.pl'; #require
 &ReadParse();
 &error_setup($text{'restart_err'});
 
