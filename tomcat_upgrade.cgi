@@ -7,7 +7,7 @@ sub migrate_settings_and_apps{
 	my $new_ver = $_[1];
 	my $apps_ref = $_[2];
 
-	#copy settings
+	#Copy Settings
 	my @files = ('bin/setenv.sh', 'conf/tomcat-users.xml');
 	foreach my $file (@files){
 		if( -f "/home/tomcat/apache-tomcat-$old_ver/$file"){
