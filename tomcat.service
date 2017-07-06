@@ -9,7 +9,7 @@
 ### END INIT INFO
 
 # Source function library.
-. /etc/environment;	#Catalina variables
+. /etc/environment;	#Catalina Variables
 
 RETVAL=$?
 
