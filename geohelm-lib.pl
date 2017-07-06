@@ -34,7 +34,7 @@ sub get_acugeo_versions{
 	my %tver = &get_catalina_version();
 	my %gver = &get_geoserver_version();
 
-	#merge the two versions into one
+	
 	$tver{'geoserver_ver'}	 = $gver{'number'};
 	$tver{'geoserver_build'} = $gver{'jdk'};
 	return %tver;
@@ -95,12 +95,6 @@ sub unzip_me{
 
 	my $unzip_dir = "/tmp/.webmin/$file_name";
 
-	#if old temp extension dir exist, remove it
-	#if( -d $unzip_dir and rmtree($unzip_dir) == 0){
-	#	&error("Failed to remove temp extension dir");
-	#	&ui_print_footer("", $text{'index_return'});
-	#	exit;
-	#}
 	&make_dir($unzip_dir, 0754, 1);
 
 	my $unzip_out;
