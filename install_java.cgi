@@ -2,7 +2,7 @@
 
 require './java-lib.pl';
 require './tomcat-lib.pl';
-require '../webmin/webmin-lib.pl';	#for OS detection
+require '../webmin/webmin-lib.pl';	#require
 use File::Basename;
 
 sub extract_java_archive{
@@ -68,7 +68,6 @@ sub set_default_java{
 		}
 	}
 
-	#set Java environment variables
 	print "<hr>Setting Java environment variables...<br>";
 	my %os_env;
 	$os_env{'J2SDKDIR'}  = $jdk_dir;
@@ -97,10 +96,10 @@ if ($ENV{REQUEST_METHOD} eq "POST") {
 
 &ui_print_header(undef, $text{'java_title'}, "");
 
-if ($in{'source'} == 100) {	#download from Oracle site
+if ($in{'source'} == 100) {	
 	my ($jdk_name, $url) = split /=/, $in{'jdk_ver'};
-	$in{'url'} = $url;	#set URL to be value of select box
-	$in{'source'} = 2;	#install from URL
+	$in{'url'} = $url;	
+	$in{'source'} = 2;	
 }
 
 my $jdk_archive = process_file_source();
