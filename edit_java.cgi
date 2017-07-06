@@ -2,7 +2,7 @@
 
 require './tomcat-lib.pl';
 require './java-lib.pl';
-require '../webmin/webmin-lib.pl';	#for OS detection
+require '../webmin/webmin-lib.pl';	#require
 
 &ReadParse();
 
@@ -15,7 +15,7 @@ require '../webmin/webmin-lib.pl';	#for OS detection
 
 print &ui_tabs_start(\@tabs, "mode", $in{'mode'} || "install", 1);
 
-# Display installation form
+
 print &ui_tabs_start_tab("mode", "install");
 print "$text{'java_desc1'}<p>\n";
 
@@ -41,7 +41,7 @@ print &ui_table_end();
 print &ui_form_end([ [ "", $text{'java_installok'} ] ]);
 print &ui_tabs_end_tab();
 
-# Display deletion form
+
 print &ui_tabs_start_tab("mode", "uninstall");
 print "$text{'java_desc2'}<p>\n";
 
