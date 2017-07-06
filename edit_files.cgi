@@ -1,5 +1,4 @@
 #!/usr/bin/perl
-# Show a page for manually editing Glassfish config files
 
 require './geohelm-lib.pl';
 &ui_print_header($text{'editor_desc1'}, $text{'editor_title'}, "");
