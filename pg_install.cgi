@@ -137,7 +137,6 @@ sub add_pg_repo_yum{
 		return 1;
 	}
 
-	#<a href="https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-redhat96-9.6-3.noarch.rpm">Red Hat Enterprise Linux 7 - x86_64</a>
 	my $rpm_filename="";
 	my $match = "(download\\.postgresql\\.org\\/pub\\/repos\\/yum\\/$pg_ver\\/redhat\\/rhel-$distro_ver-x86_64\\/pgdg-$distro$pg_ver2-$pg_ver-[0-9]\\.noarch\\.rpm)";	#centos
 	if($distro eq 'fedora'){
