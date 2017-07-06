@@ -12,7 +12,6 @@ use warnings;
 use WebminCore;
 use File::Copy;
 
-# Returns version of Geoserver
 sub get_geoserver_version
 {
 	local %version;
@@ -31,14 +30,14 @@ sub get_latest_geoserver_ver(){
 	my $error;
 	my $geo_version = shift;
 
-	#download the geoserver webpage
+	
 	$url = "http://geoserver.org/";
 	$tmpfile = &transname("page");
 	&error_setup(&text('install_err3', $url));
 
 	&http_download("geoserver.org", 80, "/", $tmpfile, \$error);
 
-	#parse stable version
+	#Parse Stable Version
 	open(my $fb, '<', $tmpfile) or &webmin_log("open:$!");
 	while (my $line = <$fb>){
 		#<li><a href="/release/stable">2.11.0</a></li>
