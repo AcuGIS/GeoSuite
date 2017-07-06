@@ -11,19 +11,6 @@ if ($ENV{REQUEST_METHOD} eq "POST") {
 }
 
 
-#export GEOSERVER_DATA_DIR to /var/lib/geoser
-#my $tomcat_env = $catalina_home."/bin/setenv.sh";
-
-#my %os_env;
-#read_env_file($tomcat_env, \%os_env);
-#$os_env{'GEOSERVER_DATA_DIR'} = "/var/lib/data";
-
-#&make_dir($os_env{'GEOSERVER_DATA_DIR'}, 0755, 1);
-#&set_ownership_permissions('tomcat','tomcat', undef, $os_env{'GEOSERVER_DATA_DIR'});
-
-#write_env_file($tomcat_env, \%os_env, 0);
-
-#call tomcat install war page
 my $geo_ver = get_latest_geoserver_ver();
 my $url = &urlize("http://sourceforge.net/projects/geoserver/files/GeoServer/$geo_ver/geoserver-$geo_ver-war.zip");
 
