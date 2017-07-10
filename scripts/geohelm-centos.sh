@@ -2,7 +2,7 @@
 #GeoHelm Pre-Install Script for Debian and Ubuntu
 #For use on clean CentOS 7 box only!!
 
-#Usage: wget https://raw.githubusercontent.com/downloads/AcuGIS/geohelm-quick-start/geohelm-centos.sh
+#Usage: wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/geohelm-centos.sh
 #chmod +x geohelm-centos.sh
 #./geohelm-centos.sh
 
