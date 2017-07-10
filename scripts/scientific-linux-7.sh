@@ -1,5 +1,10 @@
 #!/bin/bash -e
- 
+#GeoHelm Pre-Install Script for Scientific Linux
+#For use on clean Scientific Linux box only!!
+#Usage: wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/scientific-linux-7.sh
+#chmod +x scientific-linux-7.sh
+#./geohelm-scientific-linux-7.sh
+
 function install_webmin(){
 	cat >/etc/yum.repos.d/webmin.repo <<EOF
 [Webmin]
@@ -23,6 +28,13 @@ function download_geohelm_module(){
  
 	popd
 }
+
+function warn_apache(){
+
+ 
+	 echo -e "Webmin is now installed and GeoHelm module is at /opt/geohelm.wbm.gz"
+        echo -e "Important: Install Apache via Webmin BEFORE installing GeoHelm!!!" 
+}
  
 yum -y update;
 yum -y install wget unzip epel-release
@@ -30,3 +42,4 @@ yum -y install wget unzip epel-release
  
 install_webmin;
 download_geohelm_module;
+warn_apache;
