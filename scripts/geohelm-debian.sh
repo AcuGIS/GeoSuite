@@ -2,7 +2,7 @@
 #GeoHelm Pre-Install Script for Debian and Ubuntu
 #For use on clean Debian or Ubuntu box only
 #Usage: 
-#wget https://raw.githubusercontent.com/downloads/AcuGIS/geohelm-quick-start/geohelm-debian.sh
+#wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/geohelm-debian.sh
 #chmod +x geohelm-debian.sh
 #./geohelm-debian.sh
 
