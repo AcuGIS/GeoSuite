@@ -1,9 +1,9 @@
 #!/bin/bash -e
 #GeoHelm Pre-Install Script for Scientific Linux
 #For use on clean Scientific Linux box only!!
-#Usage: wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/scientific-linux-7.sh
-#chmod +x scientific-linux-7.sh
-#./geohelm-scientific-linux-7.sh
+#Usage: wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/geohelm-scientific-linux.sh
+#chmod +x geohelm-scientific-linux.sh
+#./geohelm-geohelm-scientific-linux.sh
 
 function install_webmin(){
 	cat >/etc/yum.repos.d/webmin.repo <<EOF
