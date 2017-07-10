@@ -1,5 +1,5 @@
 #!/bin/bash -e
-#GeoHelm Pre-Install Script for Debian and Ubuntu
+#GeoHelm Pre-Install Script for CentOS
 #For use on clean CentOS 7 box only!!
 
 #Usage: wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/geohelm-centos.sh
