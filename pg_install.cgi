@@ -438,17 +438,16 @@ sub create_compat_symlinks{
 
 &ui_print_header(undef, $text{'pg_inst_title'}, "", "intro", 1, 1);
 
-my $no_install = 1;
-if ($ENV{REQUEST_METHOD} eq "POST") {
-	&ReadParseMime();
-	$no_install = 0;
-}else{
-	&ReadParse();
-	$no_install = 1;
-}
+&ReadParse();
 
 my @pg_versions = get_versions();
-my $pg_ver = $in{'pg_ver'} || $pg_versions[0];
+my $pg_ver = $pg_versions[0];
+if($in{'pg_ver'}){
+	$pg_ver = $in{'pg_ver'};
+}elsif(get_installed_pg_version()){
+	$pg_ver = get_installed_pg_version();
+}
+
 my %pkgs;
 my %pkgs_installed;
 my $srv_pkg;
@@ -498,20 +497,26 @@ if( $osinfo{'os_type'} =~ /redhat/i){	#other redhat
 	}
 }
 
-#Check what is updated
-if ($ENV{REQUEST_METHOD} eq "POST" && $no_install == 0) {
-	#find what was changed
-	my @pkgs_remove;
-	my $pkgs_install="";
-	foreach my $pkg (sort keys %pkgs_installed){
-		if($in{$pkg.'_status'} != $pkgs_installed{$pkg}){
-			if($in{$pkg.'_status'} == 1){
-				$pkgs_install .= "$pkg ";
-			}else{
-				push(@pkgs_remove, $pkg);
-			}
+if($in{'install_repo'} == 1){
+	&ui_print_footer("/acugis_es/pg_install.cgi", $text{'pg_inst_title'});
+	exit;
+}
+
+#find what was changed
+my @pkgs_remove;
+my $pkgs_install="";
+foreach my $pkg (sort keys %pkgs_installed){
+	if($in{$pkg.'_status'} != $pkgs_installed{$pkg}){
+		if($in{$pkg.'_status'} == 1){
+			$pkgs_install .= "$pkg ";
+		}elsif($in{$pkg.'_status'}){
+			push(@pkgs_remove, $pkg);
 		}
 	}
+}
+
+#Check what is updated
+if ($pkgs_install or @pkgs_remove) {	#if pkgs were edited
 
 	if($pkgs_install =~ /$srv_pkg /){	#if we are installing server
 		if(($osinfo{'os_type'} =~ /redhat/i) && (-d $pgconf_dir)){
@@ -569,13 +574,13 @@ function update_select(){
 </script>
 EOF
 
-print &ui_form_start("pg_install.cgi", "form-data");
+print &ui_form_start("pg_install.cgi", "post");
 print &ui_hidden("install_repo", $show_repo_install_info);
 
 print &ui_table_start($text{'pg_inst_edit'}, "width=100%", 3);
 
 print &ui_table_row($text{'pg_versions'},
-						&ui_select("pg_ver", $pg_ver, \@pg_versions, 1, 0, undef, undef, 'onchange="update_select()"'),
+						&ui_select("pg_ver", $pg_ver, \@pg_versions, 1, 0, undef, undef, "id='pg_ver' onchange='update_select()'"),
 						3);
 
 #print server package before everything else

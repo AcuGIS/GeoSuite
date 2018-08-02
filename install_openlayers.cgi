@@ -16,7 +16,7 @@ sub latest_openlayers_version(){
 	my $latest_ver = '0.0.0';
 	open(my $fh, '<', $tmpfile) or die "open:$!";
 	while(my $line = <$fh>){
-		
+
 		if($line =~ /Downloads\sfor\sthe\sv([0-9\.]+)\srelease/){
 			$latest_ver = $1;
 			last;
@@ -27,12 +27,8 @@ sub latest_openlayers_version(){
 	return $latest_ver;
 }
 
-if ($ENV{REQUEST_METHOD} eq "POST") {
-	&ReadParseMime();
-}else {
-	&ReadParse();
-	$no_upload = 1;
-}
+if($ENV{'CONTENT_TYPE'} =~ /boundary=(.*)$/) { &ReadParseMime(); }
+else { &ReadParse(); $no_upload = 1; }
 
 &ui_print_header(undef, $text{'index_title'}, "", "intro", 1, 1);
 
@@ -54,7 +50,7 @@ if($in{'dismiss'}){
 		return 0;
 	}
 
-	
+
 	my $ol_ver = latest_openlayers_version();
 
 	my $tmpfile = transname("v${ol_ver}.zip");

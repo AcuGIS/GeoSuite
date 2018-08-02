@@ -6,7 +6,7 @@ require './geohelm-lib.pl';
 my $files_home = '/var/www/html';
 my $home_path   = ($in{'home_path'})   ? $in{'home_path'} : $files_home;
 
-if ($ENV{REQUEST_METHOD} eq "POST") {
+if($ENV{'CONTENT_TYPE'} =~ /boundary=(.*)$/) {
 	&ReadParseMime();
 
 	$home_path = $in{'home_path'};
