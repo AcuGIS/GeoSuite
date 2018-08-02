@@ -3,12 +3,8 @@
 require './geohelm-lib.pl';
 require '../webmin/webmin-lib.pl';	#require
 
-if ($ENV{REQUEST_METHOD} eq "POST") {
-	&ReadParseMime();
-}else {
-	&ReadParse();
-	$no_upload = 1;
-}
+if($ENV{'CONTENT_TYPE'} =~ /boundary=(.*)$/) { &ReadParseMime(); }
+else { &ReadParse(); $no_upload = 1; }
 
 if($in{'dismiss'}){
 	&ui_print_header(undef, $text{'index_title'}, "", "intro", 1, 1);

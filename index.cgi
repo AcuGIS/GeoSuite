@@ -2,59 +2,7 @@
 
 require './geohelm-lib.pl';
 require './pg-lib.pl';
-require '../webmin/webmin-lib.pl';	
-
-sub setup_apache_for_geoserver(){
-	my $gs_proxy_file = '';
-	my %osinfo = &detect_operating_system();
-	if(	( $osinfo{'real_os_type'} =~ /centos/i) or	#CentOS
-		($osinfo{'real_os_type'} =~ /fedora/i)	or  #Fedora
-		($osinfo{'real_os_type'} =~ /scientific/i)	){
-		if( ! -d '/etc/httpd/'){
-			return 0;
-		}
-		$gs_proxy_file = '/etc/httpd/conf.d/geoserver_proxy.conf';
-
-	}elsif( ($osinfo{'real_os_type'} =~ /ubuntu/i) or
-			($osinfo{'real_os_type'} =~ /debian/i) 	){	#ubuntu or debian
-		if( ! -d '/etc/apache2/'){
-			return 0;
-		}
-		$gs_proxy_file = '/etc/apache2/conf-enabled/geoserver_proxy.conf';
-	}
-
-	if(! -f $gs_proxy_file){
-		open(my $fh, '>', $gs_proxy_file) or die "open:$!";
-
-		if(	($osinfo{'real_os_type'} =~ /centos/i) or	#CentOS
-			($osinfo{'real_os_type'} =~ /fedora/i)	){	#Fedora
-
-			&execute_command('setsebool httpd_can_network_connect 1');
-
-			print $fh "LoadModule proxy_module 		modules/mod_proxy.so\n";
-			print $fh "LoadModule proxy_http_module modules/mod_proxy_http.so\n";
-			print $fh "LoadModule rewrite_module  	modules/mod_rewrite.so\n";
-
-		}elsif( $osinfo{'os_type'} =~ /debian/i){	#ubuntu or debian
-
-			print $fh "LoadModule proxy_module /usr/lib/apache2/modules/mod_proxy.so\n";
-			print $fh "LoadModule proxy_http_module  /usr/lib/apache2/modules/mod_proxy_http.so\n";
-			print $fh "LoadModule rewrite_module  /usr/lib/apache2/modules/mod_rewrite.so\n";
-		}
-
-		print $fh "ProxyRequests Off\n";
-		print $fh "ProxyPreserveHost On\n";
-		print $fh "    <Proxy *>\n";
-		print $fh "       Order allow,deny\n";
-		print $fh "       Allow from all\n";
-		print $fh "    </Proxy>\n";
-		print $fh "ProxyPass /geoserver http://localhost:8080/geoserver\n";
-		print $fh "ProxyPassReverse /geoserver http://localhost:8080/geoserver\n";
-
-		close $fh;
-	}
-}
-
+require '../webmin/webmin-lib.pl';
 
 # Check if config file exists
 if (! -r $config{'geohelm_config'}) {
@@ -65,13 +13,9 @@ if (! -r $config{'geohelm_config'}) {
 	exit;
 }
 
-# Check if tomcat exists
-my $tomcat_ver = installed_tomcat_version();
-if(!$tomcat_ver){
+if(-f "$module_root_directory/setup.cgi"){
 	&ui_print_header(undef, $text{'index_title'}, "", "intro", 1, 1);
-
-	my $latest_ver = latest_tomcat_version();
-	print &ui_buttons_row("tomcat_install.cgi", $text{'index_install'}, "Tomcat $latest_ver will be installed from Apache site.");
+		print '<p>Install all GeoHelm components by clicking <a href=\'./setup.cgi?mode=checks\'>here</a>';
 	&ui_print_footer("/", $text{"index"});
 	exit;
 }
@@ -129,80 +73,11 @@ if ($running == 1) {
 }
 
 #Check for an update of tomcat, once a day
+my $tomcat_ver = installed_tomcat_version();
 my $latest_ver = latest_tomcat_version();
 if("v$tomcat_ver" ne "v$latest_ver"){
 	print &ui_buttons_row("tomcat_upgrade.cgi", $text{'index_upgrade'}, "Tomcat will be updated to  $latest_ver. All WARs will be moved and config will be copied to new install!");
 }
 print &ui_buttons_end();
-
-#Check for commands
-if (!&has_command('java')) {
-	print '<p>Warning: Java is not found. Install it manually or from the '.
-		  "<a href='./edit_java.cgi?return=%2E%2E%2Fgeohelm%2F&returndesc=GeoHelm&caller=geohelm'>Java tab</a>";
-}
-
-if (!&has_command('unzip')) {
-	print '<p>Warning: unzip command is not found. Install it manually or '.
-		  "<a href='../software/install_pack.cgi?source=3&update=unzip&return=%2E%2E%2Fgeohelm%2F&returndesc=GeoHelm&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
-}
-
-my $pg_ver = get_installed_pg_version();
-if(have_pg_repo() == 0){
-	print '<p>Warning: PostgreSQL repository is not found. Install it from <a href="./pg_install.cgi">'.$text{'pg_inst_title'}.'</a>';
-}
-
-check_pg_ext_deps($pg_ver);
-
-foreign_require('software', 'software-lib.pl');
-my @pinfo = software::package_info('haveged', undef, );
-if(!@pinfo){
-	print "<p>Warning: haveged package is not installed. Install it manually or ".
-		  "<a href='../software/install_pack.cgi?source=3&update=haveged&return=%2E%2E%2Fgeohelm%2F&returndesc=GeoHelm&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
-}
-
-#setup apache modules on CentOS and Ubuntu
-setup_apache_for_geoserver();
-
-#Check if bootstrap web application is installed
-if (! -f "$module_config_directory/bootstraped.txt"){
-	print '<p>Warning: Bootstrap web app is not installed in /var/www/html. '.
-		  "<a href='./bootstrap_web_app.cgi?return=%2E%2E%2Fgeohelm%2F&returndesc=GeoHelm&caller=geohelm'>Click here</a>  to install it automatically";
-	print " or <a href='./bootstrap_web_app.cgi?dismiss=1&return=%2E%2E%2Fgeohelm%2F&returndesc=GeoHelm&caller=geohelm'>Dismiss</a> this warning.";
-}
-
-# Check if geoexplorer webapp exists
-my $catalina_home = get_catalina_home();
-if ((! -f "$module_config_directory/dismiss_geoexplorer.txt") &&
-	(! -d "$catalina_home/webapps/geoexplorer/") 				){
-	if( -f "$catalina_home/webapps/geoexplorer.war"){
-		print "<p>The GeoExplorer webapp is not deployed yet!";
-	}else{
-		print "<p>The GeoExplorer webapp direcrory <tt>$catalina_home/webapps/geoexplorer/</tt> does not exist. ".
-			  "<a href='./install_geoexplorer.cgi?return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm'>Click here</a> to have it downloaded and installed";
-		print " or <a href='./install_geoexplorer.cgi?dismiss=1&return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm'>Dismiss</a> this warning</p>";
-	}
-}
-
-# Check if OpenLayers exists
-if ((! -f "$module_config_directory/dismiss_openlayers.txt") &&
-	(! -d "/var/www/html/OpenLayers") 				){
-	print "<p>The OpenLayers direcrory <tt>/var/www/html/OpenLayers</tt> does not exist. ".
-		  "<a href='./install_openlayers.cgi?return=%2E%2E%2Fgeohelm%2F&returndesc=GeoHelm&caller=geohelm'>Click here</a> to have it downloaded and installed";
-	print " or <a href='./install_openloayers.cgi?dismiss=1&return=%2E%2E%2Fgeohelm%2F&returndesc=GeoHelm&caller=geohelm'>Dismiss</a> this warning</p>";
-}
-
-# Check if LeafletJS exists
-if ((! -f "$module_config_directory/dismiss_leafletjs.txt") &&
-	(! -d "/var/www/html/leafletjs") 				){
-	print "<p>The LeafletJS direcrory <tt>/var/www/html/leafletjs</tt> does not exist. ".
-		  "<a href='./install_leafletjs.cgi?return=%2E%2E%2Fgeohelm%2F&returndesc=GeoHelm&caller=geohelm'>Click here</a> to have it downloaded and installed";
-	print " or <a href='./install_leafletjs.cgi?dismiss=1&return=%2E%2E%2Fgeohelm%2F&returndesc=GeoHelm&caller=geohelm'>Dismiss</a> this warning</p>";
-}
-
-if (!&has_command('shp2pgsql')) {
-	print '<p>Warning: shp2pgsql command is not found.';
-	print "<a href='../software/install_pack.cgi?source=3&update=$config{'shp2pgsql_pkg'}&return=%2E%2E%2Fgeohelm%2F&returndesc=GeoHelm&caller=geohelm'>Click here</a> to have it installed from postgis package.</p>";
-
-}
 
 &ui_print_footer("/", $text{"index"});

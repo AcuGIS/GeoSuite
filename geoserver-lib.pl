@@ -30,7 +30,7 @@ sub get_latest_geoserver_ver(){
 	my $error;
 	my $geo_version = shift;
 
-	
+
 	$url = "http://geoserver.org/";
 	$tmpfile = &transname("page");
 	&error_setup(&text('install_err3', $url));
@@ -43,19 +43,12 @@ sub get_latest_geoserver_ver(){
 		#<li><a href="/release/stable">2.11.0</a></li>
 		if($line =~ /<li><a\s+href="\/release\/stable">([0-9\.]+)<\/a>/i){
 			$geo_version = $1;
-			break;
+			last;
 		}
 	}
 	close $fb;
 
 	return $geo_version;
-}
-
-sub file_basename
-{
-	my $rv = $_[0];
-	$rv =~ s/^.*[\/\\]//;
-	return $rv;
 }
 
 1;

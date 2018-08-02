@@ -9,7 +9,7 @@ my %ext_info  = (	'postgis' 	=> ['PostGIS', 	 'http://postgis.net', 	0, undef, u
 					'hstore'	=> ['hStore',	 'https://www.postgresql.org/docs/9.0/static/hstore.html', 0, undef, undef],
 					'postgis_topology'		=> ['PostGIS Topology', 	'http://postgis.net', 	0, undef, 'postgis'],
 					'fuzzystrmatch'			=> ['FuzzyStringMatch', 	'http://postgis.net', 	0, undef, undef],
-					'address_standardizer'	=> ['Address Standardizer', 'http://postgis.net', 	0, undef, undef],					
+					'address_standardizer'	=> ['Address Standardizer', 'http://postgis.net', 	0, undef, undef],
 					);
 
 &ui_print_header(undef, $text{'pg_ext_title'}, "");
@@ -17,11 +17,8 @@ my %ext_info  = (	'postgis' 	=> ['PostGIS', 	 'http://postgis.net', 	0, undef, u
 #TODO: Check if packages are installed
 my @pg_dbs = postgresql::list_databases();
 
-if ($ENV{REQUEST_METHOD} eq "POST") {
-	&ReadParseMime();
-}else{
-	&ReadParse();
-}
+&ReadParse();
+
 my $sel_db = $in{'ext_db'} || 'postgres';
 
 
@@ -35,7 +32,7 @@ if ($ENV{REQUEST_METHOD} eq "POST") {
 
 	foreach my $ename (keys %ext_info){	#for each extension
 		if($in{$ename.'_status'} != $ext_info{$ename}[2]){	#if extension status changed
-			
+
 			if($in{$ename.'_status'} == 1){	#yes = Install
 				my $t = postgresql::execute_sql_safe($sel_db, "CREATE EXTENSION $ename");
 				$ext_info{$ename}[2] = $in{$ename.'_status'};
@@ -50,7 +47,7 @@ if ($ENV{REQUEST_METHOD} eq "POST") {
 	}
 }
 
-print &ui_form_start("edit_pg_ext.cgi", "form-data");
+print &ui_form_start("edit_pg_ext.cgi", "post");
 print &ui_table_start($text{'pg_ext_edit'}, "width=100%", 2);
 
 print <<EOF;
@@ -69,12 +66,12 @@ foreach my $db_name (@pg_dbs) {
 	push(@opt_dbs, [ $db_name, $db_name]);
 }
 print &ui_table_row($text{'pg_ext_database'},
-						&ui_select("ext_db", $sel_db, \@opt_dbs, 1, 0, undef, undef, 'onchange="update_select()"'),
+						&ui_select("ext_db", $sel_db, \@opt_dbs, 1, 0, undef, undef, 'id="ext_db" onchange="update_select()"'),
 						2);
 print ui_table_hr();
 
 foreach my $ename (sort keys %ext_info){
-	
+
 	my $row_label = $ext_info{$ename}[0];
 	if($ext_info{$ename}[3]){
 		$row_label .= '    (ver. '.$ext_info{$ename}[3].')';

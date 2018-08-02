@@ -10,7 +10,7 @@ sub inst_error{
 	exit;
 }
 
-if ($ENV{REQUEST_METHOD} eq "POST") { &ReadParseMime(); }
+if($ENV{'CONTENT_TYPE'} =~ /boundary=(.*)$/) { &ReadParseMime(); }
 else { &ReadParse(); $no_upload = 1; }
 
 $| = 1;

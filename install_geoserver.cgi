@@ -3,12 +3,8 @@
 require './geoserver-lib.pl';
 require './tomcat-lib.pl';
 
-if ($ENV{REQUEST_METHOD} eq "POST") {
-	&ReadParseMime();
-}else {
-	&ReadParse();
-	$no_upload = 1;
-}
+if($ENV{'CONTENT_TYPE'} =~ /boundary=(.*)$/) { &ReadParseMime(); }
+else { &ReadParse(); $no_upload = 1; }
 
 
 my $geo_ver = get_latest_geoserver_ver();

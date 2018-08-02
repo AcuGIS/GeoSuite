@@ -26,12 +26,8 @@ sub latest_leafletjs_version(){
 	return $latest_ver;
 }
 
-if ($ENV{REQUEST_METHOD} eq "POST") {
-	&ReadParseMime();
-}else {
-	&ReadParse();
-	$no_upload = 1;
-}
+if($ENV{'CONTENT_TYPE'} =~ /boundary=(.*)$/) { &ReadParseMime(); }
+else { &ReadParse(); $no_upload = 1; }
 
 &ui_print_header(undef, $text{'index_title'}, "", "intro", 1, 1);
 
