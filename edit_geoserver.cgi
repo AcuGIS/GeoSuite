@@ -15,7 +15,7 @@ if (! -d "$catalina_home/webapps/geoserver/") {
 	print "<p>The Geoserver webapp direcrory <tt>$catalina_home/webapps/geoserver/</tt> does not exist. ".
 			  "<a href='./install_geoserver.cgi?return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm'>Click here</a> to have it downloaded and installed.</p>";
 }else{
-	print "Geoserver webapp ins installed in <tt>$catalina_home/webapps/geoserver/</tt>";
+	print "Geoserver webapp is installed in <tt>$catalina_home/webapps/geoserver/</tt>";
 }
 
 
