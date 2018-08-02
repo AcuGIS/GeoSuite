@@ -433,7 +433,7 @@ sub check_pg_ext_deps{
 		my @pinfo = software::package_info($pkg);
 		if(!@pinfo){
 			print "<p>Warning: $pkg package is not installed. Install it manually or ".
-				  "<a href='../software/install_pack.cgi?source=3&update=$pkg&return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
+				  "<a href='../software/install_pack.cgi?source=3&update=$pkg&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
 		}
 	}
 }
@@ -443,45 +443,45 @@ sub setup_checks{
 	#Check for commands
 	if (!&has_command('java')) {
 		print '<p>Warning: Java is not found. Install it manually or from the '.
-			  "<a href='./edit_java.cgi?return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm'>Java tab</a></p>";
+			  "<a href='./edit_java.cgi?return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Java tab</a></p>";
 	}
 
 	my $tomcat_ver = installed_tomcat_version();
 	if(!$tomcat_ver){
 		my $latest_ver = latest_tomcat_version();
-		print "<p><a href='setup.cgi?mode=tomcat_install&return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm'>Click here</a> to install Tomcat $latest_ver from Apache site.</p>";
+		print "<p><a href='setup.cgi?mode=tomcat_install&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> to install Tomcat $latest_ver from Apache site.</p>";
 	}
 
 	if (!&has_command('unzip')) {
 		print '<p>Warning: unzip command is not found. Install it manually or '.
-			  "<a href='../software/install_pack.cgi?source=3&update=unzip&return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
+			  "<a href='../software/install_pack.cgi?source=3&update=unzip&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
 	}
 
 	foreign_require('software', 'software-lib.pl');
 	my @pinfo = software::package_info('haveged', undef, );
 	if(!@pinfo){
 		print "<p>Warning: haveged package is not installed. Install it manually or ".
-			  "<a href='../software/install_pack.cgi?source=3&update=haveged&return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
+			  "<a href='../software/install_pack.cgi?source=3&update=haveged&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
 	}
 
 	#Check if bootstrap web application is installed
 	if (! -f "$module_config_directory/bootstraped.txt"){
 		print '<p>Warning: Bootstrap web app is not installed in /var/www/html. '.
-			  "<a href='setup.cgi?mode=install_bootstrap_web_app&return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm'>Click here</a> install it";
+			  "<a href='setup.cgi?mode=install_bootstrap_web_app&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> install it";
 	}
 
 	# Check if OpenLayers exists
 	if ((! -f "$module_config_directory/dismiss_openlayers.txt") &&
 		(! -d "/var/www/html/OpenLayers") ){
 		print "<p>The OpenLayers direcrory <tt>/var/www/html/OpenLayers</tt> does not exist. ".
-			  "<a href='setup.cgi?mode=install_openlayers&return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm'>Click here</a> install it";
+			  "<a href='setup.cgi?mode=install_openlayers&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> install it";
 	}
 
 	# Check if LeafletJS exists
 	if ((! -f "$module_config_directory/dismiss_leafletjs.txt") &&
 		(! -d "/var/www/html/leafletjs") ){
 		print "<p>The LeafletJS direcrory <tt>/var/www/html/leafletjs</tt> does not exist. ".
-			  "<a href='setup.cgi?mode=install_leafletjs&return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm'>Click here</a> install it";
+			  "<a href='setup.cgi?mode=install_leafletjs&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> install it";
 	}
 
 	# Check if GeoExplorer webapp exists
@@ -493,7 +493,7 @@ sub setup_checks{
 				print "<p>The GeoExplorer webapp is not deployed yet!";
 			}else{
 				print "<p>The GeoExplorer webapp direcrory <tt>$catalina_home/webapps/geoexplorer/</tt> does not exist. ".
-					  "<a href='./setup.cgi?mode=install_geoexplorer&return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm'>Click here</a> to have it downloaded and installed";
+					  "<a href='./setup.cgi?mode=install_geoexplorer&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> to have it downloaded and installed";
 			}
 		}
 
@@ -502,7 +502,7 @@ sub setup_checks{
 			my $geo_ver = get_latest_geoserver_ver();
 			my $url = &urlize("http://sourceforge.net/projects/geoserver/files/GeoServer/$geo_ver/geoserver-$geo_ver-war.zip");
 			print "<p>The Geoserver webapp direcrory <tt>$catalina_home/webapps/geoserver/</tt> does not exist. ".
-				  "<a href='./install_war.cgi?source=2&url=$url&return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm'>Click here</a> to have it downloaded and installed.</p>";
+				  "<a href='./install_war.cgi?source=2&url=$url&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> to have it downloaded and installed.</p>";
 		}
 	}
 
@@ -519,7 +519,7 @@ sub setup_checks{
 	}
 	if(! -f $gs_proxy_file){
 		print "<p>The GeoServer Apache config <tt> $gs_proxy_file</tt> does not exist. ".
-			  "<a href='./setup.cgi?mode=setup_geoserver_apache&return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm'>Click here</a> to create it.";
+			  "<a href='./setup.cgi?mode=setup_geoserver_apache&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> to create it.";
 	}
 
 	my $pg_ver;
@@ -536,11 +536,11 @@ sub setup_checks{
 		if(-f "$module_root_directory/pg_install.cgi"){
 			if($pg_ver){
 				print '<p>Warning: shp2pgsql command is not found.'.
-					"<a href='../software/install_pack.cgi?source=3&update=$config{'shp2pgsql_pkg'}&return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm'>Click here</a> to have it installed from postgis package.</p>";
+					"<a href='../software/install_pack.cgi?source=3&update=$config{'shp2pgsql_pkg'}&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> to have it installed from postgis package.</p>";
 			}
 		}else{
 			print '<p>Warning: shp2pgsql command is not found. '.
-			  "<a href='../software/install_pack.cgi?source=3&update=$config{'shp2pgsql_pkg'}&return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm'>Click here</a> to have it installed from postgis package.</p>";
+			  "<a href='../software/install_pack.cgi?source=3&update=$config{'shp2pgsql_pkg'}&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> to have it installed from postgis package.</p>";
 		}
 	}
 
