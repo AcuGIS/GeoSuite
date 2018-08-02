@@ -51,11 +51,4 @@ sub get_latest_geoserver_ver(){
 	return $geo_version;
 }
 
-sub file_basename
-{
-	my $rv = $_[0];
-	$rv =~ s/^.*[\/\\]//;
-	return $rv;
-}
-
 1;
