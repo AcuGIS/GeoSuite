@@ -22,15 +22,25 @@ sub get_versions(){
 
 	#<td class="colFirst">9.5</td>
 	my @versions;
-	my $version;
+	my $version = '';
+	$start_matching = 0;
+
 	open(my $fh, '<', $tmpfile) or die "open:$!";
 	while(my $line = <$fh>){
-		if($line =~ /<td class="colFirst">([0-9\.]+)<\/td>/){
-			$version = $1;
-		}elsif($line =~ /<td class="colMid">Yes<\/td>/){
-			push(@versions, $version);
-		}elsif($line =~ /<td class="colMid">No<\/td>/){
-			last;
+		if($start_matching == 1){
+			if(	$line =~ /<td>([0-9\.]+)<\/td>/){	#Version column
+				if($version == ''){	#match only first column
+					$version = $1;
+				}
+			}elsif($line =~ /<td>Yes<\/td>/){
+				push(@versions, $version);
+				$version=''
+			}elsif($line =~ /<td>No<\/td>/){
+				last;
+			}
+		}
+		if($line =~ /<th>Version<\/th>/){
+			$start_matching = 1;
 		}
 	}
 	close $fh;
@@ -593,4 +603,3 @@ if($show_repo_install_info == 1){
 }
 
 &ui_print_footer("", $text{'index_return'});
-
