@@ -96,3 +96,5 @@ pg_listen_all=Listen on All Interfaces
 editor_title=MapJS
 editor_desc1=Use Load/Browse to load a file content or browse into a folder.
 load_ok=Load/Browse
+
+setup_title=Setup
