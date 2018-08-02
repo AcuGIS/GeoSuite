@@ -17,8 +17,7 @@ my %ext_info  = (	'postgis' 	=> ['PostGIS', 	 'http://postgis.net', 	0, undef, u
 #TODO: Check if packages are installed
 my @pg_dbs = postgresql::list_databases();
 
-if($ENV{'CONTENT_TYPE'} =~ /boundary=(.*)$/) { &ReadParseMime(); }
-else { &ReadParse(); $no_upload = 1; }
+&ReadParse();
 
 my $sel_db = $in{'ext_db'} || 'postgres';
 
@@ -29,7 +28,7 @@ foreach my $ename (keys %ext_info){
 	$ext_info{$ename}[2]  = $ext_info{$ename}[3] ? 1 : 0;
 }
 
-if($ENV{'CONTENT_TYPE'} =~ /boundary=(.*)$/){
+if ($ENV{REQUEST_METHOD} eq "POST") {
 
 	foreach my $ename (keys %ext_info){	#for each extension
 		if($in{$ename.'_status'} != $ext_info{$ename}[2]){	#if extension status changed
