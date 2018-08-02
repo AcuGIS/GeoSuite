@@ -440,16 +440,16 @@ sub check_pg_ext_deps{
 
 
 sub setup_checks{
-	my $tomcat_ver = installed_tomcat_version();
-	if(!$tomcat_ver){
-		my $latest_ver = latest_tomcat_version();
-		print "<p><a href='setup.cgi?mode=tomcat_install&return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm'>Click here</a> to install Tomcat $latest_ver from Apache site.</p>";
-	}
-
 	#Check for commands
 	if (!&has_command('java')) {
 		print '<p>Warning: Java is not found. Install it manually or from the '.
 			  "<a href='./edit_java.cgi?return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm'>Java tab</a></p>";
+	}
+
+	my $tomcat_ver = installed_tomcat_version();
+	if(!$tomcat_ver){
+		my $latest_ver = latest_tomcat_version();
+		print "<p><a href='setup.cgi?mode=tomcat_install&return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm'>Click here</a> to install Tomcat $latest_ver from Apache site.</p>";
 	}
 
 	if (!&has_command('unzip')) {
