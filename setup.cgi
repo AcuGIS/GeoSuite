@@ -101,7 +101,7 @@ sub download_and_install{
 EOF
 	close $fh;
 
-	#&set_ownership_permissions('tomcat','tomcat', undef, "/home/tomcat/apache-tomcat-$tomcat_ver/");
+	
 	&execute_command("chown -R tomcat:tomcat /home/tomcat/apache-tomcat-$tomcat_ver");
 }
 
