@@ -13,11 +13,11 @@ use WebminCore;
 
 sub get_latest_jdk_version(){
 	my $error;
-	my $url = 'http://www.oracle.com/technetwork/java/javase/downloads/index.html';
+	my $url = 'https://www.oracle.com/technetwork/java/javase/downloads/index.html';
 	$tmpfile = &transname("javase.html");
 	&error_setup(&text('install_err3', $url));
-	&http_download("www.oracle.com", 80, "/technetwork/java/javase/downloads/index.html", $tmpfile, \$error,
-					undef, 0, undef, 0, 0, 1);
+	&http_download("www.oracle.com", 443, "/technetwork/java/javase/downloads/index.html", $tmpfile, \$error,
+					undef, 1, undef, 0, 0, 1);
 
 	my $download_num = '';
 	open(my $fh, '<', $tmpfile) or die "open:$!";
@@ -29,18 +29,17 @@ sub get_latest_jdk_version(){
 	}
 	close $fh;
 
-
-	$url = "http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-$download_num.html";
+	$url = "https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-$download_num.html";
 	$tmpfile = &transname("sdk.html");
 	&error_setup(&text('install_err3', $url));
 	my %cookie_headers = ('Cookie'=> 'oraclelicense=accept-securebackup-cookie');
-	&http_download("www.oracle.com", 80,"/technetwork/java/javase/downloads/jdk8-downloads-$download_num.html",
-					$tmpfile, \$error, undef, 0, undef, undef, 0, 0, 1, \%cookie_headers);
+	&http_download("www.oracle.com", 443,"/technetwork/java/javase/downloads/jdk8-downloads-$download_num.html",
+					$tmpfile, \$error, undef, 1, undef, undef, 0, 0, 1, \%cookie_headers);
 
 	my %java_tar_gz;
 	open($fh, '<', $tmpfile) or die "open:$!";
 	while(my $line = <$fh>){
-		if($line =~ /"filepath":"(http:\/\/download.oracle.com\/otn-pub\/java\/jdk\/([a-z0-9-]+)\/[a-z0-9]+\/jdk-[a-z0-9-]+-linux-x64.tar.gz)/){
+		if($line =~ /"filepath":"(https:\/\/download.oracle.com\/otn-pub\/java\/jdk\/([a-z0-9-]+)\/[a-z0-9]+\/jdk-[a-z0-9-]+-linux-x64.tar.gz)/){
 			$java_tar_gz{$2} = $1;
 			last;
 		}
