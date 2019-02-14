@@ -17,7 +17,8 @@ $in{'file'} ||= $files[0];
 
 print &ui_form_start("edit_manual.cgi");
 print "<b>$text{'manual_file'}</b>\n";
-print &ui_select("file", $in{'file'}, [ map { [ $_ ] } @files ], 1, 0, undef, undef, 'onchange="this.form.submit()"'),"\n";
+print &ui_select("file", $in{'file'}, [ map { [ $_ ] } @files ], 1, 0);
+print &ui_submit($text{'manual_ok'});
 print &ui_form_end();
 
 
