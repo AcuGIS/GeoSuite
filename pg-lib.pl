@@ -18,7 +18,13 @@ sub check_pg_repo_yum{
 	my $pg_ver2;
 	($pg_ver2 = $pg_ver) =~ s/\.//;
 
-	my @pinfo = software::package_info("pgdg-$distro$pg_ver2", undef, );
+	if($distro eq 'fedora'){
+		$distro = "fedora";
+	}else{
+		$distro = "redhat";	#centos, redhat, scientific
+	}
+
+	my @pinfo = software::package_info("pgdg-$distro-repo", undef, );
 	if(@pinfo){
 		return 1;
 	}

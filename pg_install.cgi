@@ -147,15 +147,22 @@ sub add_pg_repo_yum{
 		return 1;
 	}
 
-	my $rpm_filename="";
-	my $match = "(download\\.postgresql\\.org\\/pub\\/repos\\/yum\\/$pg_ver\\/redhat\\/rhel-$distro_ver-x86_64\\/pgdg-$distro$pg_ver2-$pg_ver-[0-9]\\.noarch\\.rpm)";	#centos
-	if($distro eq 'fedora'){
-		$match = "(download\\.postgresql\\.org\\/pub\\/repos\\/yum\\/$pg_ver\\/fedora\\/fedora-$distro_ver-x86_64\\/pgdg-$distro$pg_ver2-$pg_ver-[0-9]\\.noarch\\.rpm)";	#fedora
+
+	my $label = '';
+	if(	$distro eq 'centos'){
+		$label = "CentOS $distro_ver";
+
+	}elsif( $distro eq 'scientific'){
+		$label = "Scientific Linux $distro_ver";
+
+	}elsif($distro eq 'fedora'){
+		$label = "Fedora $distro_ver";
 	}
 
+	my $rpm_filename="";
 	open(my $fh, '<', $tmpfile) or die "open:$!";
 	while(my $line = <$fh>){
-		if($line =~ /$match/i){
+		if($line =~ /<a\shref="(.*\.rpm)">$label\s-\sx86_64\s*<\/a><\/li>/i){
 			$rpm_filename = $1;
 			last;
 		}
@@ -166,7 +173,7 @@ sub add_pg_repo_yum{
 		$rpm_filename .= ' epel-release'
 	}
 
-	software::update_system_install("https://$rpm_filename", undef);
+	software::update_system_install("$rpm_filename", undef);
 
 	return 0;
 }
