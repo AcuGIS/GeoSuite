@@ -19,21 +19,23 @@ sub get_latest_jdk_version(){
 	&http_download("www.oracle.com", 443, "/technetwork/java/javase/downloads/index.html", $tmpfile, \$error,
 					undef, 1, undef, 0, 0, 1);
 
+	my $jdk_mv = 12;	#JDK major version
 	my $download_num = '';
 	open(my $fh, '<', $tmpfile) or die "open:$!";
 	while(my $line = <$fh>){
-		if($line =~ /\/technetwork\/java\/javase\/downloads\/jdk12-downloads-([0-9]+)\.html/){
-			$download_num = $1;
+		if($line =~ /\/technetwork\/java\/javase\/downloads\/jdk([0-9]+)-downloads-([0-9]+)\.html/){
+			$jdk_mv = $1;
+			$download_num = $2;
 			last;
 		}
 	}
 	close $fh;
 
-	$url = "https://www.oracle.com/technetwork/java/javase/downloads/jdk12-downloads-$download_num.html";
+	$url = "https://www.oracle.com/technetwork/java/javase/downloads/jdk$jdk_mv-downloads-$download_num.html";
 	$tmpfile = &transname("sdk.html");
 	&error_setup(&text('install_err3', $url));
 	my %cookie_headers = ('Cookie'=> 'oraclelicense=accept-securebackup-cookie');
-	&http_download("www.oracle.com", 443,"/technetwork/java/javase/downloads/jdk12-downloads-$download_num.html",
+	&http_download("www.oracle.com", 443,"/technetwork/java/javase/downloads/jdk$jdk_mv-downloads-$download_num.html",
 					$tmpfile, \$error, undef, 1, undef, undef, 0, 0, 1, \%cookie_headers);
 
 	my %java_tar_gz;
