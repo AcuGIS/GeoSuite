@@ -14,9 +14,7 @@ if (! -r $config{'geohelm_config'}) {
 }
 
 if(-f "$module_root_directory/setup.cgi"){
-	&ui_print_header(undef, $text{'index_title'}, "", "intro", 1, 1);
-		print '<p>Install all GeoHelm components by clicking <a href=\'./setup.cgi?mode=checks\'>here</a>';
-	&ui_print_footer("/", $text{"index"});
+	&redirect("setup.cgi?mode=checks");
 	exit;
 }
 
