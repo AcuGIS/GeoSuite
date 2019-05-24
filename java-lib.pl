@@ -263,4 +263,22 @@ sub unset_default_java{
 	}
 }
 
+sub get_jdk_dir_by_name{
+	my $jdk_name = $_[0];
+	if($jdk_name =~ /.*openjdk.*/){
+
+		my $jdk_ver = (split /-/, $jdk_name)[1];	#get version from name
+		$jdk_dir = '/usr/lib/jvm/java-'.$jdk_ver.'-openjdk';
+
+		#On Ubuntu the arch is appended to jdk dir
+		if(! -d $jdk_dir){
+			$jdk_dir = $jdk_dir."-amd64";
+		}
+
+	}else{
+		$jdk_dir = '/usr/java/'.$jdk_name;
+	}
+	return $jdk_dir;
+}
+
 1;

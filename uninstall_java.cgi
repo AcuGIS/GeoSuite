@@ -19,7 +19,7 @@ if($jdk_name =~ /.*openjdk.*/){
 
 &ui_print_header(undef, $text{'delete_title'}, "");
 
-my $jdk_dir = '/usr/java/'.$jdk_name;
+my $jdk_dir = get_jdk_dir_by_name($jdk_name);
 my $def_jdk = is_default_jdk($jdk_dir);
 
 if(($def_jdk == 1) and ($in{'rm_def_jdk'} == 0)){
