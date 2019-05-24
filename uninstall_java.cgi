@@ -30,44 +30,7 @@ if(($def_jdk == 1) and ($in{'rm_def_jdk'} == 0)){
 print "Removing $jdk_dir...<br>";
 
 if($def_jdk == 1){
-	print "Removing Java environment variables ...<br>";
-	if(-f '/etc/profile.d/jdk.sh'){
-		unlink_file('/etc/profile.d/jdk.sh');
-	}elsif(-f '/etc/environment'){
-		my %os_env;
-		read_env_file('/etc/environment', \%os_env);
-		delete $os_env{'J2SDKDIR'};
-		delete $os_env{'JAVA_HOME'};
-		delete $os_env{'DERBY_HOME'};
-		delete $os_env{'J2REDIR'};
-		write_env_file('/etc/environment', \%os_env, 0);
-	}
-
-	my $alt_cmd = "";
-	if(has_command('alternatives')){        #CentOS
-			$alt_cmd = 'alternatives';
-	}elsif(has_command('update-alternatives')){     #ubuntu
-			$alt_cmd = 'update-alternatives';
-	}else{
-			print "Warning: No alternatives command found<br>";
-	}
-
-	if($alt_cmd ne ""){
-		print "Removing Java using $alt_cmd<br>";
-		my @jdk_progs = ('java', 'jar', 'javac');
-		foreach my $prog (@jdk_progs){
-
-			$cmd_out='';
-			$cmd_err='';
-			local $out = &execute_command("$alt_cmd --remove $prog $jdk_dir/bin/$prog", undef, \$cmd_out, \$cmd_err, 0, 0);
-			if($cmd_err){
-				&error("Error: $alt_cmd: $cmd_err");
-			}else{
-				$cmd_out = s/\r\n/<br>/g;
-				print &html_escape($cmd_out);
-			}
-		}
-	}
+	unset_default_java($jdk_dir);
 }
 
 if( -d $jdk_dir){
