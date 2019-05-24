@@ -16,21 +16,23 @@ sub extract_java_archive{
 	$cmd_out='';
 	$cmd_err='';
 	print "<hr>Extracting $jdk_archive to $java_dir...<br>";
-	local $out = &execute_command("tar -x --overwrite -f \"$jdk_archive\" -C/usr/java", undef, \$cmd_out, \$cmd_err, 0, 0);
+	local $out = &execute_command("tar -x -v --overwrite -f \"$jdk_archive\" -C/usr/java", undef, \$cmd_out, \$cmd_err, 0, 0);
+
+	my $jdk_tar_first_line = ( split /\n/, $cmd_out )[0];
+	my $jdk_dir = $java_dir."/".(split /\//, $jdk_tar_first_line)[0];
 
 	if($cmd_err){
+		$cmd_err = s/\n/<br>/g;
 		&error("Error: tar: $cmd_err");
 	}else{
-		$cmd_out = s/\r\n/<br>/g;
+		$cmd_out = s/\n/<br>/g;
 		print &html_escape($cmd_out);
 	}
-
-	my ($jdk_subver) = $jdk_archive =~ /8u([0-9]+)/;
-	my $jdk_dir = $java_dir."/jdk1.8.0_".$jdk_subver;
 
 	&set_ownership_permissions('root','root', 0755, $jdk_dir);
 	&execute_command("chown -R root:root $jdk_dir", undef, \$cmd_out, \$cmd_err, 0, 0);
 	if($cmd_err){
+		$cmd_err = s/\n/<br>/g;
 		&error("Error: chown: $cmd_err");
 	}
 
@@ -60,9 +62,10 @@ sub set_default_java{
 			      $out.= &execute_command("$alt_cmd --set $prog $jdk_dir/bin/$prog", undef, \$cmd_out, \$cmd_err, 0, 0);
 
 			if($cmd_err){
+				$cmd_err = s/\n/<br>/g;
 				&error("Error: $alt_cmd: $cmd_err");
 			}else{
-				$cmd_out = s/\r\n/<br>/g;
+				$cmd_out = s/\n/<br>/g;
 				print &html_escape($cmd_out);
 			}
 		}

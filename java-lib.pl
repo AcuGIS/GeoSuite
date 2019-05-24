@@ -57,7 +57,7 @@ sub get_installed_oracle_jdk_versions{
     opendir(DIR, '/usr/java/') or return @dirs;
     @dirs
         = grep {
-	    /^jdk1.8.[0-9]+_[0-9]+/
+	    /^jdk-[0-9\.]+/
           && -d "/usr/java/$_"
 	} readdir(DIR);
     closedir(DIR);
@@ -69,8 +69,8 @@ sub is_default_jdk{
 	my $jdk_dir = $_[0];
 
 	my %os_env;
-	if(-f '/etc/profile.d/jdk8.sh'){
-		read_env_file('/etc/profile.d/jdk8.sh', \%os_env);
+	if(-f '/etc/profile.d/jdk.sh'){
+		read_env_file('/etc/profile.d/jdk.sh', \%os_env);
 	}elsif(-f '/etc/environment'){
 		read_env_file('/etc/environment', \%os_env);
 	}
@@ -98,7 +98,7 @@ sub get_java_version(){
 
 sub get_java_home(){
 	my %jdk_ver = get_java_version();
-	return '/usr/java/jdk'.$jdk_ver{'full'};
+	return '/usr/java/jdk-'.$jdk_ver{'full'};
 }
 
 1;
