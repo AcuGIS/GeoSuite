@@ -10,7 +10,8 @@ require '../webmin/webmin-lib.pl';	#require
 
 # Show tabs
 @tabs = ( [ "install",   $text{'java_tabinstall'}, "edit_java.cgi?mode=install" ],
-		  [ "uninstall", $text{'java_tabuninstall'}, "edit_java.cgi?mode=uninstall" ]
+		  [ "uninstall", $text{'java_tabuninstall'}, "edit_java.cgi?mode=uninstall" ],
+			[ "default", $text{'java_tabdefault'}, "edit_java.cgi?mode=default" ]
 		);
 
 print &ui_tabs_start(\@tabs, "mode", $in{'mode'} || "install", 1);
@@ -71,6 +72,18 @@ print &ui_table_row($text{'java_rm_def_jdk'}, &ui_checkbox("rm_def_jdk", 1,undef
 
 print &ui_table_end();
 print &ui_form_end([ [ "", $text{'java_deleteok'} ] ]);
+print &ui_tabs_end_tab();
+
+print &ui_tabs_start_tab("mode", "default");
+print "$text{'java_desc3'}<p>\n";
+
+print &ui_form_start("default_java.cgi", "post");
+print &ui_table_start($text{'java_default'}, undef, 2);
+
+print &ui_table_row($text{'java_installed'}, &ui_select("inst_jdk2", undef, \@opts_inst_jdk, 1, 0)."<br>\n", 2);
+
+print &ui_table_end();
+print &ui_form_end([ [ "", $text{'java_defaultok'} ] ]);
 print &ui_tabs_end_tab();
 
 print &ui_tabs_end(1);

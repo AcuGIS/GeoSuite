@@ -81,7 +81,7 @@ sub set_default_java{
 
 	if(-e '/etc/profile.d/'){
 		$os_env{'PATH'}		 = "\$PATH:$jdk_dir/bin:$jdk_dir/db/bin:$jdk_dir/jre/bin";
-		write_env_file('/etc/profile.d/jdk8.sh', \%os_env, 1);
+		write_env_file('/etc/profile.d/jdk.sh', \%os_env, 1);
 	}elsif(-e '/etc/environment'){
 		read_env_file('/etc/environment', \%os_env);
 		$os_env{'PATH'}		 = "$os_env{'PATH'}:$jdk_dir/bin:$jdk_dir/db/bin:$jdk_dir/jre/bin";

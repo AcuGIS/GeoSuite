@@ -172,4 +172,53 @@ sub get_java_home(){
 	return '/usr/java/jdk-'.$jdk_ver{'full'};
 }
 
+sub set_default_java{
+	my $jdk_dir = $_[0];
+
+	my $alt_cmd = "";
+	if(has_command('alternatives')){        #CentOS
+			$alt_cmd = 'alternatives';
+	}elsif(has_command('update-alternatives')){     #ubuntu
+			$alt_cmd = 'update-alternatives';
+	}else{
+			print "Warning: No alternatives command found<br>";
+	}
+
+	if($alt_cmd ne ""){
+		print "Updating Java using $alt_cmd<br>";
+		my @jdk_progs = ('java', 'jar', 'javac');
+		foreach my $prog (@jdk_progs){
+
+			$cmd_out='';
+			$cmd_err='';
+			local $out = &execute_command("$alt_cmd --install /usr/bin/$prog $prog $jdk_dir/bin/$prog 1", undef, \$cmd_out, \$cmd_err, 0, 0);
+			      $out.= &execute_command("$alt_cmd --set $prog $jdk_dir/bin/$prog", undef, \$cmd_out, \$cmd_err, 0, 0);
+
+			if($cmd_err){
+				$cmd_err = s/\n/<br>/g;
+				&error("Error: $alt_cmd: $cmd_err");
+			}else{
+				$cmd_out = s/\n/<br>/g;
+				print &html_escape($cmd_out);
+			}
+		}
+	}
+
+	print "<hr>Setting Java environment variables...<br>";
+	my %os_env;
+	$os_env{'J2SDKDIR'}  = $jdk_dir;
+	$os_env{'JAVA_HOME'} = $jdk_dir;
+	$os_env{'DERBY_HOME'}= "$jdk_dir/db";
+	$os_env{'J2REDIR'}	 = "$jdk_dir/jre";
+
+	if(-e '/etc/profile.d/'){
+		$os_env{'PATH'}		 = "\$PATH:$jdk_dir/bin:$jdk_dir/db/bin:$jdk_dir/jre/bin";
+		write_env_file('/etc/profile.d/jdk.sh', \%os_env, 1);
+	}elsif(-e '/etc/environment'){
+		read_env_file('/etc/environment', \%os_env);
+		$os_env{'PATH'}		 = "$os_env{'PATH'}:$jdk_dir/bin:$jdk_dir/db/bin:$jdk_dir/jre/bin";
+		write_env_file('/etc/environment', \%os_env, 0);
+	}
+}
+
 1;
