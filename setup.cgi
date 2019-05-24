@@ -6,49 +6,6 @@ require './pg-lib.pl';
 require './geoserver-lib.pl';
 require '../webmin/webmin-lib.pl';	#for OS detection
 
-sub latest_tomcat_version(){
-	#get latest version from Apache Tomcat webpage
-	my %version;
-	if(-f "$module_config_directory/version"){
-		read_file_cached("$module_config_directory/version", \%version);
-
-		if(	$version{'updated'} >= (time() - 86400)){	#if last update was less than a day ago
-			return $version{'latest'} if ($version{'latest'} ne '0.0.0');
-		}
-	}
-
-	my $url = 'http://archive.apache.org/dist/tomcat/tomcat-8/';
-	&error_setup(&text('install_err3', $url));
-	my $error = '';
-	my $tmpfile = &transname('tomcat.html');
-
-
-	&http_download('archive.apache.org', 80, '/dist/tomcat/tomcat-8/', $tmpfile, \$error);
-	if($error){
-		print &html_escape($error);
-		die "Error: Failed to get Apache Tomcat webpage";
-	}
-
-	my @latest_versions;
-	open(my $fh, '<', $tmpfile) or die "open:$!";
-	while(my $line = <$fh>){
-		if($line =~ /<a\s+href="v(8\.[0-9\.]+)\/">v[0-9\.]+\/<\/a>/){
-			push(@latest_versions, $1);
-		}
-	}
-	close $fh;
-
-	my @result = sort sort_version @latest_versions;
-	my $latest_ver = $result[$#result];
-
-	#renew the updated timestamp and latest version
-	$version{'updated'} = time();
-	$version{'latest'} = $latest_ver;
-	&write_file("$module_config_directory/version", \%version);
-
-	return $latest_ver;
-}
-
 sub add_tomcat_user{
 	#check if tomcat user exists
 	if(read_file_contents('/etc/passwd') !~ /\ntomcat:/){
@@ -60,89 +17,6 @@ sub add_tomcat_user{
 	}
 }
 
-sub download_and_install{
-	my $tomcat_ver = $_[0];
-
-	#download tomcat archive
-	my $url = "http://archive.apache.org/dist/tomcat/tomcat-8/v$tomcat_ver/bin/apache-tomcat-$tomcat_ver.tar.gz";
-	$progress_callback_url = $url;
-	&error_setup(&text('install_err3', $url));
-	my $tmpfile = &transname("apache-tomcat-$tomcat_ver.tar.gz");
-	&http_download('archive.apache.org', 80, "/dist/tomcat/tomcat-8/v$tomcat_ver/bin/apache-tomcat-$tomcat_ver.tar.gz",
-					$tmpfile, \$error, \&progress_callback, 0);
-
-	if($error){
-		print &html_escape($error);
-		return 1;
-	}
-
-	#extract tomcat archive
-	my $cmd_out='';
-	my $cmd_err='';
-	print "<hr>Extracting to /home/tomcat/apache-tomcat-$tomcat_ver/ ...<br>";
-	local $out = &execute_command("tar -x --overwrite -f \"$tmpfile\" -C/home/tomcat/", undef, \$cmd_out, \$cmd_err, 0, 0);
-
-	if($cmd_err ne ""){
-		&error("Error: tar: $cmd_err");
-	}else{
-		$cmd_out = s/\r\n/<br>/g;
-		print &html_escape($cmd_out);
-		print "Done<br>";
-	}
-
-	#folder is created after tomcat is started, but we need it now
-	&make_dir("/home/tomcat/apache-tomcat-$tomcat_ver/conf/Catalina/localhost/", 0755, 1);
-
-	open(my $fh, '>', "/home/tomcat/apache-tomcat-$tomcat_ver/conf/Catalina/localhost/manager.xml") or die "open:$!";
-	print $fh <<EOF;
-<Context privileged="true" antiResourceLocking="false" docBase="\${catalina.home}/webapps/manager">
-	<Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="^.*\$" />
-</Context>
-EOF
-	close $fh;
-
-	#&set_ownership_permissions('tomcat','tomcat', undef, "/home/tomcat/apache-tomcat-$tomcat_ver/");
-	&execute_command("chown -R tomcat:tomcat /home/tomcat/apache-tomcat-$tomcat_ver");
-}
-
-sub setup_catalina_env{
-	my $tomcat_ver = $_[0];
-
-	my %os_env;
-
-	print "<hr>Setting CATALINA environment...";
-
-	read_env_file('/etc/environment', \%os_env);
-	$os_env{'CATALINA_HOME'} = "/home/tomcat/apache-tomcat-$tomcat_ver/";
-	$os_env{'CATALINA_BASE'} = "/home/tomcat/apache-tomcat-$tomcat_ver/";
-	write_env_file('/etc/environment', \%os_env, 0);
-}
-
-sub setup_tomcat_users{
-	my $tomcat_ver = $_[0];
-	my @pw_chars = ("A".."Z", "a".."z", "0".."9", "_", "-");
-	my $manager_pass;
-	my $admin_pass;
-
-	$manager_pass .= $pw_chars[rand @pw_chars] for 1..32;
-	$admin_pass   .= $pw_chars[rand @pw_chars] for 1..32;
-
-	#Save tomcat-users.xml
-	open(my $fh, '>', "/home/tomcat/apache-tomcat-$tomcat_ver/conf/tomcat-users.xml") or die "open:$!";
-	print $fh <<EOF;
-<?xml version='1.0' encoding='utf-8'?>
-<tomcat-users>
-<role rolename="manager-gui" />
-<user username="manager" password="$manager_pass" roles="manager-gui" />
-
-<role rolename="admin-gui" />
-<user username="admin" password="$admin_pass" roles="manager-gui,admin-gui" />
-</tomcat-users>
-EOF
-	close $fh;
-	print "<hr>Setting Tomcat users...";
-}
-
 sub setup_tomcat_service{
 	my $tomcat_ver = $_[0];
 	copy_source_dest("$module_root_directory/tomcat.service", '/etc/init.d/tomcat');
@@ -151,46 +25,13 @@ sub setup_tomcat_service{
 }
 
 sub install_tomcat_from_archive{
-	my $tomcat_ver = latest_tomcat_version();
 
 	add_tomcat_user();
-	download_and_install($tomcat_ver);
+	my $tomcat_ver = download_and_install($in{'source_archive'});
 
 	setup_catalina_env($tomcat_ver);
 	setup_tomcat_users($tomcat_ver);
 	setup_tomcat_service($tomcat_ver);
-}
-
-sub migrate_settings_and_apps{
-	my $old_ver = $_[0];
-	my $new_ver = $_[1];
-	my $apps_ref = $_[2];
-
-	#copy settings
-	my @files = ('bin/setenv.sh', 'conf/tomcat-users.xml');
-	foreach my $file (@files){
-		if( -f "/home/tomcat/apache-tomcat-$old_ver/$file"){
-			copy_source_dest("/home/tomcat/apache-tomcat-$old_ver/$file",
-							 "/home/tomcat/apache-tomcat-$new_ver/$file");
-			print "Copying $file to /home/tomcat/apache-tomcat-$new_ver/$file<br>";
-		}
-	}
-
-	#make a list of installed apps
-	my @exclude_apps = ('docs', 'examples', 'host-manager', 'manager', 'ROOT');
-	#move apps
-	print "Moving apps ...<br>";
-	foreach my $app (@$apps_ref){
-		next if (grep $_ == $app, @exclude_apps);
-
-		#move
-		if(!move(	"/home/tomcat/apache-tomcat-$old_ver/webapps/$app",
-					"/home/tomcat/apache-tomcat-$old_ver/webapps/$app")){
-			&error("Error: Can't move $app: $!");
-		}else{
-			print "$app moved<br>";
-		}
-	}
 }
 
 sub install_geoexplorer{
@@ -438,8 +279,53 @@ sub check_pg_ext_deps{
 	}
 }
 
+sub select_tomcat_archive{
+	print "$text{'base_desc1'}<p>\n";
+	print &ui_form_start("setup.cgi", "form-data");
+	print ui_hidden('mode', 'tomcat_install');
+	print &ui_table_start($text{'base_options'}, undef, 2);
+
+	my @tmver = &get_tomcat_major_versions();
+	my $sel_tmver = $in{'tmver'} || $tmver[0];
+	my @tm_opts = ( );
+	foreach my $v (@tmver) {
+		push(@tm_opts, [ $v, $v ]);
+	}
+
+	print <<EOF;
+	<script type="text/javascript">
+	function update_select(){
+		var majorSel = document.getElementById('base_major');
+		var major = majorSel.options[majorSel.selectedIndex].value;
+
+		window.location='setup.cgi?mode=tomcat_install_form&tmver='+major;
+	}
+	</script>
+EOF
+
+	print &ui_table_row($text{'base_major'},
+		&ui_select("base_major", $sel_tmver, \@tm_opts, 1, 0, undef, undef, 'id="base_major" onchange="update_select()"'));
+
+	my @tver = &major_tomcat_versions($sel_tmver);
+	my @tver_opts = ( );
+	foreach my $v (@tver) {
+		push(@tver_opts, [ $v, $v ]);
+	}
+
+	print &ui_table_row($text{'base_installsource'},
+		&ui_radio_table("source", 100,
+			[ [ 100, $text{'base_archive'},  &ui_select("source_archive", undef, \@tver_opts,1, 0)],
+			  [ 0, $text{'source_local'}, &ui_textbox("file", undef, 40)." ". &file_chooser_button("file", 0) ],
+			  [ 1, $text{'source_uploaded'}, &ui_upload("upload", 40) ],
+			  [ 2, $text{'source_ftp'},&ui_textbox("url", undef, 40) ]
+		    ]));
+
+	print &ui_table_end();
+	print &ui_form_end([ [ "", $text{'base_installok'} ] ]);
+}
 
 sub setup_checks{
+
 	#Check for commands
 	if (!&has_command('java')) {
 		print '<p>Warning: Java is not found. Install it manually or from the '.
@@ -448,8 +334,7 @@ sub setup_checks{
 
 	my $tomcat_ver = installed_tomcat_version();
 	if(!$tomcat_ver){
-		my $latest_ver = latest_tomcat_version();
-		print "<p><a href='setup.cgi?mode=tomcat_install&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> to install Tomcat $latest_ver from Apache site.</p>";
+		print "<p><a href='setup.cgi?mode=tomcat_install_form&return=%2E%2E%2Ftomcat%2Fsetup.cgi&returndesc=Setup&caller=tomcat'>Click here</a> to install Tomcat from Apache site.</p>";
 	}
 
 	if (!&has_command('unzip')) {
@@ -564,7 +449,11 @@ sub setup_cleanup{
 
 &ui_print_header(undef, $text{'setup_title'}, "");
 
-&ReadParse();
+if($ENV{'CONTENT_TYPE'} =~ /boundary=(.*)$/) {
+	&ReadParseMime();
+}else {
+	&ReadParse(); $no_upload = 1;
+}
 
 my $mode = $in{'mode'} || "checks";
 
@@ -574,6 +463,7 @@ if($mode eq "checks"){							setup_checks();
 }elsif($mode eq "cleanup"){						setup_cleanup();
 	&ui_print_footer('', $text{'index_return'});
 	exit 0;
+}elsif($mode eq "tomcat_install_form"){			select_tomcat_archive();
 }elsif($mode eq "tomcat_install"){				install_tomcat_from_archive();
 }elsif($mode eq "install_bootstrap_web_app"){	install_bootstrap_web_app();
 }elsif($mode eq "install_openlayers"){			install_openlayers();

@@ -26,7 +26,7 @@ sub migrate_settings_and_apps{
 
 		#move
 		if(!move(	"/home/tomcat/apache-tomcat-$old_ver/webapps/$app",
-					"/home/tomcat/apache-tomcat-$old_ver/webapps/$app")){
+							"/home/tomcat/apache-tomcat-$old_ver/webapps/$app")){
 			&error("Error: Can't move $app: $!");
 		}else{
 			print "$app moved<br>";
@@ -35,8 +35,9 @@ sub migrate_settings_and_apps{
 }
 
 sub upgrade_tomcat_from_archive{
-	my  $latest_ver = latest_tomcat_version();
+
 	my $install_ver = installed_tomcat_version();
+	my  $latest_ver = latest_tomcat_version($install_ver);
 
 	my @installed_apps = get_all_war_infos();
 
@@ -51,6 +52,7 @@ sub upgrade_tomcat_from_archive{
 
 	migrate_settings_and_apps($install_ver, $latest_ver, \@installed_apps);
 
+	print("Update done, stating new Tomcat ".$latest_ver);
 	tomcat_service_ctl('start');
 
 	return 0;

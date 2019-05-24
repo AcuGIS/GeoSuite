@@ -72,7 +72,7 @@ if ($running == 1) {
 
 #Check for an update of tomcat, once a day
 my $tomcat_ver = installed_tomcat_version();
-my $latest_ver = latest_tomcat_version();
+my $latest_ver = latest_tomcat_version($tomcat_ver);
 if("v$tomcat_ver" ne "v$latest_ver"){
 	print &ui_buttons_row("tomcat_upgrade.cgi", $text{'index_upgrade'}, "Tomcat will be updated to  $latest_ver. All WARs will be moved and config will be copied to new install!");
 }

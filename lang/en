@@ -106,3 +106,10 @@ editor_desc1=Use Load/Browse to load a file content or browse into a folder.
 load_ok=Load/Browse
 
 setup_title=Setup
+
+base_options=Options
+base_major=Tomcat Major Version
+base_archive=Release
+base_installok=Download
+base_installsource=Install source
+base_desc1=Download an archive of Apache Tomcat Server from Apache website and install it
