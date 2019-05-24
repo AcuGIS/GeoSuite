@@ -28,14 +28,27 @@ foreach $ver (keys %jdk_version) {
 	push(@opt_avail_jdk, [ "$ver=$jdk_version{$ver}", $ver]);
 }
 
+my %openjdk_version = &get_openjdk_versions();
+@opt_avail_openjdk = ();
+foreach $ver (keys %openjdk_version) {
+	push(@opt_avail_openjdk, [ "$ver=$openjdk_version{$ver}", $ver]);
+}
+
 print &ui_table_row($text{'jdk_installsource'},
-	&ui_radio_table("source", 100,
-		[ [ 100, $text{'jdk_latest'},  &ui_select("jdk_ver", undef, \@opt_avail_jdk, 1, 0)],
+	&ui_radio_table("source", 200,
+		[ [ 200, $text{'openjdk_latest'},  &ui_select("openjdk_ver", undef, \@opt_avail_openjdk, 1, 0).
+																			 '<br>'.
+																			 &ui_checkbox("openjdk_headless", 1,undef, 1).$text{'openjdk_headless'}.
+																			 &ui_hr()],
+			[ 100, $text{'jdk_latest'},  &ui_select("jdk_ver", undef, \@opt_avail_jdk, 1, 0)],
 		  [ 0, $text{'source_local'},   &ui_textbox("file", undef, 40)." ". &file_chooser_button("file", 0) ],
 		  [ 1, $text{'source_uploaded'},&ui_upload("upload", 40) ],
 		  [ 2, $text{'source_ftp'},     &ui_textbox("url", undef, 40) ]
 	    ]), 2);
-print &ui_table_row($text{'java_def_jdk'}, &ui_checkbox("def_jdk", 1,undef, 1), 2);
+print &ui_table_row($text{'java_def_jdk'},
+			&ui_checkbox("def_jdk", 1,undef, 1).$text{'java_def_jdk_desc'}
+			,2);
+
 
 print &ui_table_end();
 print &ui_form_end([ [ "", $text{'java_installok'} ] ]);
@@ -48,7 +61,7 @@ print "$text{'java_desc2'}<p>\n";
 print &ui_form_start("uninstall_java.cgi", "post");
 print &ui_table_start($text{'java_uninstall'}, undef, 2);
 
-@jdk_vlist = &get_installed_oracle_jdk_versions();
+@jdk_vlist = &get_installed_jdk_versions();
 @opts_inst_jdk = ( );
 foreach $jdk_ver (@jdk_vlist) {
 	push(@opts_inst_jdk, [ $jdk_ver, $jdk_ver ]);

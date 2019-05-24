@@ -2,16 +2,22 @@
 
 use File::Path 'rmtree';
 
-require './java-lib.pl';
 require './tomcat-lib.pl';
+require './java-lib.pl';
 require '../webmin/webmin-lib.pl';	#For OS Fetection
 &ReadParse();
 
 &error_setup($text{'delete_err'});
-&ui_print_header(undef, $text{'delete_title'}, "");
 
 my $jdk_name = $in{'inst_jdk'};
 $jdk_name || &error($text{'delete_enone'});
+
+if($jdk_name =~ /.*openjdk.*/){
+	&redirect("/software/search.cgi?search=$jdk_name");
+	return;
+}
+
+&ui_print_header(undef, $text{'delete_title'}, "");
 
 my $jdk_dir = '/usr/java/'.$jdk_name;
 my $def_jdk = is_default_jdk($jdk_dir);
@@ -25,8 +31,8 @@ print "Removing $jdk_dir...<br>";
 
 if($def_jdk == 1){
 	print "Removing Java environment variables ...<br>";
-	if(-f '/etc/profile.d/jdk8.sh'){
-		unlink_file('/etc/profile.d/jdk8.sh');
+	if(-f '/etc/profile.d/jdk.sh'){
+		unlink_file('/etc/profile.d/jdk.sh');
 	}elsif(-f '/etc/environment'){
 		my %os_env;
 		read_env_file('/etc/environment', \%os_env);
@@ -71,4 +77,3 @@ if( -d $jdk_dir){
 print "<hr>Uninstall of <tt>$jdk_name</tt> is successful<br>";
 
 &ui_print_footer("", $text{'index_return'});
-

@@ -1,8 +1,9 @@
 #!/usr/bin/perl
 
-require './java-lib.pl';
 require './tomcat-lib.pl';
+require './java-lib.pl';
 require '../webmin/webmin-lib.pl';	#require
+
 use File::Basename;
 
 sub extract_java_archive{
@@ -88,26 +89,48 @@ sub set_default_java{
 	}
 }
 
-$| = 1;
+#$| = 1;
 
-if($ENV{'CONTENT_TYPE'} =~ /boundary=(.*)$/) { &ReadParseMime(); }
-else { &ReadParse(); $no_upload = 1; }
+if ($ENV{REQUEST_METHOD} eq "POST") {
+        &ReadParse(\%getin, "GET");
+        &ReadParseMime(undef, \&read_parse_mime_callback, [ $getin{'id'} ]);
+        }
+else {
+        &ReadParse();
+        $no_upload = 1;
+      }
+&error_setup($text{'install_err'});
 
-&ui_print_header(undef, $text{'java_title'}, "");
 
 if ($in{'source'} == 100) {
+
+	&ui_print_header(undef, $text{'java_title'}, "");
+
 	my ($jdk_name, $url) = split /=/, $in{'jdk_ver'};
 	$in{'url'} = $url;
 	$in{'source'} = 2;
+
+	my $jdk_archive = process_file_source();
+	my $jdk_path    = extract_java_archive($jdk_archive);
+
+	if($in{'def_jdk'} == 1){
+		set_default_java($jdk_path);
+	}
+
+	print "<hr>Done<br>";
+
+	&ui_print_footer("", $text{'index_return'});
+
+}elsif($in{'source'} == 200){
+
+	my $openjdk_pkg = (split /=/, $in{'openjdk_ver'})[1];
+	if($in{'openjdk_headless'} == 1){
+		$openjdk_pkg .= '-headless';
+	}
+
+	&redirect("/software/install_pack.cgi?".
+							"source=3&update=$openjdk_pkg".
+							"&return=%2E%2E%2Fgeohelm%2Findex.cgi&returndesc=GeoHelm&caller=geohelm");
+
+	return;
 }
-
-my $jdk_archive = process_file_source();
-my $jdk_path    = extract_java_archive($jdk_archive);
-
-if($in{'def_jdk'} == 1){
-	set_default_java($jdk_path);
-}
-
-print "<hr>Done<br>";
-
-&ui_print_footer("", $text{'index_return'});

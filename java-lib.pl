@@ -7,9 +7,31 @@ Functions for managing Oracle JDK installations.
 
 =cut
 
-#BEGIN { push(@INC, ".."); };
+BEGIN { push(@INC, ".."); };
 use warnings;
 use WebminCore;
+
+foreign_require('software', 'software-lib.pl');
+
+sub get_openjdk_versions(){
+	my $search = 'openjdk-[0-9]+-jdk$';
+	if (defined(&software::update_system_search)) {
+  	# Call the search function
+    @avail = &software::update_system_search($search);
+  } else {
+  	# Scan through list manually
+  	@avail = &software::update_system_available();
+  	@avail = grep { $_->{'name'} =~ /\Q$search\E/i } @avail;
+  }
+
+	my %openjdk_versions;
+	foreach $a (@avail) {
+		if($a->{'name'} =~ /openjdk-([0-9]+)-jdk/){
+			$openjdk_versions{$1} = $a->{'name'};
+		}
+	}
+	return %openjdk_versions;
+}
 
 sub get_latest_jdk_version(){
 	my $error;
@@ -52,17 +74,66 @@ sub get_latest_jdk_version(){
 	return %java_tar_gz;
 }
 
+sub get_installed_jdk_versions(){
+	my @jdks = get_installed_oracle_jdk_versions();
+
+	push(@jdks, get_installed_openjdk_versions());
+	return @jdks;
+}
+
+sub get_installed_openjdk_versions{
+
+	my @pkgs = ();
+
+	my $cmd_out='';
+	my $cmd_err='';
+	if(has_command('rpm')){
+		local $out = &execute_command("rpm -q --queryformat \"%{NAME}\n\" $pkg_list", undef, \$cmd_out, \$cmd_err, 0, 0);
+
+		my @lines = split /\n/, $cmd_out;
+		foreach my $line (@lines){
+			if($line =~ /^(java-[0-9\.]+-openjdk)-.*/i){	#package pgdg96-centos is not installed
+				push(@pkgs, $1);
+			}
+		}
+	}elsif(has_command('dpkg')){
+		local $out = &execute_command("dpkg -l \"*openjdk*\"", undef, \$cmd_out, \$cmd_err, 0, 0);
+
+		my %all_pkgs;
+		my @lines = split /\n/, $cmd_out;
+		foreach my $line (@lines){
+			if($line =~ /^(..)\s+(openjdk-[0-9\.]*)-.*:.*/i){
+				my $pkg = $2;
+				if($1 =~ /[uirph]i/){
+					$all_pkgs{$pkg} = 1;
+				}
+			}
+		}
+		@pkgs = keys %all_pkgs;
+	}else{
+		my @dirs;
+	    opendir(DIR, '/usr/java/') or return @dirs;
+	    @dirs
+	        = grep {
+		    /^jdk-[0-9\.]+/
+	          && -d "/usr/java/$_"
+		} readdir(DIR);
+	  closedir(DIR);
+	}
+
+	return sort @pkgs;
+}
+
 sub get_installed_oracle_jdk_versions{
 	my @dirs;
-    opendir(DIR, '/usr/java/') or return @dirs;
-    @dirs
-        = grep {
-	    /^jdk-[0-9\.]+/
-          && -d "/usr/java/$_"
+  opendir(DIR, '/usr/java/') or return @dirs;
+  @dirs	= grep {
+			/^jdk-[0-9\.]+/
+			&& -d "/usr/java/$_"
 	} readdir(DIR);
-    closedir(DIR);
+  closedir(DIR);
 
-    return sort @dirs;
+  return sort @dirs;
 }
 
 sub is_default_jdk{
