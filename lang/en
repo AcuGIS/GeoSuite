@@ -44,7 +44,7 @@ start_err=Failed to start Apache Tomcat
 stop_err=Failed to stop Apache Tomcat
 restart_err=Failed to restart Apache Tomcat
 
-java_title=Oracle Java 8
+java_title=Java
 java_tabinstall=Install
 java_tabuninstall=Uninstall
 java_desc1=Install Java Development Kit(JDK) from distribution repository or from Oracle .tar.gz archive
