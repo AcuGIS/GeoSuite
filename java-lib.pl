@@ -22,24 +22,25 @@ sub get_latest_jdk_version(){
 	my $download_num = '';
 	open(my $fh, '<', $tmpfile) or die "open:$!";
 	while(my $line = <$fh>){
-		if($line =~ /\/technetwork\/java\/javase\/downloads\/jdk8-downloads-([0-9]+)\.html/){
+		if($line =~ /\/technetwork\/java\/javase\/downloads\/jdk12-downloads-([0-9]+)\.html/){
 			$download_num = $1;
 			last;
 		}
 	}
 	close $fh;
 
-	$url = "https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-$download_num.html";
+	$url = "https://www.oracle.com/technetwork/java/javase/downloads/jdk12-downloads-$download_num.html";
 	$tmpfile = &transname("sdk.html");
 	&error_setup(&text('install_err3', $url));
 	my %cookie_headers = ('Cookie'=> 'oraclelicense=accept-securebackup-cookie');
-	&http_download("www.oracle.com", 443,"/technetwork/java/javase/downloads/jdk8-downloads-$download_num.html",
+	&http_download("www.oracle.com", 443,"/technetwork/java/javase/downloads/jdk12-downloads-$download_num.html",
 					$tmpfile, \$error, undef, 1, undef, undef, 0, 0, 1, \%cookie_headers);
 
 	my %java_tar_gz;
 	open($fh, '<', $tmpfile) or die "open:$!";
 	while(my $line = <$fh>){
-		if($line =~ /"filepath":"(https:\/\/download.oracle.com\/otn-pub\/java\/jdk\/([a-z0-9-]+)\/[a-z0-9]+\/jdk-[a-z0-9-]+-linux-x64.tar.gz)/){
+
+		if($line =~ /"filepath":"(https:\/\/download.oracle.com\/otn-pub\/java\/jdk\/([a-z0-9-\.+]+)\/[a-z0-9]+\/jdk-[a-z0-9-\.]+_linux-x64_bin.tar.gz)/){
 			$java_tar_gz{$2} = $1;
 			last;
 		}
@@ -54,8 +55,8 @@ sub get_installed_oracle_jdk_versions{
     opendir(DIR, '/usr/java/') or return @dirs;
     @dirs
         = grep {
-	    /^jdk1.8.[0-9]+_[0-9]+/ 
-          && -d "/usr/java/$_"  
+	    /^jdk1.8.[0-9]+_[0-9]+/
+          && -d "/usr/java/$_"
 	} readdir(DIR);
     closedir(DIR);
 
