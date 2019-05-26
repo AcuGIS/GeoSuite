@@ -7,7 +7,7 @@ index_stop=Stop
 index_stopmsg=Click this button to stop Apache Tomcat
 index_restart=Restart
 index_restartmsg=Click this button to restart the Apache Tomcat
-index_return=Geohelm
+index_return=GeoHelm
 index_install=Install Tomcat
 index_upgrade=Upgrade Tomcat
 
