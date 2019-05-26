@@ -3,6 +3,7 @@
 require './tomcat-lib.pl';
 require './java-lib.pl';
 require '../webmin/webmin-lib.pl';	#require
+foreign_require('software', 'software-lib.pl');
 
 use File::Basename;
 
@@ -100,37 +101,33 @@ else {
         $no_upload = 1;
       }
 &error_setup($text{'install_err'});
+&ui_print_header(undef, $text{'java_title'}, "");
 
-
+my $jdk_path = '';
 if ($in{'source'} == 100) {
-
-	&ui_print_header(undef, $text{'java_title'}, "");
 
 	my ($jdk_name, $url) = split /=/, $in{'jdk_ver'};
 	$in{'url'} = $url;
 	$in{'source'} = 2;
 
 	my $jdk_archive = process_file_source();
-	my $jdk_path    = extract_java_archive($jdk_archive);
-
-	if($in{'def_jdk'} == 1){
-		set_default_java($jdk_path);
-	}
-
-	print "<hr>Done<br>";
-
-	&ui_print_footer("", $text{'index_return'});
+	$jdk_path    = extract_java_archive($jdk_archive);
 
 }elsif($in{'source'} == 200){
 
-	my $openjdk_pkg = (split /=/, $in{'openjdk_ver'})[1];
+	my $jdk_name = (split /=/, $in{'openjdk_ver'})[1];
+	my $openjdk_pkg = $jdk_name;
 	if($in{'openjdk_headless'} == 1){
 		$openjdk_pkg .= '-headless';
 	}
 
-	&redirect("/software/install_pack.cgi?".
-							"source=3&update=$openjdk_pkg".
-							"&return=%2E%2E%2Fgeohelm%2Findex.cgi&returndesc=GeoHelm&caller=geohelm");
-
-	return;
+	software::update_system_install($openjdk_pkg, undef);
+	$jdk_path = get_jdk_dir_by_name($jdk_name);
 }
+
+if($in{'def_jdk'} == 1){
+	set_default_java($jdk_path);
+}
+
+print "<hr>Done<br>";
+&ui_print_footer("", $text{'index_return'});

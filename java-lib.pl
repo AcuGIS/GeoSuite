@@ -311,12 +311,13 @@ sub unset_default_java{
 
 sub get_jdk_dir_by_name{
 	my $jdk_name = $_[0];
+	my $jdk_dir = '';
+
 	if($jdk_name =~ /.*openjdk.*/){
 
 		my $jdk_ver = (split /-/, $jdk_name)[1];	#get version from name
 		my @known_dirs = ('java-'.$jdk_ver.'-openjdk', 'java-'.$jdk_ver.'-openjdk-amd64', 'jre-'.$jdk_ver.'-openjdk');
 
-		$jdk_dir = '';
 		foreach $jvm_name (@known_dirs){
 			if(-d '/usr/lib/jvm/'.$jvm_name){
 				$jdk_dir = '/usr/lib/jvm/'.$jvm_name;
