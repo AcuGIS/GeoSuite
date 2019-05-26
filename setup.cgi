@@ -269,7 +269,18 @@ sub check_pg_ext_deps{
 	}elsif( $osinfo{'os_type'} =~ /redhat/i){
 		my $pg_ver2;
 		($pg_ver2 = $pg_ver) =~ s/\.//;
-		@ext_pkgs = ("postgis23_$pg_ver2", "pgrouting_$pg_ver2", "postgresql$pg_ver2-contrib");
+
+		@ext_pkgs = ("pgrouting_$pg_ver2", "postgresql$pg_ver2-contrib");
+
+		my @avail = search_pkg('postgis');	#we have postgis{23,24,25}_{96,...,10,11}
+		my @pgis_pkgs;
+		foreach $a (@avail) {
+			if($a->{'name'} =~ /^postgis[0-9]+_$pg_ver2$/){
+				push(@pgis_pkgs, $a->{'name'});
+			}
+		}
+		@pgis_pkgs = sort @pgis_pkgs;
+		push(@ext_pkgs, @pgis_pkgs[-1]);
 	}
 
 	foreach my $pkg (@ext_pkgs){

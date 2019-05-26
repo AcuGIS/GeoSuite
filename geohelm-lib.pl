@@ -15,6 +15,8 @@ require './tomcat-lib.pl';
 require './geoserver-lib.pl';
 use File::Basename;
 
+foreign_require('software', 'software-lib.pl');
+
 sub get_geohelm_config
 {
 my $lref = &read_file_lines($config{'geohelm_conf'});
@@ -34,7 +36,7 @@ sub get_acugeo_versions{
 	my %tver = &get_catalina_version();
 	my %gver = &get_geoserver_version();
 
-	
+
 	$tver{'geoserver_ver'}	 = $gver{'number'};
 	$tver{'geoserver_build'} = $gver{'jdk'};
 	return %tver;
@@ -109,4 +111,19 @@ sub unzip_me{
 		print &html_escape($unzip_out);
 	}
 	return $unzip_dir;
+}
+
+sub search_pkg{
+  my $pattern  = $_[0];
+
+  my @avail = ();
+  if (defined(&software::update_system_search)) {
+  	# Call the search function
+    @avail = &software::update_system_search($pattern);
+  } else {
+  	# Scan through list manually
+  	@avail = &software::update_system_available();
+  	@avail = grep { $_->{'name'} =~ /\Q$pattern\E/i } @avail;
+  }
+  return sort @avail;
 }
