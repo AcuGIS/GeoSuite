@@ -344,6 +344,11 @@ sub setup_checks{
 			  "<a href='../software/install_pack.cgi?source=3&update=unzip&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
 	}
 
+	if (!&has_command('bzip2')) {
+		print '<p>Warning: bzip2 command is not found. Install it manually or '.
+			  "<a href='../software/install_pack.cgi?source=3&update=bzip2&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
+	}
+
 	my %osinfo = &detect_operating_system();
 	if($osinfo{'real_os_type'} =~ /centos/i){	#CentOS
 		my @pinfo = software::package_info('epel-release', undef, );
