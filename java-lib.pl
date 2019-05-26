@@ -12,24 +12,39 @@ use warnings;
 use WebminCore;
 
 foreign_require('software', 'software-lib.pl');
+require './geohelm-lib.pl';
+
+sub get_openjdk_patterns(){
+	my %osinfo = &detect_operating_system();
+
+	my %rv;
+	if(	($osinfo{'real_os_type'} =~ /centos/i) or	#CentOS
+			($osinfo{'real_os_type'} =~ /fedora/i)	or  #Fedora
+			($osinfo{'real_os_type'} =~ /scientific/i)	){
+
+		$rv{'search'}  = 'openjdk';
+		$rv{'version'} = '^java-([0-9\.]+)-openjdk$';
+
+	}elsif( $osinfo{'os_type'} =~ /debian/i){	#ubuntu
+		$rv{'search'}  = 'openjdk-[0-9]+-jdk$';
+		$rv{'version'} = 'openjdk-([0-9]+)-jdk';
+	}
+	return %rv;
+}
 
 sub get_openjdk_versions(){
-	my $search = 'openjdk-[0-9]+-jdk$';
-	if (defined(&software::update_system_search)) {
-  	# Call the search function
-    @avail = &software::update_system_search($search);
-  } else {
-  	# Scan through list manually
-  	@avail = &software::update_system_available();
-  	@avail = grep { $_->{'name'} =~ /\Q$search\E/i } @avail;
-  }
+
+	my %patterns = get_openjdk_patterns();
+
+	my @avail = search_pkg($patterns{'search'});
 
 	my %openjdk_versions;
 	foreach $a (@avail) {
-		if($a->{'name'} =~ /openjdk-([0-9]+)-jdk/){
+		if($a->{'name'} =~ /$patterns{'version'}/){
 			$openjdk_versions{$1} = $a->{'name'};
 		}
 	}
+
 	return %openjdk_versions;
 }
 
@@ -84,11 +99,12 @@ sub get_installed_jdk_versions(){
 sub get_installed_openjdk_versions{
 
 	my @pkgs = ();
+	my %patterns = get_openjdk_patterns();
 
 	my $cmd_out='';
 	my $cmd_err='';
 	if(has_command('rpm')){
-		local $out = &execute_command("rpm -q --queryformat \"%{NAME}\n\" $pkg_list", undef, \$cmd_out, \$cmd_err, 0, 0);
+		local $out = &execute_command("rpm -qa --queryformat \"%{NAME}\n\" $patterns['search']", undef, \$cmd_out, \$cmd_err, 0, 0);
 
 		my @lines = split /\n/, $cmd_out;
 		foreach my $line (@lines){

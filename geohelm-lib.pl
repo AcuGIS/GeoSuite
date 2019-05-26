@@ -114,7 +114,7 @@ sub unzip_me{
 }
 
 sub search_pkg{
-  my $pattern  = $_[0];
+  my $pattern = $_[0];
 
   my @avail = ();
   if (defined(&software::update_system_search)) {
