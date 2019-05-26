@@ -6,6 +6,8 @@ require './pg-lib.pl';
 require './geoserver-lib.pl';
 require '../webmin/webmin-lib.pl';	#for OS detection
 
+foreign_require('software', 'software-lib.pl');
+
 sub add_tomcat_user{
 	#check if tomcat user exists
 	if(read_file_contents('/etc/passwd') !~ /\ntomcat:/){
@@ -342,7 +344,15 @@ sub setup_checks{
 			  "<a href='../software/install_pack.cgi?source=3&update=unzip&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
 	}
 
-	foreign_require('software', 'software-lib.pl');
+	my %osinfo = &detect_operating_system();
+	if($osinfo{'real_os_type'} =~ /centos/i){	#CentOS
+		my @pinfo = software::package_info('epel-release', undef, );
+		if(!@pinfo){
+			print "<p>Warning: EPEL repository is not installed. Install it manually or ".
+					"<a href='../software/install_pack.cgi?source=3&update=epel-release&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
+		}
+	}
+
 	my @pinfo = software::package_info('haveged', undef, );
 	if(!@pinfo){
 		print "<p>Warning: haveged package is not installed. Install it manually or ".
@@ -392,7 +402,6 @@ sub setup_checks{
 	}
 
 	#check for GeoServer Apache config
-	my %osinfo = &detect_operating_system();
 	if(	( $osinfo{'real_os_type'} =~ /centos/i) or	#CentOS
 		($osinfo{'real_os_type'} =~ /fedora/i)	or  #Fedora
 		($osinfo{'real_os_type'} =~ /scientific/i)	){
