@@ -33,22 +33,47 @@ sub get_openjdk_patterns(){
 }
 
 sub get_openjdk_versions(){
+	my $cache_file = "$module_config_directory/openjdk_version_cache";
+	my %openjdk_versions;
+
+	if(-f $cache_file){
+		read_file_cached($cache_file, \%openjdk_versions);
+
+		if($openjdk_versions{'updated'} >= (time() - 86400)){	#if last update was less than a day ago
+			delete $openjdk_versions{'updated'};	#remove the cache mtime key
+			return %openjdk_versions;
+		}
+	}
 
 	my %patterns = get_openjdk_patterns();
-
 	my @avail = search_pkg($patterns{'search'});
-
-	my %openjdk_versions;
 	foreach $a (@avail) {
 		if($a->{'name'} =~ /$patterns{'version'}/){
 			$openjdk_versions{$1} = $a->{'name'};
 		}
 	}
 
+	#cache the results
+	$openjdk_versions{'updated'} = time();
+	&write_file($cache_file, \%openjdk_versions);
+	delete $openjdk_versions{'updated'};	#remove the cache mtime key
+
 	return %openjdk_versions;
 }
 
 sub get_latest_jdk_version(){
+
+	my %java_tar_gz;
+	my $cache_file = "$module_config_directory/oracle_version_cache";
+	if(-f $cache_file){
+		read_file_cached($cache_file, \%java_tar_gz);
+
+		if($java_tar_gz{'updated'} >= (time() - 86400)){	#if last update was less than a day ago
+			delete $java_tar_gz{'updated'};	#remove the cache mtime key
+			return %java_tar_gz;
+		}
+	}
+
 	my $error;
 	my $url = 'https://www.oracle.com/technetwork/java/javase/downloads/index.html';
 	$tmpfile = &transname("javase.html");
@@ -75,7 +100,7 @@ sub get_latest_jdk_version(){
 	&http_download("www.oracle.com", 443,"/technetwork/java/javase/downloads/jdk$jdk_mv-downloads-$download_num.html",
 					$tmpfile, \$error, undef, 1, undef, undef, 0, 0, 1, \%cookie_headers);
 
-	my %java_tar_gz;
+
 	open($fh, '<', $tmpfile) or die "open:$!";
 	while(my $line = <$fh>){
 
@@ -85,6 +110,11 @@ sub get_latest_jdk_version(){
 		}
 	}
 	close $fh;
+
+	#cache the results
+	$java_tar_gz{'updated'} = time();
+	&write_file($cache_file, \%java_tar_gz);
+	delete $java_tar_gz{'updated'};	#remove the cache mtime key
 
 	return %java_tar_gz;
 }

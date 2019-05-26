@@ -266,20 +266,41 @@ sub check_pg_ext_deps{
 	my %osinfo = &detect_operating_system();
 	if( ($osinfo{'os_type'} =~ /debian/i)){
 		@ext_pkgs = ("postgresql-$pg_ver-postgis-scripts", "postgresql-$pg_ver-pgrouting-scripts", "postgresql-$pg_ver-pgrouting");
+
 	}elsif( $osinfo{'os_type'} =~ /redhat/i){
 		my $pg_ver2;
 		($pg_ver2 = $pg_ver) =~ s/\.//;
 
 		@ext_pkgs = ("pgrouting_$pg_ver2", "postgresql$pg_ver2-contrib");
 
-		my @avail = search_pkg('postgis');	#we have postgis{23,24,25}_{96,...,10,11}
-		my @pgis_pkgs;
-		foreach $a (@avail) {
-			if($a->{'name'} =~ /^postgis[0-9]+_$pg_ver2$/){
-				push(@pgis_pkgs, $a->{'name'});
+
+		my @pgis_pkgs = ();
+		my $cache_file = '/tmp/postgis_versions_cache';
+		if(-f $cache_file){
+			my %version;
+			read_file_cached($cache_file, \%version);
+
+			if($version{'updated'} >= (time() - 86400)){	#if last update was less than a day ago
+				@pgis_pkgs = split ',', $version{'postgis_versions'};
 			}
 		}
-		@pgis_pkgs = sort @pgis_pkgs;
+
+		if(scalar(@pgis_pkgs) == 0){
+			my @avail = search_pkg('postgis');	#we have postgis{23,24,25}_{96,...,10,11}
+
+			foreach $a (@avail) {
+				if($a->{'name'} =~ /^postgis[0-9]+_$pg_ver2$/){
+					push(@pgis_pkgs, $a->{'name'});
+				}
+			}
+			@pgis_pkgs = sort @pgis_pkgs;
+
+			#save the results
+			my %version;
+			$version{'updated'} = time();
+			$version{'postgis_versions'} = join(',', @pgis_pkgs);
+			&write_file($cache_file, \%version);
+		}
 		push(@ext_pkgs, @pgis_pkgs[-1]);
 	}
 
