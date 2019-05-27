@@ -19,24 +19,35 @@ sub migrate_settings_and_apps{
 
 	#make a list of installed apps
 	my @exclude_apps = ('docs', 'examples', 'host-manager', 'manager', 'ROOT');
-	#move apps
-	print "Moving apps ...<br>";
-	foreach my $app (@$apps_ref){
-		next if (grep $_ == $app, @exclude_apps);
 
-		#move
-		if(!move(	"/home/tomcat/apache-tomcat-$old_ver/webapps/$app",
-					"/home/tomcat/apache-tomcat-$old_ver/webapps/$app")){
-			&error("Error: Can't move $app: $!");
+	#move apps
+	print "Copying apps ...<br>";
+	foreach my $app (@$apps_ref){
+
+		next if grep( /^$app$/, @exclude_apps);
+
+		if(!copy_source_dest(	"/home/tomcat/apache-tomcat-$old_ver/webapps/$app",
+							"/home/tomcat/apache-tomcat-$new_ver/webapps/$app")){
+			&error("Error: Can't copy $app: $!");
 		}else{
-			print "$app moved<br>";
+			print "$app<br>";
+		}
+
+		if(-f "/home/tomcat/apache-tomcat-$old_ver/webapps/$app.war"){
+			if(!copy_source_dest(	"/home/tomcat/apache-tomcat-$old_ver/webapps/$app.war",
+								"/home/tomcat/apache-tomcat-$new_ver/webapps/$app.war")){
+				&error("Error: Can't copy $app.war: $!");
+			}else{
+				print "$app.war<br>";
+			}
 		}
 	}
 }
 
 sub upgrade_tomcat_from_archive{
-	my  $latest_ver = latest_tomcat_version();
+
 	my $install_ver = installed_tomcat_version();
+	my  $latest_ver = latest_tomcat_version($install_ver);
 
 	my @installed_apps = get_all_war_infos();
 
@@ -51,9 +62,8 @@ sub upgrade_tomcat_from_archive{
 
 	migrate_settings_and_apps($install_ver, $latest_ver, \@installed_apps);
 
+	print("Update done, stating new Tomcat ".$latest_ver);
 	tomcat_service_ctl('start');
-
-	return 0;
 }
 
 
@@ -61,6 +71,5 @@ sub upgrade_tomcat_from_archive{
 &ReadParse();
 &error_setup($text{'start_err'});
 $err = upgrade_tomcat_from_archive();
-&error($err) if ($err != 0);
 
-&ui_print_footer("/", $text{"index"});
+&ui_print_footer("", $text{'index_return'});

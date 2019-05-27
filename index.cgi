@@ -14,9 +14,7 @@ if (! -r $config{'geohelm_config'}) {
 }
 
 if(-f "$module_root_directory/setup.cgi"){
-	&ui_print_header(undef, $text{'index_title'}, "", "intro", 1, 1);
-		print '<p>Install all GeoHelm components by clicking <a href=\'./setup.cgi?mode=checks\'>here</a>';
-	&ui_print_footer("/", $text{"index"});
+	&redirect("setup.cgi?mode=checks");
 	exit;
 }
 
@@ -74,7 +72,7 @@ if ($running == 1) {
 
 #Check for an update of tomcat, once a day
 my $tomcat_ver = installed_tomcat_version();
-my $latest_ver = latest_tomcat_version();
+my $latest_ver = latest_tomcat_version($tomcat_ver);
 if("v$tomcat_ver" ne "v$latest_ver"){
 	print &ui_buttons_row("tomcat_upgrade.cgi", $text{'index_upgrade'}, "Tomcat will be updated to  $latest_ver. All WARs will be moved and config will be copied to new install!");
 }

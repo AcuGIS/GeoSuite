@@ -7,7 +7,7 @@ index_stop=Stop
 index_stopmsg=Click this button to stop Apache Tomcat
 index_restart=Restart
 index_restartmsg=Click this button to restart the Apache Tomcat
-index_return=Geohelm
+index_return=GeoHelm
 index_install=Install Tomcat
 index_upgrade=Upgrade Tomcat
 
@@ -44,20 +44,28 @@ start_err=Failed to start Apache Tomcat
 stop_err=Failed to stop Apache Tomcat
 restart_err=Failed to restart Apache Tomcat
 
-java_title=Oracle Java 8
+java_title=Java
 java_tabinstall=Install
 java_tabuninstall=Uninstall
-java_desc1=Install Oracle Java 8 from an archive(tar.gz)
+java_tabdefault=Default
+java_desc1=Install Java Development Kit(JDK) from distribution repository or from Oracle .tar.gz archive
 java_desc2=Uninstall Oracle Java 8 files from /usr/share
-java_install=Install Oracle Java SDK/JRE 8
-java_uninstall=Uninstall Oracle Java SDK/JRE 8
-jdk_installsource=Oracle JDK source (.tar.gz)
-jdk_latest=Latest JDK Version
+java_desc3=Set default Java, using update-alternatives and /etc/profile.d/jdk.sh
+java_install=Install Options
+java_uninstall=Uninstall Options
+java_default=update-alternatives Options
+jdk_installsource=JDK source
+jdk_latest=Oracle JDK
 java_installok=Install
 java_deleteok=Uninstall
+java_defaultok=Update
 java_def_jdk=Set as system default Java
+java_def_jdk_desc= ( using alternatives )
 java_rm_def_jdk=Remove, if default Java
 java_installed=JDK versions
+openjdk_latest=OpenJDK
+openjdk_headless=Headless package
+openjdk_headless_desc=only for OpenJDK
 
 extensions_title=GeoServer
 extensions_ecannot=You are not allowed to edit the Tomcat server.xml config file
@@ -98,3 +106,10 @@ editor_desc1=Use Load/Browse to load a file content or browse into a folder.
 load_ok=Load/Browse
 
 setup_title=Setup
+
+base_options=Options
+base_major=Tomcat Major Version
+base_archive=Release
+base_installok=Download
+base_installsource=Install source
+base_desc1=Download an archive of Apache Tomcat Server from Apache website and install it

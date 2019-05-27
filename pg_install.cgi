@@ -505,7 +505,7 @@ if( $osinfo{'os_type'} =~ /redhat/i){	#other redhat
 }
 
 if($in{'install_repo'} == 1){
-	&ui_print_footer("/acugis_es/pg_install.cgi", $text{'pg_inst_title'});
+	&ui_print_footer("/geohelm/pg_install.cgi", $text{'pg_inst_title'});
 	exit;
 }
 
