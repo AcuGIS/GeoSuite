@@ -37,13 +37,20 @@ if ($ENV{REQUEST_METHOD} eq "POST") {
 				my $t = postgresql::execute_sql_safe($sel_db, "CREATE EXTENSION $ename");
 				$ext_info{$ename}[2] = $in{$ename.'_status'};
 			}elsif($in{$ename.'_status'} == 0){
-				my $t = postgresql::execute_sql_safe($sel_db, "DROP EXTENSION $ename");
-				$ext_info{$ename}[2] = $in{$ename.'_status'};
+				my $drop_sql = "DROP EXTENSION $ename";
+				if($in{'ext_cascade'}){
+					$drop_sql .= " CASCADE";
+				}
+				my $t = postgresql::execute_sql_safe($sel_db, $drop_sql);
 			}
-
-			my $t = postgresql::execute_sql_safe($sel_db, "select extversion from pg_extension where extname = '$ename'");
-			$ext_info{$ename}[3] = $t->{'data'}->[0]->[0];
 		}
+	}
+
+	#populate ext_info
+	foreach my $ename (keys %ext_info){
+		my $t = postgresql::execute_sql_safe($sel_db, "select extversion from pg_extension where extname = '$ename'");
+		$ext_info{$ename}[3] = $t->{'data'}->[0]->[0];
+		$ext_info{$ename}[2]  = $ext_info{$ename}[3] ? 1 : 0;
 	}
 }
 
@@ -68,6 +75,8 @@ foreach my $db_name (@pg_dbs) {
 print &ui_table_row($text{'pg_ext_database'},
 						&ui_select("ext_db", $sel_db, \@opt_dbs, 1, 0, undef, undef, 'id="ext_db" onchange="update_select()"'),
 						2);
+print &ui_table_row($text{'extensions_cascade'}, &ui_checkbox("ext_cascade", 1, undef, 0), 2);
+
 print ui_table_hr();
 
 foreach my $ename (sort keys %ext_info){
