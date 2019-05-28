@@ -75,6 +75,7 @@ extensions_file=Edit config file:
 extensions_edata=Nothing entered!
 extensions_err=Failed to save config file
 extensions_updating_list=Updating extension list
+extensions_cascade=Automatically drop objects that depend on the extension
 
 source_local=Local file
 source_uploaded=Uploaded file

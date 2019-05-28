@@ -19,13 +19,6 @@ sub add_tomcat_user{
 	}
 }
 
-sub setup_tomcat_service{
-	my $tomcat_ver = $_[0];
-	copy_source_dest("$module_root_directory/tomcat.service", '/etc/init.d/tomcat');
-	&set_ownership_permissions('root','root', 0555, "/etc/init.d/tomcat");
-	print "<hr>Setting Tomcat service ...";
-}
-
 sub install_tomcat_from_archive{
 
 	add_tomcat_user();
