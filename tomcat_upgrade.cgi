@@ -62,7 +62,7 @@ sub upgrade_tomcat_from_archive{
 
 	migrate_settings_and_apps($install_ver, $latest_ver, \@installed_apps);
 
-	print("Update done, stating new Tomcat ".$latest_ver);
+	print("Update done, starting new Tomcat ".$latest_ver);
 	tomcat_service_ctl('start');
 }
 
