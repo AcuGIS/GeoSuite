@@ -35,7 +35,6 @@ if ($ENV{REQUEST_METHOD} eq "POST") {
 
 			if($in{$ename.'_status'} == 1){	#yes = Install
 				my $t = postgresql::execute_sql_safe($sel_db, "CREATE EXTENSION $ename");
-				$ext_info{$ename}[2] = $in{$ename.'_status'};
 			}elsif($in{$ename.'_status'} == 0){
 				my $drop_sql = "DROP EXTENSION $ename";
 				if($in{'ext_cascade'}){
