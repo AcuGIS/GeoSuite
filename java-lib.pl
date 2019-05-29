@@ -134,11 +134,11 @@ sub get_installed_openjdk_versions{
 	my $cmd_out='';
 	my $cmd_err='';
 	if(has_command('rpm')){
-		local $out = &execute_command("rpm -qa --queryformat \"%{NAME}\n\" $patterns['search']", undef, \$cmd_out, \$cmd_err, 0, 0);
+		local $out = &execute_command("rpm -qa --queryformat \"%{NAME}\n\" \"*$patterns['search']*\"", undef, \$cmd_out, \$cmd_err, 0, 0);
 
 		my @lines = split /\n/, $cmd_out;
 		foreach my $line (@lines){
-			if($line =~ /^(java-[0-9\.]+-openjdk)-.*/i){	#package pgdg96-centos is not installed
+			if($line =~ /^(java-[0-9\.]+-openjdk).*/i){	#package pgdg96-centos is not installed
 				push(@pkgs, $1);
 			}
 		}
