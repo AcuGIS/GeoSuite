@@ -4,7 +4,7 @@
 GeoHelm is a Webmin module that installs, configures, and manages the <code>latest, stable</code> versions of:
 
 <code>Apache Tomcat</code><br />
-<code>Oracle Java</code><br />
+<code>Oracle Java or OpenJDK</code><br />
 <code>PostgreSQL</code><br />
 <code>PostGIS</code><br />
 <code>PgRouting</code><br />
@@ -25,8 +25,7 @@ The entire module can even be uninstalled and all components will continue to ru
 <code>Debian 9 x64</code><br />
 <code>Ubuntu 14 x64</code><br />
 <code>Ubuntu 16 x64</code><br />
-<code>Fedora 24 x64</code><br />
-<code>Fedora 25 x64</code><br />
+<code>Ubuntu 18 x64</code><br />
 <code>Scientific Linux 7 x64 (requires manual installation for epel or use Quick Start Script)</code><br />
 
 ## System Requirements: <br />
@@ -47,4 +46,4 @@ GeoHelm Documentation is available at [GeoHelm Docs](https://geohelm.org/)
 
 ![GeoHelm Installed](https://geohelm.org/img/software-images/GeoHelmDashBoard.gif)
 
-[AcuGIS](https://www.acugis.com/), [GeoHelm](https://geohelm.org) &copy; 2017 [Cited, Inc. ](https://www.citedcorp.com)Cited, Inc. All Rights Reserved.
+[AcuGIS](https://www.acugis.com/), [GeoHelm](https://geohelm.org) &copy; 2019 [Cited, Inc. ](https://www.citedcorp.com)Cited, Inc. All Rights Reserved.
