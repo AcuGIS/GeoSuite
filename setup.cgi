@@ -285,6 +285,8 @@ sub setup_apache_for_geoserver(){
 
 sub check_pg_ext_deps{
 	my $pg_ver = $_[0];
+	my $pg_ver2;
+	($pg_ver2 = $pg_ver) =~ s/\.//;
 
 	my @ext_pkgs;
 
@@ -292,12 +294,15 @@ sub check_pg_ext_deps{
 	if( ($osinfo{'os_type'} =~ /debian/i)){
 		@ext_pkgs = ("postgresql-$pg_ver-postgis-scripts", "postgresql-$pg_ver-pgrouting-scripts", "postgresql-$pg_ver-pgrouting");
 
+	}elsif( $osinfo{'os_type'} =~ /arch/i){	#Arch
+		@ext_pkgs = 'postgis';
+
+	}elsif($osinfo{'os_type'} =~ /suse/i){	#Suse
+		@ext_pkgs = "postgresql$pg_ver2-postgis postgresql$pg_ver2-postgis-utils";
+
 	}elsif( $osinfo{'os_type'} =~ /redhat/i){
-		my $pg_ver2;
-		($pg_ver2 = $pg_ver) =~ s/\.//;
 
 		@ext_pkgs = ("pgrouting_$pg_ver2", "postgresql$pg_ver2-contrib");
-
 
 		my @pgis_pkgs = ();
 		my $cache_file = '/tmp/postgis_versions_cache';
@@ -327,15 +332,9 @@ sub check_pg_ext_deps{
 			&write_file($cache_file, \%version);
 		}
 		push(@ext_pkgs, @pgis_pkgs[-1]);
+		push(@ext_pkgs, @pgis_pkgs[-1].'-client');
 	}
-
-	foreach my $pkg (@ext_pkgs){
-		my @pinfo = software::package_info($pkg);
-		if(!@pinfo){
-			print "<p>Warning: $pkg package is not installed. Install it manually or ".
-				  "<a href='../software/install_pack.cgi?source=3&update=$pkg&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
-		}
-	}
+	return @ext_pkgs;
 }
 
 sub select_tomcat_archive{
@@ -488,12 +487,14 @@ sub setup_checks{
 		if(!$pg_ver){
 			print '<p>Warning: PostgreSQL is not installed. Install it from <a href="./pg_install.cgi">'.$text{'pg_inst_title'}.'</a>';
 		}else{
-			if (!&has_command('shp2pgsql')) {
-				my $shp2pg_pkg = get_shp2pgsql_pkg_name($pg_ver);
-				print '<p>Warning: shp2pgsql command is not found. '.
-				  "<a href='../package-updates/update.cgi?mode=new&source=3&u=$shp2pg_pkg&redir=%2E%2E%2Facugis_es%2Fsetup.cgi&redirdesc=AcuGIS ES Setup'>Click here</a> to have it installed from postgis package.</p>";
+			my @ext_pkgs = check_pg_ext_deps($pg_ver);
+			foreach my $pkg (@ext_pkgs){
+				my @pinfo = software::package_info($pkg);
+				if(!@pinfo){
+					print "<p>Warning: $pkg package is not installed. Install it manually or ".
+						  "<a href='../software/install_pack.cgi?source=3&update=$pkg&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
+				}
 			}
-			check_pg_ext_deps($pg_ver) if($pg_ver);
 		}
 	}
 
