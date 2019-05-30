@@ -117,17 +117,6 @@ sub get_catalina_home(){
 	return "/home/tomcat/apache-tomcat-$tomcat_ver";
 }
 
-sub add_tomcat_user{
-	#check if tomcat user exists
-	if(read_file_contents('/etc/passwd') !~ /\ntomcat:/){
-		#add tomcat user
-		local $out = &backquote_command('useradd -m tomcat', 0);
-	}elsif(! -d '/home/tomcat'){
-		&make_dir("/home/tomcat", 0755, 1);
-		&set_ownership_permissions('tomcat','tomcat', undef, '/home/tomcat');
-	}
-}
-
 sub download_and_install{
 	my $tomcat_ver = $_[0];
 	my $major;
@@ -181,38 +170,6 @@ sub setup_catalina_env{
 	$os_env{'CATALINA_HOME'} = "/home/tomcat/apache-tomcat-$tomcat_ver/";
 	$os_env{'CATALINA_BASE'} = "/home/tomcat/apache-tomcat-$tomcat_ver/";
 	write_env_file('/etc/environment', \%os_env, 0);
-}
-
-sub setup_tomcat_users{
-	my $tomcat_ver = $_[0];
-	my @pw_chars = ("A".."Z", "a".."z", "0".."9", "_", "-");
-	my $manager_pass;
-	my $admin_pass;
-
-	$manager_pass .= $pw_chars[rand @pw_chars] for 1..32;
-	$admin_pass   .= $pw_chars[rand @pw_chars] for 1..32;
-
-	#Save tomcat-users.xml
-	open(my $fh, '>', "/home/tomcat/apache-tomcat-$tomcat_ver/conf/tomcat-users.xml") or die "open:$!";
-	print $fh <<EOF;
-<?xml version='1.0' encoding='utf-8'?>
-<tomcat-users>
-<role rolename="manager-gui" />
-<user username="manager" password="$manager_pass" roles="manager-gui" />
-
-<role rolename="admin-gui" />
-<user username="admin" password="$admin_pass" roles="manager-gui,admin-gui" />
-</tomcat-users>
-EOF
-	close $fh;
-	print "<hr>Setting Tomcat users...";
-}
-
-sub setup_tomcat_service{
-	my $tomcat_ver = $_[0];
-	copy_source_dest("$module_root_directory/tomcat.service", '/etc/init.d/tomcat');
-	&set_ownership_permissions('root','root', 0555, "/etc/init.d/tomcat");
-	print "<hr>Setting Tomcat service ...";
 }
 
 sub get_installed_libs{

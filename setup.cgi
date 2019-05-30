@@ -19,6 +19,38 @@ sub add_tomcat_user{
 	}
 }
 
+sub setup_tomcat_users{
+	my $tomcat_ver = $_[0];
+	my @pw_chars = ("A".."Z", "a".."z", "0".."9", "_", "-");
+	my $manager_pass;
+	my $admin_pass;
+
+	$manager_pass .= $pw_chars[rand @pw_chars] for 1..32;
+	$admin_pass   .= $pw_chars[rand @pw_chars] for 1..32;
+
+	#Save tomcat-users.xml
+	open(my $fh, '>', "/home/tomcat/apache-tomcat-$tomcat_ver/conf/tomcat-users.xml") or die "open:$!";
+	print $fh <<EOF;
+<?xml version='1.0' encoding='utf-8'?>
+<tomcat-users>
+<role rolename="manager-gui" />
+<user username="manager" password="$manager_pass" roles="manager-gui" />
+
+<role rolename="admin-gui" />
+<user username="admin" password="$admin_pass" roles="manager-gui,admin-gui" />
+</tomcat-users>
+EOF
+	close $fh;
+	print "<hr>Setting Tomcat users...";
+}
+
+sub setup_tomcat_service{
+	my $tomcat_ver = $_[0];
+	copy_source_dest("$module_root_directory/tomcat.service", '/etc/init.d/tomcat');
+	&set_ownership_permissions('root','root', 0555, "/etc/init.d/tomcat");
+	print "<hr>Setting Tomcat service ...";
+}
+
 sub install_tomcat_from_archive{
 
 	add_tomcat_user();
@@ -253,6 +285,8 @@ sub setup_apache_for_geoserver(){
 
 sub check_pg_ext_deps{
 	my $pg_ver = $_[0];
+	my $pg_ver2;
+	($pg_ver2 = $pg_ver) =~ s/\.//;
 
 	my @ext_pkgs;
 
@@ -260,12 +294,15 @@ sub check_pg_ext_deps{
 	if( ($osinfo{'os_type'} =~ /debian/i)){
 		@ext_pkgs = ("postgresql-$pg_ver-postgis-scripts", "postgresql-$pg_ver-pgrouting-scripts", "postgresql-$pg_ver-pgrouting");
 
+	}elsif( $osinfo{'os_type'} =~ /arch/i){	#Arch
+		@ext_pkgs = 'postgis';
+
+	}elsif($osinfo{'os_type'} =~ /suse/i){	#Suse
+		@ext_pkgs = "postgresql$pg_ver2-postgis postgresql$pg_ver2-postgis-utils";
+
 	}elsif( $osinfo{'os_type'} =~ /redhat/i){
-		my $pg_ver2;
-		($pg_ver2 = $pg_ver) =~ s/\.//;
 
 		@ext_pkgs = ("pgrouting_$pg_ver2", "postgresql$pg_ver2-contrib");
-
 
 		my @pgis_pkgs = ();
 		my $cache_file = '/tmp/postgis_versions_cache';
@@ -295,15 +332,9 @@ sub check_pg_ext_deps{
 			&write_file($cache_file, \%version);
 		}
 		push(@ext_pkgs, @pgis_pkgs[-1]);
+		push(@ext_pkgs, @pgis_pkgs[-1].'-client');
 	}
-
-	foreach my $pkg (@ext_pkgs){
-		my @pinfo = software::package_info($pkg);
-		if(!@pinfo){
-			print "<p>Warning: $pkg package is not installed. Install it manually or ".
-				  "<a href='../software/install_pack.cgi?source=3&update=$pkg&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
-		}
-	}
+	return @ext_pkgs;
 }
 
 sub select_tomcat_archive{
@@ -364,23 +395,39 @@ sub setup_checks{
 		print "<p><a href='setup.cgi?mode=tomcat_install_form&return=%2E%2E%2Ftomcat%2Fsetup.cgi&returndesc=Setup&caller=tomcat'>Click here</a> to install Tomcat from Apache site.</p>";
 	}
 
+	my @dep_pkgs;
 	if (!&has_command('unzip')) {
-		print '<p>Warning: unzip command is not found. Install it manually or '.
-			  "<a href='../software/install_pack.cgi?source=3&update=unzip&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
+		push(@dep_pkgs, 'unzip');
 	}
 
 	if (!&has_command('bzip2')) {
-		print '<p>Warning: bzip2 command is not found. Install it manually or '.
-			  "<a href='../software/install_pack.cgi?source=3&update=bzip2&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
+		push(@dep_pkgs, 'bzip2');
 	}
 
 	my %osinfo = &detect_operating_system();
+	my $apache_pkg = 'apache2';
+	if($osinfo{'os_type'} =~ /redhat/i){
+		$apache_pkg = 'httpd';
+	}elsif($osinfo{'os_type'} =~ /debian/i){
+		$apache_pkg = 'apache2';
+	}
+
+	if(!software::package_info($apache_pkg, undef)){
+		push(@dep_pkgs, $apache_pkg);
+	}
+
 	if($osinfo{'real_os_type'} =~ /centos/i){	#CentOS
 		my @pinfo = software::package_info('epel-release', undef, );
 		if(!@pinfo){
-			print "<p>Warning: EPEL repository is not installed. Install it manually or ".
-					"<a href='../software/install_pack.cgi?source=3&update=epel-release&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
+			push(@dep_pkgs, 'epel-release');
 		}
+	}
+
+	if(scalar(@dep_pkgs) > 0){
+		my $pkg_list = join(', ', @dep_pkgs);
+		my $pkgs_urlize  = &urlize(join(' ', @dep_pkgs));
+		print "<p>Warning: $pkg_list packages are not installed. Install them manually or ".
+				"<a href='../software/install_pack.cgi?source=3&update=".$pkgs_urlize."&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>click here</a> to have them installed.</p>";
 	}
 
 	my @pinfo = software::package_info('haveged', undef, );
@@ -396,15 +443,13 @@ sub setup_checks{
 	}
 
 	# Check if OpenLayers exists
-	if ((! -f "$module_config_directory/dismiss_openlayers.txt") &&
-		(! -d "/var/www/html/OpenLayers") ){
+	if (! -d "/var/www/html/OpenLayers"){
 		print "<p>The OpenLayers direcrory <tt>/var/www/html/OpenLayers</tt> does not exist. ".
 			  "<a href='setup.cgi?mode=install_openlayers&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> install it";
 	}
 
 	# Check if LeafletJS exists
-	if ((! -f "$module_config_directory/dismiss_leafletjs.txt") &&
-		(! -d "/var/www/html/leafletjs") ){
+	if (! -d "/var/www/html/leafletjs"){
 		print "<p>The LeafletJS direcrory <tt>/var/www/html/leafletjs</tt> does not exist. ".
 			  "<a href='setup.cgi?mode=install_leafletjs&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> install it";
 	}
@@ -412,8 +457,7 @@ sub setup_checks{
 	# Check if GeoExplorer webapp exists
 	if($tomcat_ver){
 		my $catalina_home = get_catalina_home();
-		if ((! -f "$module_config_directory/dismiss_geoexplorer.txt") &&
-			(! -d "$catalina_home/webapps/geoexplorer/") 				){
+		if(! -d "$catalina_home/webapps/geoexplorer/"){
 			if( -f "$catalina_home/webapps/geoexplorer.war"){
 				print "<p>The GeoExplorer webapp is not deployed yet!";
 			}else{
@@ -453,22 +497,17 @@ sub setup_checks{
 		$pg_ver = get_installed_pg_version();
 		if(!$pg_ver){
 			print '<p>Warning: PostgreSQL is not installed. Install it from <a href="./pg_install.cgi">'.$text{'pg_inst_title'}.'</a>';
-		}
-	}
-
-	if (!&has_command('shp2pgsql')) {
-		if(-f "$module_root_directory/pg_install.cgi"){
-			if($pg_ver){
-				print '<p>Warning: shp2pgsql command is not found.'.
-					"<a href='../software/install_pack.cgi?source=3&update=$config{'shp2pgsql_pkg'}&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> to have it installed from postgis package.</p>";
-			}
 		}else{
-			print '<p>Warning: shp2pgsql command is not found. '.
-			  "<a href='../software/install_pack.cgi?source=3&update=$config{'shp2pgsql_pkg'}&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> to have it installed from postgis package.</p>";
+			my @ext_pkgs = check_pg_ext_deps($pg_ver);
+			foreach my $pkg (@ext_pkgs){
+				my @pinfo = software::package_info($pkg);
+				if(!@pinfo){
+					print "<p>Warning: $pkg package is not installed. Install it manually or ".
+						  "<a href='../software/install_pack.cgi?source=3&update=$pkg&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
+				}
+			}
 		}
 	}
-
-	check_pg_ext_deps($pg_ver) if($pg_ver);
 
 	if(foreign_installed('postgresql', 1) != 2){
 		print '<p>Warning: Webmin Postgresql module is not installed! Set it up from <a href="../postgresql/">here</a><p>';
