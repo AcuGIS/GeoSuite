@@ -1,2 +1,0 @@
-geohelm_config=/etc/webmin/geohelm/config
-tomcat_service=/etc/init.d/tomcat
