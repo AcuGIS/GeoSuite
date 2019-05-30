@@ -396,23 +396,28 @@ sub setup_checks{
 		print "<p><a href='setup.cgi?mode=tomcat_install_form&return=%2E%2E%2Ftomcat%2Fsetup.cgi&returndesc=Setup&caller=tomcat'>Click here</a> to install Tomcat from Apache site.</p>";
 	}
 
+	my @dep_pkgs;
 	if (!&has_command('unzip')) {
-		print '<p>Warning: unzip command is not found. Install it manually or '.
-			  "<a href='../software/install_pack.cgi?source=3&update=unzip&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
+		push(@dep_pkgs, 'unzip');
 	}
 
 	if (!&has_command('bzip2')) {
-		print '<p>Warning: bzip2 command is not found. Install it manually or '.
-			  "<a href='../software/install_pack.cgi?source=3&update=bzip2&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
+		push(@dep_pkgs, 'bzip2');
 	}
 
 	my %osinfo = &detect_operating_system();
 	if($osinfo{'real_os_type'} =~ /centos/i){	#CentOS
 		my @pinfo = software::package_info('epel-release', undef, );
 		if(!@pinfo){
-			print "<p>Warning: EPEL repository is not installed. Install it manually or ".
-					"<a href='../software/install_pack.cgi?source=3&update=epel-release&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>click here</a> to have it downloaded and installed.</p>";
+			push(@dep_pkgs, 'epel-release');
 		}
+	}
+
+	if(scalar(@dep_pkgs) > 0){
+		my $pkg_list = join(', ', @dep_pkgs);
+		my $pkgs_urlize  = &urlize(join(' ', @dep_pkgs));
+		print "<p>Warning: $pkg_list packages are not installed. Install them manually or ".
+				"<a href='../software/install_pack.cgi?source=3&update=".$pkgs_urlize."&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>click here</a> to have them installed.</p>";
 	}
 
 	my @pinfo = software::package_info('haveged', undef, );
