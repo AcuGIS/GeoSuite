@@ -405,6 +405,17 @@ sub setup_checks{
 	}
 
 	my %osinfo = &detect_operating_system();
+	my $apache_pkg = 'apache2';
+	if($osinfo{'os_type'} =~ /redhat/i){
+		$apache_pkg = 'httpd';
+	}elsif($osinfo{'os_type'} =~ /debian/i){
+		$apache_pkg = 'apache2';
+	}
+
+	if(!software::package_info($apache_pkg, undef)){
+		push(@dep_pkgs, $apache_pkg);
+	}
+
 	if($osinfo{'real_os_type'} =~ /centos/i){	#CentOS
 		my @pinfo = software::package_info('epel-release', undef, );
 		if(!@pinfo){

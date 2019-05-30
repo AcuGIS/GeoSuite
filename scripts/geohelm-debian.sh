@@ -1,7 +1,7 @@
 #!/bin/bash -e
 #GeoHelm Pre-Install Script for Debian and Ubuntu
 #For use on clean Debian or Ubuntu box only
-#Usage: 
+#Usage:
 #wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/geohelm-debian.sh
 #chmod +x geohelm-debian.sh
 #./geohelm-debian.sh
@@ -15,24 +15,20 @@ function install_webmin(){
 }
 function download_geohelm_module(){
 	pushd /tmp/
- 
+
 	wget https://github.com/AcuGIS/GeoHelm/archive/master.zip
 	unzip master.zip
 	mv GeoHelm-master geohelm
 	tar -czf /opt/geohelm.wbm.gz geohelm
 	rm -rf geohelm master.zip
-       
- 
+
 	popd
+	echo -e "Webmin is now installed and GeoHelm module is at /opt/geohelm.wbm.gz"
 }
-function warn_apache(){
- echo -e "Webmin is now installed and GeoHelm module is at /opt/geohelm.wbm.gz"
- echo -e "Important: Install Apache via Webmin BEFORE installing GeoHelm!!!" 
-}
+
 
 apt-get -y update
 apt-get -y install wget unzip
 
 install_webmin;
 download_geohelm_module;
-warn_apache;
