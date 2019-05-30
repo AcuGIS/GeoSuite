@@ -489,16 +489,18 @@ sub setup_checks{
 	}
 
 	if (!&has_command('shp2pgsql')) {
-		if(-f "$module_root_directory/pg_install.cgi"){
-			if($pg_ver){
-				print '<p>Warning: shp2pgsql command is not found.'.
-					"<a href='../software/install_pack.cgi?source=3&update=$config{'shp2pgsql_pkg'}&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> to have it installed from postgis package.</p>";
+			my $shp2pg_pkg = get_shp2pgsql_pkg_name($pg_ver);
+			if(-f "$module_root_directory/pg_install.cgi"){
+				print '<p>Warning: shp2pgsql command is not found.';
+				if(!$pg_ver){
+					print 'Install PG repo from <a href="./pg_install.cgi">'.$text{'pg_inst_title'}.'</a> and after that ';
+				}
+				print "<a href='../package-updates/update.cgi?mode=new&source=3&u=$shp2pg_pkg&redir=%2E%2E%2Facugis_es%2Fsetup.cgi&redirdesc=AcuGIS ES Setup'>Click here</a> to have it installed from postgis package.</p>";
+			}else{
+				print '<p>Warning: shp2pgsql command is not found. '.
+				  "<a href='../package-updates/update.cgi?mode=new&source=3&u=$shp2pg_pkg&redir=%2E%2E%2Facugis_es%2Fsetup.cgi&redirdesc=AcuGIS ES Setup'>Click here</a> to have it installed from postgis package.</p>";
 			}
-		}else{
-			print '<p>Warning: shp2pgsql command is not found. '.
-			  "<a href='../software/install_pack.cgi?source=3&update=$config{'shp2pgsql_pkg'}&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> to have it installed from postgis package.</p>";
 		}
-	}
 
 	check_pg_ext_deps($pg_ver) if($pg_ver);
 
