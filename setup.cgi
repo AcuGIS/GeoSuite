@@ -433,15 +433,13 @@ sub setup_checks{
 	}
 
 	# Check if OpenLayers exists
-	if ((! -f "$module_config_directory/dismiss_openlayers.txt") &&
-		(! -d "/var/www/html/OpenLayers") ){
+	if (! -d "/var/www/html/OpenLayers"){
 		print "<p>The OpenLayers direcrory <tt>/var/www/html/OpenLayers</tt> does not exist. ".
 			  "<a href='setup.cgi?mode=install_openlayers&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> install it";
 	}
 
 	# Check if LeafletJS exists
-	if ((! -f "$module_config_directory/dismiss_leafletjs.txt") &&
-		(! -d "/var/www/html/leafletjs") ){
+	if (! -d "/var/www/html/leafletjs"){
 		print "<p>The LeafletJS direcrory <tt>/var/www/html/leafletjs</tt> does not exist. ".
 			  "<a href='setup.cgi?mode=install_leafletjs&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> install it";
 	}
@@ -449,8 +447,7 @@ sub setup_checks{
 	# Check if GeoExplorer webapp exists
 	if($tomcat_ver){
 		my $catalina_home = get_catalina_home();
-		if ((! -f "$module_config_directory/dismiss_geoexplorer.txt") &&
-			(! -d "$catalina_home/webapps/geoexplorer/") 				){
+		if(! -d "$catalina_home/webapps/geoexplorer/"){
 			if( -f "$catalina_home/webapps/geoexplorer.war"){
 				print "<p>The GeoExplorer webapp is not deployed yet!";
 			}else{
