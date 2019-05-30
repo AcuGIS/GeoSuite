@@ -1,4 +1,4 @@
-![GeoHelm Logo](https://cdn.acugis.com/geohelm/GeoHelm-Github.jpg)
+![GeoHelm Logo](https://geohelm.org/GeoHelm-Github.jpg)
 # GeoHelm: A new route to Open Source GIS
 
 GeoHelm is a Webmin module that installs, configures, and manages the <code>latest, stable</code> versions of:
