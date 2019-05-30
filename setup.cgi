@@ -19,6 +19,38 @@ sub add_tomcat_user{
 	}
 }
 
+sub setup_tomcat_users{
+	my $tomcat_ver = $_[0];
+	my @pw_chars = ("A".."Z", "a".."z", "0".."9", "_", "-");
+	my $manager_pass;
+	my $admin_pass;
+
+	$manager_pass .= $pw_chars[rand @pw_chars] for 1..32;
+	$admin_pass   .= $pw_chars[rand @pw_chars] for 1..32;
+
+	#Save tomcat-users.xml
+	open(my $fh, '>', "/home/tomcat/apache-tomcat-$tomcat_ver/conf/tomcat-users.xml") or die "open:$!";
+	print $fh <<EOF;
+<?xml version='1.0' encoding='utf-8'?>
+<tomcat-users>
+<role rolename="manager-gui" />
+<user username="manager" password="$manager_pass" roles="manager-gui" />
+
+<role rolename="admin-gui" />
+<user username="admin" password="$admin_pass" roles="manager-gui,admin-gui" />
+</tomcat-users>
+EOF
+	close $fh;
+	print "<hr>Setting Tomcat users...";
+}
+
+sub setup_tomcat_service{
+	my $tomcat_ver = $_[0];
+	copy_source_dest("$module_root_directory/tomcat.service", '/etc/init.d/tomcat');
+	&set_ownership_permissions('root','root', 0555, "/etc/init.d/tomcat");
+	print "<hr>Setting Tomcat service ...";
+}
+
 sub install_tomcat_from_archive{
 
 	add_tomcat_user();
