@@ -485,24 +485,15 @@ sub setup_checks{
 		$pg_ver = get_installed_pg_version();
 		if(!$pg_ver){
 			print '<p>Warning: PostgreSQL is not installed. Install it from <a href="./pg_install.cgi">'.$text{'pg_inst_title'}.'</a>';
-		}
-	}
-
-	if (!&has_command('shp2pgsql')) {
-			my $shp2pg_pkg = get_shp2pgsql_pkg_name($pg_ver);
-			if(-f "$module_root_directory/pg_install.cgi"){
-				print '<p>Warning: shp2pgsql command is not found.';
-				if(!$pg_ver){
-					print 'Install PG repo from <a href="./pg_install.cgi">'.$text{'pg_inst_title'}.'</a> and after that ';
-				}
-				print "<a href='../package-updates/update.cgi?mode=new&source=3&u=$shp2pg_pkg&redir=%2E%2E%2Facugis_es%2Fsetup.cgi&redirdesc=AcuGIS ES Setup'>Click here</a> to have it installed from postgis package.</p>";
-			}else{
+		}else{
+			if (!&has_command('shp2pgsql')) {
+				my $shp2pg_pkg = get_shp2pgsql_pkg_name($pg_ver);
 				print '<p>Warning: shp2pgsql command is not found. '.
 				  "<a href='../package-updates/update.cgi?mode=new&source=3&u=$shp2pg_pkg&redir=%2E%2E%2Facugis_es%2Fsetup.cgi&redirdesc=AcuGIS ES Setup'>Click here</a> to have it installed from postgis package.</p>";
 			}
+			check_pg_ext_deps($pg_ver) if($pg_ver);
 		}
-
-	check_pg_ext_deps($pg_ver) if($pg_ver);
+	}
 
 	if(foreign_installed('postgresql', 1) != 2){
 		print '<p>Warning: Webmin Postgresql module is not installed! Set it up from <a href="../postgresql/">here</a><p>';
