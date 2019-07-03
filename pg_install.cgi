@@ -446,6 +446,7 @@ sub create_compat_symlinks{
 &ui_print_header(undef, $text{'pg_inst_title'}, "", "intro", 1, 1);
 
 &ReadParse();
+my $post_flag = $in{'post_flag'} || 0;
 
 my @pg_versions = get_versions();
 my $pg_ver = $pg_versions[0];
@@ -512,12 +513,14 @@ if($in{'install_repo'} == 1){
 #find what was changed
 my @pkgs_remove;
 my $pkgs_install="";
-foreach my $pkg (sort keys %pkgs_installed){
-	if($in{$pkg.'_status'} != $pkgs_installed{$pkg}){
-		if($in{$pkg.'_status'} == 1){
-			$pkgs_install .= "$pkg ";
-		}elsif($in{$pkg.'_status'}){
-			push(@pkgs_remove, $pkg);
+if($post_flag){
+	foreach my $pkg (sort keys %pkgs_installed){
+		if($in{$pkg.'_status'} != $pkgs_installed{$pkg}){
+			if($in{$pkg.'_status'} == 1){
+				$pkgs_install .= "$pkg ";
+			}elsif($in{$pkg.'_status'} == 0){
+				push(@pkgs_remove, $pkg);
+			}
 		}
 	}
 }
@@ -583,6 +586,7 @@ EOF
 
 print &ui_form_start("pg_install.cgi", "post");
 print &ui_hidden("install_repo", $show_repo_install_info);
+print &ui_hidden("post_flag", 1);
 
 print &ui_table_start($text{'pg_inst_edit'}, "width=100%", 3);
 
