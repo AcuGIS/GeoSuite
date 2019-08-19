@@ -20,6 +20,7 @@ my @pg_dbs = postgresql::list_databases();
 &ReadParse();
 
 my $sel_db = $in{'ext_db'} || 'postgres';
+my $post_flag = $in{'post_flag'} || 0;
 
 
 foreach my $ename (keys %ext_info){
@@ -28,7 +29,7 @@ foreach my $ename (keys %ext_info){
 	$ext_info{$ename}[2]  = $ext_info{$ename}[3] ? 1 : 0;
 }
 
-if ($ENV{REQUEST_METHOD} eq "POST") {
+if($post_flag){
 
 	foreach my $ename (keys %ext_info){	#for each extension
 		if($in{$ename.'_status'} != $ext_info{$ename}[2]){	#if extension status changed
@@ -54,6 +55,7 @@ if ($ENV{REQUEST_METHOD} eq "POST") {
 }
 
 print &ui_form_start("edit_pg_ext.cgi", "post");
+print &ui_hidden("post_flag", 1);
 print &ui_table_start($text{'pg_ext_edit'}, "width=100%", 2);
 
 print <<EOF;
