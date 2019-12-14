@@ -74,3 +74,8 @@ sub have_pg_repo(){
 
 	return $found;
 }
+
+sub pg_list_databases{
+	local $t = &postgresql::execute_sql_safe('template1', 'select datname from pg_database order by datname');
+	return sort { lc($a) cmp lc($b) } map { $_->[0] } @{$t->{'data'}};
+}
