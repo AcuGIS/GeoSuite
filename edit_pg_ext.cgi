@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 
 require './geohelm-lib.pl';
+require './pg-lib.pl';
 foreign_require('postgresql', 'postgresql-lib.pl');
 
 
@@ -15,7 +16,7 @@ my %ext_info  = (	'postgis' 	=> ['PostGIS', 	 'http://postgis.net', 	0, undef, u
 &ui_print_header(undef, $text{'pg_ext_title'}, "");
 
 #TODO: Check if packages are installed
-my @pg_dbs = postgresql::list_databases();
+my @pg_dbs = pg_list_databases();
 
 &ReadParse();
 
