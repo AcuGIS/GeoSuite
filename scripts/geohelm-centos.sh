@@ -29,12 +29,45 @@ function download_geohelm_module(){
 	rm -rf geohelm master.zip
 
 	popd
-
-  echo -e "Webmin is now installed and GeoHelm module is at /opt/geohelm.wbm.gz"
+  
 }
+function download_certbot_module(){
+	pushd /tmp/
 
+	wget https://github.com/AcuGIS/Certbot-Webmin-Module/archive/master.zip
+	unzip master.zip
+	mv Certbot-Webmin-Module-master certbot
+	tar -czf /opt/certbot.wbm.gz certbot
+	rm -rf certbot master.zip
 
+	popd
+	
+}
+function install_apache(){
+		
+	yum -y install httpd        
+	
+}
+function install_geohelm_module(){
+	pushd /opt/
+
+	/usr/share/webmin/install-module.pl geohelm.wbm.gz
+	
+	popd
+	
+}
+function install_certbot_module(){
+	pushd /opt/
+
+	/usr/share/webmin/install-module.pl certbot.wbm.gz
+	
+	popd
+	echo -e "GeoHelm is now installed.  Please go to Servers > GeoHelm to complete installation"
+	
+}
 yum -y install wget unzip bzip2
-
 install_webmin;
 download_geohelm_module;
+install_apache;
+download_certbot_module;
+install_certbot_module;
