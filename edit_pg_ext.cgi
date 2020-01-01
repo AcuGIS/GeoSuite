@@ -65,7 +65,7 @@ function update_select(){
 	var extSel = document.getElementById('ext_db');
 	var db_name = extSel.options[extSel.selectedIndex].value;
 
-	window.location='edit_pg_ext.cgi?ext_db='+db_name;
+	get_pjax_content('/geohelm/edit_pg_ext.cgi?ext_db='+db_name);
 }
 </script>
 EOF

@@ -356,7 +356,7 @@ sub select_tomcat_archive{
 		var majorSel = document.getElementById('base_major');
 		var major = majorSel.options[majorSel.selectedIndex].value;
 
-		window.location='setup.cgi?mode=tomcat_install_form&tmver='+major;
+		get_pjax_content('/geohelm/setup.cgi?mode=tomcat_install_form&tmver='+major);
 	}
 	</script>
 EOF

@@ -579,7 +579,7 @@ function update_select(){
 	var pgverSel = document.getElementById('pg_ver');
 	var pg_ver = pgverSel.options[pgverSel.selectedIndex].value;
 
-	window.location='pg_install.cgi?pg_ver='+pg_ver;
+	get_pjax_content('/geohelm/pg_install.cgi?pg_ver='+pg_ver);
 }
 </script>
 EOF
