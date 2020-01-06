@@ -51,7 +51,7 @@ function install_apache(){
 function install_geohelm_module(){
 	pushd /opt/
 
-	/usr/share/webmin/install-module.pl geohelm.wbm.gz
+	/usr/libexec/webmin/install-module.pl geohelm.wbm.gz
 	
 	popd
 	
@@ -59,7 +59,7 @@ function install_geohelm_module(){
 function install_certbot_module(){
 	pushd /opt/
 
-	/usr/share/webmin/install-module.pl certbot.wbm.gz
+	/usr/libexec/webmin/install-module.pl certbot.wbm.gz
 	
 	popd
 	echo -e "GeoHelm is now installed.  Please go to Servers > GeoHelm to complete installation"
