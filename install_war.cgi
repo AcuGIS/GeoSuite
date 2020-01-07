@@ -58,6 +58,6 @@ if($unzip_dir ne ''){
 	&rmtree($unzip_dir);	
 }
 
-tomcat_service_ctl('restart');
+#tomcat_service_ctl('restart');
 
 &ui_print_footer("", $text{'index_return'});
