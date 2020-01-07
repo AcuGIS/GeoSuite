@@ -71,3 +71,4 @@ download_geohelm_module;
 install_apache;
 download_certbot_module;
 install_certbot_module;
+install_geohelm_module;
