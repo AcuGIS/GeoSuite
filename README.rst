@@ -3,12 +3,12 @@ GeoHelm
 
 GeoHelm is a Webmin module that installs, configures, and manages the latest, stable versions of:
 
-Apache Tomcat
-Oracle Java or OpenJDK
-PostgreSQL
-PostGIS
-PgRouting
-GeoServer
+- Apache Tomcat
+- Oracle Java or OpenJDK
+- PostgreSQL
+- PostGIS
+- PgRouting
+- GeoServer
 
 Features
 --------
