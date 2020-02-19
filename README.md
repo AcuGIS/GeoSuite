@@ -35,7 +35,7 @@ User Access:<code>root access required</code><br />
 Software Requirements: <code>Webmin</code><br />
 
 ## Quick Start
-A Quick Start is available at: [GeoHelm Quick Start](https://geohelm.org/quick-start.html). <br /> 
+A Quick Start is available at: [GeoHelm Quick Start](https://github.com/AcuGIS/GeoHelm/blob/master/QuickStart.md). <br /> 
 The Quick Start does save a few minutes, but even <a href="https://geohelm.org/install/">standard installation</a>  only takes about 10 minutes. 
 
 ## Documentation
