@@ -1,23 +1,22 @@
 
-** Quick Start
+# Quick Start
 
 
-The Quick Start scripts install Webmin, Apache, create the GeoHelm module.
+The Quick Start scripts installs Webmin, Apache, and creates and installs the GeoHelm module.
 
-This does save a few minutes, but even standard installation only takes about 10 minutes.
+1. Connect to a fresh VM via SSH.
 
-    Connect to a fresh VM or server via SSH.
-    Grab the Quick Start script for your operating system using WGET:
+2. Download the Quick Start for your Distro using WGET:
 
  
 
-For CentOS 7:
+## CentOS 7:
 
     wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/geohelm-centos.sh
 
  
 
-For Debian 8 and 9 or Ubuntu 14 or 16
+## Debian 8 and 9 or Ubuntu 14 or 16
 
  
 
@@ -25,7 +24,7 @@ For Debian 8 and 9 or Ubuntu 14 or 16
 
  
 
-For Fedora 24 or 25:
+## Fedora 24 or 25:
 
  
 
@@ -33,7 +32,7 @@ For Fedora 24 or 25:
 
  
 
-For Scientific Linux 7:
+## Scientific Linux 7:
 
  
 
@@ -41,7 +40,7 @@ For Scientific Linux 7:
 
  
 
-Make the script executable:
+3. Make the script executable:
 
  
 
@@ -49,7 +48,7 @@ Make the script executable:
 
  
 
-Execute the script:
+4. Execute the script:
 
  
 
