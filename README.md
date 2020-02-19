@@ -1,6 +1,8 @@
 ![GeoHelm Logo](https://geohelm.org/GeoHelm-Github.jpg)
 # GeoHelm: A new route to Open Source GIS
 
+[![Documentation Status](https://readthedocs.org/projects/geohelm/badge/?version=latest)](https://geohelm-docs.acugis.com/en/latest/?badge=latest)
+
 GeoHelm is a Webmin module that installs, configures, and manages the <code>latest, stable</code> versions of:
 
 <code>Apache Tomcat</code><br />
