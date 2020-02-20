@@ -1,5 +1,5 @@
 ============
-Installation
+Quick Start
 ============
 
 Install using bash Quick Start script (Debian)::
