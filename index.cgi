@@ -44,6 +44,10 @@ push(@links, "edit_pg_ext.cgi");
 push(@titles, $text{'pg_ext_title'});
 push(@icons, "images/postgis.png");
 
+push(@links, "add_shape.cgi");
+push(@titles, $text{'add_shape_title'});
+push(@icons, "images/shp2pgsql.png");
+
 #if PostgreSQL installer is available
 if(-f "$module_root_directory/pg_install.cgi"){
 	push(@links, "pg_install.cgi");
