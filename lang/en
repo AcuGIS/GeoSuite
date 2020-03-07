@@ -102,6 +102,17 @@ pg_repo_install=Install Repository
 pg_enable_ssl=Enable SSL
 pg_listen_all=Listen on All Interfaces
 
+add_shape_title=Shape Loader
+add_shape_desc1=Add shape to an existing database, with PostGIS extension
+load_type=Load Type
+set_srid=Set SRID (defaults to 0)
+db_user=Database Username
+db_schema=Schema
+db_table=Table
+shape_load=Load
+shape_source=Shape source (.zip)
+select_or=Or
+
 editor_title=MapJS
 editor_desc1=Use Load/Browse to load a file content or browse into a folder.
 load_ok=Load/Browse
