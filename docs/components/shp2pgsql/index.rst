@@ -7,14 +7,14 @@
    :width: 1em
 
 **********************
-Schedule
+SHP2PGSQL
 **********************
 
 .. contents:: Table of Contents
-Scheduling Reports
-==================
+SHP2PGSQL Tool
+==============
 
-Reports can be scheduled with a variety of options via the Schedule tab as shown below:
+GeoHelm includes a shp2pgsql tool that can used to load shape files into PostGIS via Webmin.
 
 .. image:: _static/schedule-tab.png
 
