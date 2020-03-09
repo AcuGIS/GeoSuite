@@ -91,6 +91,6 @@ If the included LeafletJS demo does not render, or renders only the base map, ch
 
 2. Be sure you have started GeoServer
 
-3. If both of above are eliminated, restart Apache Tomcat
+3. If both of above are eliminated, restart Apache HTTP Server
 
 
