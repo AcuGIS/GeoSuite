@@ -47,9 +47,7 @@ With the Wizard completed, your module should appear as below:
 
 
 .. note::
-    The JRI application is not deployed at this point.  You need to Start Tomcat
-    in order to deploy it.  Do so before any further operations as it is required
-    to write configuration files, etc...
+    The Wizard may state that GeoServer is not deployed.  This is due to Tomcat not starting automatically.  Simply complete        installation and start Tomcat to deploy the GeoServer war.
     
 
 About Haveged
