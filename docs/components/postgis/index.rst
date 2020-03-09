@@ -7,7 +7,7 @@
    :width: 1em
 
 **********************
-Publish
+PostGIS
 **********************
 
 .. contents:: Table of Contents
