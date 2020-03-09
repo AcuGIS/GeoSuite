@@ -12,102 +12,66 @@ LeafletJS
 
 .. contents:: Table of Contents
 
-Layout
-======
+Demo App
+========
 
-For installations done using the Wizard, the Apache Tomcat (CATALINA) home directory is::
+A simple LeafletJS demo app using OpenLayers and GeoServer is available via the Home Page.
 
-   /home/tomcat/apache-tomcat-v/
+Click the LeafletJS link on the home page or navigate to:
+
+https://yourdomain.com/LeafletDemo.html
+
+
+Structure and Code
+==================
+
+.. code-block:: HTML
+   :linenos:
    
-Where apache-tomcat-v is the version you chose to install.
+   
+   	<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <title>Example Leaflet</title>
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css"
+   integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw=="
+   crossorigin=""/>
 
-The CATALINA_HOME variable is set both in the Tomcat init script as well as setenv.sh files.
+    <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"
+   integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA=="
+   crossorigin=""></script>
+  </head> 
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+    html, body, #map {
+      height: 100%;
+    }
+  </style>
 
-
-Starting and Stopping
-=====================
-
-There are two ways to start/stop/restart Tomcat.
-
-1.  Via Module, using the Stop/Start/Restart buttons as shown below::
-
-   .. image:: _static/tomcat-functions.png
-
-2.  Via SSH, using the following commands
-
-.. code-block:: console
-   :linenos:
-
-    /etc/init.d/tomcat { start | stop | restart | status }
+  <body>
+    <div id="map"></div>
     
+    <script>
+    var map = L.map('map').setView([0, 0], 2);        
+    var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  	var osmAttrib='Data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+  	var osm = new L.TileLayer(osmUrl, {minZoom: 2, maxZoom: 8, attribution: osmAttrib});
+    map.addLayer(osm);
+	//change localhost below to your IP or hostname
+    var wmsLayer= L.tileLayer.wms("http://localhost/geoserver/wms", {
+        layers: 'topp:states',
+        format: 'image/png',
+        transparent: true
+    });
+    map.addLayer(wmsLayer);    
+    </script>
+</html>
 
-Init Script
-===========
-
-The Tomcat init script is located in /etc/init.d and has the following content.
-
-.. code-block:: bash
-   :linenos:
-
-
-
-	#!/bin/bash
-	### BEGIN INIT INFO
-	# Provides:        tomcat
-	# Required-Start:  $network
-	# Required-Stop:   $network
-	# Default-Start:   2 3 4 5
-	# Default-Stop:    0 1 6
-	# Short-Description: Start/Stop Tomcat server
-	### END INIT INFO
-
-	# Source function library.
-	. /etc/environment;	#Catalina variables
-	. $CATALINA_HOME/bin/setenv.sh
-
-	RETVAL=$?
-
-	function start(){
-	echo "Starting Tomcat"
-	/bin/su - tomcat $CATALINA_HOME/bin/startup.sh
-	RETVAL=$?
-	}
-
-	function stop(){
-	echo "Stopping Tomcat"
-	/bin/su - tomcat -c "$CATALINA_HOME/bin/shutdown.sh 60 -force"
-	RETVAL=$?
-	}
-
-	case "$1" in
- 	start)
-		start;
-        ;;
- 	stop)
-		stop;
-        ;;
- 	restart)
-		echo "Restarting Tomcat"
-    	stop;
-		start;
-        ;;
- 	status)
-
-		if [ -f "${CATALINA_PID}" ]; then
-			TOMCAT_PID=$(cat "${CATALINA_PID}")
-			echo "Tomcat is running with PID ${TOMCAT_PID}";
-			RETVAL=1
-		else
-			echo "Tomcat is not running";
-			RETVAL=0
-		fi
-		;;
- 	*)
-        echo $"Usage: $0 {start|stop|restart|status}"
-        exit 1
-        ;;
-	esac
-	exit $RETVAL
 
 
 
@@ -115,6 +79,18 @@ The Tomcat init script is located in /etc/init.d and has the following content.
 Version
 =======
 
-GeoHelm has been tested with Tomcat 8.x and 9.x
+By default, the latest version of LeafletJS is installed by the Wizard
+
+
+Troubleshooting
+===============
+
+If the included LeafletJS demo does not render, or renders only the base map, check the following:
+
+1. Be sure you have the correct IP or hostname in the /var/www/html/Leaflet.html page
+
+2. Be sure you have started GeoServer
+
+3. If both of above are eliminated, restart Apache Tomcat
 
 
