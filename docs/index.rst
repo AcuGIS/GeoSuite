@@ -1,7 +1,6 @@
-JRI Publisher
+GeoHelm
 ==================================================
 
-.. image:: _static/JRI-Publisher-Main-Page.png
 
 
 .. include:: ../README.rst
@@ -21,11 +20,10 @@ JRI Publisher
 
     components/general/index
     components/tomcat/index
-    components/datasources/index
-    components/publish/index
-    components/schedule/index
-    components/reports/index
-    components/jasper/index
+    components/postgresql/index
+    components/postgis/index
+    components/geoserver/index
+    components/shp2pgsql/index
 
 .. toctree::
     :maxdepth: 2
