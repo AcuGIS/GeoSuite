@@ -38,40 +38,6 @@ System Requirements
 - User Access:root access required
 - Software Requirements: Webmin
 
-Quick Start
------------
-
-Ubuntu:
-
-wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/geohelm-debian.sh
-chmod +x geohelm-debian.sh
-./geohelm-debian.sh
-
-CentOS:
-
-wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/geohelm-centos.sh
-chmod +x geohelm-centos.sh
-./geohelm-centos.sh
-
-Installation
-------------
-
-A Quick Start is available at: GeoHelm Quick Start.
-The Quick Start does save a few minutes, but even standard installation only takes about 10 minutes.
-
-The preferred method is installing via GIT.
-
-    $ git clone https://github.com/AcuGIS/GeoHelm
-
-    $ mv GeoHelm-master geohelm
-
-    $ tar -cvzf geohelm.wbm.gz geohelm/
-    
-    
-Upload from Webmin->Webmin Configuration->Webmin Modules
-
-Go to Servers->GeoHelm and follow the Set Up Wizard
-
 Contribute
 ----------
 
@@ -81,10 +47,10 @@ Contribute
 Support
 -------
 
-If you are having issues, please let us know.
-We have a mailing list located at: project@google-groups.com
+If you are having issues, create an issue on Github.
+
 
 License
 -------
 
-The project is licensed under the BSD license.
+GeoHelm is Free, Open Source software.
