@@ -12,7 +12,7 @@ from sphinx.locale import _
 from sphinx_rtd_theme import __version__
 
 
-project = u'JRI Publisher'
+project = u'AcuGIS GeoHelm'
 copyright = u'2020, Cited, Inc.'
 slug = re.sub(r'\W+', '-', project.lower())
 version = __version__
@@ -51,7 +51,7 @@ html_theme_options = {
     'display_version': True
 }
 html_theme_path = ["_themes", ]
-html_logo = "_static/jri-publihser-top-icon.fw.png"
+#html_logo = "_static/jri-publihser-top-icon.fw.png"
 html_show_sourcelink = True
 
 htmlhelp_basename = slug
