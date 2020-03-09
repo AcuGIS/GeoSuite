@@ -25,6 +25,14 @@ GeoHelm
     components/pgrouting/index
     components/geoserver/index
     components/shp2pgsql/index
+    
+.. toctree::
+    :maxdepth: 3
+    :caption: Web Apps
+
+    components/HomePage/index
+    components/OpenLayers/index
+    components/LeafletJS/index
 
 .. toctree::
     :maxdepth: 2
