@@ -93,11 +93,6 @@ To install using the PostGIS/PgRouting Extension installer, click on the Extensi
 1. Select the target database from the drop-down as shown below.
 
 .. image:: _static/postgis-select-db.png 
-postgis-enable.png 	
-postgis-install-more.png 	
-	
-postgis-tab.png
- 
 
 .. Note:: You must FIRST install PostGIS prior to installing any other of the listed extensions.
 
