@@ -18,7 +18,6 @@ Edit Config
 
 The Config tab is used to edit the following files::
 
-   application.properties
    server.xml
    web.xml
    context.xml
@@ -35,20 +34,6 @@ Apps
 The Apps manager allows you to deploy, undeploy, and redeploy WAR files in Apache Tomcat
 
    
-Libraries
-=========
-.. image:: _static/libs-tab.png
-
-The Libraries tab is for managing Jar files under::
-
-   /home/tomcat/<tomcat-version>/libs
-
-These files can, of course, via the file system.
-
-.. note::
-   The advantage of the Libraries tab is that it tracks Jar files installed,  This allows you to easily roll back changes.
-
-
 Java
 =========
 .. image:: _static/java-tab.png
@@ -65,22 +50,10 @@ It can also be used to un-install the selected JDK and replace it with a new ver
     When installing or removing, there is an option to set as System default.
 
 
-Proxy
+MapJS
 =========
 
-By default, JRI Publisher enables a Proxy for Apache and maps port 8080 to 80.
+The MapJS tab is simply a file browser for viewing and editing both OpenLayers and LeafletJS files.
 
-This enables you to reach reports via http://yourdomain.com/JasperReportsIntegration without need to add the 8080 port.
 
-.. warning::
-
-   While the proxy is convenient for development or intranet use, in production you should remove the proxy.  To remove the Proxy, follow the steps below:
-   
-To edit, remove, or update Proxies, click on the Proxy tab as shown below.
-
-.. image:: _static/proxy.png
-
-Select the default Proxy of / as shown below, and click Remove.
-
-.. image:: _static/proxy-remove.png
 
