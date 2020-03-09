@@ -6,13 +6,13 @@ Wizard
 
 Once the module is installed, the Wizard is used to configure the components.
 
-Go to Servers > JRI Publisher:
+Go to Servers > Geohelm:
 
 .. image:: _static/3.png
 
 The main Wizard screen will a link for completing each step.
 
-While most steps are self-explanatory, we will cover Tomcat, JDK, and JRI selection below:
+While most steps are self-explanatory, we will cover Tomcat and JDK selection below:
 
 **Install Java/JDK:**
 
@@ -22,30 +22,20 @@ Select the JDK you wish to use.  We have tested with JDK 8
 
 .. image:: _static/5-java.png
 
-JRI Publihsher has been tested with OpenJDK 8 and Oracle JDK 8.
+Geohelm has been tested with OpenJDK 8 and Oracle JDK 8.
 
 
 **Apache Tomcat:**  
 
 .. image:: _static/8-tomcat.png
 
-JRI Publihsher has been tested with Apache Tomcat 8.x and 9.x:
+Geohelm has been tested with Apache Tomcat 8.x and 9.x:
 
 .. image:: _static/9-tomcat.png
 
 
 **Install JasperReportsIntegration:**
 
-.. image:: _static/13-jri.png
-
-JRI Publihsher has been tested with JasperReportsIntegration 2.4.0 and 2.5.1:
-
-.. image:: _static/14-jri.png
-
-.. note::
-    If you wish to use a Beta version of JasperReporsIntegration, tick the "Show Beta Versions" select box 
-
- 
 Once each step of the Wizard is completed, the Wizard can be removed:
 
 .. image:: _static/19-donei.png
