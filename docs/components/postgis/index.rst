@@ -11,58 +11,95 @@ PostGIS
 **********************
 
 .. contents:: Table of Contents
-Publishing Reports
+
+Installing PostGIS
 ==================
 
-To publish a report, click the Publish tab as shown below:
+PostGIS can be enabled on your PostgreSQL database via the Extension tab or via Command Line.
 
-.. image:: _static/publish-tab.png
+Command Line
+============
 
-This will open the screen below.  
+To install via command line:
 
-.. image:: _static/publish-default.png
+1. Connect to PostgreSQL
+.. code-block:: console
+   :linenos:
 
-.. note::
-    The file browser location is set to /home/tomcat/apache-tomcat-v/jasper_reports/reports
-    
-Select the directory you wish to publish to and then select Upload to upload both your .jrxml and .jasper files.
+   root@geohelm:~# su - postgres
+   postgres@geohelm:~$ psql
+   psql (12.2.1)
+   Type "help" for help.
 
-You would also include any support files, such as image files.
+   postgres=#
 
-Creating Directories
-====================
+ 
 
-To publish a report, click the Publish tab as shown below. 
+2. If you have not created a database, create one now.
 
-.. image:: _static/publish-tab.png
+.. code-block:: console
+   :linenos:
 
-Enter the name of the directory you wish to create as show below.  This will create a new directory, NewReports, under the main reports directory.
+   postgres=# create database geohelm;
+   CREATE DATABASE
+   postgres=# 
 
-Once text is entered, upload any files you wish to.
+3. Connect to your database.
 
-.. image:: _static/publish-browse.png
+.. code-block:: console
+   :linenos:
 
-Note that once a Directory has been created, it will be added to the availbale directories for subsequent publications:
+   postgres=# \c geohelm
+   You are now connected to database "geohelm" as user "postgres".
+   geohelm=#
 
-.. image:: _static/publish-new.png
+4. Install the PostGIS extension.
 
-Options
-=======
+.. code-block:: console
+   :linenos:
 
-There are four options for uploading files. 
+   geohelm=# create extension postgis;
+   CREATE EXTENSION
+   geohelm=#
 
-1. Local File - this is a file already on the device.
+Note: GeoHelm also includes fuzzy_match_string, tiger, postgis_topology.
 
-2. Uploaded File - upload from your local machine.
+ 
+5. Verify the installation via command line or the PostgreSQL Management Page
 
-3. HTTP or FTP URL - obtain files via HTTP or FTP
+.. code-block:: console
+   :linenos:
 
-Additionally, select the options to upload zip archives as well as to over-write any existing files (for when you publish updates to your reports).
+   geohelm=# \d
+               List of relations
+   Schema |       Name        | Type  |  Owner
+   --------+-------------------+-------+----------
+   public | geography_columns | view  | postgres
+   public | geometry_columns  | view  | postgres
+   public | raster_columns    | view  | postgres
+   public | raster_overviews  | view  | postgres
+   public | spatial_ref_sys   | table | postgres
+   (5 rows)
 
-.. image:: _static/publish-options.png
+ 
+Extensions Tool
+===============
 
-   
+To install using the PostGIS/PgRouting Extension installer, click on the Extensions button.
+
+1. Select the target database from the drop-down as shown below:
+
+ 
+
+.. Note:: You must FIRST install PostGIS prior to installing any other of the listed extensions.
 
 
+2. Tick the PostGIS select button and then click the Save button as show below:
+
+ 
+3. Once PostGIS has been installed on a target database, you can then return to install additional extensions:
+
+.. Note:: 
+   You can also un-install Extensions using above. 
 
 
