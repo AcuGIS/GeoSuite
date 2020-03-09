@@ -1,8 +1,7 @@
 Commercial Support
 -----------------
 
-Commercial Support is available via `Enciva LLC`_
+Commercial Support with enhanced features and support is available via `AcuGIS`_
 
-.. _`Enciva LLC`: https://www.enciva.com
+.. _`AcuGIS`: https://www.acugis.com/acugis-suite
 
-In addition to JRI Publisher, Enciva also offers a multi-user edition written in PHP.
