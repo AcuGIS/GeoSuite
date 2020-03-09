@@ -7,97 +7,96 @@
    :width: 1em
 
 **********************
-Report Dashboard
+GeoServer
 **********************
 
 .. contents:: Table of Contents
 Overview
 ==================
 
-Click the Reports tab to open the Reports Dashboard.
+GeoHelm installs the latest, stable version of GeoServer.
 
-.. image:: _static/reports-tab.png
+The GeoServer tab checks that GeoServer is installed.
 
-This will open the screen below.  
+.. image:: _static/geoserver-tab.png
 
-.. image:: _static/report-dashboard.png
+If not, it can be installed using the "Install Now" button.
+
+This will install the latest, stable version of GeoServer.
+
+Important: GeoServer is an optional component on the GeoHelm Java Version.
+
+If you do not wish to install it, simply do not do so.
+
+Location
+================== 
+
+By default, GeoServer is installed at /home/tomcat/apache-tomcat-<version>/webapps/geoserver
+
+To make upgrading easier, you should always change the GeoServer Data Directory location.
+
+To install GeoServer extensions, see our guide
 
 As we can see above, the creation of our NewReports Directory has been added to the directory structure.  This is true for all directories and sub directories added.
 
-Dashboard Layout
-================
+Geoserver Extensions
+====================
 
-Expanding the NewReports directory, we see below:
+GeoServer Extensions can be installed as below.
 
-.. image:: _static/report-dashboard-item.png
+Below, we are installing the MapFish Print Module via SSH.
+
+1. Switch to user tomcat::
+
+   su - tomcat
+
+2. Change to the GeoServer /lib directory (adjust for your own file path)::
+
+   cd /home/tomcat/apache-tomcat-8.5.15/webapps/geoserver/WEB-INF/lib
+
+3. Download the desired extension, making sure to match the version to your GeoServer version::
+
+   wget http://sourceforge.net/projects/geoserver/files/GeoServer/2.16.2/extensions/geoserver-2.16.2-printing-plugin.zip
+
+4. Unzip the downloaded file::
+
+   unzip -q geoserver-2.16.2-printing-plugin.zip
+
+5. Remove the zip file::
+
+   rm -f geoserver-2.16.2-printing-plugin.zip
+
+6. Restart Tomcat for the extension to take effect.
+
+.. Note:: Some components, such as GDAL, require additional configuration. 
 
 
-Dashboard Functions
-===================
+Data Directory
+==============
 
-**Name**::
+To make GeoServer more portable and easier to upgrade, you should change the GeoServer data directory.
 
- Clicking on the report name will open the .jrxml file for editing, as shown below:
+Follow the instructions below, substituting your own paths and file names.
+
+1. Stop Tomcat
+
+2. Connect via SSH and move the data directory as below: (Important: the target directory - 'geo_data' below - should not exist.)::
+
+   mv /home/tomcat/apache-tomcat-8.5.15/webapps/geoserver/data/ /var/lib/geo_data/ 
+
+3. Add the following to your GeoServer web.xml file.
+
+   <context-param>
+       <param-name>GEOSERVER_DATA_DIR</param-name>
+       <param-value>/var/lib/geo_data</param-value>
+   </context-param>
  
-.. image:: _static/reports-edit-jrxml.png
- 
- 
-**Actions**::
-      
-Run:  Runs the report on demand.
+   <context-param>
+      <param-name>GEOSERVER_REQUIRE_FILE</param-name>
+      <param-value>/var/lib/geo_data/global.xml</param-value>
+   </context-param>   
 
-.. image:: _static/reports-actions.gif
+4. Start Tomcat
 
-
-Clean: Opens a new window to delete any reports you may wish to delete
-
-.. image:: _static/reports-cleaner.png 	
-
-Download:  Opens a new window to download selected report(s) in .zip or .bgz format.
-
-.. image:: _static/reports-downloader.png 	
-
-
-**SchID**::
-
-Link to edit the Schedule for the report
-
-**Cron**::
-
-Displays the cron in use for the Schedule
- 
-**Format**::
-
-Displays the report format (e.g. pdf, csv, etc...)
-
-**Data Source**::
-
-Displays report Data Source
-
-**Output**::
-
-Clicking the Browse button will open the report directory in the File Manager as shown below:
-
-.. image:: _static/reports-browse.png
-
-
-**Email**::
-
-Displays report email recipient(s).
-
-**Optional Params**::
-
-Displays any URL Parameters the report is using.
-
-
-No Schedule
-===========
-
-.. note::
-    Any report that does not have a schedule will show the Scheduler icon in the Actions menu.  To add a Schedule, click the icon as shown below.
-
- 
-.. image:: _static/reports-no-schedule.png
-
-   
+You should log into GeoServer and verify that your workspaces, etc.. are accesible.    
 
