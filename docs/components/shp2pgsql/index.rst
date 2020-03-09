@@ -16,8 +16,6 @@ SHP2PGSQL Tool
 
 GeoHelm includes a shp2pgsql tool that can used to load shape files into PostGIS via Webmin.
 
-.. image:: _static/shp2pgsql-tab.png
-
 1. Load using the Shape File Loader.
 
 2. Load using command line.
@@ -36,7 +34,21 @@ The load options are displayed below.
 
 Also select if load will be into a new Schema and, in the case of New Table creation, the table name to be created.
 
-Click the Load button.
+**Load Options**
+
+Database: select the database you wish to load the shape file to.
+
+Load Type: Create, Drop, Append, or Prepare
+
+Set SRID: Defaults to 0 if not set
+
+Database Username:  Select the user who will own the data
+
+Schema: Select an existing schema or create a new schema.
+
+Table: Select an existing table or create new one
+
+Shape File Source:  Local, Upload, or FTP/HTTP
 
 Load via Comamnd Line
 =====================
