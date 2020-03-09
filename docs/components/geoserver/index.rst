@@ -46,23 +46,42 @@ GeoServer Extensions can be installed as below.
 
 Below, we are installing the MapFish Print Module via SSH.
 
-1. Switch to user tomcat::
+1. Switch to user tomcat
+
+.. code-block:: console
+   :linenos:
 
    su - tomcat
+   
 
-2. Change to the GeoServer /lib directory (adjust for your own file path)::
+2. Change to the GeoServer /lib directory (adjust for your own file path)
+
+.. code-block:: console
+   :linenos:
 
    cd /home/tomcat/apache-tomcat-8.5.15/webapps/geoserver/WEB-INF/lib
+   
 
-3. Download the desired extension, making sure to match the version to your GeoServer version::
+3. Download the desired extension, making sure to match the version to your GeoServer version
+
+.. code-block:: console
+   :linenos:
 
    wget http://sourceforge.net/projects/geoserver/files/GeoServer/2.16.2/extensions/geoserver-2.16.2-printing-plugin.zip
 
-4. Unzip the downloaded file::
+
+4. Unzip the downloaded file
+
+.. code-block:: console
+   :linenos:
 
    unzip -q geoserver-2.16.2-printing-plugin.zip
 
-5. Remove the zip file::
+
+5. Remove the zip file
+
+.. code-block:: console
+   :linenos:
 
    rm -f geoserver-2.16.2-printing-plugin.zip
 
@@ -80,11 +99,17 @@ Follow the instructions below, substituting your own paths and file names.
 
 1. Stop Tomcat
 
-2. Connect via SSH and move the data directory as below: (Important: the target directory - 'geo_data' below - should not exist.)::
+2. Connect via SSH and move the data directory as below: (Important: the target directory - 'geo_data' below - should not exist.)
+
+.. code-block:: console
+   :linenos:
 
    mv /home/tomcat/apache-tomcat-8.5.15/webapps/geoserver/data/ /var/lib/geo_data/ 
 
-3. Add the following to your GeoServer web.xml file.
+3. Add the following to your GeoServer web.xml file:
+
+.. code-block:: console
+   :linenos:
 
    <context-param>
        <param-name>GEOSERVER_DATA_DIR</param-name>
