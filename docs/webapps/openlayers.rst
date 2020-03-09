@@ -25,7 +25,7 @@ https://yourdomain.com/OpenLayersDemo.html
 Structure and Code
 ==================
 
-.. code-block:: html
+.. code-block:: HTML
    :linenos:
 
 
@@ -81,5 +81,17 @@ Version
 =======
 
 By default, the latest version of OpenLayers is installed by the Wizard
+
+
+Troubleshooting
+===============
+
+If the included OpenLayers demo does not render, or renders only the base map, check the following:
+
+1. Be sure you have the correct IP or hostname in the /var/www/html/OpenLayersDemo.html page
+
+2. Be sure you have started GeoServer
+
+3. If both of above are eliminated, restart Apache Tomcat
 
 
