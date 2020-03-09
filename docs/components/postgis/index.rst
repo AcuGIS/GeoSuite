@@ -23,12 +23,13 @@ Command Line
 To install via command line:
 
 1. Connect to PostgreSQL
+
 .. code-block:: console
    :linenos:
 
    root@geohelm:~# su - postgres
    postgres@geohelm:~$ psql
-   psql (12.2.1)
+   psql (12.2 (Ubuntu 12.2-2.pgdg18.04+1))
    Type "help" for help.
 
    postgres=#
@@ -85,10 +86,17 @@ Note: GeoHelm also includes fuzzy_match_string, tiger, postgis_topology.
 Extensions Tool
 ===============
 
-To install using the PostGIS/PgRouting Extension installer, click on the Extensions button.
+To install using the PostGIS/PgRouting Extension installer, click on the Extensions tab as shown below.
 
-1. Select the target database from the drop-down as shown below:
+.. image:: _static/postgis-tab.png
 
+1. Select the target database from the drop-down as shown below.
+
+.. image:: _static/postgis-select-db.png 
+postgis-enable.png 	
+postgis-install-more.png 	
+	
+postgis-tab.png
  
 
 .. Note:: You must FIRST install PostGIS prior to installing any other of the listed extensions.
@@ -96,9 +104,13 @@ To install using the PostGIS/PgRouting Extension installer, click on the Extensi
 
 2. Tick the PostGIS select button and then click the Save button as show below:
 
+.. image:: _static/postgis-enable.png 	
+
  
 3. Once PostGIS has been installed on a target database, you can then return to install additional extensions:
 
+.. image:: _static/postgis-install-more.png 	
+	
 .. Note:: 
    You can also un-install Extensions using above. 
 
