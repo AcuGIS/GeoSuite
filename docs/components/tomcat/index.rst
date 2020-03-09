@@ -24,12 +24,6 @@ Where apache-tomcat-v is the version you chose to install.
 The CATALINA_HOME variable is set both in the Tomcat init script as well as setenv.sh files.
 
 
-JRI File Locations
-==================
-
-For JasperReportsIntegration layout and customization options, please see the Jasper section below.
-
-
 Starting and Stopping
 =====================
 
@@ -37,7 +31,7 @@ There are two ways to start/stop/restart Tomcat.
 
 1.  Via Module, using the Stop/Start/Restart buttons as shown below::
 
-   .. image:: _static/tomcat-tab.gif
+   .. image:: _static/tomcat-functions.png
 
 2.  Via SSH, using the following commands
 
@@ -45,7 +39,7 @@ There are two ways to start/stop/restart Tomcat.
    :linenos:
 
     /etc/init.d/tomcat { start | stop | restart | status }
-
+    
 
 Init Script
 ===========
@@ -121,5 +115,5 @@ The Tomcat init script is located in /etc/init.d and has the following content.
 Version
 =======
 
-JRI Publisher has been tested with Tomcat 9.x
+GeoHelm has been tested with Tomcat 8.x and 9.x
 
