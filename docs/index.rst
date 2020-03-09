@@ -22,6 +22,7 @@ GeoHelm
     components/tomcat/index
     components/postgresql/index
     components/postgis/index
+    components/pgrouting/index
     components/geoserver/index
     components/shp2pgsql/index
 
