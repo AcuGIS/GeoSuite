@@ -1,23 +1,42 @@
-.. Read the Docs Template documentation master file, created by
-   sphinx-quickstart on Tue Aug 26 14:19:49 2014.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-AcuGIS GeoHelm
+JRI Publisher
 ==================================================
 
-Contents:
+.. image:: _static/JRI-Publisher-Main-Page.png
+
+
+.. include:: ../README.rst
 
 .. toctree::
+   :caption: Getting Started
    :maxdepth: 2
-   :glob:
 
-   *
+   intro
+   installing
+   wizard
+   webmin
+   
+.. toctree::
+    :maxdepth: 3
+    :caption: Components
 
+    components/general/index
+    components/tomcat/index
+    components/datasources/index
+    components/publish/index
+    components/schedule/index
+    components/reports/index
+    components/jasper/index
 
+.. toctree::
+    :maxdepth: 2
+    :caption: Resources
 
+    resources/css
+    resources/security
+    resources/support
+    resources/commercial
+    resources/license
+    
+    
+    
 
-AcuGIS
-==================
-`AcuGIS <https://www.acugis.com>`_
-
-`Cited, Inc. <https://www.citedcorp.com>`_
