@@ -8,16 +8,19 @@
    :width: 1em
 
 **********************
-Jasper
+PostgreSQL
 **********************
 
 .. contents:: Table of Contents
 
-JasperReportsIntegration
-========================
+Repository Manager
+==================
 
-The information below pertains to the deployment of JasperReportsIntegration in JRI Publisher.  For full documentation of JasperReportsIntegration, please see http://www.opal-consulting.de/downloads/free_tools/JasperReportsIntegration/
+The Repository installer and manager allows you to install your selected version of the PostgreSQL Repository.
 
+You can also use the manager to install and update packages as well.
+
+As certain packages require EPEL for CentOS, the EPEL repository is installed as well when installing on CentOS.
 
 File Locations
 ==============
