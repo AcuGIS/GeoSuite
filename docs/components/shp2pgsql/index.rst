@@ -16,132 +16,115 @@ SHP2PGSQL Tool
 
 GeoHelm includes a shp2pgsql tool that can used to load shape files into PostGIS via Webmin.
 
-.. image:: _static/schedule-tab.png
+.. image:: _static/shp2pgsql-tab.png
 
-On the main Schedule page, click the Add tab to open the Create Schedule page as shown below.  
+1. Load using the Shape File Loader.
 
-.. image:: _static/schedule-new.png
+2. Load using command line.
 
-Scheduling Options
-==================
 
-The Schedule module offers the following options.
+Load via Shape File Loader
+==========================
 
-**Execute**::
+Click the Shape File Loader tab as shown below
 
-   Options:
-      now
-      custom
-      hourly
-      weekly
-      monthly
-      
-now:  This will run the report immediately, with no subsequent runs.
+.. image:: _static/shp2pgsql-tab.png
 
-custom: This option allows you to enter a custom cron for running the report
+The load options are displayed below.
+
+.. image:: _static/shape-loader.png
+
+Also select if load will be into a new Schema and, in the case of New Table creation, the table name to be created.
+
+Click the Load button.
+
+Load via Comamnd Line
+=====================
  
-hourly, weekly, and monthly are as stated.
- 
-**Name**::
+Usage
 
-   Options:
-      Drop-down list of all available reports
+shp2pgsql usage can be found using the 'shp2pgsl' command:
 
+.. code-block:: console
+   :linenos:
 
-The Name field will display a list of all available reports.  Above, we have select the NewReports/ClassReports we created earlier.
+   root@geohelm:~# shp2pgsql
+   RELEASE: 2.3.2 (r15302)
+   USAGE: shp2pgsql [<options>] <shapefile> [[<schema>.]<table>]
+   OPTIONS:
+      -s [<from>:]<srid> Set the SRID field. Defaults to 0.
+         Optionally reprojects from given SRID (cannot be used with -D).
+         (-d|a|c|p) These are mutually exclusive options:
+     -d  Drops the table, then recreates it and populates
+         it with current shape file data.
+     -a  Appends shape file into current table, must be
+         exactly the same table schema.
+     -c  Creates a new table and populates it, this is the
+         default if you do not specify any options.
+     -p  Prepare mode, only creates the table.
+     -g <geocolumn> Specify the name of the geometry/geography column
+      (mostly useful in append mode).
+  -D  Use postgresql dump format (defaults to SQL insert statements).
+  -e  Execute each statement individually, do not use a transaction.
+      Not compatible with -D.
+  -G  Use geography type (requires lon/lat data or -s to reproject).
+  -k  Keep postgresql identifiers case.
+  -i  Use int4 type for all integer dbf fields.
+  -I  Create a spatial index on the geocolumn.
+  -m <filename>  Specify a file containing a set of mappings of (long) column
+     names to 10 character DBF column names. The content of the file is one or
+     more lines of two names separated by white space and no trailing or
+     leading space. For example:
+         COLUMNNAME DBFFIELD1
+         AVERYLONGCOLUMNNAME DBFFIELD2
+  -S  Generate simple geometries instead of MULTI geometries.
+  -t <dimensionality> Force geometry to be one of '2D', '3DZ', '3DM', or '4D'
+  -w  Output WKT instead of WKB.  Note that this can result in
+      coordinate drift.
+  -W <encoding> Specify the character encoding of Shape's
+      attribute column. (default: "UTF-8")
+  -N <policy> NULL geometries handling policy (insert*,skip,abort).
+  -n  Only import DBF file.
+  -T <tablespace> Specify the tablespace for the new table.
+      Note that indexes will still use the default tablespace unless the
+      -X flag is also used.
+  -X <tablespace> Specify the tablespace for the table's indexes.
+      This applies to the primary key, and the spatial index if
+      the -I flag is used.
+  -?  Display this help screen.
 
+  An argument of `--' disables further option processing.
+  (useful for unusual file names starting with '-')
 
-**Format**::
-
-   Options:
-      csv
-      docx
-      html
-      html2
-      jxl
-      pdf
-      pptx
-      rtf
-      xls
-      xlsx
-
-Select the desired output format for the report.
-
-
-**Data Source**::
-
-   Options:
-      Displays a drop-down list of Data Sources you have created.
-
-Select the desired Data Source for the report.
-
-**File Name**::
-
-   Options:
-      Enter the desired file name WITH Extension.
-      Example: ClassReports.pdf
-
-Enter the desired Data Source for the report.
-
-
-**Email**::
-
-   Options:
-      Enter email address or comma separated list of addresses for delivery.
-
-Enter the desired Data Source for the report.
-
-.. note::
-    If you do not wish to email the report, tick the "Don't send email" box.  
-    This will run the report and save it to disk on the server.
-    The report can be retrived via disk or downloaded via Reports tab.
-
-
-
-Optional Params
+Troubleshooting
 ===============
 
-The Optional Params tab allows you to:
+If the above commands produce 'shp2pgsql command not found', do the following:
 
-1. Set email subject
-2. Set email message
-3. Add report parameters
+On Ubuntu:
 
+.. code-block:: console
+   :linenos:
 
-URL Parameters
-===============
+   root@geohelm:~# apt install postgis
 
-To add a Report Parameter to the report URL, enter the variable in the left box and the value in the right box as shown below:
+On CentOS
 
-.. image:: _static/schedule-params.png
+.. code-block:: console
+   :linenos:
 
+   root@geohelm:~# yum install postgis3_utils
 
-Click the Save button.
+Documentation
+=============
 
-.. image:: _static/schedule-optional-params.png
+Below are resources to get started with ogr2ogr and gdal_translate:
 
-You can add as many parameters as you wish to.
+* `Refractions Documentation`_
+* `Boston GIS Cheatsheet`_
 
-Finally, click the Creat button to schedule the report.
-
-Additional Examples
-===================
-
-Below are some additional examples.
-
-**Send report every Tuesday at 1500 (3 PM)**
-
-.. image:: _static/schedule-tuesdays.png
-
-**Send report every hour without email delivery**
-
-.. image:: _static/schedule-hour.png
-
-**Send report weekly with StudentID = 51**
-
-.. image:: _static/schedule-weekly.png
-
-   
+.. _`Refractions Documentation`: https://postgis.net/docs/using_postgis_dbmanagement.html#shp2pgsql_usage
+.. _`Boston GIS Cheatsheet`: http://www.bostongis.com/pgsql2shp_shp2pgsql_quickguide.bqg 
 
 
 
