@@ -30,9 +30,9 @@ GeoHelm
     :maxdepth: 3
     :caption: Web Apps
 
-    components/HomePage/index
-    components/OpenLayers/index
-    components/LeafletJS/index
+    webapps/HomePage/index
+    webapps/OpenLayers/index
+    webapps/LeafletJS/index
 
 .. toctree::
     :maxdepth: 2
