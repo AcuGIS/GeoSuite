@@ -292,7 +292,7 @@ sub check_pg_ext_deps{
 
 	my %osinfo = &detect_operating_system();
 	if( ($osinfo{'os_type'} =~ /debian/i)){
-		@ext_pkgs = ("postgresql-$pg_ver-postgis-scripts", "postgresql-$pg_ver-pgrouting-scripts", "postgresql-$pg_ver-pgrouting");
+		@ext_pkgs = ("postgresql-$pg_ver-postgis-3-scripts", "postgresql-$pg_ver-pgrouting-scripts", "postgresql-$pg_ver-pgrouting");
 
 	}elsif( $osinfo{'os_type'} =~ /arch/i){	#Arch
 		@ext_pkgs = 'postgis';
