@@ -1,9 +1,7 @@
 # GeoHelm: A new route to Open Source GIS
 
 * Project page: https://www.acugis.com/geohelm
-* Documentation: https://www.acugis.com/geoheml/docs
-
-[![Documentation Status](https://readthedocs.org/projects/geohelm/badge/?version=latest)](https://geohelm.docs.acugis.com/en/latest/?badge=latest)
+* Documentation: https://www.acugis.com/geoheml/docs 
 
 ![GeoHelm Logo](geohelm-top-banner.jpg)
 
