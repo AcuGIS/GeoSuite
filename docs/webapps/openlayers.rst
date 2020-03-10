@@ -92,6 +92,6 @@ If the included OpenLayers demo does not render, or renders only the base map, c
 
 2. Be sure you have started GeoServer
 
-3. If both of above are eliminated, restart Apache Tomcat
+3. If both of above are eliminated, restart Apache HTTP Server
 
 
