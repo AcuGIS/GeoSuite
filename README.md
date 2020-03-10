@@ -46,6 +46,6 @@ GeoHelm Documentation is available at [GeoHelm Docs](https://www.acugis.com/geoh
 ## GeoHelm Installed:
 
 
-![GeoHelm Installed](https://geohelm.org/img/software-images/GeoHelmDashBoard.gif)
+![GeoHelm Installed](geohelm-header.png)
 
 [AcuGIS](https://www.acugis.com/), [GeoHelm](https://geohelm.org) &copy; 2019 [Cited, Inc. ](https://www.citedcorp.com)Cited, Inc. All Rights Reserved.
