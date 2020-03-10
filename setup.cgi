@@ -468,10 +468,14 @@ sub setup_checks{
 
 		# Check if geoserver webapp exists
 		if (! -d "$catalina_home/webapps/geoserver/") {
-			my $geo_ver = get_latest_geoserver_ver();
-			my $url = &urlize("http://sourceforge.net/projects/geoserver/files/GeoServer/$geo_ver/geoserver-$geo_ver-war.zip");
-			print "<p>The Geoserver webapp direcrory <tt>$catalina_home/webapps/geoserver/</tt> does not exist. ".
-				  "<a href='./install_war.cgi?source=2&url=$url&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> to have it downloaded and installed.</p>";
+			if( -f "$catalina_home/webapps/geoserver.war"){
+				print "<p>The GeoExplorer webapp is not deployed yet!";
+			}else{
+				my $geo_ver = get_latest_geoserver_ver();
+				my $url = &urlize("http://sourceforge.net/projects/geoserver/files/GeoServer/$geo_ver/geoserver-$geo_ver-war.zip");
+				print "<p>The Geoserver webapp direcrory <tt>$catalina_home/webapps/geoserver/</tt> does not exist. ".
+					  "<a href='./install_war.cgi?source=2&url=$url&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> to have it downloaded and installed.</p>";
+			}
 		}
 	}
 
