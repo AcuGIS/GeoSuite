@@ -79,3 +79,47 @@ sub pg_list_databases{
 	local $t = &postgresql::execute_sql_safe('template1', 'select datname from pg_database order by datname');
 	return sort { lc($a) cmp lc($b) } map { $_->[0] } @{$t->{'data'}};
 }
+
+sub get_shp2pgsql_pkg_name{
+	my $pg_ver = $_[0];
+
+	my %osinfo = &detect_operating_system();
+	if( $osinfo{'os_type'} =~ /debian/i){	#debian, ubuntu, etc
+		return 'postgis';
+	}elsif( $osinfo{'os_type'} =~ /arch/i){	#Arch
+		return 'postgis';
+	}elsif($osinfo{'os_type'} =~ /suse/i){	#Suse
+		my $pg_ver2;
+		($pg_ver2 = $pg_ver) =~ s/\.//;
+		return "postgresql$pg_ver2-postgis postgresql$pg_ver2-postgis-utils";
+	}elsif( $osinfo{'os_type'} =~ /redhat/i){	#other redhat
+
+		my $pg_ver2;
+		($pg_ver2 = $pg_ver) =~ s/\.//;
+
+		my $cmd_out='';
+		my $cmd_err='';
+		my $out;
+		if(has_command('dnf')){
+			$out = &execute_command("dnf search postgis", undef, \$cmd_out, \$cmd_err, 0, 0);
+		}else{
+			$out = &execute_command("yum --disablerepo=* --enablerepo=pgdg$pg_ver2 search postgis", undef, \$cmd_out, \$cmd_err, 0, 0);
+		}
+
+		if($out != 0){
+			&error("Error: yum: $cmd_err");
+			return 1;
+		}
+
+		my @lines = split /\n/, $cmd_out;
+		my $pkg = undef;
+		foreach my $line (@lines){
+			if($line =~ /^(postgis[0-9_]+-client)\.x86_64 :/i){
+				$pkg = $1;
+			}
+		}
+		return $pkg
+	}
+
+	return undef;
+}
