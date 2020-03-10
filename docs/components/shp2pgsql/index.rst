@@ -11,8 +11,8 @@ Shape Loader
 **********************
 
 .. contents:: Table of Contents
-SHP2PGSQL Tool
-==============
+Shape Loader Tool
+=================
 
 GeoHelm includes a shp2pgsql tool that can used to load shape files into PostGIS via Webmin.
 
