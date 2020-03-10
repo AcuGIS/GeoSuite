@@ -1,7 +1,7 @@
 GeoHelm
 ==================================================
 
-
+.. image:: _static/geohelm-header.png
 
 .. include:: ../README.rst
 
