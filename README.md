@@ -1,4 +1,4 @@
-![GeoHelm Logo](https://geohelm.org/GeoHelm-Github.jpg)
+![GeoHelm Logo](geohelm-top-banner.jpg)
 # GeoHelm: A new route to Open Source GIS
 
 * Project page: https://www.acugis.com/geohelm
