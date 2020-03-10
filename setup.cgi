@@ -292,7 +292,7 @@ sub check_pg_ext_deps{
 
 	my %osinfo = &detect_operating_system();
 	if( ($osinfo{'os_type'} =~ /debian/i)){
-		@ext_pkgs = ("postgresql-$pg_ver-postgis-scripts", "postgresql-$pg_ver-pgrouting-scripts", "postgresql-$pg_ver-pgrouting");
+		@ext_pkgs = ("postgresql-$pg_ver-postgis-3-scripts", "postgresql-$pg_ver-pgrouting-scripts", "postgresql-$pg_ver-pgrouting");
 
 	}elsif( $osinfo{'os_type'} =~ /arch/i){	#Arch
 		@ext_pkgs = 'postgis';
@@ -468,10 +468,14 @@ sub setup_checks{
 
 		# Check if geoserver webapp exists
 		if (! -d "$catalina_home/webapps/geoserver/") {
-			my $geo_ver = get_latest_geoserver_ver();
-			my $url = &urlize("http://sourceforge.net/projects/geoserver/files/GeoServer/$geo_ver/geoserver-$geo_ver-war.zip");
-			print "<p>The Geoserver webapp direcrory <tt>$catalina_home/webapps/geoserver/</tt> does not exist. ".
-				  "<a href='./install_war.cgi?source=2&url=$url&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> to have it downloaded and installed.</p>";
+			if( -f "$catalina_home/webapps/geoserver.war"){
+				print "<p>The GeoExplorer webapp is not deployed yet!";
+			}else{
+				my $geo_ver = get_latest_geoserver_ver();
+				my $url = &urlize("http://sourceforge.net/projects/geoserver/files/GeoServer/$geo_ver/geoserver-$geo_ver-war.zip");
+				print "<p>The Geoserver webapp direcrory <tt>$catalina_home/webapps/geoserver/</tt> does not exist. ".
+					  "<a href='./install_war.cgi?source=2&url=$url&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> to have it downloaded and installed.</p>";
+			}
 		}
 	}
 
@@ -498,6 +502,13 @@ sub setup_checks{
 		if(!$pg_ver){
 			print '<p>Warning: PostgreSQL is not installed. Install it from <a href="./pg_install.cgi">'.$text{'pg_inst_title'}.'</a>';
 		}else{
+
+			if (!&has_command('shp2pgsql')) {
+				my $shp2pg_pkg = get_shp2pgsql_pkg_name($pg_ver);
+					print '<p>Warning: shp2pgsql command is not found. '.
+					  "<a href='../package-updates/update.cgi?mode=new&source=3&u=$shp2pg_pkg&redir=%2E%2E%2Fgeohelm%2Fsetup.cgi&redirdesc=Setup'>Click here</a> to have it installed from $shp2pg_pkg package.</p>";
+			}
+
 			my @ext_pkgs = check_pg_ext_deps($pg_ver);
 			foreach my $pkg (@ext_pkgs){
 				my @pinfo = software::package_info($pkg);

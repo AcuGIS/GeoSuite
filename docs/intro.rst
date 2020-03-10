@@ -14,7 +14,7 @@ GeoHelm can be installed on CentOS 7 or 8 or Ubuntu 18.
 
 All installed components are non-forked and un-modified and installed via the projects archive.
 
-.. image:: _static/geohelm-header-small.png
+.. image:: _static/geohelm-header.png
 
 
 System Requirements
