@@ -30,7 +30,7 @@ Structure and Code
    
    
    	<html lang="en">
-  <head>
+  	<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
@@ -70,12 +70,9 @@ Structure and Code
     });
     map.addLayer(wmsLayer);    
     </script>
-</html>
-
-
-
-
-
+	</html>
+	
+	
 Version
 =======
 
