@@ -72,10 +72,8 @@ Structure and Code
       });
     </script>
   </body>
-</html>
-
-
-
+	</html>
+	
 
 Version
 =======
