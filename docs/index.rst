@@ -1,4 +1,4 @@
-GeoHelm
+AcuGIS GeoHelm
 ==================================================
 
 .. include:: ../README.rst
