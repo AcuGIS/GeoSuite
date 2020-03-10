@@ -1,6 +1,9 @@
 ![GeoHelm Logo](https://geohelm.org/GeoHelm-Github.jpg)
 # GeoHelm: A new route to Open Source GIS
 
+* Project page: https://www.acugis.com/geohelm
+* Documentation: https://www.acugis.com/geoheml/docs
+
 [![Documentation Status](https://readthedocs.org/projects/geohelm/badge/?version=latest)](https://geohelm.docs.acugis.com/en/latest/?badge=latest)
 
 GeoHelm is a Webmin module that installs, configures, and manages the <code>latest, stable</code> versions of:
@@ -22,26 +25,23 @@ The entire module can even be uninstalled and all components will continue to ru
 
 ## Supported Operating Systems <br/>
 		
-<code>CentOS 7.x 64</code><br />
-<code>Debian 8 x64</code><br />
-<code>Debian 9 x64</code><br />
-<code>Ubuntu 14 x64</code><br />
-<code>Ubuntu 16 x64</code><br />
-<code>Ubuntu 18 x64</code><br />
-<code>Scientific Linux 7 x64 (requires manual installation for epel or use Quick Start Script)</code><br />
+<code>CentOS 7</code><br />
+<code>CentOS 8</code><br />
+<code>Ubuntu 16 LTS</code><br />
+<code>Ubuntu 18 LTS</code><br />
+<code>Scientific Linux (requires manual installation for epel or use Quick Start Script)</code><br />
 
 ## System Requirements: <br />
-Disk: <code>5 GB</code><br />
+Disk: <code>10 GB</code><br />
 Memory: <code>1 GB (Minimum) </code><br /> 
 User Access:<code>root access required</code><br />
 Software Requirements: <code>Webmin</code><br />
 
 ## Quick Start
-A Quick Start is available at: [GeoHelm Quick Start](https://github.com/AcuGIS/GeoHelm/blob/master/QuickStart.md). <br /> 
-The Quick Start does save a few minutes, but even <a href="https://geohelm.org/install/">standard installation</a>  only takes about 10 minutes. 
+A Quick Start is available at: [GeoHelm Quick Start](https://github.com/AcuGIS/GeoHelm/blob/master/QuickStart.md). 
 
 ## Documentation
-GeoHelm Documentation is available at [GeoHelm Docs](https://geohelm.org/)
+GeoHelm Documentation is available at [GeoHelm Docs](https://www.acugis.com/geohelm/docs/)
 		
 ## GeoHelm Installed:
 
