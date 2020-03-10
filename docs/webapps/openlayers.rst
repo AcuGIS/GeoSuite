@@ -27,25 +27,19 @@ Structure and Code
 
 .. code-block:: HTML
    :linenos:
-
-
-
-	<html>
-  <head>
-    <title>OpenLayer Example</title>
+   
+   	<html>
+  	<head>
+    	<title>OpenLayer Demo</title>
     
-   <!-- From https://openlayers.org/en/latest/examples/wms-image.html -->    
-
-    <link rel="stylesheet" href="OpenLayers/ol.css" type="text/css">
+   	<link rel="stylesheet" href="OpenLayers/ol.css" type="text/css">
         
-    <script src="OpenLayers/ol.js"></script>    
-    
-
- </head>
-  <body>
-    <div id="map" class="map"></div>
-    <script>
-      var layers = [
+    	<script src="OpenLayers/ol.js"></script>    
+    	</head>
+  	<body>
+    	<div id="map" class="map"></div>
+    	<script>
+      	var layers = [
         new ol.layer.Tile({
           source: new ol.source.OSM()
         }),
@@ -61,20 +55,19 @@ Structure and Code
             serverType: 'geoserver'
           })
         })
-      ];
-      var map = new ol.Map({
+      	];
+      	var map = new ol.Map({
         layers: layers,
         target: 'map',
         view: new ol.View({
           center: [-10997148, 4569099],
           zoom: 4
         })
-      });
-    </script>
-  </body>
+      	});
+    	</script>
+  	</body>
 	</html>
 	
-
 Version
 =======
 
