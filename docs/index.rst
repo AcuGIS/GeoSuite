@@ -27,12 +27,12 @@ GeoHelm
     components/shp2pgsql/index
     
 .. toctree::
-    :maxdepth: 3
+    :maxdepth: 2
     :caption: Web Apps
 
-    webapps/homepage/index
-    webapps/openlayers/index
-    webapps/leafletjs/index
+    webapps/homepage
+    webapps/openlayers
+    webapps/leafletjs
 
 .. toctree::
     :maxdepth: 2
