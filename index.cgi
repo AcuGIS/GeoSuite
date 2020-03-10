@@ -26,7 +26,7 @@ my %version = get_acugeo_versions();
 
 push(@links, "edit_manual.cgi");
 push(@titles, $text{'manual_title'});
-push(@icons, "images/manual.gif");
+push(@icons, "images/edit-file.png");
 
 push(@links, "edit_war.cgi");
 push(@titles, $text{'wars_title'});

@@ -34,22 +34,19 @@ Geohelm has been tested with Apache Tomcat 8.x and 9.x:
 .. image:: _static/9-tomcat.png
 
 
-**Install JasperReportsIntegration:**
+**Complete Installation:**
 
 Once each step of the Wizard is completed, the Wizard can be removed:
 
 .. image:: _static/19-donei.png
 
+
 With the Wizard completed, your module should appear as below:
 
-.. image:: _static/start-jri.png
-
-
+.. image:: _static/start-geohelm.png
 
 .. note::
-    The JRI application is not deployed at this point.  You need to Start Tomcat
-    in order to deploy it.  Do so before any further operations as it is required
-    to write configuration files, etc...
+    The Wizard may state that GeoServer is not deployed.  This is due to Tomcat not starting automatically.  Simply complete        installation and start Tomcat to deploy the GeoServer war.
     
 
 About Haveged

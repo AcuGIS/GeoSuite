@@ -22,8 +22,17 @@ GeoHelm
     components/tomcat/index
     components/postgresql/index
     components/postgis/index
+    components/pgrouting/index
     components/geoserver/index
     components/shp2pgsql/index
+    
+.. toctree::
+    :maxdepth: 2
+    :caption: Web Apps
+
+    webapps/homepage
+    webapps/openlayers
+    webapps/leafletjs
 
 .. toctree::
     :maxdepth: 2

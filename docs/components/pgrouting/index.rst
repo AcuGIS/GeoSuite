@@ -7,15 +7,18 @@
    :width: 1em
 
 **********************
-PostGIS
+PgRouting
 **********************
 
 .. contents:: Table of Contents
 
-Installing PostGIS
+Installing PgRouting
 ==================
 
-PostGIS can be enabled on your PostgreSQL database via the Extension tab or via Command Line.
+PgRouting can be enabled on your PostgreSQL database via the Extension tab or via Command Line.
+
+.. Note::
+	PostGIS must be enabled priort to installing PgRouting
 
 Command Line
 ============
@@ -62,6 +65,15 @@ To install via command line:
    geohelm=# create extension postgis;
    CREATE EXTENSION
    geohelm=#
+   
+5.  Install the PgRouting extension.
+
+.. code-block:: console
+   :linenos:
+
+   geohelm=# create extension pgrouting;
+   CREATE EXTENSION
+   geohelm=#
 
 Note: GeoHelm also includes fuzzy_match_string, tiger, postgis_topology.
 
@@ -86,7 +98,7 @@ Note: GeoHelm also includes fuzzy_match_string, tiger, postgis_topology.
 Extensions Tool
 ===============
 
-To install using the PostGIS/PgRouting Extension installer, click on the Extensions tab as shown below.
+To install using the Extension installer, click on the Extensions tab as shown below.
 
 .. image:: _static/postgis-tab.png
 
@@ -94,7 +106,7 @@ To install using the PostGIS/PgRouting Extension installer, click on the Extensi
 
 .. image:: _static/postgis-select-db.png 
 
-.. Note:: You must FIRST install PostGIS prior to installing any other of the listed extensions.
+.. Note:: You must FIRST install PostGIS prior to installing PgRouting.
 
 
 2. Tick the PostGIS select button and then click the Save button as show below:
@@ -102,11 +114,12 @@ To install using the PostGIS/PgRouting Extension installer, click on the Extensi
 .. image:: _static/postgis-enable.png 	
 
  
-3. Once PostGIS has been installed on a target database, you can then return to install additional extensions:
+3. Once PostGIS has been installed on a target database, you can then return to install PgRouting:
 
 .. image:: _static/postgis-install-more.png 	
 	
 .. Note:: 
    You can also un-install Extensions using above. 
+
 
 

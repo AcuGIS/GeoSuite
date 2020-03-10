@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
-require './gis-lib.pl';
 require './geohelm-lib.pl';
+require './pg-lib.pl';
 use File::Basename;
 use File::Path 'rmtree';
 
@@ -9,12 +9,23 @@ foreign_require('postgresql', 'postgresql-lib.pl');
 
 &ui_print_header(undef, $text{'add_shape_title'}, "");
 
+print <<EOF;
+<script type="text/javascript">
+function update_select(){
+	var dbnameSel = document.getElementById('db_name');
+	var dbname    = dbnameSel.options[dbnameSel.selectedIndex].value;
+
+	get_pjax_content('/geohelm/add_shape.cgi?db_name='+dbname);
+}
+</script>
+EOF
+
 print "$text{'add_shape_desc1'}<p>\n";
 
 my $output = '';
 
 my $sel_db = '';
-my @pg_dbs = postgresql::list_databases();
+my @pg_dbs = pg_list_databases();
 my @opt_dbs = ();
 foreach my $db_name (@pg_dbs) {
 	push(@opt_dbs, [ $db_name, $db_name]);
@@ -84,7 +95,7 @@ sub add_shape{
 
 	#insert shape in db
 	my $cmd_out;
-	#my $cmd_err;
+	my $cmd_err;
 	local $out = &execute_command($cmd, undef, \$cmd_out, \$cmd_err, 0, 0);
 
 	rmtree($shp_dir);	#remove temp dir
@@ -97,7 +108,7 @@ sub add_shape{
 	$output =~ s/(\r?\n)+/<br>/g;
 }
 
-if ($ENV{REQUEST_METHOD} eq "POST") {
+if($ENV{'CONTENT_TYPE'} =~ /boundary=(.*)$/) {
 	&ReadParseMime();
 	$sel_db = $in{'db_name'};
 
@@ -142,7 +153,8 @@ push(@load_type_opt, ['-p', '-p Prepare mode, only creates the table']);
 print &ui_form_start("add_shape.cgi", "form-data");
 print &ui_table_start($text{'shape_install'}, undef, 2);
 
-print &ui_table_row($text{'pg_ext_database'}, &ui_select("db_name", $sel_db, \@opt_dbs, 1, 0, undef, undef, 'onchange="this.form.submit()"'), 2);
+print &ui_table_row($text{'pg_ext_database'}, &ui_select("db_name", $sel_db, \@opt_dbs, 1, 0,
+														undef, undef, 'id="db_name" onchange="update_select()"'), 2);
 print &ui_table_row($text{'load_type'}, &ui_select("load_type", undef, \@load_type_opt, 1, 0), 2);
 print &ui_table_row($text{'set_srid'}, &ui_textbox("srid", '0', 10), 2);
 print &ui_table_row($text{'db_user'}, &ui_select("db_user", undef, \@opt_users, 1, 0), 2);
@@ -183,3 +195,4 @@ if($output ne ""){
 }
 
 &ui_print_footer("", $text{'index_return'});
+
