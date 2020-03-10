@@ -7,7 +7,7 @@
    :width: 1em
 
 **********************
-SHP2PGSQL
+Shape Loader
 **********************
 
 .. contents:: Table of Contents
