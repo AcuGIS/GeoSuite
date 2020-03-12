@@ -60,7 +60,7 @@ sub add_pg_repo_apt{
 
 	#add repo to APT
 	open(my $fh, '>', '/etc/apt/sources.list.d/pgdg.list') or die "open:$!";
-	print $fh "deb http://apt.postgresql.org/pub/repos/apt/ $release-pgdg main";
+	print $fh "deb http://apt.postgresql.org/pub/repos/apt/ $release-pgdg main\n";
 	close $fh;
 
 	#download repo key
