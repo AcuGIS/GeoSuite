@@ -8,6 +8,7 @@ foreign_require('postgresql', 'postgresql-lib.pl');
 my %ext_info  = (	'postgis' 	=> ['PostGIS', 	 'http://postgis.net', 	0, undef, undef],
 					'pgrouting' => ['PgRouting', 'http://pgrouting.org',0, undef, 'postgis'],
 					'hstore'	=> ['hStore',	 'https://www.postgresql.org/docs/9.0/static/hstore.html', 0, undef, undef],
+					'postgis_raster' => ['PostGIS Raster', 'https://postgis.net/docs/RT_reference.html', 0, undef, 'postgis'],
 					'postgis_topology'		=> ['PostGIS Topology', 	'http://postgis.net', 	0, undef, 'postgis'],
 					'fuzzystrmatch'			=> ['FuzzyStringMatch', 	'http://postgis.net', 	0, undef, undef],
 					'address_standardizer'	=> ['Address Standardizer', 'http://postgis.net', 	0, undef, undef],
