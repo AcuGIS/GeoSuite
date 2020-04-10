@@ -25,8 +25,6 @@ The entire module can even be uninstalled and all components will continue to ru
 ## Supported Operating Systems <br/>
 		
 <code>CentOS 7</code><br />
-<code>CentOS 8</code><br />
-<code>Ubuntu 16 LTS</code><br />
 <code>Ubuntu 18 LTS</code><br />
 
 ## System Requirements: <br />
