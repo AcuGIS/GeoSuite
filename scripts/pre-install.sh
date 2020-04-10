@@ -1,3 +1,11 @@
+#!/bin/bash -e
+#GeoHelm Pre-Install Script for Debian and Ubuntu
+#For use on clean Debian or Ubuntu box only
+#Usage:
+#wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/pre-install.sh
+#chmod +x pre-install.sh
+#./pre-install.sh
+
 function get_repo(){
 	if [ -f /etc/centos-release ]; then
 		REPO='rpm'
