@@ -6,45 +6,17 @@ The Quick Start scripts installs Webmin, Apache, and creates and installs the Ge
 
 1. Connect to a fresh VM via SSH.
 
-2. Download the Quick Start for your Distro using WGET:
+2. Download the pre-install script using WGET:
 
  
-
-## CentOS 7:
-
-    wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/geohelm-centos.sh
+    wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/pre-install.sh
 
  
-
-## Debian 8 and 9 or Ubuntu 14 or 16
-
- 
-
-    wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/geohelm-debian.sh
-
- 
-
-## Fedora 24 or 25:
-
- 
-
-    wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/geohelm-fedora.sh
-
- 
-
-## Scientific Linux 7:
-
- 
-
-    wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/geohelm-scientific-linux.sh
-
- 
-
 3. Make the script executable:
 
  
 
-    chmod +x geohelm-centos.sh
+    chmod +x pre-install.sh
 
  
 
@@ -52,11 +24,11 @@ The Quick Start scripts installs Webmin, Apache, and creates and installs the Ge
 
  
 
-    ./geohelm-centos.sh
+    ./pre-install.sh
 
  
 
-When the script completes it will have installed Webmin as well the GeoHelm module.
+When the script completes it will have installed Webmin as well the GeoHelm module and our Certbot module (for SSL).
 
 Go to Servers > GeoHelm to complete the installation.
 
