@@ -76,7 +76,7 @@ pushd /opt/
         /usr/libexec/webmin/install-module.pl geohelm.wbm.gz
         fi
 popd
-        echo -e "JRI Publisher is now installed. Go to Servers > JRI Publisher to complete installation"
+        echo -e "GeoHelm is now installed. Go to Servers > GeoHelm to complete installation"
 	
 }
 
