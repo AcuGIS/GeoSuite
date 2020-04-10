@@ -36,8 +36,26 @@ Memory: <code>1 GB (Minimum) </code><br />
 User Access:<code>root access required</code><br />
 Software Requirements: <code>Webmin</code><br />
 
-## Quick Start
-A Quick Start is available at: [GeoHelm Quick Start](https://github.com/AcuGIS/GeoHelm/blob/master/QuickStart.md). 
+# Install via Script:
+
+      wget https://github.com/AcuGIS/GeoHelm/master/scripts/pre-install.sh
+      chmod +x pre-install.sh
+      ./pre-install.sh
+
+Go to Webmin > Servers > GeoHelm to complete installation using the Wizard
+
+# Install via Git:
+
+Archive module
+
+	$ git clone https://github.com/AcuGIS/GeoHelm
+	$ mv GeoHelm-master geohelm
+	$ tar -cvzf geohelm.wbm.gz geohelm/
+
+Upload from Webmin->Webmin Configuration->Webmin Modules
+
+Go to Webmin > Servers > GeoHelm to complete installation using the Wizard
+
 
 ## Documentation
 GeoHelm Documentation is available at [GeoHelm Docs](https://www.acugis.com/geohelm/docs/)
