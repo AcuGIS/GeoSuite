@@ -10,7 +10,7 @@ GeoHelm installs and configures PostgreSQL, PostGIS, GeoServer (optionally), Tom
 
 It includes a panel for managing all aspects of the service.
 
-GeoHelm can be installed on CentOS 7 or 8 or Ubuntu 18.
+GeoHelm can be installed on CentOS 7 or Ubuntu 18.
 
 All installed components are non-forked and un-modified and installed via the projects archive.
 
@@ -19,7 +19,7 @@ All installed components are non-forked and un-modified and installed via the pr
 
 System Requirements
 -------------------
-* CentOS 8 or 
+* CentOS 7 or 
 * Ubuntu 18
 * Webmin
 * 1 GB Ram
