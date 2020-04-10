@@ -29,7 +29,7 @@ function install_webmin(){
 	
 
 cat >/etc/yum.repos.d/webmin.repo <<EOF
-		[Webmin]
+[Webmin]
 name=Webmin Distribution Neutral
 #baseurl=http://download.webmin.com/download/yum
 mirrorlist=http://download.webmin.com/download/yum/mirrorlist
@@ -40,6 +40,7 @@ EOF
 		yum -y install webmin
 
 	fi
+
 }	
 
 function download_geohelm_module(){
