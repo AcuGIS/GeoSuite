@@ -164,15 +164,6 @@ sub install_openlayers{
 }
 
 sub install_bootstrap_web_app(){
-
-	my $www_dir = '/var/www/html';
-
-	if( ! -d $www_dir){
-		print &html_escape("Error: $www_dir is missing");
-		return 0;
-	}
-
-sub install_bootstrap_web_app(){
  
 	my $www_dir = '/var/www/html';
  
