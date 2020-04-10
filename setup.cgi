@@ -429,11 +429,11 @@ sub setup_checks{
 			  "<a href='setup.cgi?mode=install_leafletjs&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> install it";
 	}
 
-	# Check if GeoServer webapp exists
+	# Check if GeoExplorer webapp exists
 	if($tomcat_ver){
 		my $catalina_home = get_catalina_home();
-		if(! -d "$catalina_home/webapps/geoexplorer/")
 		
+
 		# Check if geoserver webapp exists
 		if (! -d "$catalina_home/webapps/geoserver/") {
 			if( -f "$catalina_home/webapps/geoserver.war"){
