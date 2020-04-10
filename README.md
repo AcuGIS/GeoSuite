@@ -1,7 +1,7 @@
 # GeoHelm: A new route to Open Source GIS
 
 * Project page: https://www.acugis.com/geohelm
-* Documentation: https://www.acugis.com/geohelm/docs 
+* Documentation: https://geohelm.docs.acugis.com 
 
 ![GeoHelm Logo](geohelm-top-banner.jpg)
 
@@ -28,7 +28,6 @@ The entire module can even be uninstalled and all components will continue to ru
 <code>CentOS 8</code><br />
 <code>Ubuntu 16 LTS</code><br />
 <code>Ubuntu 18 LTS</code><br />
-<code>Scientific Linux (requires manual installation for epel or use Quick Start Script)</code><br />
 
 ## System Requirements: <br />
 Disk: <code>10 GB</code><br />
