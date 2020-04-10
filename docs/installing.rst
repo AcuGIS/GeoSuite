@@ -12,9 +12,9 @@ On a fresh CentOS 8 or Ubuntu 18 installation, the fastest method is to use the 
 .. code-block:: console
    :linenos:
    
-   wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/geohelm-ubuntu.sh
-   chmod +x geohelm-ubuntu.sh
-   ./geohelm-ubuntu.sh
+   wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/pre-install.sh
+   chmod +x pre-install.sh
+   ./pre-install.sh
     
 The above will install Webmin, Apache HTTPD Server, GeoHelm module, as well as our (optional) Certbot Module for SSL.
 
