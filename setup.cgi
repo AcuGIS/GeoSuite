@@ -61,31 +61,6 @@ sub install_tomcat_from_archive{
 	setup_tomcat_service($tomcat_ver);
 }
 
-sub install_geoexplorer{
-	#setup geoexplorer in apache configure file
-	my $gs_proxy_file = '';
-	my %osinfo = &detect_operating_system();
-	if( $osinfo{'real_os_type'} =~ /centos/i){	#CentOS
-		$gs_proxy_file = '/etc/httpd/conf.d/geoserver_proxy.conf';
-
-	}elsif( $osinfo{'os_type'} =~ /debian/i){	#ubuntu
-		$gs_proxy_file = '/etc/apache2/conf-enabled/geoserver_proxy.conf';
-	}
-
-	if(-f $gs_proxy_file){
-		open(my $fh, '>>', $gs_proxy_file) or die "open:$!";
-
-		print $fh "ProxyPass /geoexplorer http://localhost:8080/geoexplorer\n";
-		print $fh "ProxyPassReverse /geoexplorer http://localhost:8080/geoexplorer\n";
-
-		close $fh;
-	}
-
-	#call tomcat install war page
-	my $url = &urlize("http://cdn.acugis.com/geohelm/external/geoexplorer.war");
-	print "Goexplorer is configured. <a href='./install_war.cgi?source=2&url=$url&return=%2E%2E%2Fgeohelm%2F&returndesc=Geohelm&caller=geohelm'>Click here</a> to install the WAR file";
-}
-
 sub latest_leafletjs_version(){
 	my $tmpfile = transname('download.html');
 	&error_setup(&text('install_err3', "http://leafletjs.com/download.html"));
@@ -454,18 +429,11 @@ sub setup_checks{
 			  "<a href='setup.cgi?mode=install_leafletjs&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> install it";
 	}
 
-	# Check if GeoExplorer webapp exists
+	# Check if GeoServer webapp exists
 	if($tomcat_ver){
 		my $catalina_home = get_catalina_home();
-		if(! -d "$catalina_home/webapps/geoexplorer/"){
-			if( -f "$catalina_home/webapps/geoexplorer.war"){
-				print "<p>The GeoExplorer webapp is not deployed yet!";
-			}else{
-				print "<p>The GeoExplorer webapp direcrory <tt>$catalina_home/webapps/geoexplorer/</tt> does not exist. ".
-					  "<a href='./setup.cgi?mode=install_geoexplorer&return=%2E%2E%2Fgeohelm%2Fsetup.cgi&returndesc=Setup&caller=geohelm'>Click here</a> to have it downloaded and installed";
-			}
-		}
-
+		if(! -d "$catalina_home/webapps/geoexplorer/")
+		
 		# Check if geoserver webapp exists
 		if (! -d "$catalina_home/webapps/geoserver/") {
 			if( -f "$catalina_home/webapps/geoserver.war"){
@@ -557,7 +525,6 @@ if($mode eq "checks"){							setup_checks();
 }elsif($mode eq "install_bootstrap_web_app"){	install_bootstrap_web_app();
 }elsif($mode eq "install_openlayers"){			install_openlayers();
 }elsif($mode eq "install_leafletjs"){			install_leafletjs();
-}elsif($mode eq "install_geoexplorer"){			install_geoexplorer();
 }elsif($mode eq "setup_geoserver_apache"){		setup_apache_for_geoserver();
 }else{
 	print "Error: Invalid setup mode\n";
