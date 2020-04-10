@@ -25,8 +25,6 @@ function install_webmin(){
 	apt-get -y install webmin
 
 	elif [ "${REPO}" == 'rpm' ]; then
-	
-	
 
 cat >/etc/yum.repos.d/webmin.repo <<EOF
 [Webmin]
@@ -40,7 +38,6 @@ EOF
 		yum -y install webmin
 
 	fi
-
 }	
 
 function download_geohelm_module(){
