@@ -35,7 +35,7 @@ Software Requirements: <code>Webmin</code><br />
 
 # Install via Script:
 
-      wget https://github.com/AcuGIS/GeoHelm/master/scripts/pre-install.sh
+      wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/pre-install.sh
       chmod +x pre-install.sh
       ./pre-install.sh
 
