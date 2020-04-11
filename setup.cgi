@@ -456,7 +456,7 @@ sub setup_checks{
 		# Check if geoserver webapp exists
 		if (! -d "$catalina_home/webapps/geoserver/") {
 			if( -f "$catalina_home/webapps/geoserver.war"){
-				print "<p>The GeoExplorer webapp is not deployed yet!";
+				print "<p>The GeoServer webapp is not deployed yet!";
 			}else{
 				my $geo_ver = get_latest_geoserver_ver();
 				my $url = &urlize("http://sourceforge.net/projects/geoserver/files/GeoServer/$geo_ver/geoserver-$geo_ver-war.zip");
