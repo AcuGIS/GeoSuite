@@ -2,10 +2,8 @@
 
 # Quick Start Scripts for GeoHelm
 
-These scripts install Webmin and create the GeoHelm module.
+These scripts install Webmin and install the GeoHelm.
 
 For use on clean installs only
 
-Read the [Quick Start Doc](https://geohelm.org/quick-start.html) for usage or full [GeoHelm Documentation](https://geohelm.org/)
-
-AcuGIS, GeoHelm  &copy; 2017 Cited, Inc. All Rights Reserved
+AcuGIS, GeoHelm  &copy; 2020 Cited, Inc. All Rights Reserved
