@@ -13,16 +13,15 @@ Once file is run, the user and updated root password will be displayed as well a
 
 The script can be executed, as root, using below
 
-.. code-block:: css
+.. code-block:: xml
    :linenos:
     cp /usr/share/webmin/geohelm/scripts/secure-debian.txt /root/secure-debian.sh
     cp /root
     chmod +x secure-debian.sh
     ./secure-debian.sh
     
-      
- 
- Be sure to note new passwords.
+    
+Be sure to note new passwords.
  
   
 
