@@ -1,1 +1,34 @@
-1
+**********************
+Enable CORS
+**********************
+
+To enable CORS for your Tomcat instance, you can use our included file.
+
+This file is located under /scripts/cors.txt
+
+In addition to making the screens a bit more vivid, it also increaes the size of objects on the page as well as padding, making it easier to work with
+
+
+.. code-block:: css
+   :linenos:
+   
+   	  <filter>
+        <filter-name>CorsFilter</filter-name>
+        <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+        <init-param>
+          <param-name>cors.allowed.origins</param-name>
+          <param-value>*</param-value>
+        </init-param>
+        <init-param>
+          <param-name>cors.allowed.methods</param-name>
+          <param-value>GET,POST,HEAD,OPTIONS,PUT</param-value>
+      </init-param>  
+    </filter>
+    <filter-mapping>
+      <filter-name>CorsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+      </filter-mapping>
+      
+ You must restart Tomcat for the changes to register.
+ 
+  .. note:: The above script is very permissive.  You should refine your CORS filter to reflect usage.
