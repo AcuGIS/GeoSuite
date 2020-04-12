@@ -52,7 +52,7 @@ COMMIT
 # Accept notifications of protocol problems
 -A INPUT -p icmp -m icmp --icmp-type parameter-problem -j ACCEPT
 # Allow connections to our SSH server
--A INPUT -p tcp -m tcp --dport 3838 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 3824 -j ACCEPT
 # Allow connections to our IDENT server
 -A INPUT -p tcp -m tcp --dport auth -j ACCEPT
 # Respond to pings
@@ -63,6 +63,7 @@ COMMIT
 -A INPUT -p udp -m udp --dport 53 -j ACCEPT
 # Allow connections to webserver
 -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+# Allow connections to Tomcat
 -A INPUT -p tcp -m tcp --dport 8080 -j ACCEPT
 # Allow SSL connections to webserver
 -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
@@ -78,9 +79,9 @@ COMMIT
 -A INPUT -p tcp -m tcp --dport 10000:10010 -j ACCEPT
 # Allow connections to Usermin
 -A INPUT -p tcp -m tcp --dport 20000 -j ACCEPT
-# Postgres
+# Allow connections to PostgreSQL
 -A INPUT -p tcp -m tcp --dport 5432 -j ACCEPT
-# pgbouncer
+# Allow connections to pgbouncer
 -A INPUT -p tcp -m tcp --dport 6432 -j ACCEPT
 COMMIT
 EOF
@@ -98,7 +99,7 @@ function secure_ssh(){
 		echo "${UNPRIV_USER} pass: ${USER_PASS}" >> /root/auth.txt
 	fi
  
-	sed -i.save 's/#\?Port [0-9]\+/Port 3838/' /etc/ssh/sshd_config
+	sed -i.save 's/#\?Port [0-9]\+/Port 3824/' /etc/ssh/sshd_config
 	sed -i.save 's/#\?PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
  
 	systemctl restart sshd
