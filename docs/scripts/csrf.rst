@@ -12,17 +12,18 @@ The contents should be added to your /home/tomcat/apache-tomcat-{version}/webapp
 .. warning::
       Be sure to create a backup of your web.xml file before making any changes.
       
-Content are below.      
+The file contents are below
 
-.. code-block:: css
-   :linenos:
-   
-   	    <context-param>
-          <param-name>GEOSERVER_CSRF_WHITELIST</param-name>
-          <param-value>yourdomain.com</param-value>
-        </context-param>
-      
- You must restart Tomcat for the changes to register.
+.. code-block:: xml
+   :linenos:      
+
+            <context-param>
+            <param-name>GEOSERVER_CSRF_WHITELIST</param-name>
+            <param-value>yourdomain.com</param-value>
+            </context-param>
+     
+     
+You must restart Tomcat for the changes to register.
  
   .. note:: Be sure to replace yourdomain.com with your own domain above.
 
