@@ -1,5 +1,5 @@
 **********************
-CSRF Whitlist
+CSRF Whitelist
 **********************
 
 To whitelist your domain in GeoServer, you can use our included file.
