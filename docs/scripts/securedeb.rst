@@ -15,13 +15,12 @@ The script can be executed, as root, using below
 
 .. code-block:: css
    :linenos:
-   
-      cp /usr/share/webmin/geohelm/scripts/secure-debian.txt /root/secure-debian.sh
-      cp /root
-      chmod +x secure-debian.sh
-      ./secure-debian.sh
+    cp /usr/share/webmin/geohelm/scripts/secure-debian.txt /root/secure-debian.sh
+    cp /root
+    chmod +x secure-debian.sh
+    ./secure-debian.sh
+    
       
- 
  
  Be sure to note new passwords.
  
