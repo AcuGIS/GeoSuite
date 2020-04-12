@@ -6,8 +6,7 @@ To enable CORS for your Tomcat instance, you can use our included file.
 
 This file is located under /scripts/cors.txt
 
-In addition to making the screens a bit more vivid, it also increaes the size of objects on the page as well as padding, making it easier to work with
-
+The contents should be added to the line just before </web-app> in your /home/tomcat/apache-tomcat-{version}/conf/web.xml
 
 .. code-block:: css
    :linenos:
@@ -29,6 +28,8 @@ In addition to making the screens a bit more vivid, it also increaes the size of
         <url-pattern>/*</url-pattern>
       </filter-mapping>
       
+ 
+ 
  You must restart Tomcat for the changes to register.
  
   .. note:: The above script is very permissive.  You should refine your CORS filter to reflect usage.
