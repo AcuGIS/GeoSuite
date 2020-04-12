@@ -11,7 +11,8 @@ The contents should be added to the line just before </web-app> in your /home/to
 .. warning::
       Be sure to create a backup of your web.xml file before making any changes.
       
-Content are below.
+
+Contents are below
 
 .. code-block:: css
    :linenos:
