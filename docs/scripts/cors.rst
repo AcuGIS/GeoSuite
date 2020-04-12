@@ -14,7 +14,7 @@ The contents should be added to the line just before </web-app> in your /home/to
 
 Contents are below::
 
-.. code-block:: css
+.. code-block:: xml
    :linenos:
    
             <filter>
