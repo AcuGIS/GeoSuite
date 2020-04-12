@@ -24,6 +24,18 @@ GeoHelm
     components/geoserver/index
     components/shp2pgsql/index
     
+    
+.. toctree::
+    :maxdepth: 2
+    :caption: Scripts
+
+    scripts/cors
+    scripts/csrf
+    scripts/securedeb
+    scripts/securerhel
+    
+    
+    
 .. toctree::
     :maxdepth: 2
     :caption: Web Apps
