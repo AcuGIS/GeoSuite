@@ -17,10 +17,10 @@ The file contents are below
 .. code-block:: xml
    :linenos:      
 
-            <context-param>
-            <param-name>GEOSERVER_CSRF_WHITELIST</param-name>
-            <param-value>yourdomain.com</param-value>
-            </context-param>
+      <context-param>
+      <param-name>GEOSERVER_CSRF_WHITELIST</param-name>
+      <param-value>yourdomain.com</param-value>
+      </context-param>
      
      
 You must restart Tomcat for the changes to register.
