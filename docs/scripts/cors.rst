@@ -17,7 +17,7 @@ Contents are below::
 .. code-block:: css
    :linenos:
    
-   	      <filter>
+            <filter>
             <filter-name>CorsFilter</filter-name>
             <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
             <init-param>
