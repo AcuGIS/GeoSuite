@@ -12,10 +12,11 @@ The contents should be added to the line just before </web-app> in your /home/to
       Be sure to create a backup of your web.xml file before making any changes.
       
 
-Contents are below::
+The file Contents are below
 
 .. code-block:: xml
    :linenos:
+   
    
             <filter>
             <filter-name>CorsFilter</filter-name>
