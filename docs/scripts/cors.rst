@@ -12,7 +12,7 @@ The contents should be added to the line just before </web-app> in your /home/to
       Be sure to create a backup of your web.xml file before making any changes.
       
 
-Contents are below
+Contents are below::
 
 .. code-block:: css
    :linenos:
@@ -27,12 +27,12 @@ Contents are below
         <init-param>
           <param-name>cors.allowed.methods</param-name>
           <param-value>GET,POST,HEAD,OPTIONS,PUT</param-value>
-      </init-param>  
-    </filter>
-    <filter-mapping>
-      <filter-name>CorsFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-      </filter-mapping>
+            </init-param>  
+           </filter>
+         <filter-mapping>
+         <filter-name>CorsFilter</filter-name>
+            <url-pattern>/*</url-pattern>
+         </filter-mapping>
       
 You must restart Tomcat for the changes to register.
  
