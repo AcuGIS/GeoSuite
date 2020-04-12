@@ -2,7 +2,7 @@
 Securing RHEL
 **********************
 
-To enable basic security for Debian distributions, you can use our included file.
+To enable basic security for REHL distributions, you can use our included file.
 
 This file is located under /scripts/secure-rhel.sh
 
