@@ -6,7 +6,7 @@ To enable basic security for Debian distributions, you can use our included file
 
 This file is located under /scripts/secure-rhel.sh
 
-  .. warning::
+.. warning::
     The script will disable root login, create a minimally privilaged user, and IP table rules.  Proceed with caution.
     
 Once file is run, the user and updated root password will be displayed as well as saved to /root/auth.txt
