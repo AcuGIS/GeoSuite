@@ -17,22 +17,22 @@ Contents are below::
 .. code-block:: css
    :linenos:
    
-   	  <filter>
-        <filter-name>CorsFilter</filter-name>
-        <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
-        <init-param>
-          <param-name>cors.allowed.origins</param-name>
-          <param-value>*</param-value>
-        </init-param>
-        <init-param>
-          <param-name>cors.allowed.methods</param-name>
-          <param-value>GET,POST,HEAD,OPTIONS,PUT</param-value>
+   	      <filter>
+            <filter-name>CorsFilter</filter-name>
+            <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+            <init-param>
+                  <param-name>cors.allowed.origins</param-name>
+                  <param-value>*</param-value>
+            </init-param>
+            <init-param>
+                  <param-name>cors.allowed.methods</param-name>
+                  <param-value>GET,POST,HEAD,OPTIONS,PUT</param-value>
             </init-param>  
-           </filter>
-         <filter-mapping>
-         <filter-name>CorsFilter</filter-name>
+            </filter>
+            <filter-mapping>
+            <filter-name>CorsFilter</filter-name>
             <url-pattern>/*</url-pattern>
-         </filter-mapping>
+            </filter-mapping>
       
 You must restart Tomcat for the changes to register.
  
