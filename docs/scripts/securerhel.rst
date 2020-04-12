@@ -11,11 +11,12 @@ This file is located under /scripts/secure-rhel.sh
     
 Once file is run, the user and updated root password will be displayed as well as saved to /root/auth.txt
 
+
 The script can be executed, as root, using below
 
-.. code-block:: css
+.. code-block:: xml
    :linenos:
-   
+ 
       cp /usr/libexec/webmin/geohelm/scripts/secure-rhel.txt /root/secure-rhel.sh
       cp /root
       chmod +x secure-rhel.sh
@@ -23,7 +24,8 @@ The script can be executed, as root, using below
       
  
  
- Be sure to note new passwords.
+
+Be sure to note new passwords.
  
   
 
