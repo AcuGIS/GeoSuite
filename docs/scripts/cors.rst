@@ -8,6 +8,9 @@ This file is located under /scripts/cors.txt
 
 The contents should be added to the line just before </web-app> in your /home/tomcat/apache-tomcat-{version}/conf/web.xml
 
+.. warning::
+      Be sure to create a backup of your web.xml file before making any changes.
+
 .. code-block:: css
    :linenos:
    
@@ -32,4 +35,4 @@ The contents should be added to the line just before </web-app> in your /home/to
  
  You must restart Tomcat for the changes to register.
  
-  .. note:: The above script is very permissive.  You should refine your CORS filter to reflect usage.
+.. note:: The above script is very permissive.  You should refine your CORS filter to reflect usage.
