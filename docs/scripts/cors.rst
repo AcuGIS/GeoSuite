@@ -33,8 +33,6 @@ Content are below.
         <url-pattern>/*</url-pattern>
       </filter-mapping>
       
- 
- 
- You must restart Tomcat for the changes to register.
+You must restart Tomcat for the changes to register.
  
 .. note:: The above script is very permissive.  You should refine your CORS filter to reflect usage.
