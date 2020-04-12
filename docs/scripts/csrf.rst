@@ -8,6 +8,10 @@ This file is located under /scripts/csrf-whitelist.txt
 
 The contents should be added to your /home/tomcat/apache-tomcat-{version}/webapps/geoserver/WEB-INF/web.xml file.
 
+
+.. warning::
+      Be sure to create a backup of your web.xml file before making any changes.
+
 .. code-block:: css
    :linenos:
    
