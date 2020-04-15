@@ -5,35 +5,21 @@
 #chmod +x csrf-whitelist.sh
 #./csrf-whitelist.sh
 
-function get_repo(){
-	if [ -f /etc/centos-release ]; then
-		REPO='rpm'
- 
-	elif [ -f /etc/debian_version ]; then
-		REPO='apt'
-fi
-}
-
-# Prompt the user for domain
-echo "Domain to whitelist: "
-
 # Read the input to a variable
-read DOMAIN
-
+read -p "Domain to whitelist: " DOMAIN
 
 function update_domain(){
-	if [ "${REPO}" == 'apt' ]; then
+	if [ -d '/usr/share/webmin' ]; then
 	        sed -i 's/yourdomain.com/$DOMAIN/g' /usr/share/webmin/geohelm/scripts/csrf-whitelist.txt
-	elif [ "${REPO}" == 'rpm' ]; then
+	elif [ -d '/usr/libexec/webmin' ]; then
 		sed -i 's/yourdomain.com/$DOMAIN/g' /usr/libexec/webmin/geohelm/scripts/csrf-whitelist.txt
 	fi
 }
 
-
 function enable_csrf(){
-	if [ "${REPO}" == 'apt' ]; then
+	if [ -d '/usr/share/webmin' ]; then
 	        sed -i.save $'/<\/web-app>/{e cat /usr/share/webmin/geohelm/scripts/csrf-whitelist.txt\n}' $CATALINA_HOME/webapps/geoserver/WEB-INF/web.xml
-	elif [ "${REPO}" == 'rpm' ]; then
+	elif [ -d '/usr/libexec/webmin' ]; then
 		sed -i.save $'/<\/web-app>/{e cat /usr/libexec/webmin/geohelm/scripts/csrf-whitelist.txt\n}' $CATALINA_HOME/webapps/geoserver/WEB-INF/web.xml
 	fi
 }
