@@ -41,6 +41,14 @@ Software Requirements: <code>Webmin</code><br />
 
 Go to Webmin > Servers > GeoHelm to complete installation using the Wizard
 
+# Quick Install (if Webmin already installed):
+
+1. Log into Webmin
+2. Go to Webmin Configuration > Webmin Modules
+3. Select "From HTTP or FTP Url"
+4. Enter https://github.com/cited/GeoHelm/blob/master/scripts/geohelm.wbm.gz?raw=true
+5. Click the Install button.
+
 # Install via Git:
 
 Archive module
