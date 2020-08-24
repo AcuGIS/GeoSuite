@@ -8,20 +8,24 @@ foreign_require('postgresql', 'postgresql-lib.pl');
 
 
 sub get_versions(){
-	#download versioning page
-	my $url = 'https://www.postgresql.org/support/versioning/';
-	$progress_callback_url = $url;
-	&error_setup(&text('install_err3', $url));
-	my $tmpfile = &transname('ACCC4CF8.asc');
-	&http_download('www.postgresql.org', 443, '/support/versioning/', $tmpfile, \$error, undef, 1);
+	my @versions;
+	my %pg_ver_cache;
+	my $cache_file = "$module_config_directory/pg_version_cache";
+  if(-f $cache_file){
+  	read_file_cached($cache_file, \%pg_ver_cache);
+		if($pg_ver_cache{'updated'} >= (time() - 86400)){        #if last update was less than a day ago
+			@versions = split(',', $pg_ver_cache{'versions'});
+      return @versions;
+    }
+  }
 
-	if($error){
-		print &html_escape($error);
-		return 1;
+	#download versioning page
+	my $tmpfile = download_file('https://www.postgresql.org/support/versioning/');
+	if(!$tmpfile){
+		return @versions;
 	}
 
 	#<td class="colFirst">9.5</td>
-	my @versions;
 	my $version = '';
 	$start_matching = 0;
 
@@ -44,6 +48,11 @@ sub get_versions(){
 		}
 	}
 	close $fh;
+
+	$pg_ver_cache{'updated'} = time();
+	$pg_ver_cache{'versions'} = join(',', @versions);
+  &write_file($cache_file, \%pg_ver_cache);
+
 	return @versions;
 }
 
@@ -64,14 +73,8 @@ sub add_pg_repo_apt{
 	close $fh;
 
 	#download repo key
-	my $url = 'https://www.postgresql.org/media/keys/ACCC4CF8.asc';
-	$progress_callback_url = $url;
-	&error_setup(&text('install_err3', $url));
-	my $tmpfile = &transname('ACCC4CF8.asc');
-	&http_download('www.postgresql.org', 443, '/media/keys/ACCC4CF8.asc', $tmpfile, \$error, \&progress_callback, 1);
-
-	if($error){
-		print &html_escape($error);
+	my $tmpfile = download_file('https://www.postgresql.org/media/keys/ACCC4CF8.asc');
+	if(!$tmpfile){
 		return 1;
 	}
 
@@ -82,15 +85,58 @@ sub add_pg_repo_apt{
 				'Updating apt' => 'apt-get -y update');
 	foreach my $label (sort keys %cmds){
 		print "<hr>$label...<br>";
-		&open_execute_command(CMD, $cmds{$label}, 1);
-		while(my $line = <CMD>) {
-			print &html_escape($line);
+		if(exec_cmd($cmds{$label}) != 0){
+			last;
 		}
-		close(CMD);
 	}
 	print '</pre>';
 
 	return 0;
+}
+
+sub enable_repo_yum{
+	my $repo_file = $_[0];
+	my $section = $_[1];
+
+	my $ln = 0;
+	my $found = 0;
+	$lref = read_file_lines($repo_file);
+	foreach $line (@$lref){
+		chomp $line;
+		if($line =~ /\[$section\]/){	#if its a section start
+			$found = 1;
+		}elsif($line =~ /^enabled=/){
+			if($found){	#if its not our section
+				@{$lref}[$ln] = "enabled=1";	#enable it
+				last;
+			}
+		}
+		$ln=$ln+1;
+	}
+	&flush_file_lines($repo_file);
+}
+
+sub disable_pg_repo_yum{
+	my $repo_file = $_[0];
+	my $pg_ver = $_[1];
+	my $keep_repo = "[pgdg$pg_ver]";
+
+	#gather all pg repo versions
+	my $section = '';
+	my $ln = 0;
+	$lref = read_file_lines($repo_file);
+	foreach $line (@$lref){
+		chomp $line;
+		if($line =~ /^\[pgdg/){	#if its a section start
+			$section = $line;
+		}elsif($line =~ /^enabled=/){
+			if($section =~ /^\[pgdg[0-9]+/ and $section ne $keep_repo){	#if its not our section
+				@{$lref}[$ln] = "enabled=0";	#disable it
+			}
+		}
+		$ln=$ln+1;
+	}
+	&flush_file_lines($repo_file);
 }
 
 sub disable_base_repo_yum{
@@ -136,17 +182,10 @@ sub add_pg_repo_yum{
 	}
 
 	#download versioning page
-	my $url = 'https://yum.postgresql.org/repopackages.php';
-	$progress_callback_url = $url;
-	&error_setup(&text('install_err3', $url));
-	my $tmpfile = &transname('repopackages.php');
-	&http_download('yum.postgresql.org', 443, '/repopackages.php', $tmpfile, \$error, undef, 1);
-
-	if($error){
-		print &html_escape($error);
+	my $tmpfile = download_file('https://yum.postgresql.org/repopackages.php');
+	if(!$tmpfile){
 		return 1;
 	}
-
 
 	my $label = '';
 	if(	$distro eq 'centos'){
@@ -169,11 +208,20 @@ sub add_pg_repo_yum{
 	}
 	close $fh;
 
-	if($distro eq 'centos'){
-		$rpm_filename .= ' epel-release'
+	if(($disto == 'centos') && ($distro_ver == '8')){
+		my $tmpfile = download_file($rpm_filename);
+		if(!$tmpfile){
+			return 1;
+		}
+		#exec_cmd('dnf config-manager --add-repo '.$rpm_filename);	#doesn't work on CentOS 8
+		exec_cmd('rpm -i '.$tmpfile);
+		exec_cmd('dnf module disable -y postgresql');
+		enable_repo_yum('/etc/yum.repos.d/CentOS-PowerTools.repo', 'PowerTools');
+	}else{
+		software::update_system_install("$rpm_filename", undef);
 	}
 
-	software::update_system_install("$rpm_filename", undef);
+	disable_pg_repo_yum('/etc/yum.repos.d/pgdg-redhat-all.repo', $pg_ver);
 
 	return 0;
 }
@@ -185,13 +233,14 @@ sub get_version_packages_yum{
 
 	my $cmd_out='';
 	my $cmd_err='';
+	my $out;
 	if(has_command('dnf')){
-		local $out = &execute_command("dnf search postgresql", undef, \$cmd_out, \$cmd_err, 0, 0);
+		$out = &execute_command("dnf search postgresql", undef, \$cmd_out, \$cmd_err, 0, 0);
 	}else{
-		local $out = &execute_command("yum --disablerepo=* --enablerepo=epel --enablerepo=pgdg$pg_ver2 search postgresql", undef, \$cmd_out, \$cmd_err, 0, 0);
+		$out = &execute_command("yum --disablerepo=* --enablerepo=epel --enablerepo=pgdg$pg_ver2 search postgresql", undef, \$cmd_out, \$cmd_err, 0, 0);
 	}
 
-	if($cmd_err ne ""){
+	if($out ne 0){
 		&error("Error: yum: $cmd_err");
 		return 1;
 	}
@@ -217,7 +266,7 @@ sub get_packages_installed_yum{
 
 	my $cmd_out='';
 	my $cmd_err='';
-	local $out = &execute_command("rpm -q --queryformat \"%{NAME}\n\" $pkg_list", undef, \$cmd_out, \$cmd_err, 0, 0);
+	my $out = &execute_command("rpm -q --queryformat \"%{NAME}\n\" $pkg_list", undef, \$cmd_out, \$cmd_err, 0, 0);
 
 	my %pkgs;
 	my @lines = split /\n/, $cmd_out;
@@ -236,9 +285,9 @@ sub get_version_packages_apt{
 
 	my $cmd_out='';
 	my $cmd_err='';
-	local $out = &execute_command("apt-cache search '^postgresql'", undef, \$cmd_out, \$cmd_err, 0, 0);
+	my $out = &execute_command("apt-cache search '^postgresql'", undef, \$cmd_out, \$cmd_err, 0, 0);
 
-	if($cmd_err ne ""){
+	if($out ne 0){
 		&error("Error: apt-cache: $cmd_err");
 		return 1;
 	}
@@ -261,12 +310,12 @@ sub get_packages_installed_apt{
 
 	my $cmd_out='';
 	my $cmd_err='';
-	local $out = &execute_command("dpkg -l postgresql*", undef, \$cmd_out, \$cmd_err, 0, 0);
+	my $out = &execute_command("dpkg -l postgresql*", undef, \$cmd_out, \$cmd_err, 0, 0);
 
-	#if($cmd_err ne ""){
-	#	&error("Error: dpkg: $cmd_err");
-	#	return 1;
-	#}
+	if($out ne 0){
+		&error("Error: dpkg: $cmd_err");
+		return 1;
+	}
 
 	my %pkgs;
 
@@ -328,11 +377,7 @@ sub pg_initdb{
 	print '<pre>';
 
 	print "<hr>Initializing database ...<br>";
-	&open_execute_command(CMD, "su - postgres -c '$cmd -D $data'", 2);
-	while(my $line = <CMD>) {
-		print &html_escape($line);
-	}
-	close(CMD);
+	exec_cmd("su - postgres -c '$cmd -D $data'");
 	print '</pre>';
 }
 
@@ -386,7 +431,7 @@ sub pg_enable_ssl{
 
 		#add repo key
 		$SIG{'TERM'} = 'ignore';
-		my @cmds =	("openssl genrsa -des3 -passout pass:$ssl_pass -out $keyfile 1024",
+		my @cmds =	("openssl genrsa -des3 -passout pass:$ssl_pass -out $keyfile 2048",
 					 "openssl rsa -in $keyfile -passin pass:$ssl_pass -out $keyfile",
 					 "chmod 400 $keyfile",
 					 "openssl req -new -key $keyfile -days 3650 -out $crtfile -passin pass:$ssl_pass -x509 -subj '/C=CA/ST=Frankfurt/L=Frankfurt/O=acuciva-de.com/CN=acuciva-de.com/emailAddress=info\@acugis.com'",
@@ -396,11 +441,9 @@ sub pg_enable_ssl{
 		print 'Generating SSL key/cert<br><pre>';
 		foreach my $cmd (@cmds){
 			print "<hr>$cmd...<br>";
-			&open_execute_command(CMD, $cmd, 1);
-			while(my $line = <CMD>) {
-				print &html_escape($line);
+			if(exec_cmd($cmd) != 0){
+				last;
 			}
-			close(CMD);
 		}
 		print '</pre>';
 	}
