@@ -141,12 +141,12 @@ sub install_openlayers{
 
 	#get OpenLayers version
 	my $ol_ver = latest_openlayers_version();
+	my $dist = '-package';	#'-site' string for full release or '-package' for libs only
 
 	my $tmpfile = transname("v${ol_ver}.zip");
-	my $url = "https://github.com/openlayers/openlayers/releases/download/v${ol_ver}/v${ol_ver}.zip";
+	my $url = "https://github.com/openlayers/openlayers/releases/download/v${ol_ver}/v${ol_ver}${dist}.zip";
 	$progress_callback_url = $url;
 
-	my $dist = '-dist';	#empty string for full release or '-dist' for libs only
 
 	&error_setup(&text('install_err3', $url));
 	&http_download('github.com', 443, "/openlayers/openlayers/releases/download/v${ol_ver}/v${ol_ver}${dist}.zip", $tmpfile, \$error, \&progress_callback, 1);
@@ -158,8 +158,8 @@ sub install_openlayers{
 
 	my $ol_dir = unzip_me($tmpfile);
 
-	print "Moving to /var/www/html/OpenLayers ...";
-	rename_file($ol_dir."/v${ol_ver}${dist}", '/var/www/html/OpenLayers');
+	print "Moving ${ol_dir} to /var/www/html/OpenLayers ...";
+	rename_file($ol_dir, '/var/www/html/OpenLayers');
 	&execute_command("chown -R root:root '/var/www/html/OpenLayers'");
 }
 
@@ -451,7 +451,7 @@ sub setup_checks{
 	# Check if GeoExplorer webapp exists
 	if($tomcat_ver){
 		my $catalina_home = get_catalina_home();
-		
+
 
 		# Check if geoserver webapp exists
 		if (! -d "$catalina_home/webapps/geoserver/") {
