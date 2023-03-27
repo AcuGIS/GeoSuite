@@ -63,25 +63,25 @@ sub install_tomcat_from_archive{
 
 sub latest_leafletjs_version(){
 	my $tmpfile = transname('download.html');
-	&error_setup(&text('install_err3', "http://leafletjs.com/download.html"));
-	&http_download('leafletjs.com', 80, '/download.html', $tmpfile, \$error);
+	&error_setup(&text('install_err3', "https://leafletjs.com/download.html"));
+	&http_download('leafletjs.com', 443, '/download.html', $tmpfile, \$error, undef, 1);
 
 	if($error){
 		print &html_escape($error);
 		die "Error: Failed to get latest version of LeafletJS";
 	}
 
-	my $latest_ver = '0.0.0';
+	my $latest_url = 'https://leafletjs-cdn.s3.amazonaws.com/content/leaflet/v1.9.3/leaflet.zip';
 	open(my $fh, '<', $tmpfile) or die "open:$!";
 	while(my $line = <$fh>){
-		if($line =~ /cdn\.leafletjs\.com\/leaflet\/v([0-9\.]+)\/leaflet\.zip/){
+		if($line =~ /(https:\/\/.*leaflet\/v[0-9\.]+\/leaflet\.zip)/){
 			$latest_ver = $1;
 			last;
 		}
 	}
 	close $fh;
 
-	return $latest_ver;
+	return $latest_url;
 }
 
 sub install_leafletjs{
@@ -89,19 +89,9 @@ sub install_leafletjs{
 		return 0;
 	}
 
-	my $ll_ver = latest_leafletjs_version();
-
-	my $tmpfile = transname("leaflet.zip");
-	my $url = "http://cdn.leafletjs.com/leaflet/v${ll_ver}/leaflet.zip";
-	$progress_callback_url = $url;
-
-	&error_setup(&text('install_err3', $url));
-	&http_download('cdn.leafletjs.com', 80, "/leaflet/v${ll_ver}/leaflet.zip", $tmpfile, \$error, \&progress_callback);
-
-	if($error){
-		print &html_escape($error);
-		die "Error: Failed to get latest LeafletJS archive";
-	}
+	$in{'source'} = 2;
+	$in{'url'} = latest_leafletjs_version();
+	my $tmpfile = process_file_source();
 
 	my $ll_dir = unzip_me($tmpfile);
 
@@ -141,12 +131,12 @@ sub install_openlayers{
 
 	#get OpenLayers version
 	my $ol_ver = latest_openlayers_version();
+	my $dist = '-package';	#'-site' string for full release or '-package' for libs only
 
 	my $tmpfile = transname("v${ol_ver}.zip");
-	my $url = "https://github.com/openlayers/openlayers/releases/download/v${ol_ver}/v${ol_ver}.zip";
+	my $url = "https://github.com/openlayers/openlayers/releases/download/v${ol_ver}/v${ol_ver}${dist}.zip";
 	$progress_callback_url = $url;
 
-	my $dist = '-dist';	#empty string for full release or '-dist' for libs only
 
 	&error_setup(&text('install_err3', $url));
 	&http_download('github.com', 443, "/openlayers/openlayers/releases/download/v${ol_ver}/v${ol_ver}${dist}.zip", $tmpfile, \$error, \&progress_callback, 1);
@@ -158,8 +148,8 @@ sub install_openlayers{
 
 	my $ol_dir = unzip_me($tmpfile);
 
-	print "Moving to /var/www/html/OpenLayers ...";
-	rename_file($ol_dir."/v${ol_ver}${dist}", '/var/www/html/OpenLayers');
+	print "Moving ${ol_dir} to /var/www/html/OpenLayers ...";
+	rename_file($ol_dir, '/var/www/html/OpenLayers');
 	&execute_command("chown -R root:root '/var/www/html/OpenLayers'");
 }
 
@@ -451,7 +441,7 @@ sub setup_checks{
 	# Check if GeoExplorer webapp exists
 	if($tomcat_ver){
 		my $catalina_home = get_catalina_home();
-		
+
 
 		# Check if geoserver webapp exists
 		if (! -d "$catalina_home/webapps/geoserver/") {
@@ -518,8 +508,9 @@ sub setup_checks{
 #Remove all setup files
 sub setup_cleanup{
 	my $file = $module_root_directory.'/setup.cgi';
-	print "Completing Set Up....";
+	print "Completing Set Up....</br>";
 	&unlink_file($file);
+	print &js_redirect("index.cgi");
 }
 
 
