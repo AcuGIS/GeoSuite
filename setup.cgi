@@ -508,8 +508,9 @@ sub setup_checks{
 #Remove all setup files
 sub setup_cleanup{
 	my $file = $module_root_directory.'/setup.cgi';
-	print "Completing Set Up....";
+	print "Completing Set Up....</br>";
 	&unlink_file($file);
+	print &js_redirect("index.cgi");
 }
 
 
