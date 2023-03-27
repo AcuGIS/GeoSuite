@@ -63,25 +63,25 @@ sub install_tomcat_from_archive{
 
 sub latest_leafletjs_version(){
 	my $tmpfile = transname('download.html');
-	&error_setup(&text('install_err3', "http://leafletjs.com/download.html"));
-	&http_download('leafletjs.com', 80, '/download.html', $tmpfile, \$error);
+	&error_setup(&text('install_err3', "https://leafletjs.com/download.html"));
+	&http_download('leafletjs.com', 443, '/download.html', $tmpfile, \$error, undef, 1);
 
 	if($error){
 		print &html_escape($error);
 		die "Error: Failed to get latest version of LeafletJS";
 	}
 
-	my $latest_ver = '0.0.0';
+	my $latest_url = 'https://leafletjs-cdn.s3.amazonaws.com/content/leaflet/v1.9.3/leaflet.zip';
 	open(my $fh, '<', $tmpfile) or die "open:$!";
 	while(my $line = <$fh>){
-		if($line =~ /cdn\.leafletjs\.com\/leaflet\/v([0-9\.]+)\/leaflet\.zip/){
+		if($line =~ /(https:\/\/.*leaflet\/v[0-9\.]+\/leaflet\.zip)/){
 			$latest_ver = $1;
 			last;
 		}
 	}
 	close $fh;
 
-	return $latest_ver;
+	return $latest_url;
 }
 
 sub install_leafletjs{
@@ -89,19 +89,9 @@ sub install_leafletjs{
 		return 0;
 	}
 
-	my $ll_ver = latest_leafletjs_version();
-
-	my $tmpfile = transname("leaflet.zip");
-	my $url = "http://cdn.leafletjs.com/leaflet/v${ll_ver}/leaflet.zip";
-	$progress_callback_url = $url;
-
-	&error_setup(&text('install_err3', $url));
-	&http_download('cdn.leafletjs.com', 80, "/leaflet/v${ll_ver}/leaflet.zip", $tmpfile, \$error, \&progress_callback);
-
-	if($error){
-		print &html_escape($error);
-		die "Error: Failed to get latest LeafletJS archive";
-	}
+	$in{'source'} = 2;
+	$in{'url'} = latest_leafletjs_version();
+	my $tmpfile = process_file_source();
 
 	my $ll_dir = unzip_me($tmpfile);
 
