@@ -49,6 +49,7 @@ Go to Webmin > Servers > GeoHelm to complete installation using the Wizard
 3. Select "From HTTP or FTP Url"
 4. Enter https://github.com/AcuGIS/GeoHelm/blob/master/scripts/geohelm.wbm.gz?raw=true
 5. Click the Install button.
+6. Go to Webmin > Servers > GeoHelm to complete installation using the Wizard
 
 # Install via Git:
 
