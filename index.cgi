@@ -20,7 +20,7 @@ if(-f "$module_root_directory/setup.cgi"){
 
 my %version = get_acugeo_versions();
 
-&ui_print_header("GeoHelm<sup>&copy</sup> by <a href='https://www.acugis.com' target='blank'>AcuGIS</a>.  Cited, Inc. 2018 ", $text{'index_title'}, "", "intro", 1, 1, 0,
+&ui_print_header("GeoHelm<sup>&copy</sup> by <a href='https://www.acugis.com' target='blank'>AcuGIS</a>.  Cited, Inc. 2023 ", $text{'index_title'}, "", "intro", 1, 1, 0,
 	&help_search_link("tomcat", "geoserver", "man", "doc", "google"), undef, undef,
 	"Tomcat $version{'number'} / Java $version{'jvm'}");
 
