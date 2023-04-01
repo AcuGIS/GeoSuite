@@ -34,7 +34,7 @@ Memory: <code>1 GB (Minimum) </code><br />
 User Access:<code>root access required</code><br />
 Software Requirements: <code>Webmin</code><br />
 
-# Install via Script:
+# Install Webmin and GeoHelm via Script:
 
       wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/pre-install.sh
       chmod +x pre-install.sh
