@@ -2,7 +2,7 @@
 
 require './geohelm-lib.pl';
 require './pg-lib.pl';
-require '../webmin/webmin-lib.pl';	#for OS detection
+require '../webmin/webmin-lib.pl';	
 foreign_require('software', 'software-lib.pl');
 foreign_require('postgresql', 'postgresql-lib.pl');
 
@@ -13,13 +13,13 @@ sub get_versions(){
 	my $cache_file = "$module_config_directory/pg_version_cache";
   if(-f $cache_file){
   	read_file_cached($cache_file, \%pg_ver_cache);
-		if($pg_ver_cache{'updated'} >= (time() - 86400)){        #if last update was less than a day ago
+		if($pg_ver_cache{'updated'} >= (time() - 86400)){        
 			@versions = split(',', $pg_ver_cache{'versions'});
       return @versions;
     }
   }
 
-	#download versioning page
+	
 	my $tmpfile = download_file('https://www.postgresql.org/support/versioning/');
 	if(!$tmpfile){
 		return @versions;
@@ -32,8 +32,8 @@ sub get_versions(){
 	open(my $fh, '<', $tmpfile) or die "open:$!";
 	while(my $line = <$fh>){
 		if($start_matching == 1){
-			if(	$line =~ /<td>([0-9\.]+)<\/td>/){	#Version column
-				if($version == ''){	#match only first column
+			if(	$line =~ /<td>([0-9\.]+)<\/td>/){	
+				if($version == ''){	
 					$version = $1;
 				}
 			}elsif($line =~ /<td>Yes<\/td>/){
@@ -67,18 +67,18 @@ sub add_pg_repo_apt{
 		$release = $1 if $info{'VERSION'} =~ /[0-9]+\s\(([a-z]+)\)/i;
 	}
 
-	#add repo to APT
+	
 	open(my $fh, '>', '/etc/apt/sources.list.d/pgdg.list') or die "open:$!";
 	print $fh "deb http://apt.postgresql.org/pub/repos/apt/ $release-pgdg main\n";
 	close $fh;
 
-	#download repo key
+	
 	my $tmpfile = download_file('https://www.postgresql.org/media/keys/ACCC4CF8.asc');
 	if(!$tmpfile){
 		return 1;
 	}
 
-	#add repo key
+	
 	$SIG{'TERM'} = 'ignore';
 	print '<pre>';
 	my %cmds = ('Adding PG apt key'=> "apt-key add $tmpfile",
@@ -103,11 +103,11 @@ sub enable_repo_yum{
 	$lref = read_file_lines($repo_file);
 	foreach $line (@$lref){
 		chomp $line;
-		if($line =~ /\[$section\]/){	#if its a section start
+		if($line =~ /\[$section\]/){	
 			$found = 1;
 		}elsif($line =~ /^enabled=/){
-			if($found){	#if its not our section
-				@{$lref}[$ln] = "enabled=1";	#enable it
+			if($found){	
+				@{$lref}[$ln] = "enabled=1";	
 				last;
 			}
 		}
