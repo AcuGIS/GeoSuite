@@ -130,15 +130,17 @@ sub download_file{
 		$filename = 'index.html';
 	}
 
+	my $sslmode = $proto eq 'https:';
 	my $port = 80;
-	if($proto eq 'https'){
+	if($sslmode){
 		$port = 443;
 	}
 
 	&error_setup(&text('install_err3', $url));
 	my $tmpfile = &transname($filename);
 	$progress_callback_url = $url;
-	&http_download($host, $port, '/'.$path, $tmpfile, \$error, \&progress_callback);
+
+	&http_download($host, $port, '/'.$path, $tmpfile, \$error, \&progress_callback, $sslmode);
 
 	if($error){
 		print &html_escape($error);
