@@ -2,12 +2,12 @@
 Installation
 ************
 
-Installation is done via the GeoSuite Installer.
+Installation is done via the GeoHelm Installer.
 
 Check Hostname
 ------------------------
 
-While you can use GeoSuite with only an IP address, if you wish to use SSL, be sure to set the hostname.
+While you can use GeoHelm with only an IP address, if you wish to use SSL, be sure to set the hostname.
 
 You can check using the 'hostname' command
 
@@ -102,7 +102,7 @@ The passwords are also stored in the file /root/auth.txt following set up
 Enable SSL
 ------------------------
 
-If you did not have the GeoSuite installer enable SSL, you can use the script below to issue a certificate and configure Apache, the control panel, and pg_tileserv for SSL.
+If you did not have the GeoHelm installer enable SSL, you can use the script below to issue a certificate and configure Apache, the control panel, and pg_tileserv for SSL.
 
 .. code-block:: console
 
@@ -135,7 +135,7 @@ SSL is now enabled for Apache, control panel, pg_tileserv, and pg_featursrv
 Troubleshooting
 ------------------------
 
-GeoSuite creates a log file for each installation process.
+GeoHelm creates a log file for each installation process.
 
 The files are located in the /tmp directory (screenshot below).
 
