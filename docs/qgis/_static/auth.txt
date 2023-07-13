@@ -1,0 +1,18 @@
+pg pass: cdfRkrPaTxcVULdSJxRVL0QR9m6gjsAP
+ssl server pass: mqDeoZGRehZp0uCkhyh5V2y_I8YctNBS
+pgis PG pass: XRHnKG2ECQJFWymFmU_3Ld1cG2zNvi-r
+tomcat manager pass: fpL9ee7pgZpUxnwnkVBRAaywFgplmu8q
+tomcat admin pass: 1xeW7dfAE6lT-xbRvhOugzLtBhOSVGyX
+g3wsuite PG pass: 0H8PkEZAEt7Af4Bw_75MPWgUUTHAEjee
+g3wsuite user/pass is user1/user1
+g3wsuite admin/pass is admin/_A3dywW_8X
+
+
+
+[geosuitedb]
+host=localhost
+port=5432
+dbname=geodb
+user=geouser
+password=geouserpassword
+
