@@ -364,7 +364,7 @@ function install_bootstrap_app(){
 	unzip /tmp/master.zip -d/tmp
 
 	cp -r /tmp/GeoHelm-master/app/* /var/www/html/
-	#mv /tmp/GeoHelm-master/data /opt/
+	mv /tmp/GeoHelm-master/app/data /opt/
 
 	rm -rf /tmp/master.zip
 	
