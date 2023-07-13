@@ -4,7 +4,7 @@
 #Description: GeoHelm Ubuntu installer
 
 # default menu options
-WEBMIN_MODS='geohelm geoserver postgis certbot'
+WEBMIN_MODS='geoserver postgis certbot'
 TOMCAT_MAJOR=9
 JAVA_FLAVOR='OpenJDK'
 GEOSERVER_WEBAPP='Yes'
