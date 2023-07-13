@@ -4,7 +4,7 @@ DISTRO=$(grep -m 1 '^ID=' /etc/os-release | cut -f2 -d= | tr -d '"')
 DISTRO_VER=$(grep '^VERSION_ID' /etc/os-release | tr -d '"' | cut -f2 -d= | cut -f1 -d.)
 
 INSTALL_SCRIPT="geohelm-${DISTRO}-${DISTRO_VER}.sh"
-URL_BASE="https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/"
+URL_BASE="https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts"
 
 if [ -f /usr/bin/wget ]; then
 	wget -q "${URL_BASE}/${INSTALL_SCRIPT}"
