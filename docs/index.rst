@@ -1,7 +1,7 @@
 AcuGIS GeoSuite
 ==================================================
 
-.. image:: _static/webapp-1.png
+.. image:: _static/GeoHelm-main.png
 
 .. image:: _static/spacer.png
 
