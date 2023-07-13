@@ -482,7 +482,7 @@ function install_geoserver_module(){
     #wget --quiet https://github.com/AcuGIS/GeoServer/archive/master.zip
     #unzip master.zip
     #mv GeoServer-master geoserver
-		tar -czf /opt/geoserver.wbm.gz geoserver
+		tar -czf geoserver.wbm.gz geoserver
 		rm -rf geoserver
 
     /usr/libexec/webmin/install-module.pl geoserver.wbm.gz
