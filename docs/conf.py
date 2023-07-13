@@ -15,7 +15,7 @@ html_css_files = [
     'custom.css',
 ]
 
-project = u'AcuGIS GeoSuite'
+project = u'AcuGIS GeoHelm'
 copyright = u'2023, Cited, Inc.'
 slug = re.sub(r'\W+', '-', project.lower())
 version = __version__

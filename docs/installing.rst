@@ -2,12 +2,12 @@
 Installation
 ************
 
-Installation is done via the GeoSuite Installer.
+Installation is done via the GeoHelm Installer.
 
 Check Hostname
 ------------------------
 
-While you can use GeoSuite with only an IP address, if you wish to use SSL, be sure to set the hostname.
+While you can use GeoHelm with only an IP address, if you wish to use SSL, be sure to set the hostname.
 
 You can check using the 'hostname' command
 
@@ -46,29 +46,30 @@ On a fresh Ubuntu 22 or Rocky Linux 9 installation, as root:
     
 The above will start the installer
 
-.. image:: _static/geosuite-installer-screen-1.png
-
+.. image:: _static/Install1.png
 
 .. image:: _static/spacer.png
 
 
 Tab to the OK button and hit enter
 
-.. image:: _static/geosuite-installer-screen-2.png
+.. image:: _static/Install2.png
+
 
 .. image:: _static/spacer.png
 
 
 A reminder is displayed to set the hostname.  If you have set the hostname, or do not wish to use SSL, hit continue
 
-.. image:: _static/geosuite-installer-screen-3.png
+.. image:: _static/Install3.png
+
 
 .. image:: _static/spacer.png
 
 
-A prompt will ask you if you would like GeoSuite to provision a free SSL certificate using LetsEncrypt
+A prompt will ask you if you would like GeoHelm to provision a free SSL certificate using LetsEncrypt
 
-.. image:: _static/ssl-option.png
+.. image:: _static/Install4.png
 
 .. image:: _static/spacer.png
 
@@ -101,7 +102,7 @@ The passwords are also stored in the file /root/auth.txt following set up
 Enable SSL
 ------------------------
 
-If you did not have the GeoSuite installer enable SSL, you can use the script below to issue a certificate and configure Apache, the control panel, and pg_tileserv for SSL.
+If you did not have the GeoHelm installer enable SSL, you can use the script below to issue a certificate and configure Apache, the control panel, and pg_tileserv for SSL.
 
 .. code-block:: console
 
@@ -134,7 +135,7 @@ SSL is now enabled for Apache, control panel, pg_tileserv, and pg_featursrv
 Troubleshooting
 ------------------------
 
-GeoSuite creates a log file for each installation process.
+GeoHelm creates a log file for each installation process.
 
 The files are located in the /tmp directory (screenshot below).
 
