@@ -402,12 +402,12 @@ function install_webmin(){
 
 function install_geoserver_module(){
 
-	pushd /opt/
-    wget --quiet https://github.com/AcuGIS/GeoServer/archive/master.zip
-    unzip master.zip
-    mv GeoServer-master postgis
+	pushd /tmp/GeoHelm-master/
+    #wget --quiet https://github.com/AcuGIS/GeoServer/archive/master.zip
+    #unzip master.zip
+    #mv GeoServer-master geoserver
     tar -czf /opt/geoserver.wbm.gz geoserver
-    rm -rf geoserver master.zip
+    rm -rf geoserver
 
     /usr/share/webmin/install-module.pl geoserver.wbm.gz
 		rm -rf geoserver.wbm.gz
