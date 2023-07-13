@@ -497,6 +497,7 @@ function install_postgis_module(){
 		wget --quiet https://github.com/AcuGIS/PostGIS-Module/archive/master.zip
 		unzip master.zip
 		mv PostGIS-Module-master postgis
+		rm -f postgis/setup.cgi
 		tar -czf /opt/postgis.wbm.gz postgis
 		rm -rf postgis master.zip
 
