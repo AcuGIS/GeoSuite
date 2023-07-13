@@ -1,0 +1,3 @@
+geoserver_config=Path to the Webmin Tomcat module config file,8
+tomcat_service=Path to tomcat service command,8
+shp2pgsql_path=/usr/bin/shp2pgsql

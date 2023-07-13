@@ -1,0 +1,2 @@
+geoserver_config=/etc/webmin/geoserver/config
+shp2pgsql_path=/usr/bin/shp2pgsql
