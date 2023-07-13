@@ -46,29 +46,30 @@ On a fresh Ubuntu 22 or Rocky Linux 9 installation, as root:
     
 The above will start the installer
 
-.. image:: _static/geosuite-installer-screen-1.png
-
+.. image:: _static/Install1.png
 
 .. image:: _static/spacer.png
 
 
 Tab to the OK button and hit enter
 
-.. image:: _static/geosuite-installer-screen-2.png
+.. image:: _static/Install2.png
+
 
 .. image:: _static/spacer.png
 
 
 A reminder is displayed to set the hostname.  If you have set the hostname, or do not wish to use SSL, hit continue
 
-.. image:: _static/geosuite-installer-screen-3.png
+.. image:: _static/Install3.png
+
 
 .. image:: _static/spacer.png
 
 
-A prompt will ask you if you would like GeoSuite to provision a free SSL certificate using LetsEncrypt
+A prompt will ask you if you would like GeoHelm to provision a free SSL certificate using LetsEncrypt
 
-.. image:: _static/ssl-option.png
+.. image:: _static/Install4.png
 
 .. image:: _static/spacer.png
 
