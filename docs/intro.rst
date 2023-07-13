@@ -7,7 +7,7 @@ Intro
 Overview
 ------------
 
-.. image:: _static/webapp-1.png
+.. image:: _static/GeoHelm-main.png
 .. image:: _static/spacer.png
 
 AcuGIS GeoHelm is used to install, configure, and manage the latest stable releases of 
