@@ -1,0 +1,764 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<!-- Mirrored from geohelm.docs.acugis.com/en/latest/resources/css.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 13 Jul 2023 23:23:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CSS &mdash; AcuGIS GeoHelm 0.4.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+<!-- AcuGIS 1 -->
+  
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="../../../_/static/javascript/readthedocs-doc-embed.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Security" href="security.html" />
+    <link rel="prev" title="Documentation" href="documents.html" /> 
+
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="../../../_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "resources/css", "programming_language": "perl", "project": "geohelm", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_rtd_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="../../../_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+
+
+                                                                <div id="header" style="position: fixed; height: 70px; padding-bottom: 20px; overflow: hidden; background-color: #28728d;  display: block; z-index: 1000; width: 100%;">
+        <div class="acugis_geosuite" style="color:#fff!important; padding-left:30px; font-size:26px; padding-top: 20px;"><a href="https://geohelm.docs.acugis.com/" style="color:#fff!important; text-decoration:none!important">AcuGIS GeoHelm</a></div>
+
+      </div>
+
+
+  
+
+                                                                
+  
+                                                                
+
+   
+</div>
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        
+        <div id="header2"> </div>
+        
+        
+        
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation" style="padding-top: 45px;">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout.html">Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../webmin.html">Control Panel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../webmin.html#removing-the-control-panel">Removing the Control Panel</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PostGIS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/createdb/index.html">Create Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/postgresql/index.html">PostgreSQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/postgis/index.html">PostGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/pgrouting/index.html">PgRouting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/shp2pgsql/index.html">shp2pgsql</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/osm2pgsql/index.html">osm2pgsql</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/raster2pgsql/index.html">raster2pgsql</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GeoServer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/admin/index.html">Access</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/geoservers/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/tomcat/index.html">Apache Tomcat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/workspace/index.html">Create a Workspace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/store/index.html">Create Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/layer/index.html">Add Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/shp/index.html">Load ESRI Shapefile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/styles/index.html">Styles</a></li>
+</ul>
+<p class="caption"><span class="caption-text">pg_tileserv</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/pgtileserv/index.html">pg_tileserv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/pgfeatureserv/index.html">pg_featureserv</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Database Operations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../database/snapshot/index.html">Database Snapshots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../database/clone/index.html">Clone Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../database/restore/index.html">Restore Database</a></li>
+</ul>
+<p class="caption"><span class="caption-text">QGIS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../qgis/home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qgis/pgservice.html">pg_service.conf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qgis/qgis.html">Create a QGIS Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qgis/publish.html">Publish Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qgis/style-only.html">Publish Styles Only</a></li>
+</ul>
+<p class="caption"><span class="caption-text">LeafletJS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../apps/choropleth.html">Leaflet Choropleth App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apps/geojson.html">Leaflet GeoJson</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apps/php.html">Leaflet and PHP</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="documents.html">Documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nagios.html">Nagios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Project Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commercial.html">Commercial Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index-2.html">AcuGIS GeoHelm</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index-2.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>CSS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/AcuGIS/GeoHelm/blob/master/docs/resources/css.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="css">
+<h1>CSS<a class="headerlink" href="#css" title="Permalink to this headline">¶</a></h1>
+<p>The screenshots in the documentation use a Material Design CSS Extension we created.</p>
+<p>This can be added directly to Webmin &gt; Configuration &gt; Webmin Themes</p>
+<p>In addition to making the screens a bit more vivid, it also increaes the size of objects on the page as well as padding, making it easier to work with</p>
+<div class="highlight-css notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span></pre></div></td><td class="code"><div><pre><span></span><span class="w">     </span><span class="p">.</span><span class="nc">row</span><span class="p">.</span><span class="nc">icons-row</span><span class="w"> </span><span class="p">.</span><span class="nc">icons-container</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="kt">px</span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="kp">-webkit-</span><span class="k">filter</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">filter</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="nt">html</span><span class="o">[</span><span class="nt">data-theme</span><span class="o">=</span><span class="s2">&quot;brown&quot;</span><span class="o">]</span><span class="w"> </span><span class="p">#</span><span class="nn">sidebar</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">background</span><span class="p">:</span>
+<span class="w">     </span><span class="kc">darkslategray</span><span class="cp">!important</span><span class="p">;}</span>
+
+<span class="w">     </span><span class="p">.</span><span class="nc">panel-default</span><span class="o">&gt;</span><span class="p">.</span><span class="nc">panel-heading</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#fff</span><span class="p">;</span>
+<span class="w">     </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">188</span><span class="p">,</span><span class="w"> </span><span class="mi">212</span><span class="p">)</span><span class="cp">!important</span><span class="p">;</span><span class="k">text-align</span><span class="p">:</span><span class="kc">left</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="p">.</span><span class="nc">panel-default</span><span class="o">&gt;</span><span class="p">.</span><span class="nc">panel-heading</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">panel-default</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">border-top-left-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="kt">px</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">border-top-right-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="kt">px</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="w">     </span><span class="p">.</span><span class="nc">panel-default</span><span class="w"> </span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">panel</span><span class="p">{</span>
+<span class="w">     </span><span class="k">border-bottom-left-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="kt">px</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span><span class="k">border-top</span><span class="p">:</span><span class="mi">0</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span><span class="k">border-top-width</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">     </span><span class="k">border-bottom-right-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="kt">px</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">.14</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="kt">px</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="mi">-2</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">.12</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="mi">5</span><span class="kt">px</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">.2</span><span class="p">);</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="p">.</span><span class="nc">row</span><span class="p">.</span><span class="nc">icons-row</span><span class="w"> </span><span class="p">.</span><span class="nc">icons-container</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">.</span><span class="nc">highlighted</span><span class="o">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="kt">px</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">.14</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="kt">px</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="mi">-2</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">.12</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="mi">5</span><span class="kt">px</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">.2</span><span class="p">);</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="nt">h2</span><span class="p">.</span><span class="nc">form-signin-heading</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="nt">i</span><span class="p">.</span><span class="nc">wbm-webmin</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="p">.</span><span class="nc">card</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mf">.875</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">     </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="p">.</span><span class="nc">btn</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">.</span><span class="nc">btn-round</span><span class="o">),</span><span class="w"> </span><span class="nt">button</span><span class="p">.</span><span class="nc">btn</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">.</span><span class="nc">btn-round</span><span class="o">),</span><span class="w"> </span><span class="p">.</span><span class="nc">csf-container</span><span class="w"> </span><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;submit&#39;</span><span class="o">]</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">.</span><span class="nc">btn-round</span><span class="o">),</span><span class="w"> </span><span class="p">.</span><span class="nc">csf-container</span><span class="w"> </span><span class="nt">button</span><span class="p">.</span><span class="nc">input</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">.</span><span class="nc">btn-round</span><span class="o">),</span><span class="w"> </span><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;submit&#39;</span><span class="o">]</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">.</span><span class="nc">btn-round</span><span class="o">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">text-align</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+<span class="w">     </span><span class="k">vertical-align</span><span class="p">:</span><span class="w"> </span><span class="kc">middle</span><span class="p">;</span>
+<span class="w">     </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">     </span><span class="k">line-height</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="p">;</span>
+<span class="w">     </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mf">0.325</span><span class="kt">em</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">transition</span><span class="p">:</span><span class="w"> </span><span class="kc">color</span><span class="w"> </span><span class="mf">.15</span><span class="kt">s</span><span class="w"> </span><span class="kc">ease-in-out</span><span class="p">,</span><span class="k">background-color</span><span class="w"> </span><span class="mf">.15</span><span class="kt">s</span><span class="w"> </span><span class="kc">ease-in-out</span><span class="p">,</span><span class="k">border-color</span><span class="w"> </span><span class="mf">.15</span><span class="kt">s</span><span class="w"> </span><span class="kc">ease-in-out</span><span class="p">,</span><span class="k">box-shadow</span><span class="w"> </span><span class="mf">.15</span><span class="kt">s</span><span class="w"> </span><span class="kc">ease-in-out</span><span class="p">;</span>
+<span class="w">     </span><span class="k">text-transform</span><span class="p">:</span><span class="w"> </span><span class="kc">uppercase</span><span class="p">;</span>
+<span class="w">     </span><span class="k">cursor</span><span class="p">:</span><span class="w"> </span><span class="kc">pointer</span><span class="p">;</span>
+<span class="w">     </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">     </span><span class="k">outline</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">     </span><span class="k">transition</span><span class="p">:</span><span class="w"> </span><span class="k">box-shadow</span><span class="w"> </span><span class="mf">.2</span><span class="kt">s</span><span class="w"> </span><span class="nb">cubic-bezier</span><span class="p">(</span><span class="mf">.4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="k">background-color</span><span class="w"> </span><span class="mf">.2</span><span class="kt">s</span><span class="w"> </span><span class="nb">cubic-bezier</span><span class="p">(</span><span class="mf">.4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">.2</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="kc">color</span><span class="w"> </span><span class="mf">.2</span><span class="kt">s</span><span class="w"> </span><span class="nb">cubic-bezier</span><span class="p">(</span><span class="mf">.4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">.2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">will-change</span><span class="p">:</span><span class="w"> </span><span class="k">box-shadow</span><span class="p">,</span><span class="k">transform</span><span class="p">;</span>
+<span class="w">     </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">.87</span><span class="p">);</span>
+<span class="w">     </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">);</span>
+<span class="w">     </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">204</span><span class="p">,</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w"> </span><span class="mi">204</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">.14</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="kt">px</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="mi">-2</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">.2</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="mi">5</span><span class="kt">px</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">.12</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">margin-left</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">margin-right</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="cp">!important</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="nt">html</span><span class="o">[</span><span class="nt">data-script-name</span><span class="o">*=</span><span class="s1">&#39;settings-editor_read.cgi&#39;</span><span class="o">]</span><span class="w"> </span><span class="p">#</span><span class="nn">content</span><span class="w"> </span><span class="p">.</span><span class="nc">CodeMirror</span><span class="o">+</span><span class="p">.</span><span class="nc">ui_form_end_buttons</span><span class="w"> </span><span class="p">.</span><span class="nc">btn</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">margin-left</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">margin-right</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="cp">!important</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="nt">html</span><span class="o">[</span><span class="nt">data-script-name</span><span class="o">*=</span><span class="s1">&#39;settings-editor_read.cgi&#39;</span><span class="o">]</span><span class="w"> </span><span class="p">#</span><span class="nn">content</span><span class="w"> </span><span class="p">.</span><span class="nc">CodeMirror</span><span class="o">+</span><span class="p">.</span><span class="nc">ui_form_end_buttons</span><span class="w"> </span><span class="nt">td</span><span class="p">:</span><span class="nd">last-child</span><span class="w"> </span><span class="p">.</span><span class="nc">btn</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">margin-left</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">margin-right</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="kt">px</span><span class="w"> </span><span class="cp">!important</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="p">.</span><span class="nc">btn-group</span><span class="w"> </span><span class="p">.</span><span class="nc">btn</span><span class="o">,</span><span class="p">.</span><span class="nc">btn</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">.14</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="kt">px</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="mi">-2</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">.2</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="mi">5</span><span class="kt">px</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">.12</span><span class="p">);</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="p">.</span><span class="nc">btn-group</span><span class="o">&gt;</span><span class="p">.</span><span class="nc">btn</span><span class="p">:</span><span class="nd">first-child</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">:</span><span class="nd">last-child</span><span class="o">)</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">.</span><span class="nc">dropdown-toggle</span><span class="o">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">border-top-right-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">border-bottom-right-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="p">.</span><span class="nc">btn-group</span><span class="o">&gt;</span><span class="p">.</span><span class="nc">btn</span><span class="p">:</span><span class="nd">last-child</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">:</span><span class="nd">first-child</span><span class="o">)</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">.</span><span class="nc">dropdown-toggle</span><span class="o">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">border-top-left-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">border-bottom-left-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="nt">body</span><span class="w"> </span><span class="p">.</span><span class="nc">btn</span><span class="p">.</span><span class="nc">btn-primary</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">63</span><span class="p">,</span><span class="w"> </span><span class="mi">81</span><span class="p">,</span><span class="w"> </span><span class="mi">181</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">63</span><span class="p">,</span><span class="w"> </span><span class="mi">81</span><span class="p">,</span><span class="w"> </span><span class="mi">181</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="w">     </span><span class="nt">body</span><span class="w"> </span><span class="p">.</span><span class="nc">btn</span><span class="p">.</span><span class="nc">btn-default</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.87</span><span class="p">);</span>
+<span class="w">     </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">153</span><span class="p">,</span><span class="w"> </span><span class="mi">153</span><span class="p">,</span><span class="w"> </span><span class="mi">153</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">);</span>
+<span class="w">     </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">153</span><span class="p">,</span><span class="w"> </span><span class="mi">153</span><span class="p">,</span><span class="w"> </span><span class="mi">153</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">);</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="w">     </span><span class="nt">body</span><span class="w"> </span><span class="p">.</span><span class="nc">btn</span><span class="p">.</span><span class="nc">btn-success</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">76</span><span class="p">,</span><span class="w"> </span><span class="mi">175</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">76</span><span class="p">,</span><span class="w"> </span><span class="mi">175</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="p">.</span><span class="nc">btn</span><span class="p">.</span><span class="nc">btn-secondary</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">108</span><span class="p">,</span><span class="w"> </span><span class="mi">117</span><span class="p">,</span><span class="w"> </span><span class="mi">125</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">108</span><span class="p">,</span><span class="w"> </span><span class="mi">117</span><span class="p">,</span><span class="w"> </span><span class="mi">125</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="p">.</span><span class="nc">btn</span><span class="p">.</span><span class="nc">btn-info</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">btn</span><span class="p">.</span><span class="nc">btn-inverse</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">btn</span><span class="p">.</span><span class="nc">ui_link</span><span class="p">.</span><span class="nc">btn-inverse</span><span class="o">,</span><span class="p">.</span><span class="nc">btn-tiny</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">ui_link</span><span class="p">.</span><span class="nc">btn</span><span class="p">.</span><span class="nc">btn-inverse</span><span class="p">.</span><span class="nc">btn-tiny</span><span class="p">.</span><span class="nc">ui_link_replaced</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">btn-inverse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">169</span><span class="p">,</span><span class="w"> </span><span class="mi">244</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">169</span><span class="p">,</span><span class="w"> </span><span class="mi">244</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="p">.</span><span class="nc">btn</span><span class="p">.</span><span class="nc">btn-info</span><span class="p">:</span><span class="nd">hover</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">btn</span><span class="p">.</span><span class="nc">btn-inverse</span><span class="p">:</span><span class="nd">hover</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">btn</span><span class="p">.</span><span class="nc">ui_link</span><span class="p">.</span><span class="nc">btn-inverse</span><span class="p">:</span><span class="nd">hover</span><span class="o">,</span><span class="p">.</span><span class="nc">btn-tiny</span><span class="p">:</span><span class="nd">hover</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">ui_link</span><span class="p">.</span><span class="nc">btn</span><span class="p">.</span><span class="nc">btn-inverse</span><span class="p">.</span><span class="nc">btn-tiny</span><span class="p">.</span><span class="nc">ui_link_replaced</span><span class="p">:</span><span class="nd">hover</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">btn-inverse</span><span class="p">:</span><span class="nd">hover</span><span class="o">,</span>
+
+<span class="w">     </span><span class="p">.</span><span class="nc">btn</span><span class="p">.</span><span class="nc">btn-inverse</span><span class="p">:</span><span class="nd">hover</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">btn</span><span class="p">.</span><span class="nc">ui_link</span><span class="p">.</span><span class="nc">btn-inverse</span><span class="p">:</span><span class="nd">hover</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">btn-tiny</span><span class="p">:</span><span class="nd">hover</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">ui_link</span><span class="p">.</span><span class="nc">btn</span><span class="p">.</span><span class="nc">btn-inverse</span><span class="p">.</span><span class="nc">btn-tiny</span><span class="p">.</span><span class="nc">ui_link_replaced</span><span class="p">:</span><span class="nd">hover</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">btn-inverse</span><span class="p">:</span><span class="nd">hover</span><span class="p">{</span>
+<span class="w">     </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">169</span><span class="p">,</span><span class="w"> </span><span class="mi">244</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="p">.</span><span class="nc">btn</span><span class="p">:</span><span class="nd">hover</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">cursor</span><span class="p">:</span><span class="w"> </span><span class="kc">pointer</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="w">     </span><span class="p">.</span><span class="nc">btn</span><span class="p">.</span><span class="nc">btn-warning</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">87</span><span class="p">,</span><span class="w"> </span><span class="mi">34</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">87</span><span class="p">,</span><span class="w"> </span><span class="mi">34</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="p">.</span><span class="nc">btn</span><span class="p">.</span><span class="nc">btn-danger</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">244</span><span class="p">,</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w"> </span><span class="mi">54</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">244</span><span class="p">,</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w"> </span><span class="mi">54</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="p">.</span><span class="nc">alert-success</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">);</span>
+<span class="w">     </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">219</span><span class="p">,</span><span class="w"> </span><span class="mi">239</span><span class="p">,</span><span class="w"> </span><span class="mi">220</span><span class="p">);</span>
+<span class="w">     </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">205</span><span class="p">,</span><span class="w"> </span><span class="mi">233</span><span class="p">,</span><span class="w"> </span><span class="mi">206</span><span class="p">);</span>
+<span class="w">     </span><span class="p">}.</span><span class="nc">alert-danger</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">127</span><span class="p">,</span><span class="w"> </span><span class="mi">35</span><span class="p">,</span><span class="w"> </span><span class="mi">28</span><span class="p">);</span>
+<span class="w">     </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">253</span><span class="p">,</span><span class="w"> </span><span class="mi">217</span><span class="p">,</span><span class="w"> </span><span class="mi">215</span><span class="p">);</span>
+<span class="w">     </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">252</span><span class="p">,</span><span class="w"> </span><span class="mi">202</span><span class="p">,</span><span class="w"> </span><span class="mi">199</span><span class="p">);</span>
+<span class="w">     </span><span class="p">}.</span><span class="nc">alert-primary</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">33</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="mi">94</span><span class="p">);</span>
+<span class="w">     </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">217</span><span class="p">,</span><span class="w"> </span><span class="mi">220</span><span class="p">,</span><span class="w"> </span><span class="mi">240</span><span class="p">);</span>
+<span class="w">     </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">201</span><span class="p">,</span><span class="w"> </span><span class="mi">206</span><span class="p">,</span><span class="w"> </span><span class="mi">234</span><span class="p">);</span>
+<span class="w">     </span><span class="p">}.</span><span class="nc">alert-secondary</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">56</span><span class="p">,</span><span class="w"> </span><span class="mi">61</span><span class="p">,</span><span class="w"> </span><span class="mi">65</span><span class="p">);</span>
+<span class="w">     </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">226</span><span class="p">,</span><span class="w"> </span><span class="mi">227</span><span class="p">,</span><span class="w"> </span><span class="mi">229</span><span class="p">);</span>
+<span class="w">     </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">214</span><span class="p">,</span><span class="w"> </span><span class="mi">216</span><span class="p">,</span><span class="w"> </span><span class="mi">219</span><span class="p">);</span>
+<span class="w">     </span><span class="p">}.</span><span class="nc">alert-warning</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">133</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">);</span>
+<span class="w">     </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">221</span><span class="p">,</span><span class="w"> </span><span class="mi">211</span><span class="p">);</span>
+<span class="w">     </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">208</span><span class="p">,</span><span class="w"> </span><span class="mi">193</span><span class="p">);</span>
+<span class="w">     </span><span class="p">}.</span><span class="nc">alert-info</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">88</span><span class="p">,</span><span class="w"> </span><span class="mi">127</span><span class="p">);</span>
+<span class="w">     </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">205</span><span class="p">,</span><span class="w"> </span><span class="mi">238</span><span class="p">,</span><span class="w"> </span><span class="mi">253</span><span class="p">);</span>
+<span class="w">     </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">184</span><span class="p">,</span><span class="w"> </span><span class="mi">231</span><span class="p">,</span><span class="w"> </span><span class="mi">252</span><span class="p">);</span>
+<span class="w">     </span><span class="p">}.</span><span class="nc">alert-light</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">127</span><span class="p">,</span><span class="w"> </span><span class="mi">127</span><span class="p">,</span><span class="w"> </span><span class="mi">127</span><span class="p">);</span>
+<span class="w">     </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">253</span><span class="p">,</span><span class="w"> </span><span class="mi">253</span><span class="p">,</span><span class="w"> </span><span class="mi">253</span><span class="p">);</span>
+<span class="w">     </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">252</span><span class="p">,</span><span class="w"> </span><span class="mi">252</span><span class="p">,</span><span class="w"> </span><span class="mi">252</span><span class="p">);</span>
+<span class="w">     </span><span class="p">}.</span><span class="nc">alert-dark</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">34</span><span class="p">,</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w"> </span><span class="mi">34</span><span class="p">);</span>
+<span class="w">     </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">217</span><span class="p">,</span><span class="w"> </span><span class="mi">217</span><span class="p">,</span><span class="w"> </span><span class="mi">217</span><span class="p">);</span>
+<span class="w">     </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">202</span><span class="p">,</span><span class="w"> </span><span class="mi">202</span><span class="p">,</span><span class="w"> </span><span class="mi">202</span><span class="p">);</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="w">     </span><span class="p">#</span><span class="nn">right-side-tabs</span><span class="w"> </span><span class="p">.</span><span class="nc">btn-tiny</span><span class="p">.</span><span class="nc">ui_submit</span><span class="p">.</span><span class="nc">ui_form_end_submit</span><span class="o">,</span><span class="w"> </span><span class="p">#</span><span class="nn">content</span><span class="w"> </span><span class="p">#</span><span class="nn">system-status</span><span class="w"> </span><span class="p">.</span><span class="nc">btn-tiny</span><span class="p">.</span><span class="nc">ui_submit</span><span class="p">.</span><span class="nc">ui_form_end_submit</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">line-height</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">     </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="kt">px</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span><span class="w">    </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="kt">px</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="w">     </span><span class="p">.</span><span class="nc">table-subtable</span><span class="w"> </span><span class="nt">tbody</span><span class="w"> </span><span class="nt">tr</span><span class="w"> </span><span class="nt">td</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">panel-body</span><span class="w"> </span><span class="p">.</span><span class="nc">table-subtable</span><span class="w"> </span><span class="nt">tr</span><span class="w"> </span><span class="nt">th</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">panel-body</span><span class="w"> </span><span class="p">.</span><span class="nc">table-subtable</span><span class="w"> </span><span class="nt">tr</span><span class="w"> </span><span class="nt">td</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">table-subtable</span><span class="w"> </span><span class="nt">tbody</span><span class="w"> </span><span class="nt">tr</span><span class="w"> </span><span class="nt">td</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">panel-body</span><span class="w"> </span><span class="nt">tr</span><span class="w"> </span><span class="nt">th</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">panel-body</span><span class="w"> </span><span class="nt">tr</span><span class="w"> </span><span class="nt">td</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mf">.75</span><span class="kt">rem</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="nt">body</span><span class="p">.</span><span class="nc">csf</span><span class="w"> </span><span class="p">.</span><span class="nc">dataTables_filter</span><span class="w"> </span><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;search&#39;</span><span class="o">],</span><span class="w"> </span><span class="nt">body</span><span class="w"> </span><span class="p">.</span><span class="nc">dataTables_filter</span><span class="w"> </span><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;search&#39;</span><span class="o">],</span><span class="w"> </span><span class="p">.</span><span class="nc">csf-container</span><span class="w"> </span><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="o">],</span><span class="w"> </span><span class="p">.</span><span class="nc">csf-container</span><span class="w"> </span><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;search&#39;</span><span class="o">],</span><span class="w"> </span><span class="p">.</span><span class="nc">csf-container</span><span class="w"> </span><span class="nt">input</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">csf-container</span><span class="w"> </span><span class="nt">select</span><span class="o">,</span><span class="w"> </span><span class="nt">input</span><span class="o">[</span><span class="nt">id</span><span class="o">^=</span><span class="s1">&#39;CSF&#39;</span><span class="o">],</span><span class="w"> </span><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;button&#39;</span><span class="o">],</span><span class="w"> </span><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;reset&#39;</span><span class="o">],</span><span class="w"> </span><span class="nt">input</span><span class="o">[</span><span class="nt">name</span><span class="o">]</span><span class="p">:</span><span class="nd">not</span><span class="o">([</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;image&#39;</span><span class="o">])</span><span class="p">:</span><span class="nd">not</span><span class="o">([</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;checkbox&#39;</span><span class="o">])</span><span class="p">:</span><span class="nd">not</span><span class="o">([</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;radio&#39;</span><span class="o">])</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">.</span><span class="nc">btn</span><span class="o">)</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">.</span><span class="nc">session_login</span><span class="o">),</span><span class="w"> </span><span class="nt">input</span><span class="o">[</span><span class="nt">name</span><span class="o">]</span><span class="p">:</span><span class="nd">not</span><span class="o">([</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;image&#39;</span><span class="o">])</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">.</span><span class="nc">sidebar-search</span><span class="o">)</span><span class="p">:</span><span class="nd">not</span><span class="o">([</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;button&#39;</span><span class="o">])</span><span class="p">:</span><span class="nd">not</span><span class="o">([</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;checkbox&#39;</span><span class="o">])</span><span class="p">:</span><span class="nd">not</span><span class="o">([</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;radio&#39;</span><span class="o">])</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">.</span><span class="nc">btn</span><span class="o">),</span><span class="w"> </span><span class="p">.</span><span class="nc">csf-container</span><span class="w"> </span><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="o">],</span><span class="w"> </span><span class="p">.</span><span class="nc">csf-container</span><span class="w"> </span><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;search&#39;</span><span class="o">],</span><span class="w"> </span><span class="p">.</span><span class="nc">chooser_button</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">form-control</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">     </span><span class="k">box-sizing</span><span class="p">:</span><span class="w"> </span><span class="kc">content-box</span><span class="p">;</span>
+<span class="w">     </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+<span class="w">     </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">     </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">     </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">     </span><span class="kp">-webkit-</span><span class="k">transition</span><span class="p">:</span><span class="w"> </span><span class="k">box-shadow</span><span class="w"> </span><span class="mf">.3</span><span class="kt">s</span><span class="p">,</span><span class="k">border</span><span class="w"> </span><span class="mf">.3</span><span class="kt">s</span><span class="p">;</span>
+<span class="w">     </span><span class="k">transition</span><span class="p">:</span><span class="w"> </span><span class="k">box-shadow</span><span class="w"> </span><span class="mf">.3</span><span class="kt">s</span><span class="p">,</span><span class="k">border</span><span class="w"> </span><span class="mf">.3</span><span class="kt">s</span><span class="p">;</span>
+<span class="w">     </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span>
+<span class="w">     </span><span class="k">border-bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">158</span><span class="p">,</span><span class="w"> </span><span class="mi">158</span><span class="p">,</span><span class="w"> </span><span class="mi">158</span><span class="p">);</span>
+<span class="w">     </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">     </span><span class="k">outline</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">     </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">     </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span><span class="k">font-size</span><span class="p">:</span><span class="mi">16</span><span class="kt">px</span><span class="p">;</span><span class="k">padding-left</span><span class="p">:</span><span class="mi">5</span><span class="kt">px</span><span class="p">;</span><span class="k">padding-right</span><span class="p">:</span><span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="nt">input</span><span class="o">[</span><span class="nt">name</span><span class="o">]</span><span class="p">:</span><span class="nd">not</span><span class="o">([</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;image&#39;</span><span class="o">])</span><span class="p">:</span><span class="nd">not</span><span class="o">([</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;checkbox&#39;</span><span class="o">])</span><span class="p">:</span><span class="nd">not</span><span class="o">([</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;radio&#39;</span><span class="o">])</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">.</span><span class="nc">btn</span><span class="o">)</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">.</span><span class="nc">session_login</span><span class="o">)</span><span class="p">:</span><span class="nd">focus</span><span class="o">,</span><span class="w"> </span><span class="nt">input</span><span class="o">[</span><span class="nt">name</span><span class="o">]</span><span class="p">:</span><span class="nd">not</span><span class="o">([</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;image&#39;</span><span class="o">])</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">.</span><span class="nc">sidebar-search</span><span class="o">)</span><span class="p">:</span><span class="nd">not</span><span class="o">([</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;button&#39;</span><span class="o">])</span><span class="p">:</span><span class="nd">not</span><span class="o">([</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;checkbox&#39;</span><span class="o">])</span><span class="p">:</span><span class="nd">not</span><span class="o">([</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;radio&#39;</span><span class="o">])</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">.</span><span class="nc">btn</span><span class="o">)</span><span class="p">:</span><span class="nd">focus</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">csf-container</span><span class="w"> </span><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="o">]</span><span class="p">:</span><span class="nd">focus</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">csf-container</span><span class="w"> </span><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s1">&#39;search&#39;</span><span class="o">]</span><span class="p">:</span><span class="nd">focus</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">chooser_button</span><span class="p">:</span><span class="nd">focus</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">form-control</span><span class="p">:</span><span class="nd">focus</span><span class="p">{</span>
+<span class="w">     </span><span class="k">border-bottom-width</span><span class="p">:</span><span class="mi">2</span><span class="kt">px</span><span class="p">;</span><span class="k">border-bottom-color</span><span class="w"> </span><span class="p">:</span><span class="w">  </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">63</span><span class="p">,</span><span class="w"> </span><span class="mi">81</span><span class="p">,</span><span class="w"> </span><span class="mi">181</span><span class="p">)</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="nt">li</span><span class="p">.</span><span class="nc">user-link</span><span class="o">,</span><span class="w"> </span><span class="nt">li</span><span class="p">.</span><span class="nc">user-link</span><span class="w"> </span><span class="nt">span</span><span class="o">,</span><span class="w"> </span><span class="nt">li</span><span class="p">.</span><span class="nc">user-link</span><span class="o">,</span><span class="w"> </span><span class="nt">li</span><span class="p">.</span><span class="nc">user-link</span><span class="w"> </span><span class="nt">i</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">85</span><span class="p">,</span><span class="w"> </span><span class="mi">189</span><span class="p">,</span><span class="w"> </span><span class="mi">212</span><span class="p">);</span>
+<span class="w">     </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="kt">px</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="k">line-height</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="w">     </span><span class="nt">html</span><span class="o">[</span><span class="nt">data-theme</span><span class="o">=</span><span class="s2">&quot;brown&quot;</span><span class="o">]</span><span class="w"> </span><span class="p">#</span><span class="nn">sidebar</span><span class="w"> </span><span class="p">.</span><span class="nc">form-group</span><span class="w"> </span><span class="p">.</span><span class="nc">form-control</span><span class="p">.</span><span class="nc">sidebar-search</span><span class="p">::</span><span class="nd">placeholder</span><span class="p">{</span>
+<span class="w">     </span><span class="k">color</span><span class="p">:</span><span class="mh">#bbb</span><span class="w"> </span><span class="cp">!important</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="w">     </span><span class="nt">html</span><span class="o">[</span><span class="nt">data-theme</span><span class="o">=</span><span class="s2">&quot;brown&quot;</span><span class="o">]</span><span class="w"> </span><span class="p">#</span><span class="nn">sidebar</span><span class="w"> </span><span class="p">.</span><span class="nc">form-group</span><span class="w"> </span><span class="p">.</span><span class="nc">form-control</span><span class="p">.</span><span class="nc">sidebar-search</span><span class="p">{</span>
+<span class="w">     </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#fff</span><span class="cp">!important</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+</pre></div></td></tr></table></div>
+</div>
+<p>Above can be pasted into Theme Extensions</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="security.html" class="btn btn-neutral float-right" title="Security" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="documents.html" class="btn btn-neutral float-left" title="Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright acugis
+      <span class="commit">
+        Revision <code>db2a027e</code>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="../index.html">latest</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="http://geohelm.docs.acugis.com/_/downloads/en/latest/pdf/">pdf</a></dd>
+        
+          <dd><a href="http://geohelm.docs.acugis.com/_/downloads/en/latest/htmlzip/">html</a></dd>
+        
+          <dd><a href="http://geohelm.docs.acugis.com/_/downloads/en/latest/epub/">epub</a></dd>
+        
+      </dl>
+      <dl>
+        
+        <dt>On Read the Docs</dt>
+          <dd>
+            <a href="http://readthedocs.org/projects/geohelm/?fromdocs=geohelm">Project Home</a>
+          </dd>
+          <dd>
+            <a href="http://readthedocs.org/builds/geohelm/?fromdocs=geohelm">Builds</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+   
+
+</body>
+
+<!-- Mirrored from geohelm.docs.acugis.com/en/latest/resources/css.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 13 Jul 2023 23:23:25 GMT -->
+</html>

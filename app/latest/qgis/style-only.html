@@ -1,0 +1,427 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<!-- Mirrored from geohelm.docs.acugis.com/en/latest/qgis/style-only.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 13 Jul 2023 23:23:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Publish Styles Only &mdash; AcuGIS GeoHelm 0.4.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+<!-- AcuGIS 1 -->
+  
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="../../../_/static/javascript/readthedocs-doc-embed.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Leaflet Choropleth App" href="../apps/choropleth.html" />
+    <link rel="prev" title="Publish Layers" href="publish.html" /> 
+
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="../../../_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "qgis/style-only", "programming_language": "perl", "project": "geohelm", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_rtd_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="../../../_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+
+
+                                                                <div id="header" style="position: fixed; height: 70px; padding-bottom: 20px; overflow: hidden; background-color: #28728d;  display: block; z-index: 1000; width: 100%;">
+        <div class="acugis_geosuite" style="color:#fff!important; padding-left:30px; font-size:26px; padding-top: 20px;"><a href="https://geohelm.docs.acugis.com/" style="color:#fff!important; text-decoration:none!important">AcuGIS GeoHelm</a></div>
+
+      </div>
+
+
+  
+
+                                                                
+  
+                                                                
+
+   
+</div>
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        
+        <div id="header2"> </div>
+        
+        
+        
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation" style="padding-top: 45px;">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout.html">Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../webmin.html">Control Panel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../webmin.html#removing-the-control-panel">Removing the Control Panel</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PostGIS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/createdb/index.html">Create Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/postgresql/index.html">PostgreSQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/postgis/index.html">PostGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/pgrouting/index.html">PgRouting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/shp2pgsql/index.html">shp2pgsql</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/osm2pgsql/index.html">osm2pgsql</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/raster2pgsql/index.html">raster2pgsql</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GeoServer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/admin/index.html">Access</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/geoservers/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/tomcat/index.html">Apache Tomcat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/workspace/index.html">Create a Workspace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/store/index.html">Create Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/layer/index.html">Add Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/shp/index.html">Load ESRI Shapefile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/styles/index.html">Styles</a></li>
+</ul>
+<p class="caption"><span class="caption-text">pg_tileserv</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/pgtileserv/index.html">pg_tileserv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/pgfeatureserv/index.html">pg_featureserv</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Database Operations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../database/snapshot/index.html">Database Snapshots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../database/clone/index.html">Clone Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../database/restore/index.html">Restore Database</a></li>
+</ul>
+<p class="caption"><span class="caption-text">QGIS</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pgservice.html">pg_service.conf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qgis.html">Create a QGIS Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publish.html">Publish Layers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Publish Styles Only</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#add-layers-to-qgis">Add Layers to QGIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-styles">Create Styles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#publish-styles">Publish Styles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-styles-in-geoserver">Set Styles in GeoServer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">LeafletJS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../apps/choropleth.html">Leaflet Choropleth App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apps/geojson.html">Leaflet GeoJson</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apps/php.html">Leaflet and PHP</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../resources/documents.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/css.html">CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/nagios.html">Nagios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/support.html">Project Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/commercial.html">Commercial Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index-2.html">AcuGIS GeoHelm</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index-2.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Publish Styles Only</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/AcuGIS/GeoHelm/blob/master/docs/qgis/style-only.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="publish-styles-only">
+<h1><a class="toc-backref" href="#id1">Publish Styles Only</a><a class="headerlink" href="#publish-styles-only" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#publish-styles-only" id="id1">Publish Styles Only</a><ul>
+<li><a class="reference internal" href="#add-layers-to-qgis" id="id2">Add Layers to QGIS</a></li>
+<li><a class="reference internal" href="#create-styles" id="id3">Create Styles</a></li>
+<li><a class="reference internal" href="#publish-styles" id="id4">Publish Styles</a></li>
+<li><a class="reference internal" href="#set-styles-in-geoserver" id="id5">Set Styles in GeoServer</a></li>
+<li><a class="reference internal" href="#summary" id="id6">Summary</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="add-layers-to-qgis">
+<h2><a class="toc-backref" href="#id2">Add Layers to QGIS</a><a class="headerlink" href="#add-layers-to-qgis" title="Permalink to this headline">¶</a></h2>
+<p>Previously, we used osm2pgsql to import a PBF file to our PostGIS database.</p>
+<p>However, we never published the layers created to GeoServer.</p>
+<p><strong>1. Create a new qgis project, andorra.qgs</strong></p>
+<p><strong>2. Expand the geosuite PostGIS connection</strong></p>
+<img alt="../_images/1-andorra.png" src="../_images/1-andorra.png" />
+<img alt="../_images/spacer11.png" src="../_images/spacer11.png" />
+<p><strong>3. Add the planet_osm_polygon layer to the project</strong></p>
+<img alt="../_images/2-andorra.png" src="../_images/2-andorra.png" />
+<img alt="../_images/spacer11.png" src="../_images/spacer11.png" />
+<p><strong>4. Add the planet_osm_points layer to the project</strong></p>
+<img alt="../_images/3-andorra.png" src="../_images/3-andorra.png" />
+<img alt="../_images/spacer11.png" src="../_images/spacer11.png" />
+</div>
+<div class="section" id="create-styles">
+<h2><a class="toc-backref" href="#id3">Create Styles</a><a class="headerlink" href="#create-styles" title="Permalink to this headline">¶</a></h2>
+<p><strong>1. In the top menu, go to Web &gt; GeoCat &gt; StyleViewer</strong></p>
+<img alt="../_images/5-andorra.png" src="../_images/5-andorra.png" />
+<img alt="../_images/spacer11.png" src="../_images/spacer11.png" />
+<p><strong>2. As shown below, the SLD style for our layer is displayed</strong></p>
+<img alt="../_images/4-andorra.png" src="../_images/4-andorra.png" />
+<img alt="../_images/spacer11.png" src="../_images/spacer11.png" />
+<p><strong>3. Double click the planet_osm_polygon layer to open the Properties box</strong></p>
+<img alt="../_images/7-andorra.png" src="../_images/7-andorra.png" />
+<img alt="../_images/spacer11.png" src="../_images/spacer11.png" />
+<p><strong>4. On the Symbology section, select a new fill color and click Save</strong></p>
+<img alt="../_images/8-andorra.png" src="../_images/8-andorra.png" />
+<img alt="../_images/spacer11.png" src="../_images/spacer11.png" />
+<p><strong>5. Our new polygon style is updated as below</strong></p>
+<img alt="../_images/10-andorra.png" src="../_images/10-andorra.png" />
+<img alt="../_images/spacer11.png" src="../_images/spacer11.png" />
+<p><strong>6. Repeat for the planet_osm_points layer, selecting ‘Blue Diamond’</strong></p>
+<img alt="../_images/good-no.png" src="../_images/good-no.png" />
+<img alt="../_images/spacer11.png" src="../_images/spacer11.png" />
+<p><strong>7. Again, we see the SLD style for the layer is displayed on save</strong></p>
+<img alt="../_images/good-no-2.png" src="../_images/good-no-2.png" />
+<img alt="../_images/spacer11.png" src="../_images/spacer11.png" />
+</div>
+<div class="section" id="publish-styles">
+<h2><a class="toc-backref" href="#id4">Publish Styles</a><a class="headerlink" href="#publish-styles" title="Permalink to this headline">¶</a></h2>
+<p><strong>1. As before, go to Web &gt; GeoCat &gt; Publish</strong></p>
+<img alt="../_images/22.png" src="../_images/22.png" />
+<img alt="../_images/spacer11.png" src="../_images/spacer11.png" />
+<p><strong>2. In order to publish only our styles to GeoServer, tick the “Symbology only” checkbox and then click Publish</strong></p>
+<img alt="../_images/auth-5.png" src="../_images/auth-5.png" />
+<img alt="../_images/spacer11.png" src="../_images/spacer11.png" />
+<p><strong>3. We should see a success message like below</strong></p>
+<img alt="../_images/good-2.png" src="../_images/good-2.png" />
+<img alt="../_images/spacer11.png" src="../_images/spacer11.png" />
+</div>
+<div class="section" id="set-styles-in-geoserver">
+<h2><a class="toc-backref" href="#id5">Set Styles in GeoServer</a><a class="headerlink" href="#set-styles-in-geoserver" title="Permalink to this headline">¶</a></h2>
+<p><strong>1. Log in to GeoServer and click Add New Layer</strong></p>
+<img alt="../_images/layer-11.png" src="../_images/layer-11.png" />
+<img alt="../_images/spacer11.png" src="../_images/spacer11.png" />
+<p><strong>2. Click the publish links for planet_osm_polygon and planet_osm_points layers from our PostGIS store</strong></p>
+<img alt="../_images/publish-andorra-1.png" src="../_images/publish-andorra-1.png" />
+<img alt="../_images/spacer11.png" src="../_images/spacer11.png" />
+<p><strong>3. Go to Layers and select the planet_osm_polygon layer</strong></p>
+<img alt="../_images/publish-andorra-2.png" src="../_images/publish-andorra-2.png" />
+<img alt="../_images/spacer11.png" src="../_images/spacer11.png" />
+<p><strong>4. On the Publish tab, select the green polygon style we uploaded above</strong></p>
+<img alt="../_images/publish-andorra-3.png" src="../_images/publish-andorra-3.png" />
+<img alt="../_images/spacer11.png" src="../_images/spacer11.png" />
+<p><strong>5. Repeat for the planet_osm_points layer</strong></p>
+<img alt="../_images/publish-andorra-4.png" src="../_images/publish-andorra-4.png" />
+<img alt="../_images/spacer11.png" src="../_images/spacer11.png" />
+<p><strong>6. The styles we created in QGIS and uploaded using GeoCat Bridge are now applied</strong></p>
+<img alt="../_images/publish-andorra-5.png" src="../_images/publish-andorra-5.png" />
+<img alt="../_images/spacer11.png" src="../_images/spacer11.png" />
+</div>
+<div class="section" id="summary">
+<h2><a class="toc-backref" href="#id6">Summary</a><a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>We used GeoCat bridge to upload styles we created in QGIS and applied the styles in GeoServer</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../apps/choropleth.html" class="btn btn-neutral float-right" title="Leaflet Choropleth App" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="publish.html" class="btn btn-neutral float-left" title="Publish Layers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright acugis
+      <span class="commit">
+        Revision <code>db2a027e</code>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="../index.html">latest</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="http://geohelm.docs.acugis.com/_/downloads/en/latest/pdf/">pdf</a></dd>
+        
+          <dd><a href="http://geohelm.docs.acugis.com/_/downloads/en/latest/htmlzip/">html</a></dd>
+        
+          <dd><a href="http://geohelm.docs.acugis.com/_/downloads/en/latest/epub/">epub</a></dd>
+        
+      </dl>
+      <dl>
+        
+        <dt>On Read the Docs</dt>
+          <dd>
+            <a href="http://readthedocs.org/projects/geohelm/?fromdocs=geohelm">Project Home</a>
+          </dd>
+          <dd>
+            <a href="http://readthedocs.org/builds/geohelm/?fromdocs=geohelm">Builds</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+   
+
+</body>
+
+<!-- Mirrored from geohelm.docs.acugis.com/en/latest/qgis/style-only.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 13 Jul 2023 23:23:19 GMT -->
+</html>

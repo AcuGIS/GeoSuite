@@ -1,0 +1,571 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<!-- Mirrored from geohelm.docs.acugis.com/en/latest/components/pgtileserv/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 13 Jul 2023 23:22:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pg_tileserv &mdash; AcuGIS GeoHelm 0.4.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+<!-- AcuGIS 1 -->
+  
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="../../../../_/static/javascript/readthedocs-doc-embed.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pg_featureserv" href="../pgfeatureserv/index.html" />
+    <link rel="prev" title="Styles" href="../../geoserver/styles/index.html" /> 
+
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="../../../../_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "components/pgtileserv/index", "programming_language": "perl", "project": "geohelm", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_rtd_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="../../../../_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+
+
+                                                                <div id="header" style="position: fixed; height: 70px; padding-bottom: 20px; overflow: hidden; background-color: #28728d;  display: block; z-index: 1000; width: 100%;">
+        <div class="acugis_geosuite" style="color:#fff!important; padding-left:30px; font-size:26px; padding-top: 20px;"><a href="https://geohelm.docs.acugis.com/" style="color:#fff!important; text-decoration:none!important">AcuGIS GeoHelm</a></div>
+
+      </div>
+
+
+  
+
+                                                                
+  
+                                                                
+
+   
+</div>
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        
+        <div id="header2"> </div>
+        
+        
+        
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation" style="padding-top: 45px;">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout.html">Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webmin.html">Control Panel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webmin.html#removing-the-control-panel">Removing the Control Panel</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PostGIS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../createdb/index.html">Create Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../postgresql/index.html">PostgreSQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../postgis/index.html">PostGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pgrouting/index.html">PgRouting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shp2pgsql/index.html">shp2pgsql</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../osm2pgsql/index.html">osm2pgsql</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../raster2pgsql/index.html">raster2pgsql</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GeoServer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../geoserver/admin/index.html">Access</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../geoserver/geoservers/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../geoserver/tomcat/index.html">Apache Tomcat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../geoserver/workspace/index.html">Create a Workspace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../geoserver/store/index.html">Create Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../geoserver/layer/index.html">Add Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../geoserver/shp/index.html">Load ESRI Shapefile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../geoserver/styles/index.html">Styles</a></li>
+</ul>
+<p class="caption"><span class="caption-text">pg_tileserv</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pg_tileserv</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#about">About</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">pg_tileserv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command-line">Command Line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#access">Access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#webmin">Webmin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#database">Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loading-data">Loading Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#structure">Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-file">Configuration File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enable-ssl">Enable SSL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-postgisftw-database">The postgisftw Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pgfeatureserv/index.html">pg_featureserv</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Database Operations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../database/snapshot/index.html">Database Snapshots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../database/clone/index.html">Clone Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../database/restore/index.html">Restore Database</a></li>
+</ul>
+<p class="caption"><span class="caption-text">QGIS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../qgis/home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../qgis/pgservice.html">pg_service.conf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../qgis/qgis.html">Create a QGIS Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../qgis/publish.html">Publish Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../qgis/style-only.html">Publish Styles Only</a></li>
+</ul>
+<p class="caption"><span class="caption-text">LeafletJS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../apps/choropleth.html">Leaflet Choropleth App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apps/geojson.html">Leaflet GeoJson</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apps/php.html">Leaflet and PHP</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/documents.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/css.html">CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/nagios.html">Nagios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/support.html">Project Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/commercial.html">Commercial Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index-2.html">AcuGIS GeoHelm</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index-2.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>pg_tileserv</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/AcuGIS/GeoHelm/blob/master/docs/components/pgtileserv/index.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pg-tileserv">
+<h1><a class="toc-backref" href="#id2">pg_tileserv</a><a class="headerlink" href="#pg-tileserv" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#pg-tileserv" id="id2">pg_tileserv</a><ul>
+<li><a class="reference internal" href="#about" id="id3">About</a></li>
+<li><a class="reference internal" href="#id1" id="id4">pg_tileserv</a></li>
+<li><a class="reference internal" href="#command-line" id="id5">Command Line</a></li>
+<li><a class="reference internal" href="#access" id="id6">Access</a></li>
+<li><a class="reference internal" href="#webmin" id="id7">Webmin</a></li>
+<li><a class="reference internal" href="#database" id="id8">Database</a></li>
+<li><a class="reference internal" href="#loading-data" id="id9">Loading Data</a></li>
+<li><a class="reference internal" href="#structure" id="id10">Structure</a></li>
+<li><a class="reference internal" href="#configuration-file" id="id11">Configuration File</a></li>
+<li><a class="reference internal" href="#enable-ssl" id="id12">Enable SSL</a></li>
+<li><a class="reference internal" href="#the-postgisftw-database" id="id13">The postgisftw Database</a></li>
+<li><a class="reference internal" href="#documentation" id="id14">Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="about">
+<h2><a class="toc-backref" href="#id3">About</a><a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h2>
+<p>pg_tileserv is produced by Crunch Data (<a class="reference external" href="https://www.crunchydata.com/">https://www.crunchydata.com/</a>)</p>
+<p>The documentation and examples provided are extensive (<a class="reference external" href="https://access.crunchydata.com/documentation/pg_tileserv/latest/">https://access.crunchydata.com/documentation/pg_tileserv/latest/</a>)</p>
+<p>We’ll confine ourselves below to the usage and layout of the service in GeoSuite</p>
+</div>
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id4">pg_tileserv</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>pg_tileserv is installed as a systemd service during installation.</p>
+<p>The service can be started and stopped via command line or Webmin.</p>
+<p>The service file contents are show below.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[Unit]</span>
+<span class="go">Description=PG TileServ</span>
+<span class="go">After=multi-user.target</span>
+
+<span class="go">[Service]</span>
+<span class="go">User=pgis</span>
+<span class="go">WorkingDirectory=/opt/pg_tileserv</span>
+<span class="go">Type=simple</span>
+<span class="go">Restart=always</span>
+<span class="go">ExecStart=/opt/pg_tileserv/pg_tileserv --config /opt/pg_tileserv/config/pg_tileserv.toml</span>
+
+<span class="go">[Install]</span>
+<span class="go">WantedBy=multi-user.target</span>
+</pre></div>
+</div>
+<p>The file is installed at</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">/etc/systemd/system/pg_tileserv.service</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="command-line">
+<h2><a class="toc-backref" href="#id5">Command Line</a><a class="headerlink" href="#command-line" title="Permalink to this headline">¶</a></h2>
+<p>Service commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">root@postgis:~# </span>service<span class="w"> </span>pg_tileser<span class="w"> </span>stop<span class="w"> </span><span class="p">|</span><span class="w"> </span>start
+</pre></div>
+</div>
+</div>
+<div class="section" id="access">
+<h2><a class="toc-backref" href="#id6">Access</a><a class="headerlink" href="#access" title="Permalink to this headline">¶</a></h2>
+<p>pg_tileserv runs of port 7800 and can be accessed at <a class="reference external" href="http://doamin.com:7800/">http://doamin.com:7800</a></p>
+<p>You can change the port via the pg_tileserv.toml file located under /opt/pg_tileserv/config</p>
+</div>
+<div class="section" id="webmin">
+<h2><a class="toc-backref" href="#id7">Webmin</a><a class="headerlink" href="#webmin" title="Permalink to this headline">¶</a></h2>
+<p>To start and stop the pg_tileserv service, click the button as below.</p>
+<img alt="../../_images/pgtileserv.png" src="../../_images/pgtileserv.png" />
+<img alt="../../_images/spacer4.png" src="../../_images/spacer4.png" />
+</div>
+<div class="section" id="database">
+<h2><a class="toc-backref" href="#id8">Database</a><a class="headerlink" href="#database" title="Permalink to this headline">¶</a></h2>
+<p>On installation, a database is created called postgisftw.</p>
+<p>This database contains the demo data.</p>
+<p>A user pgis is also created and given permission to the database.</p>
+<p>The password for pgis is displayed at the end of installation as well as saved to /root/auth.txt</p>
+</div>
+<div class="section" id="loading-data">
+<h2><a class="toc-backref" href="#id9">Loading Data</a><a class="headerlink" href="#loading-data" title="Permalink to this headline">¶</a></h2>
+<p>When loading data to any database for which you will use pg_tileserv, you MUST set a SRID</p>
+<p>Without a declared SRID, pg_tileserv will not pick up the table.</p>
+<img alt="../../_images/set-SRID1.png" src="../../_images/set-SRID1.png" />
+<img alt="../../_images/spacer4.png" src="../../_images/spacer4.png" />
+</div>
+<div class="section" id="structure">
+<h2><a class="toc-backref" href="#id10">Structure</a><a class="headerlink" href="#structure" title="Permalink to this headline">¶</a></h2>
+<p>pg_tileserv is installed by default at</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">/opt/pgtileserv</span>
+</pre></div>
+</div>
+<p>The directory structure is show below</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">/opt/pg_tileserv</span>
+<span class="go">├── LICENSE.md</span>
+<span class="go">├── README.md</span>
+<span class="go">├── assets</span>
+<span class="go">    ├── index.html</span>
+<span class="go">    ├── preview-function.html</span>
+<span class="go">    └── preview-table.html</span>
+<span class="go">├── config</span>
+<span class="go">    ├── pg_tileserv.toml</span>
+<span class="go">    └── pg_tileserv.toml.example.save</span>
+<span class="go">└── pg_tileserv</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuration-file">
+<h2><a class="toc-backref" href="#id11">Configuration File</a><a class="headerlink" href="#configuration-file" title="Permalink to this headline">¶</a></h2>
+<p>On installation, the pg_tileserv.toml configuration file is updated to include the postgisftw connection inforation</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">DbConnection = &quot;postgresql://pgis:G84iwLdL9jeyA7IiwkTmWhyHwKR41Qxz@localhost/postgisftw&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="enable-ssl">
+<h2><a class="toc-backref" href="#id12">Enable SSL</a><a class="headerlink" href="#enable-ssl" title="Permalink to this headline">¶</a></h2>
+<p>To enable SSL on pg_tileserv, follow the steps below</p>
+<p><strong>1. Copy the fullchaim.pem and privkey.pem files from letsencrypt to the pg_tileserv directory</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cp /etc/letsencrypt/live/domain.com/fullchain.pem /opt/pg_tileserv/fullchain.pem</span>
+<span class="go">cp /etc/letsencrypt/live/domain.com/privkey.pem /opt/pg_tileserv/privkey.pem</span>
+</pre></div>
+</div>
+<p><strong>2. Change to the /opt/pg_tileserv directory and chown the owner of the chain and key files to user pgis</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd /opt/pg_tileserv</span>
+<span class="go">chown pgis:pgis fullchain.pem</span>
+<span class="go">chown pgis:pgis privkey.pem</span>
+</pre></div>
+</div>
+<p><strong>3. Find the following lines in /opt/pg_tileserv/config/pg_tileserv.toml</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Accept<span class="w"> </span>connections<span class="w"> </span>on<span class="w"> </span>this<span class="w"> </span>port
+<span class="go">HttpPort = 7800</span>
+<span class="gp"># </span><span class="nv">HttpsPort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7801</span>
+</pre></div>
+</div>
+<p><strong>4. Update the lines to below</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Accept<span class="w"> </span>connections<span class="w"> </span>on<span class="w"> </span>this<span class="w"> </span>port
+<span class="gp"># </span><span class="nv">HttpPort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7800</span>
+<span class="go">HttpsPort = 7801</span>
+</pre></div>
+</div>
+<p><strong>5. Find the following lines in /opt/pg_tileserv/config/pg_tileserv.toml</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span><span class="nv">TlsServerCertificateFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;server.crt&quot;</span>
+<span class="gp"># </span><span class="nv">TlsServerPrivateKeyFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;server.key&quot;</span>
+</pre></div>
+</div>
+<p><strong>6. Update the lines to below</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">TlsServerCertificateFile = &quot;fullchain.pem&quot;</span>
+<span class="go">TlsServerPrivateKeyFile = &quot;privkey.pem&quot;</span>
+</pre></div>
+</div>
+<p><strong>7. Restart pg_tileserv to pick up changes</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">service pg_tileserv restart</span>
+</pre></div>
+</div>
+<p>or use the Restart button in the control panel</p>
+<p>You should now be able to access pg_tileserv via:</p>
+<blockquote>
+<div><a class="reference external" href="https://yourdomain.com:7801/">https://yourdomain.com:7801</a></div></blockquote>
+</div>
+<div class="section" id="the-postgisftw-database">
+<h2><a class="toc-backref" href="#id13">The postgisftw Database</a><a class="headerlink" href="#the-postgisftw-database" title="Permalink to this headline">¶</a></h2>
+<p>As part of the GeoSuite installation, a database, user, and password are created.</p>
+<p>This database, postgisftw, is actually the demo database created for pg_tileserv, but we use it throughout the tutorials.</p>
+<p>To connect to the database via SSH:</p>
+<ol class="arabic simple">
+<li>su to user postgres:</li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">su - postgres</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="mailto:postgres&#37;&#52;&#48;lizmap-demo">postgres<span>&#64;</span>lizmap-demo</a>:~$</p>
+<ol class="arabic simple" start="2">
+<li>Start pgsql</li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">postgres@demo:~$ </span>psql
+<span class="go">psql (15.3 (Ubuntu 15.3-1.pgdg22.04+1))</span>
+<span class="go">Type &quot;help&quot; for help.</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>List database using \l  This will provide a list of database, as well as owners:</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">postgres</span><span class="o">=</span><span class="c1"># \l</span>
+<span class="w">                                        </span>List<span class="w"> </span>of<span class="w"> </span>databases
+Name<span class="w">    </span><span class="p">|</span><span class="w">  </span>Owner<span class="w">   </span><span class="p">|</span><span class="w"> </span>Encoding<span class="w"> </span><span class="p">|</span><span class="w"> </span>Collate<span class="w"> </span><span class="p">|</span><span class="w">  </span>Ctype<span class="w">  </span><span class="p">|</span><span class="w"> </span>ICU<span class="w"> </span>Locale<span class="w"> </span><span class="p">|</span><span class="w"> </span>Locale<span class="w"> </span>Provider<span class="w"> </span><span class="p">|</span><span class="w">   </span>Access<span class="w"> </span>privileges
+------------+----------+----------+---------+---------+------------+-----------------+-----------------------
+geostore<span class="w">   </span><span class="p">|</span><span class="w"> </span>postgres<span class="w"> </span><span class="p">|</span><span class="w"> </span>UTF8<span class="w">     </span><span class="p">|</span><span class="w"> </span>C.UTF-8<span class="w"> </span><span class="p">|</span><span class="w"> </span>C.UTF-8<span class="w"> </span><span class="p">|</span><span class="w">            </span><span class="p">|</span><span class="w"> </span>libc<span class="w">            </span><span class="p">|</span>
+postgisftw<span class="w"> </span><span class="p">|</span><span class="w"> </span>pgis<span class="w">     </span><span class="p">|</span><span class="w"> </span>UTF8<span class="w">     </span><span class="p">|</span><span class="w"> </span>C.UTF-8<span class="w"> </span><span class="p">|</span><span class="w"> </span>C.UTF-8<span class="w"> </span><span class="p">|</span><span class="w">            </span><span class="p">|</span><span class="w"> </span>libc<span class="w">            </span><span class="p">|</span>
+postgres<span class="w">   </span><span class="p">|</span><span class="w"> </span>postgres<span class="w"> </span><span class="p">|</span><span class="w"> </span>UTF8<span class="w">     </span><span class="p">|</span><span class="w"> </span>C.UTF-8<span class="w"> </span><span class="p">|</span><span class="w"> </span>C.UTF-8<span class="w"> </span><span class="p">|</span><span class="w">            </span><span class="p">|</span><span class="w"> </span>libc<span class="w">            </span><span class="p">|</span>
+template0<span class="w">  </span><span class="p">|</span><span class="w"> </span>postgres<span class="w"> </span><span class="p">|</span><span class="w"> </span>UTF8<span class="w">     </span><span class="p">|</span><span class="w"> </span>C.UTF-8<span class="w"> </span><span class="p">|</span><span class="w"> </span>C.UTF-8<span class="w"> </span><span class="p">|</span><span class="w">            </span><span class="p">|</span><span class="w"> </span>libc<span class="w">            </span><span class="p">|</span><span class="w"> </span><span class="o">=</span>c/postgres<span class="w">          </span>+
+<span class="w">    </span><span class="p">|</span><span class="w">          </span><span class="p">|</span><span class="w">          </span><span class="p">|</span><span class="w">         </span><span class="p">|</span><span class="w">         </span><span class="p">|</span><span class="w">            </span><span class="p">|</span><span class="w">                 </span><span class="p">|</span><span class="w"> </span><span class="nv">postgres</span><span class="o">=</span>CTc/postgres
+template1<span class="w">  </span><span class="p">|</span><span class="w"> </span>postgres<span class="w"> </span><span class="p">|</span><span class="w"> </span>UTF8<span class="w">     </span><span class="p">|</span><span class="w"> </span>C.UTF-8<span class="w"> </span><span class="p">|</span><span class="w"> </span>C.UTF-8<span class="w"> </span><span class="p">|</span><span class="w">            </span><span class="p">|</span><span class="w"> </span>libc<span class="w">            </span><span class="p">|</span><span class="w"> </span><span class="o">=</span>c/postgres<span class="w">          </span>+
+<span class="w">    </span><span class="p">|</span><span class="w">          </span><span class="p">|</span><span class="w">          </span><span class="p">|</span><span class="w">         </span><span class="p">|</span><span class="w">         </span><span class="p">|</span><span class="w">            </span><span class="p">|</span><span class="w">                 </span><span class="p">|</span><span class="w"> </span><span class="nv">postgres</span><span class="o">=</span>CTc/postgres
+<span class="o">(</span><span class="m">5</span><span class="w"> </span>rows<span class="o">)</span>
+
+<span class="o">(</span>END<span class="o">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>Connect to the postgisftw datbase using the \c command</li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">postgres=# \c postgisftw</span>
+</pre></div>
+</div>
+<p>You are now connected to database “postgisftw” as user “postgres”.</p>
+<ol class="arabic simple" start="5">
+<li>List the tables in the database using the \dt command</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">postgisftw</span><span class="o">=</span><span class="c1"># \dt</span>
+<span class="w">               </span>List<span class="w"> </span>of<span class="w"> </span>relations
+Schema<span class="w"> </span><span class="p">|</span><span class="w">       </span>Name<span class="w">        </span><span class="p">|</span><span class="w"> </span>Type<span class="w">  </span><span class="p">|</span><span class="w">  </span>Owner
+--------+-------------------+-------+----------
+public<span class="w"> </span><span class="p">|</span><span class="w"> </span>configuration<span class="w">     </span><span class="p">|</span><span class="w"> </span>table<span class="w"> </span><span class="p">|</span><span class="w"> </span>pgis
+public<span class="w"> </span><span class="p">|</span><span class="w"> </span>countries<span class="w">         </span><span class="p">|</span><span class="w"> </span>table<span class="w"> </span><span class="p">|</span><span class="w"> </span>pgis
+public<span class="w"> </span><span class="p">|</span><span class="w"> </span>pointsofinterest<span class="w">  </span><span class="p">|</span><span class="w"> </span>table<span class="w"> </span><span class="p">|</span><span class="w"> </span>pgis
+public<span class="w"> </span><span class="p">|</span><span class="w"> </span>spatial_ref_sys<span class="w">   </span><span class="p">|</span><span class="w"> </span>table<span class="w"> </span><span class="p">|</span><span class="w"> </span>postgres
+public<span class="w"> </span><span class="p">|</span><span class="w"> </span>ways<span class="w">              </span><span class="p">|</span><span class="w"> </span>table<span class="w"> </span><span class="p">|</span><span class="w"> </span>pgis
+public<span class="w"> </span><span class="p">|</span><span class="w"> </span>ways_vertices_pgr<span class="w"> </span><span class="p">|</span><span class="w"> </span>table<span class="w"> </span><span class="p">|</span><span class="w"> </span>pgis
+<span class="o">(</span><span class="m">8</span><span class="w"> </span>rows<span class="o">)</span>
+
+<span class="nv">postgisftw</span><span class="o">=</span><span class="c1">#</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="documentation">
+<h2><a class="toc-backref" href="#id14">Documentation</a><a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://access.crunchydata.com/documentation/pg_tileserv/latest/">https://access.crunchydata.com/documentation/pg_tileserv/latest/</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../pgfeatureserv/index.html" class="btn btn-neutral float-right" title="pg_featureserv" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../geoserver/styles/index.html" class="btn btn-neutral float-left" title="Styles" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright acugis
+      <span class="commit">
+        Revision <code>db2a027e</code>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="../../index.html">latest</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="http://geohelm.docs.acugis.com/_/downloads/en/latest/pdf/">pdf</a></dd>
+        
+          <dd><a href="http://geohelm.docs.acugis.com/_/downloads/en/latest/htmlzip/">html</a></dd>
+        
+          <dd><a href="http://geohelm.docs.acugis.com/_/downloads/en/latest/epub/">epub</a></dd>
+        
+      </dl>
+      <dl>
+        
+        <dt>On Read the Docs</dt>
+          <dd>
+            <a href="http://readthedocs.org/projects/geohelm/?fromdocs=geohelm">Project Home</a>
+          </dd>
+          <dd>
+            <a href="http://readthedocs.org/builds/geohelm/?fromdocs=geohelm">Builds</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+   
+
+</body>
+
+<!-- Mirrored from geohelm.docs.acugis.com/en/latest/components/pgtileserv/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 13 Jul 2023 23:22:43 GMT -->
+</html>
