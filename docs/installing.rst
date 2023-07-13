@@ -42,11 +42,9 @@ On a fresh Ubuntu 22 or Rocky Linux 9 installation, as root:
 
 .. code-block:: console
    
-   wget https://raw.githubusercontent.com/AcuGIS/geosuite/master/scripts/geosuite-installer.sh && chmod +x geosuite-installer.sh && ./geosuite-installer.sh
+   wget https://raw.githubusercontent.com/AcuGIS/geohelm/master/scripts/geohelm-installer.sh && chmod +x geohelm-installer.sh && ./geohelm-installer.sh
     
 The above will start the installer
-
-Select the installation type you would like, either full (GeoSuite with MapStore2) or GeoSuite PostGIS Only
 
 .. image:: _static/geosuite-installer-screen-1.png
 
@@ -83,7 +81,7 @@ The installation progressed is displayed as below.
 .. image:: _static/spacer.png
 
 
-A full installation with MapStore2 on Ubuntu takes about 3 to 4 minutes to complete installation.
+A full installation on Ubuntu takes about 3 to 4 minutes to complete installation.
 
 A full installation with Rocky Linux can take 10-15 minutes due to manual OSM build required.
 
@@ -107,7 +105,7 @@ If you did not have the GeoSuite installer enable SSL, you can use the script be
 
 .. code-block:: console
 
-   wget https://raw.githubusercontent.com/AcuGIS/geosuite/master/scripts/build-ssl.sh && chmod +x build-ssl.sh && ./build-ssl
+   wget https://raw.githubusercontent.com/AcuGIS/geohelm/master/scripts/build-ssl.sh && chmod +x build-ssl.sh && ./build-ssl
 
 After a few moments you should see the success message below:
 
