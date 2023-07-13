@@ -60,16 +60,7 @@ AcuGIS GeoSuite
     database/clone/index
     database/restore/index
     
-.. toctree::
-    :maxdepth: 2
-    :caption: MapStore2
 
-    maptools/mapstore2/intro
-    maptools/mapstore2/access   
-    maptools/mapstore2/map
-    maptools/mapstore2/dashboard
-    maptools/mapstore2/users
-    
 .. toctree::
     :maxdepth: 2
     :caption: QGIS
