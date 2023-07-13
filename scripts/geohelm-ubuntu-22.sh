@@ -412,6 +412,12 @@ function install_geoserver_module(){
     /usr/share/webmin/install-module.pl geoserver.wbm.gz
 		rm -rf geoserver.wbm.gz
   popd
+
+cat >>/etc/apache2/conf.d/geoserver.conf <<EOF
+ProxyPass        /geoserver   http://localhost:8080/geoserver
+ProxyPassReverse /geoserver   http://localhost:8080/geoserver
+EOF
+  
 }
 
 function install_postgis_module(){
