@@ -413,7 +413,7 @@ function install_geoserver_module(){
 		rm -rf geoserver.wbm.gz
   popd
 
-cat >>/etc/apache2/conf.d/geoserver.conf <<EOF
+cat >>/etc/apache2/conf-enabled/geoserver.conf <<EOF
 ProxyPass        /geoserver   http://localhost:8080/geoserver
 ProxyPassReverse /geoserver   http://localhost:8080/geoserver
 EOF
