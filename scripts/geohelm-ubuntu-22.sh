@@ -1,7 +1,7 @@
 #!/bin/bash -e
 #For use on clean Ubuntu 22.04 only!!!
 #Cited, Inc. Wilmington, Delaware
-#Description: GeoHelm Ubuntu installer
+#Description: GeoSuite Ubuntu installer
 
 # default menu options
 WEBMIN_MODS='geoserver postgis certbot'
@@ -349,11 +349,11 @@ function setup_user(){
 }
 
 function install_bootstrap_app(){
-	wget --quiet -P/tmp https://github.com/AcuGIS/GeoHelm/archive/refs/heads/master.zip
+	wget --quiet -P/tmp https://github.com/AcuGIS/GeoSuite/archive/refs/heads/master.zip
 	unzip /tmp/master.zip -d/tmp
 
-	cp -r /tmp/GeoHelm-master/app/* /var/www/html/
-	mv /tmp/GeoHelm-master/app/data /opt/
+	cp -r /tmp/GeoSuite-master/app/* /var/www/html/
+	mv /tmp/GeoSuite-master/app/data /opt/
 
 	rm -rf /tmp/master.zip
 	
@@ -402,7 +402,7 @@ function install_webmin(){
 
 function install_geoserver_module(){
 
-	pushd /tmp/GeoHelm-master/
+	pushd /tmp/GeoSuite-master/
     #wget --quiet https://github.com/AcuGIS/GeoServer/archive/master.zip
     #unzip master.zip
     #mv GeoServer-master geoserver
@@ -459,9 +459,9 @@ function install_certbot_module(){
 function install_geohelm_module(){
 
   pushd /opt/
-    wget --quiet https://github.com/AcuGIS/GeoHelm/archive/master.zip
+    wget --quiet https://github.com/AcuGIS/GeoSuite/archive/master.zip
     unzip master.zip
-		mv GeoHelm-master geohelm
+		mv GeoSuite-master geosuite
 		tar -czf /opt/geohelm.wbm.gz geohelm
 		rm -rf geohelm master.zip
 
@@ -606,19 +606,19 @@ function menu(){
 	# disable error flag
 	set +e
 	
-	SUITE_FLAVOR=$(whiptail --title "GeoHelm Installer" --menu \
-									"Select the GeoHelm version you want to install:" 20 78 4 \
-									"GeoHelm Full Installation" " " 3>&1 1>&2 2>&3)
+	SUITE_FLAVOR=$(whiptail --title "GeoSuite Installer" --menu \
+									"Select the GeoSuite version you want to install:" 20 78 4 \
+									"GeoSuite Full Installation" " " 3>&1 1>&2 2>&3)
 	
 	exitstatus=$?
 	if [ $exitstatus != 0 ]; then
-		echo "GeoHelm installation cancelled."
+		echo "GeoSuite installation cancelled."
 		exit 1
 	fi
 	
 	# set options based on flavor we have
 	case ${SUITE_FLAVOR} in
-		"GeoHelm Full Installation")
+		"GeoSuite Full Installation")
 			;;
 	esac
 
@@ -631,7 +631,7 @@ function menu(){
 	    exit 0
 	fi
 
-	whiptail --title "GeoHelm can provision SSL for ${HNAME}" --yesno \
+	whiptail --title "GeoSuite can provision SSL for ${HNAME}" --yesno \
 		"Provision SSL for  ${HNAME}?" 8 78
 	
 	exitstatus=$?
