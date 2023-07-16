@@ -456,20 +456,6 @@ function install_certbot_module(){
   popd
 }
 
-function install_geohelm_module(){
-
-  pushd /opt/
-    wget --quiet https://github.com/AcuGIS/GeoSuite/archive/master.zip
-    unzip master.zip
-		mv GeoSuite-master geosuite
-		tar -czf /opt/geohelm.wbm.gz geohelm
-		rm -rf geohelm master.zip
-
-		/usr/share/webmin/install-module.pl geohelm.wbm.gz
-		rm -f geohelm.wbm.gz
-  popd
-}
-
 function install_tomcat(){
 
 	apt-get -y install haveged
