@@ -32,8 +32,6 @@ The control panel and modules can be uninstalled and all components will continu
 ## System Requirements: <br />
 Disk: <code>10 GB</code><br />
 Memory: <code>2 GB (Minimum) </code><br /> 
-User Access:<code>root access required</code><br />
-
 
 ## Installation
 
