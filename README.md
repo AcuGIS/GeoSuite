@@ -1,11 +1,11 @@
-# GeoSuite: Open Source GIS Suite
+# GeoHelm: Open Source GIS Suite
 
 [![Documentation Status](https://readthedocs.org/projects/geohelm/badge/?version=latest)](https://geohelm.docs.acugis.com/en/latest/?badge=latest)
 
 
 ![GeoHelm Logo](docs/_static/GeoSuite-Landing-Page.png)
 
-GeoSuite installs, configures, and manages the <code>latest, stable</code> versions of:
+GeoHelm installs, configures, and manages the <code>latest, stable</code> versions of:
 
 <code>Apache Tomcat</code><br />
 <code>OpenJDK</code><br />
