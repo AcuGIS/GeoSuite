@@ -1,75 +1,75 @@
-# GeoHelm: A new route to Open Source GIS
+# GeoSuite: Open Source GIS Suite
 
 * Project page: https://www.acugis.com/geohelm
 * Documentation: https://geohelm.docs.acugis.com 
 
-![GeoHelm Logo](geohelm-top-banner.jpg)
+![GeoHelm Logo](docs/_static/GeoSuite-Landing-Page.png)
 
-GeoHelm is a Webmin module that installs, configures, and manages the <code>latest, stable</code> versions of:
+GeoSuite installs, configures, and manages the <code>latest, stable</code> versions of:
 
 <code>Apache Tomcat</code><br />
-<code>Oracle Java or OpenJDK</code><br />
+<code>OpenJDK</code><br />
+<code>GeoServer</code><br />
 <code>PostgreSQL</code><br />
 <code>PostGIS</code><br />
 <code>PgRouting</code><br />
-<code>GeoServer</code><br />
+<code>pg_tileserv</code><br />
+<code>pg_featurserv</code><br />
 
 It also provides browser-based management for all services (see screen shot below)
 
-All software installed by GeoHelm is unmodified, so it does not limit, change, or impede normal SSH access or require specific usage.  <br />
+All software installed by GeoSuite is unmodified, so it does not limit, change, or impede normal SSH access or require specific usage.  <br />
 
-The entire module can even be uninstalled and all components will continue to run.<br />
+The control panel and modules can be uninstalled and all components will continue to run.<br />
 
 
 
 ## Supported Operating Systems <br/>
 		
-<code>CentOS 7</code><br />
-<code>Ubuntu 20 LTS</code><br />
 <code>Ubuntu 22 LTS</code><br />
+<code>Rocky Linux 9</code>
 
 ## System Requirements: <br />
 Disk: <code>10 GB</code><br />
-Memory: <code>1 GB (Minimum) </code><br /> 
+Memory: <code>2 GB (Minimum) </code><br /> 
 User Access:<code>root access required</code><br />
-Software Requirements: <code>Webmin</code><br />
 
-# Install Webmin and GeoHelm via Script:
 
-      wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/pre-install.sh
-      chmod +x pre-install.sh
-      ./pre-install.sh
+## Installation
 
-Go to Webmin > Servers > GeoHelm to complete installation using the Wizard
+1. On a clean Ubuntu 22 or Rocky Linux 9 system, run below as root to launch the Installer::
 
-# Quick Install (if Webmin already installed):
+      	wget https://raw.githubusercontent.com/AcuGIS/GeoSuite/master/scripts/geohelm-installer.sh && chmod +x geohelm-installer.sh && ./geohelm-installer.sh
 
-1. Log into Webmin
-2. Go to Webmin Configuration > Webmin Modules
-3. Select "From HTTP or FTP Url"
-4. Enter https://github.com/AcuGIS/GeoHelm/blob/master/scripts/geohelm.wbm.gz?raw=true
-5. Click the Install button.
-6. Go to Webmin > Servers > GeoHelm to complete installation using the Wizard
 
-# Install via Git:
+2.  Select "Full Installation" and tab to OK
 
-Archive module
+![GeoHelm Installer](docs/_static/Install-2.png)
 
-	$ git clone https://github.com/AcuGIS/GeoHelm
-	$ mv GeoHelm-master geohelm
-	$ tar -cvzf geohelm.wbm.gz geohelm/
+3.  The Installer will prompt to check hostname and if you wish to enable SSL
 
-Upload from Webmin->Webmin Configuration->Webmin Modules
+![GeoHelm Installer](docs/_static/Install-3.png)
 
-Go to Webmin > Servers > GeoHelm to complete installation using the Wizard
+3.  The Installer will prompt if you wish to enable SSL
 
+![GeoHelm Installer](docs/_static/Install-4.png)
+
+Installation time on Ubuntu 22 is about 4 minutes.  Installation time on Rocky Linux can take up to 15 minutes due to required source build for osm2pgsql
+
+![GeoHelm Installer](docs/_static/Install-5.png)
+
+On completetion, below is displayed::
+
+		Installation is now completed.
+		Access pg-tileserv at rok.webgis1.com:7800
+		Access pg-featureserv at rok.webgis1.com:9000
+		postgres, Tomcat, and crunchy pg passwords are saved in /root/auth.txt file
+		SSL Provisioning Success.
+
+4. Click the Login link on the homepage to access the control panel.
 
 ## Documentation
-GeoHelm Documentation is available at [GeoHelm Docs](https://www.acugis.com/geohelm/docs/)
-		
-## GeoHelm Installed:
+GeoSuite Documentation is available at [GeoHelm Docs](https://www.acugis.com/geohelm/docs/)
 
-
-![GeoHelm Installed](geohelm-header.png)
 
 [AcuGIS](https://www.acugis.com/), [GeoHelm](https://geohelm.org) &copy; 2023 [Cited, Inc. ](https://www.citedcorp.com)Cited, Inc. All Rights Reserved.
