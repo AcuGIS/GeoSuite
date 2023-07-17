@@ -3,7 +3,7 @@
 [![Documentation Status](https://readthedocs.org/projects/geohelm/badge/?version=latest)](https://geohelm.docs.acugis.com/en/latest/?badge=latest)
 
 
-![GeoHelm Logo](docs/_static/GeoSuite-Landing-Page.png)
+![GeoHelm Logo](docs/_static/GeoHelm-main.png)
 
 GeoHelm installs, configures, and manages the <code>latest, stable</code> versions of:
 
