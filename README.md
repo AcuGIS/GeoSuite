@@ -1,7 +1,7 @@
 # GeoSuite: Open Source GIS Suite
 
-* Project page: https://www.acugis.com/geohelm
-* Documentation: https://geohelm.docs.acugis.com 
+[![Documentation Status](https://readthedocs.org/projects/geohelm/badge/?version=latest)](https://geohelm.docs.acugis.com/en/latest/?badge=latest)
+
 
 ![GeoHelm Logo](docs/_static/GeoSuite-Landing-Page.png)
 
