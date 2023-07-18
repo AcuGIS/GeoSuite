@@ -1,4 +1,4 @@
-AcuGIS GeoSuite
+AcuGIS GeoHelm
 ==================================================
 
 .. image:: _static/GeoHelm-main.png
