@@ -38,7 +38,7 @@ AcuGIS GeoHelm is used to install, configure, and manage the latest stable relea
 
 `osm2pgsql`_
 
-.. _`osm2pgsql`: https://github.com/openstreetmap/osm2pgsql/blob/master/docs/usage.md/
+.. _`osm2pgsql`: https://github.com/openstreetmap/osm2pgsql/
 
 
 `shp2pgsql`_
