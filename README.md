@@ -37,7 +37,7 @@ Memory: <code>2 GB (Minimum) </code><br />
 
 1. On a clean Ubuntu 22 or Rocky Linux 9 system, run below as root to launch the Installer::
 
-      	wget https://raw.githubusercontent.com/AcuGIS/GeoSuite/master/scripts/geohelm-installer.sh && chmod +x geohelm-installer.sh && ./geohelm-installer.sh
+      	wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/geohelm-installer.sh && chmod +x geohelm-installer.sh && ./geohelm-installer.sh
 
 
 2.  Select "Full Installation" and tab to OK
