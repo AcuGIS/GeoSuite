@@ -491,18 +491,15 @@ function install_geoserver_module(){
 
 function install_postgis_module(){
 
-  pushd /opt/
-		wget --quiet https://github.com/AcuGIS/PostGIS-Module/archive/master.zip
-		unzip master.zip
-		mv PostGIS-Module-master postgis
-		rm -f postgis/setup.cgi
-		tar -czf /opt/postgis.wbm.gz postgis
-		rm -rf postgis master.zip
+	pushd /tmp/GeoHelm-master/
+    rm -f postgis/setup.cgi
+    tar -czf postgis.wbm.gz postgis
+    rm -rf postgis
 
     /usr/libexec/webmin/install-module.pl postgis.wbm.gz
 		rm -rf postgis.wbm.gz
   popd
-
+  
 }
 
 function install_certbot_module(){
