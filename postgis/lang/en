@@ -1,0 +1,125 @@
+index_title=PostGIS
+index_root=The root directory is $1.
+index_return=PostGIS
+
+index_start=Start
+index_stop=Stop
+index_restart=Restart
+
+index_startmsg=Click to Start pg_tileserv
+index_stopmsg=Click to Stop pg_tileserv
+index_restartmsg=Click to Restart pg_tileserv
+
+
+index_startmsg_fs=Click to Start pg_featureserv
+index_stopmsg_fs=Click to Stop pg_featureserv
+index_restartmsg_fs=Click to Restart pg_featureserv
+
+delete_err=Failed to delete modules
+delete_enone=No modules selected
+
+source_local=Local file
+source_uploaded=Uploaded file
+source_ftp=FTP or HTTP URL
+
+source_err0=File Error
+source_err1=Upload Error
+source_err1.2=No upload file
+source_err2=Download error
+source_err3=Invalid URL
+
+pg_ext_cascade=Automatically drop objects that depend on the extension
+
+pg_ext_title=Extensions
+pg_ext_edit=Edit PostgreSQL extensions
+pg_ext_save=Save
+pg_ext_enabled=Enabled
+pg_ext_disabled=Disabled
+pg_ext_database=Database
+
+pg_inst_title=Repository
+pg_inst_edit=Edit PostgreSQL packages
+pg_versions=Supported Versions
+pg_inst_save=Update
+pg_repo_install=Install repo
+pg_enable_ssl=Enable SSL
+pg_listen_all=Listen on all interfaces
+
+add_shape_title=shp2pgsql
+add_shape_desc1=Import shape file to an existing PostGIS database
+load_type=Load Type
+set_srid=Set SRID (defaults to 0)
+db_user=Database Username
+db_schema=Schema
+db_table=Table
+shape_load=Load
+shape_source=Shape source (.zip)
+select_or=Or
+
+add_raster_title=raster2pgsql
+add_raster_desc1=Import raster file to an existing PostGIS database
+raster_source=Raster source (.tif)
+
+add_osm_title=osm2pgsql
+add_osm_desc1=Import OSM data to an existing PostGIS database
+osm_source=OSM source (.pbf)
+style_source=Style Source
+osm_db_mode=Database mode
+osm_coor_fmt=Coordinate format
+osm_epsg=EPSG Projection
+slim_mode=Store temporary data in the database
+osm_hstore=Add tags without column to an additional hstore (key/value) column
+osm_mem_cache=Memory for caching nodes
+osm_cpu_cores=Number of parallel processes 
+
+
+snapshots_title=Snapshots
+snapshots_tab_create=Create
+snapshots_tab_restore=Restore
+snapshots_desc1=Create a snapshot of selected PG database in two formats, and save it to FTP
+snapshot_options=Snapshot options
+snapshot_format=Format
+snapshot_compress=Compress
+snapshot_compress_gz=gzip
+snapshot_dump_sql=SQL
+snapshot_dump_custom=Custom
+snapshot_db=Database
+snapshots_createok=Create
+
+snapshots_desc2=Restore database from a snapshot
+snapshot_restore=Restore
+snapshot_available=Available snapshots
+snapshots_restoreok=Restore
+
+snapshots_create_title=Snapshot in progress
+
+snapshots_tab_clone=Clone
+snapshots_desc3=Clone a database
+snapshot_clone=Clone options
+snapshot_source=Source
+snapshot_target=Target
+snapshots_cloneok=Clone
+snapshots_clone_title=Cloning in progress
+
+reports_title=PG Database reports
+reports_tab_drill=Drill
+reports_tab_ratio=Ratio
+reports_tab_history=History
+
+drill_desc=Table I/0 Stats
+drill_options=Options
+reports_drill_title=PostgreSQL Table I/0
+
+ratio_desc=Cache Ratio Report
+ratio_options=Options
+reports_ratio_title=Table I/O
+
+history_desc=History of PG database
+history_options=Options
+reports_history_title=Table History
+
+docs_title=Docs
+
+setup_title=Setup
+
+scout_title=Scout
