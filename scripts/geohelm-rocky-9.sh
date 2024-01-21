@@ -5,7 +5,7 @@
 
 # default menu options
 WEBMIN_MODS='geoserver postgis certbot'
-TOMCAT_MAJOR=90
+TOMCAT_MAJOR=9
 JAVA_FLAVOR='OpenJDK'
 GEOSERVER_WEBAPP='Yes'
 
@@ -532,7 +532,7 @@ function install_tomcat(){
 
 	if [ ! -d apache-tomcat-${TOMCAT_VER} ]; then
 		if [ ! -f /tmp/apache-tomcat-${TOMCAT_VER}.tar.gz ]; then
-			wget -P/tmp "${TOMCAT_URL}"
+			wget -q -P/tmp "https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR}/v${TOMCAT_VER}/bin/apache-tomcat-${TOMCAT_VER}.tar.gz"
 		fi
 		tar xzf /tmp/apache-tomcat-${TOMCAT_VER}.tar.gz
 		chown -R tomcat:tomcat apache-tomcat-${TOMCAT_VER}
@@ -711,11 +711,9 @@ function install_deps(){
 	
 	dnf install -y wget unzip tar httpd bzip2 epel-release policycoreutils-python-utils
 	
-	# Get Tomcat 9 latest version and set CATALINA_HOME
-	wget -q -P/tmp --no-check-certificate https://tomcat.apache.org/download-${TOMCAT_MAJOR}.cgi
-	TOMCAT_VER=$(grep '<a href="#9.' /tmp/download-${TOMCAT_MAJOR}.cgi | cut -f2 -d'>' | cut -f1 -d'<' | head -n 1)
-	TOMCAT_URL=$(sed -n "s|.* href=\"\(https://.*/bin/apache-tomcat-${TOMCAT_VER}.tar.gz\)\".*|\1|p" /tmp/download-${TOMCAT_MAJOR}.cgi)
-	if [ -z "${TOMCAT_VER}" ] || [ -z "${TOMCAT_URL}" ]; then
+	# Get Tomcat latest version and set CATALINA_HOME
+	TOMCAT_VER=$(wget -q -O- --no-check-certificate https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR}/ | sed -n "s|.*<a href=\"v\(${TOMCAT_MAJOR}\.[0-9.]\+\)/\">v.*|\1|p" | sort -V | tail -n 1)
+	if [ -z "${TOMCAT_VER}" ]; then
 		echo "Error: Failed to get tomcat version"; exit 1;
 	fi
 	CATALINA_HOME="/home/tomcat/apache-tomcat-${TOMCAT_VER}"
