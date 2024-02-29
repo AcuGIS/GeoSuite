@@ -685,11 +685,6 @@ declare -x STEPS=(
 	'Setting Up Users...'
 	'Installing PostgreSQL Repository....'
 	'Installing PostGIS Packages....'
-	'Creating Crunchy Database....'
-	'Loading Crunchy Data...'
-	'Installing pg_tileserv'
-	'Installing pg_featurserv'
-	'Installing pg_routing'
 	'Installing Java....'
 )
 declare -x CMDS=(
@@ -700,11 +695,6 @@ declare -x CMDS=(
 	'setup_user'
 	'install_postgresql'
 	'install_postgis_pkgs'
-	'crunchy_setup_pg'
-	'load_pg_data'
-	'install_pg_tileserv'
-	'install_pg_featureserv'
-	'install_pg_routing'
 	'install_java'
 )
 
