@@ -13,8 +13,7 @@ GeoHelm installs, configures, and manages the <code>latest, stable</code> versio
 <code>PostgreSQL</code><br />
 <code>PostGIS</code><br />
 <code>PgRouting</code><br />
-<code>pg_tileserv</code><br />
-<code>pg_featurserv</code><br />
+
 
 It also provides browser-based management for all services (see screen shot below)
 
@@ -59,8 +58,6 @@ Installation time on Ubuntu 22 is about 4 minutes.  Installation time on Rocky L
 On completetion, below is displayed::
 
 		Installation is now completed.
-		Access pg-tileserv at rok.webgis1.com:7800
-		Access pg-featureserv at rok.webgis1.com:9000
 		postgres, Tomcat, and crunchy pg passwords are saved in /root/auth.txt file
 		SSL Provisioning Success.
 
