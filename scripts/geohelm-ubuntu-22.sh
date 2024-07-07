@@ -111,6 +111,214 @@ CMD_EOF
 	service postgresql restart
 }
 
+#Set up postgresql for Crunchy Data stuff
+
+function crunchy_setup_pg(){
+
+  apt-get install -y postgis python3 osm2pgrouting
+
+  sudo -u postgres createuser ${APPUSER} --superuser
+
+  sudo -u postgres psql <<CMD_EOF
+alter user ${APPUSER} with password '${APPUSER_PG_PASS}';
+CREATE DATABASE ${APPDB} WITH OWNER = ${APPUSER} ENCODING = 'UTF8';
+\connect ${APPDB};
+CREATE SCHEMA ${APPDB};
+CREATE EXTENSION postgis;
+CREATE EXTENSION pgrouting;
+CMD_EOF
+
+  echo "${APPUSER} PG pass: ${APPUSER_PG_PASS}" >> /root/auth.txt
+}
+
+#Load Natual Earth data for testing
+
+
+function load_pg_data(){
+  pushd /home/pgis
+    wget --quiet https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip
+    unzip ne_50m_admin_0_countries.zip
+    rm -f ne_50m_admin_0_countries.zip
+
+    chown pgis:pgis ne_50m_admin_0_countries.*
+
+    shp2pgsql -I -s 4326 -W "latin1" ne_50m_admin_0_countries.shp countries | sudo -u ${APPUSER} psql -d ${APPDB}
+
+   
+    #load routing data
+    wget --quiet http://download.osgeo.org/livedvd/data/osm/Boston_MA/Boston_MA.osm.bz2
+    bunzip2 Boston_MA.osm.bz2
+    osm2pgrouting --username ${APPUSER} --password ${APPUSER_PG_PASS} --host 127.0.0.1 --dbname ${APPDB} --file Boston_MA.osm
+    rm -f Boston_MA.osm
+  popd
+}
+
+#Install pg_tileserv and config to run as a service
+
+
+function install_pg_tileserv(){
+  TILESERV_HOME='/opt/pg_tileserv'
+  mkdir -p ${TILESERV_HOME}
+
+  pushd ${TILESERV_HOME}
+    wget --quiet -P/tmp https://postgisftw.s3.amazonaws.com/pg_tileserv_latest_linux.zip
+    unzip /tmp/pg_tileserv_latest_linux.zip
+    rm -f /tmp/pg_tileserv_latest_linux.zip
+
+    pushd config
+     	sed -i.save "s|# DbConnection = \"postgresql://username:password@host/dbname\"|DbConnection = \"postgresql://${APPUSER}:${APPUSER_PG_PASS}@localhost/${APPDB}\"|" pg_tileserv.toml.example
+  	  sed -i.save "s|^AssetsPath =.*|AssetsPath = \"${TILESERV_HOME}/assets\"|g" pg_tileserv.toml.example
+      sed -i.save 's/^[# ]*HttpPort = .*/HttpPort = 7800/' pg_tileserv.toml.example
+      sed -i.save 's/^[# ]*CacheTTL = .*/CacheTTL = 600/' pg_tileserv.toml.example
+      sed -i.save 's/^HttpsPort =/#HttpsPort =/' pg_tileserv.toml.example
+     	mv pg_tileserv.toml.example pg_tileserv.toml
+    popd
+  popd
+
+
+
+  chown -R ${APPUSER}:${APPUSER} ${TILESERV_HOME}
+
+#The service file
+
+  cat >/etc/systemd/system/pg_tileserv.service <<CMD_EOF
+[Unit]
+Description=PG TileServ
+After=multi-user.target
+
+[Service]
+User=${APPUSER}
+WorkingDirectory=${TILESERV_HOME}
+Type=simple
+Restart=always
+ExecStart=${TILESERV_HOME}/pg_tileserv --config ${TILESERV_HOME}/config/pg_tileserv.toml
+
+
+
+[Install]
+WantedBy=multi-user.target
+CMD_EOF
+
+  systemctl daemon-reload
+  systemctl enable pg_tileserv
+  systemctl start pg_tileserv
+}
+
+#Install pg_featureserv and config to run as a service
+
+function install_pg_featureserv(){
+  FEATSERV_HOME='/opt/pg_featureserv'
+  mkdir -p ${FEATSERV_HOME}
+
+  pushd ${FEATSERV_HOME}
+    wget --quiet -P/tmp https://postgisftw.s3.amazonaws.com/pg_featureserv_latest_linux.zip
+    unzip /tmp/pg_featureserv_latest_linux.zip
+    rm -f /tmp/pg_featureserv_latest_linux.zip
+
+    pushd config
+
+      sed -i.save "s|# DbConnection = \"postgresql://username:password@host/dbname\"|DbConnection = \"postgresql://${APPUSER}:${APPUSER_PG_PASS}@localhost/${APPDB}\"|" pg_featureserv.toml.example
+      sed -i.save "s|^AssetsPath =.*|AssetsPath = \"${FEATSERV_HOME}/assets\"|g" pg_featureserv.toml.example
+      sed -i.save 's/^HttpHost = .*/HttpHost = "0.0.0.0"/' pg_featureserv.toml.example
+      sed -i.save 's/^HttpPort = .*/HttpPort = 9000/' pg_featureserv.toml.example
+      sed -i.save 's/^HttpsPort =/#HttpsPort =/' pg_featureserv.toml.example
+      
+      mv pg_featureserv.toml.example pg_featureserv.toml
+    popd
+
+  popd
+
+  chown -R ${APPUSER}:${APPUSER} ${FEATSERV_HOME}
+
+  cat >/etc/systemd/system/pg_featureserv.service <<CMD_EOF
+[Unit]
+Description=PG FeatureServ
+After=multi-user.target
+
+[Service]
+User=${APPUSER}
+WorkingDirectory=${FEATSERV_HOME}
+Type=simple
+Restart=always
+ExecStart=${FEATSERV_HOME}/pg_featureserv --config ${FEATSERV_HOME}/config/pg_featureserv.toml
+
+[Install]
+WantedBy=multi-user.target
+CMD_EOF
+
+
+  systemctl daemon-reload
+  systemctl enable pg_featureserv
+  systemctl start pg_featureserv
+
+}
+
+function install_pg_routing(){
+  sudo -u postgres psql -d ${APPDB} <<CMD_EOF
+CREATE OR REPLACE
+FUNCTION public.boston_nearest_id(geom geometry)
+RETURNS bigint
+AS \$\$
+    SELECT node.id
+    FROM ways_vertices_pgr node
+    JOIN ways edg
+      ON (node.id = edg.source OR    -- Only return node that is
+          node.id = edg.target)      --   an edge source or target.
+    WHERE edg.source != edg.target   -- Drop circular edges.
+    ORDER BY node.the_geom <-> \$1    -- Find nearest node.
+    LIMIT 1;
+\$\$ LANGUAGE 'sql'
+STABLE
+STRICT
+PARALLEL SAFE;
+
+CREATE OR REPLACE
+FUNCTION ${APPDB}.boston_find_route(
+    from_lon FLOAT8 DEFAULT -71.07246980438231,
+    from_lat FLOAT8 DEFAULT 42.3439930733156,
+    to_lon FLOAT8 DEFAULT -71.06028184661864,
+    to_lat FLOAT8 DEFAULT 42.354491297186655)
+RETURNS
+  TABLE(path_seq integer,
+        edge bigint,
+        cost double precision,
+        agg_cost double precision,
+        geom geometry)
+AS \$\$
+    BEGIN
+    RETURN QUERY
+    WITH clicks AS (
+    SELECT
+        ST_SetSRID(ST_Point(from_lon, from_lat), 4326) AS start,
+        ST_SetSRID(ST_Point(to_lon, to_lat), 4326) AS stop
+    )
+    SELECT dijk.path_seq, dijk.edge, dijk.cost, dijk.agg_cost, ways.the_geom AS geom
+    FROM ways
+    CROSS JOIN clicks
+    JOIN pgr_dijkstra(
+        'SELECT gid as id, source, target, length_m as cost, length_m as reverse_cost FROM ways',
+        -- source
+        boston_nearest_id(clicks.start),
+        -- target
+        boston_nearest_id(clicks.stop)
+        ) AS dijk
+        ON ways.gid = dijk.edge;
+    END;
+\$\$ LANGUAGE 'plpgsql'
+STABLE
+STRICT
+PARALLEL SAFE;
+CMD_EOF
+
+  #get the routing web UI
+  sed -i.save "
+s/var serverName =.*/var serverName = '${HNAME}'/
+s/:7800\/public.ways/:7800\/tile\/public.ways/
+" /var/www/html/openlayers-pgrouting.html
+
+  systemctl restart pg_tileserv pg_featureserv
+}
+
 function info_for_user()
 
 {
@@ -118,8 +326,10 @@ function info_for_user()
 #End message for user
 
 echo -e "Installation is now completed."
+echo -e "Access pg-tileserv at ${HNAME}:7800"
+echo -e "Access pg-featureserv at ${HNAME}:9000"
 echo -e "Access pg-routing at ${HNAME}/openlayers-pgrouting.html"
-echo -e "postgres password is saved in /root/auth.txt file"
+echo -e "postgres and crunchy pg passwords are saved in /root/auth.txt file"
 	
 	if [ ${BUILD_SSL} == 'yes' ]; then
 		if [ ! -f /etc/letsencrypt/live/${HNAME}/privkey.pem ]; then
@@ -128,6 +338,14 @@ echo -e "postgres password is saved in /root/auth.txt file"
 			echo 'SSL Provisioning Success.'
 		fi
 	fi
+}
+
+function setup_user(){
+  useradd -m ${APPUSER}
+
+  echo "${APPDB}:${APPUSER}:${APPUSER_PG_PASS}" >/home/${APPUSER}/.pgpass
+  chown ${APPUSER}:${APPUSER} /home/${APPUSER}/.pgpass
+  chmod 0600 /home/${APPUSER}/.pgpass
 }
 
 function install_bootstrap_app(){
@@ -201,6 +419,8 @@ ProxyPassReverse /geoserver   http://localhost:8080/geoserver
 EOF
   
 }
+
+
 
 function install_postgis_module(){
 
