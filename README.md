@@ -66,6 +66,12 @@ On completetion, below is displayed::
 
 4. Click the Login link on the homepage to access the control panel.
 
+5. If you elected to enable QuartzMap, go to https://yourdomain.com/quartzmap/admin/setup.php and enter your information
+
+![GeoSuite Installer](docs/_static/quartzmap-geosuite.png)
+
+
+
 ## Documentation
 GeoSuite Documentation is available at [GeoSuite Docs](https://geosuite.docs.acugis.com)
 
