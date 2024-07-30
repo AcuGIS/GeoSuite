@@ -3,7 +3,7 @@
 [![Documentation Status](https://readthedocs.org/projects/geohelm/badge/?version=latest)](https://geohelm.docs.acugis.com/en/latest/?badge=latest)
 
 
-![GeoHelm Logo](docs/_static/geosuite-docs-main.png)
+![GeoHelm Logo](docs/_static/acugis-geosuite-github.png)
 
 
 
