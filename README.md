@@ -3,16 +3,20 @@
 [![Documentation Status](https://readthedocs.org/projects/geohelm/badge/?version=latest)](https://geohelm.docs.acugis.com/en/latest/?badge=latest)
 
 
-![GeoHelm Logo](docs/_static/GeoHelm-main.png)
+![GeoHelm Logo](docs/_static/geosuite-docs-main.png)
+
+
+
 
 GeoSuite installs, configures, and manages the <code>latest, stable</code> versions of:
 
 <code>Apache Tomcat</code><br />
-<code>OpenJDK</code><br />
 <code>GeoServer</code><br />
 <code>PostgreSQL</code><br />
 <code>PostGIS</code><br />
 <code>PgRouting</code><br />
+<code>QGIS Server</code><br />
+<code>QuartzMap</code><br />
 
 
 It also provides browser-based management for all services (see screen shot below)
