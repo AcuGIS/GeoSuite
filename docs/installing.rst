@@ -35,6 +35,12 @@ Use the hostname command to verify the full hostname is now set:
 
 
 
+
+
+
+
+
+
 Run the Installer
 ------------------------
 
@@ -42,13 +48,13 @@ On a fresh Ubuntu 22 or Rocky Linux 9 installation, as root:
 
 .. code-block:: console
    
-   wget https://raw.githubusercontent.com/AcuGIS/geosuite/master/scripts/geosuite-installer.sh && chmod +x geosuite-installer.sh && ./geosuite-installer.sh
+   wget https://raw.githubusercontent.com/AcuGIS/GeoSuite/master/scripts/geosuite-installer.sh && chmod +x geosuite-installer.sh && ./geosuite-installer.sh
     
 The above will start the installer
 
-Select the installation type you would like, either full (GeoSuite with MapStore2) or GeoSuite PostGIS Only
+Select the installation type you would like, either full (GeoSuite with QuartzMap) or GeoSuite Standalone
 
-.. image:: _static/geosuite-installer-screen-1.png
+.. image:: _static/geosuite-install-screen-1.png
 
 
 .. image:: _static/spacer.png
@@ -56,21 +62,21 @@ Select the installation type you would like, either full (GeoSuite with MapStore
 
 Tab to the OK button and hit enter
 
-.. image:: _static/geosuite-installer-screen-2.png
+.. image:: _static/geosuite-install-screen-2.png
 
 .. image:: _static/spacer.png
 
 
 A reminder is displayed to set the hostname.  If you have set the hostname, or do not wish to use SSL, hit continue
 
-.. image:: _static/geosuite-installer-screen-3.png
+.. image:: _static/geosuite-install-screen-3.png
 
 .. image:: _static/spacer.png
 
 
 A prompt will ask you if you would like GeoSuite to provision a free SSL certificate using LetsEncrypt
 
-.. image:: _static/ssl-option.png
+.. image:: _static/geosuite-install-screen-4.png
 
 .. image:: _static/spacer.png
 
@@ -91,10 +97,16 @@ Upon completion the display will show as below:
 
 .. code-block:: console
 
-        Installation is now completed.
-        Access pg-tileserv at http://YourIP:7800
-        Access pg-featureserv at http://YourIP:9000
-        postgres and crunchy pg passwords are saved in /root/auth.txt file
+      Installation is now completed.
+      postgres, Tomcat, and crunchy pg passwords are saved in /root/auth.txt file
+      SSL Provisioning Success.
+
+
+Click the Login link on the homepage to access the control panel.
+
+If you elected to enable QuartzMap, go to https://yourdomain.com/quartzmap/admin/setup.php and enter your information
+
+.. image:: _static/quartzmap-geosuite.png
         
 
 The passwords are also stored in the file /root/auth.txt following set up
