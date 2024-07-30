@@ -30,20 +30,20 @@ The control panel and modules can be uninstalled and all components will continu
 ## Supported Operating Systems <br/>
 		
 <code>Ubuntu 22 LTS</code><br />
-<code>Rocky Linux 9</code>
+<code>Ubuntu 24 LTS</code>
 
 ## System Requirements: <br />
-Disk: <code>10 GB</code><br />
+Disk: <code>15 GB</code><br />
 Memory: <code>2 GB (Minimum) </code><br /> 
 
 ## Installation
 
 1. On a clean Ubuntu 22 or Rocky Linux 9 system, run below as root to launch the Installer::
 
-      	wget https://raw.githubusercontent.com/AcuGIS/GeoHelm/master/scripts/geohelm-installer.sh && chmod +x geohelm-installer.sh && ./geohelm-installer.sh
+      	wget https://raw.githubusercontent.com/AcuGIS/GeoSuite/master/scripts/geosuite-installer.sh && chmod +x geosuite-installer.sh && ./geosuite-installer.sh
 
 
-2.  Select "Full Installation" and tab to OK
+2.  Select "GeoSuite Only" or "GeoSuite and QuartzMap" and tab to OK
 
 ![GeoHelm Installer](docs/_static/Install-2.png)
 
