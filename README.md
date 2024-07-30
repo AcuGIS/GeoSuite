@@ -38,24 +38,25 @@ Memory: <code>2 GB (Minimum) </code><br />
 
 ## Installation
 
-1. On a clean Ubuntu 22 or Rocky Linux 9 system, run below as root to launch the Installer::
+1. On a clean Ubuntu 22 or 24 system, run below as root to launch the Installer::
 
       	wget https://raw.githubusercontent.com/AcuGIS/GeoSuite/master/scripts/geosuite-installer.sh && chmod +x geosuite-installer.sh && ./geosuite-installer.sh
 
 
 2.  Select "GeoSuite Only" or "GeoSuite and QuartzMap" and tab to OK
 
-![GeoHelm Installer](docs/_static/Install-2.png)
+![GeoSuite Installer](docs/_static/geosuite-install-screen-1.png)
+
 
 3.  The Installer will prompt to check hostname and if you wish to enable SSL
 
-![GeoHelm Installer](docs/_static/Install-3.png)
+![GeoHelm Installer](docs/_static/geosuite-install-screen-3.png)
 
 3.  The Installer will prompt if you wish to enable SSL
 
-![GeoHelm Installer](docs/_static/Install-4.png)
+![GeoHelm Installer](docs/_static/geosuite-install-screen-4.png)
 
-Installation time on Ubuntu 22 is about 4 minutes.  Installation time on Rocky Linux can take up to 15 minutes due to required source build for osm2pgsql
+Installation time on Ubuntu 24 is about 4 minutes without QuartzMap and up to 10 minutes with QuartzMap.  
 
 ![GeoHelm Installer](docs/_static/Install-5.png)
 
