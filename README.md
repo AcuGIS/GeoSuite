@@ -1,6 +1,6 @@
 # GeoSuite: Open Source GIS Suite
 
-[![Documentation Status](https://readthedocs.org/projects/geohelm/badge/?version=latest)](https://geohelm.docs.acugis.com/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/geosuite/badge/?version=latest)](https://geosuite.docs.acugis.com/en/latest/?badge=latest)
 
 
 ![GeoHelm Logo](docs/_static/acugis-geosuite-github.png)
