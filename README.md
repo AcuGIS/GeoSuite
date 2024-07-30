@@ -50,11 +50,11 @@ Memory: <code>2 GB (Minimum) </code><br />
 
 3.  The Installer will prompt to check hostname and if you wish to enable SSL
 
-![GeoHelm Installer](docs/_static/geosuite-install-screen-3.png)
+![GeoSuite Installer](docs/_static/geosuite-install-screen-3.png)
 
 3.  The Installer will prompt if you wish to enable SSL
 
-![GeoHelm Installer](docs/_static/geosuite-install-screen-4.png)
+![GeoSuite Installer](docs/_static/geosuite-install-screen-4.png)
 
 Installation time on Ubuntu 24 is about 4 minutes without QuartzMap and up to 10 minutes with QuartzMap.  
 
@@ -67,7 +67,7 @@ On completetion, below is displayed::
 4. Click the Login link on the homepage to access the control panel.
 
 ## Documentation
-GeoSuite Documentation is available at [GeoHelm Docs](https://geosuite.docs.acugis.com)
+GeoSuite Documentation is available at [GeoSuite Docs](https://geosuite.docs.acugis.com)
 
 
 [AcuGIS](https://www.acugis.com/), &copy; 2024 [Cited, Inc. ](https://www.citedcorp.com)Cited, Inc. All Rights Reserved.
