@@ -58,8 +58,6 @@ Memory: <code>2 GB (Minimum) </code><br />
 
 Installation time on Ubuntu 24 is about 4 minutes without QuartzMap and up to 10 minutes with QuartzMap.  
 
-![GeoHelm Installer](docs/_static/Install-5.png)
-
 On completetion, below is displayed::
 
 		Installation is now completed.
@@ -69,7 +67,7 @@ On completetion, below is displayed::
 4. Click the Login link on the homepage to access the control panel.
 
 ## Documentation
-GeoSuite Documentation is available at [GeoHelm Docs](https://www.acugis.com/geohelm/docs/)
+GeoSuite Documentation is available at [GeoHelm Docs](https://geosuite.docs.acugis.com)
 
 
-[AcuGIS](https://www.acugis.com/), [GeoHelm](https://geohelm.org) &copy; 2023 [Cited, Inc. ](https://www.citedcorp.com)Cited, Inc. All Rights Reserved.
+[AcuGIS](https://www.acugis.com/), &copy; 2024 [Cited, Inc. ](https://www.citedcorp.com)Cited, Inc. All Rights Reserved.
