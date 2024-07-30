@@ -1,9 +1,12 @@
-![GeoHelm Quick Start](https://geohelm.org/img/geohelm-logo.png)
+![GeoSuite Quick Start](https://geosuite.org/img/geosuite-logo.png)
 
-# Quick Start Scripts for GeoHelm
+# Quick Start Scripts for GeoSuite
 
-These scripts install Webmin and install the GeoHelm.
+These scripts install Webmin and install the GeoSuite.
 
-For use on clean installs only
+For use on clean installs only, like this:
 
-AcuGIS, GeoHelm  &copy; 2020 Cited, Inc. All Rights Reserved
+	$ cd GeoSuite-master/scripts/
+	$ ./geosuite-ubuntu-22.sh
+
+AcuGIS, GeoSuite  &copy; 2020 Cited, Inc. All Rights Reserved

@@ -1,0 +1,3 @@
+geosuite_config=/etc/webmin/geosuite/config
+tomcat_service=/etc/init.d/tomcat
+shp2pgsql_path=/usr/bin/shp2pgsql

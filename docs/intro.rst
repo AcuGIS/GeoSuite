@@ -7,10 +7,10 @@ Intro
 Overview
 ------------
 
-.. image:: _static/GeoHelm-main.png
+.. image:: _static/geosuite-docs-main.png
 .. image:: _static/spacer.png
 
-AcuGIS GeoHelm is used to install, configure, and manage the latest stable releases of 
+AcuGIS GeoSuite is used to install, configure, and manage the latest stable releases of 
 
 `Apache Tomcat`_
 
@@ -38,7 +38,7 @@ AcuGIS GeoHelm is used to install, configure, and manage the latest stable relea
 
 `osm2pgsql`_
 
-.. _`osm2pgsql`: https://github.com/openstreetmap/osm2pgsql/
+.. _`osm2pgsql`: https://github.com/openstreetmap/osm2pgsql/blob/master/docs/usage.md/
 
 
 `shp2pgsql`_
@@ -58,6 +58,12 @@ AcuGIS GeoHelm is used to install, configure, and manage the latest stable relea
 
 .. _`pg_featureserv`: https://github.com/CrunchyData/pg_featureserv
 
+`MapStore2`_
+
+.. _`MapStore2`: https://docs.mapstore.geosolutionsgroup.com/en/latest/
+
+
+
 
 Supported Operating Systems
 ---------------------------
@@ -68,6 +74,23 @@ Resource Requirements
 -------------------------------
 * 10 GB SSD
 * RAM: 4 GB RAM (Minimim)
+
+
+OpenGeoSuite
+-----------------
+
+AcuGIS GeoSuite is based on similar concepts to OpenGeo Suite, but with key differences to reflect changes in GIS technology.
+
+1. The growth of mapping frameworks, applications and libraries have increased the options available for building webgis applications.
+
+
+2. Both documentation and community support for webgis frameworks and libraries have improved exponentialy
+
+
+3. Rather than using a repository, GeoSuite uses an installer to install the latest, stable versions of each component.
+
+
+4. Documentation is limited to usage and getting started with components, rather than replicating the full documentation.
 
 
 Authors

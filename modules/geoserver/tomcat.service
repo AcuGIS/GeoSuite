@@ -1,0 +1,19 @@
+[Unit]
+Description=Tomcat $TOMCAT_VER
+After=multi-user.target
+
+[Service]
+User=tomcat
+Group=tomcat
+
+WorkingDirectory=$CATALINA_HOME
+Type=forking
+Restart=always
+
+EnvironmentFile=/etc/environment
+
+ExecStart=$CATALINA_HOME/bin/startup.sh
+ExecStop=$CATALINA_HOME/bin/shutdown.sh 60 -force
+
+[Install]
+WantedBy=multi-user.target

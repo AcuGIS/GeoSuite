@@ -1,102 +1,56 @@
-# -*- coding: utf-8 -*-
+# Configuration file for the Sphinx documentation builder.
 
-import sys
-import os
-import re
+# -- Project information
 
-if not 'READTHEDOCS' in os.environ:
-    sys.path.insert(0, os.path.abspath('..'))
-sys.path.append(os.path.abspath('./demo/'))
+project = 'GeoSuite'
+copyright = '2024, Cited, Inc.'
+author = 'Cited Inc'
 
-from sphinx.locale import _
-from sphinx_rtd_theme import __version__
+release = '2.1'
+version = '0.1.0'
 
-html_css_files = [
-    'custom.css',
-]
-
-project = u'AcuGIS GeoHelm'
-copyright = u'2023, Cited, Inc.'
-slug = re.sub(r'\W+', '-', project.lower())
-version = __version__
-release = __version__
-author = u'acugis'
-copyright = author
-language = 'en'
+# -- General configuration
 
 extensions = [
-    'sphinx.ext.intersphinx',
+    'sphinx.ext.duration',
+    'sphinx.ext.doctest',
     'sphinx.ext.autodoc',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.viewcode',
-    'sphinxcontrib.httpdomain',
-    'sphinx_rtd_theme',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.intersphinx',
 ]
-
-templates_path = ['_templates']
-source_suffix = '.rst'
-exclude_patterns = []
-locale_dirs = ['locale/']
-gettext_compact = False
-
-master_doc = 'index'
-suppress_warnings = ['image.nonlocal_uri']
-pygments_style = 'default'
 
 intersphinx_mapping = {
-    'rtd': ('https://docs.readthedocs.io/en/latest/', None),
-    'sphinx': ('http://www.sphinx-doc.org/en/stable/', None),
+    'python': ('https://docs.python.org/3/', None),
+    'sphinx': ('https://www.sphinx-doc.org/en/master/', None),
 }
+intersphinx_disabled_domains = ['std']
+
+templates_path = ['_templates']
+
+# -- Options for HTML output
 
 html_theme = 'sphinx_rtd_theme'
+
+# -- Options for EPUB output
+epub_show_urls = 'footnote'
+
+
+formats: all
+
+
+html_static_path = ['_static']
+
+# These paths are either relative to html_static_path
+# or fully qualified paths (eg. https://...)
+html_css_files = [
+    'css/custom.css',
+]
+
+pygments_style = "sphinx"
+
+
+html_logo = "acugis-geosuite-docs.png"
 html_theme_options = {
-    'logo_only': False,
-    'display_version': True
+    'logo_only': True,
+    'display_version': False,
 }
-html_theme_path = ["_themes", ]
-#html_logo = "_static/geohelm-logo-small.png"
-html_show_sourcelink = True
-
-htmlhelp_basename = slug
-
-latex_documents = [
-  ('index', '{0}.tex'.format(slug), project, author, 'manual'),
-]
-
-man_pages = [
-    ('index', slug, project, [author], 1)
-]
-
-texinfo_documents = [
-  ('index', slug, project, author, slug, project, 'Miscellaneous'),
-]
-
-
-# Extensions to theme docs
-def setup(app):
-    from sphinx.domains.python import PyField
-    from sphinx.util.docfields import Field
-
-    app.add_object_type(
-        'confval',
-        'confval',
-        objname='configuration value',
-        indextemplate='pair: %s; configuration value',
-        doc_field_types=[
-            PyField(
-                'type',
-                label=_('Type'),
-                has_arg=False,
-                names=('type',),
-                bodyrolename='class'
-            ),
-            Field(
-                'default',
-                label=_('Default'),
-                has_arg=False,
-                names=('default',),
-            ),
-        ]
-    )
-
-    

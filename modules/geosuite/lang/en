@@ -1,0 +1,127 @@
+index_title=GeoSuite
+index_root=The root directory is $1.
+
+index_start=Start
+index_startmsg=Click this button to start Apache Tomcat
+index_stop=Stop
+index_stopmsg=Click this button to stop Apache Tomcat
+index_restart=Restart
+index_restartmsg=Click this button to restart the Apache Tomcat
+index_return=GeoSuite
+index_install=Install Tomcat
+index_upgrade=Upgrade Tomcat
+
+wars_title=WARs
+manual_title=Edit config
+manual_ecannot=You are not allowed to edit the Tomcat server.xml config file
+manual_ok=Edit
+manual_efile=Selected file is not part of the Tomcat server configuration
+manual_file=Edit config file:
+manual_edata=Nothing entered!
+manual_err=Failed to save config file
+
+war_install=Install Application
+war_installsource=Install source (.war or .zip)
+war_installok=Deploy
+wars_tabinstall=Deploy
+wars_tabdelete=Undeploy
+wars_tablist=List
+wars_desc1=Tomcat applications can be installed using .war files from local or remote locations.
+wars_desc2=After deleting an application, Tomcat server will be restarted. If you keep the war file, the application will be redeployed!
+wars_desc3=Edit Geoserver configuration files
+wars_delete=Delete Application
+wars_deleteok=Undeploy
+wars_rmwar=Remove war file too
+wars_installed=Installed Apps
+
+install_title=Install WAR
+delete_title=Uninstall WAR
+
+delete_err=Failed to delete modules
+delete_enone=No modules selected
+
+start_err=Failed to start Apache Tomcat
+stop_err=Failed to stop Apache Tomcat
+restart_err=Failed to restart Apache Tomcat
+
+java_title=Java
+java_tabinstall=Install
+java_tabuninstall=Uninstall
+java_tabdefault=Default
+java_desc1=Install Java Development Kit(JDK) from distribution repository or from Oracle .tar.gz archive
+java_desc2=Uninstall Oracle Java 8 files from /usr/share
+java_desc3=Set default Java, using update-alternatives and /etc/profile.d/jdk.sh
+java_install=Install Options
+java_uninstall=Uninstall Options
+java_default=update-alternatives Options
+jdk_installsource=JDK source
+jdk_latest=Oracle JDK
+java_installok=Install
+java_deleteok=Uninstall
+java_defaultok=Update
+java_def_jdk=Set as system default Java
+java_def_jdk_desc= ( using alternatives )
+java_rm_def_jdk=Remove, if default Java
+java_installed=JDK versions
+openjdk_latest=OpenJDK
+openjdk_headless=Headless package
+openjdk_headless_desc=only for OpenJDK
+
+extensions_title=GeoServer
+extensions_ecannot=You are not allowed to edit the Tomcat server.xml config file
+extensions_ok=Edit
+extensions_efile=Selected file is not part of the Tomcat server configuration
+extensions_file=Edit config file:
+extensions_edata=Nothing entered!
+extensions_err=Failed to save config file
+extensions_updating_list=Updating extension list
+extensions_cascade=Automatically drop objects that depend on the extension
+
+source_local=Local file
+source_uploaded=Uploaded file
+source_ftp=FTP or HTTP URL
+
+source_err0=File Error
+source_err1=Upload Error
+source_err1.2=No upload file
+source_err2=Download error
+source_err3=Invalid URL
+
+pg_ext_title=Extensions
+pg_ext_edit=Edit PostgreSQL Extensions
+pg_ext_save=Save
+pg_ext_enabled=Enabled
+pg_ext_disabled=Disabled
+pg_ext_database=Database
+
+pg_inst_title=PG Installer
+pg_inst_edit=Edit PostgreSQL Packages
+pg_versions=Supported Versions
+pg_inst_save=Update
+pg_repo_install=Install Repository
+pg_enable_ssl=Enable SSL
+pg_listen_all=Listen on All Interfaces
+
+add_shape_title=Shape Loader
+add_shape_desc1=Add shape to an existing database, with PostGIS extension
+load_type=Load Type
+set_srid=Set SRID (defaults to 0)
+db_user=Database Username
+db_schema=Schema
+db_table=Table
+shape_load=Load
+shape_source=Shape source (.zip)
+select_or=Or
+
+editor_title=MapJS
+editor_desc1=Use Load/Browse to load a file content or browse into a folder.
+load_ok=Load/Browse
+
+setup_title=Setup
+
+base_options=Options
+base_major=Tomcat Major Version
+base_archive=Release
+base_installok=Download
+base_installsource=Install source
+base_desc1=Download an archive of Apache Tomcat Server from Apache website and install it

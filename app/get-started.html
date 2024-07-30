@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +38,7 @@
 
   
 
-  <header id="header" class="header d-flex align-items-center" style="background-color:#28728d">
+  <header id="header" class="header d-flex align-items-center">
 
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
@@ -146,7 +147,7 @@
 	  
 	  
 	  
-</section>
+</section><!-- End Frequently Asked Questions Section -->
 	  
 
 		
@@ -482,7 +483,76 @@
 	  
 	  
 	  
-	   
+	   <!-- Disable Maptore2 --> 
+    <section id="faq-mapstore2" class="faq">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="content px-xl-5">
+              <h3><i class="bi bi-map-fill green"></i>&nbsp;  <strong>Mapstore2</strong></h3>
+              <p>
+                Create a map and dashboard
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+
+            <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-i">
+                    Create a Map
+                  </button>
+                </h3>
+                <div id="faq-content-i" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    <a href="latest/maptools/mapstore2/map.html" target="_blank">Create a Map</a> with MapStore2
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-j">
+                    Create a Dashboard
+                  </button>
+                </h3>
+                <div id="faq-content-j" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    <a href="latest/maptools/mapstore2/dashboard.html" target="_blank">Create a Dashboard</a> with MapStore2
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-k">
+                    Manage Users and Groups
+                  </button>
+                </h3>
+                <div id="faq-content-k" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Manage <a href="latest/maptools/mapstore2/users.html" target="_blank"> Users and Groups</a>
+                  </div>
+                </div>
+              </div>
+
+              
+
+              
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+	  <!--  -->
 	  
 	  
 	      <section id="faq-webgis" class="faq">
@@ -574,7 +644,7 @@
 
           <div class="col-lg-4">
             <div class="content px-xl-5">
-              <h3><i class="bi bi-brush green"></i>&nbsp;  <strong>pg_tileserv</strong></h3>
+              <h3><i class="bi bi-brush green"></i>&nbsp;  <strong>More</strong></h3>
               <p>
                 LeafletJS, pg_tileserv and pg_featursrv
               </p>
@@ -674,7 +744,7 @@
           </a>
           <p>Click Quick Start on top menu or select a topic at right <br></p>
           <div class="social-links d-flex mt-4">
-            <a href="https://github.com/AcuGIS/GeoHelm" class="twitter"><i class="bi bi-github"></i></a>
+            <a href="https://github.com/AcuGIS/GeoSuite" class="twitter"><i class="bi bi-github"></i></a>
             
           </div>
         </div>
@@ -687,9 +757,11 @@
             <li><a href="latest/components/createdb/" target="_blank">Create Database</a></li>
             <li><a href="latest/components/postgis/" target="_blank">Enable PostGIS</a></li>
 	    <li><a href="latest/components/shp2pgsql/#tutorial-load-shp-files" target="_blank">Loading Data (shp2pgsql)</a></li>
+	    <li><a href="http://MYLOCALHOST:7800">pg_tileserv</a></li>
             
           </ul>
         </div>
+<!-- <!-- Disable GeoServer -->		  
 		  <div class="col-lg-2 col-6 footer-links">
           <h4>GeoServer</h4>
           <ul>
@@ -700,21 +772,40 @@
           </ul>
         </div>
 		  
+<!-- <!-- Disable Geoserver END -->		  
 		  
 
-
-
+<!-- <!-- Disable Maptore2 -->
 
 
         <div class="col-lg-2 col-6 footer-links">
-          <h4>pg_tileserv</h4>
+          <h4>MapStore2</h4>
           <ul>
-            <li><a href="http://MYLOCALHOST:7800">pg_tileserv</a></li>
-	    <li><a href="http://MYLOCALHOST:9000">pg_featureserv</a></li>
-            <li><a href="LeafletChoropleth.html" target="_blank">Leafletjs Choropleth</a></li>
+            <li><a href="/mapstore">MapStore2</a></li>
+            <li><a href="latest/maptools/mapstore2/access.html" target="_blank">Admin Access</a></li>
+            <li><a href="latest/maptools/mapstore2/map.html" target="_blank">Create Map</a></li>
+            <li><a href="latest/maptools/mapstore2/dashboard.html" target="_blank">Create Dashboard</a></li>
           </ul>
         </div>
 
+<!-- <!-- Disable Maptore2 END -->
+
+
+
+<!-- Enable g3w
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>G3W-Suite</h4>
+          <ul>
+            <li><a href="latest/g3w/home.html" target="_blank">Intro</a></li>
+            <li><a href="latest/g3w/pgservice.html" target="_blank">pgservice</a></li>
+            <li><a href="latest/g3w/qgis.html" target="_blank">qgis</a></li>
+            <li><a href="latest/g3w/groups.html" target="_blank">Create Groups</a></li>
+            <li><a href="latest/g3w/projects.html" target="_blank">Create Projects</a></li>
+          </ul>
+        </div>
+
+Enable g3w -->
 
 
 

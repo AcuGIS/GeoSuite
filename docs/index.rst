@@ -1,7 +1,7 @@
-AcuGIS GeoHelm
+AcuGIS GeoSuite
 ==================================================
 
-.. image:: _static/GeoHelm-main.png
+.. image:: _static/geosuite-docs-main.png
 
 .. image:: _static/spacer.png
 
@@ -29,6 +29,15 @@ AcuGIS GeoHelm
     components/shp2pgsql/index
     components/osm2pgsql/index
     components/raster2pgsql/index
+
+.. toctree::
+    :maxdepth: 2
+    :caption: Database Operations
+
+    database/snapshot/index
+    database/clone/index
+    database/restore/index
+
    
 .. toctree::
     :maxdepth: 3
@@ -42,24 +51,7 @@ AcuGIS GeoHelm
     geoserver/layer/index
     geoserver/shp/index
     geoserver/styles/index
-    
-    
-.. toctree::
-    :maxdepth: 3
-    :caption: pg_tileserv
 
-    components/pgtileserv/index
-    components/pgfeatureserv/index   
-
-
-.. toctree::
-    :maxdepth: 2
-    :caption: Database Operations
-
-    database/snapshot/index
-    database/clone/index
-    database/restore/index
-    
 
 .. toctree::
     :maxdepth: 2
@@ -68,20 +60,24 @@ AcuGIS GeoHelm
     qgis/home
     qgis/pgservice
     qgis/qgis
-    qgis/publish
-    qgis/style-only.rst
-    
+    qgis/plugins
     
     
 .. toctree::
     :maxdepth: 2
-    :caption: LeafletJS
+    :caption: QuartzMap
 
-    apps/choropleth
-    apps/geojson
-    apps/php
+    quartzmap/intro
+    quartzmap/quickstart
+    quartzmap/quick-dynamic
+    quartzmap/geoserver
+    quartzmap/createdb
+    quartzmap/users
+    quartzmap/groups
+    quartzmap/maps
+    quartzmap/pdf
 
-  
+    
 .. toctree::
     :maxdepth: 2
     :caption: Resources
@@ -89,7 +85,6 @@ AcuGIS GeoHelm
     resources/documents
     resources/css
     resources/security
-    resources/nagios
     resources/support
     resources/commercial
     resources/license
