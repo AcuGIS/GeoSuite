@@ -67,13 +67,13 @@ AcuGIS GeoSuite is used to install, configure, and manage the latest stable rele
 
 Supported Operating Systems
 ---------------------------
-* Ubuntu 22 LTS
-* Rocky Linux 9.x
+* Ubuntu 24 LTS
+
 
 Resource Requirements
 -------------------------------
 * 10 GB SSD
-* RAM: 4 GB RAM (Minimim)
+* RAM: 2 GB RAM (Minimim)
 
 
 OpenGeoSuite
