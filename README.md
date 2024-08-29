@@ -29,7 +29,6 @@ The control panel and modules can be uninstalled and all components will continu
 
 ## Supported Operating Systems <br/>
 		
-<code>Ubuntu 22 LTS</code><br />
 <code>Ubuntu 24 LTS</code>
 
 ## System Requirements: <br />
