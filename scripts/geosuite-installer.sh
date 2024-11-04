@@ -16,7 +16,7 @@ HNAME=$(hostname | sed -n 1p | cut -f1 -d' ' | tr -d '\n')
 
 #Set postgresql version and password (random)
 
-PG_VER='16'
+PG_VER='17'
 PG_PASS=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c32);
 
 BUILD_SSL='no'
