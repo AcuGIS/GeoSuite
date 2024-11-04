@@ -25,7 +25,7 @@ APP_DB='quartz'
 APP_DB_PASS=$(< /dev/urandom tr -dc _A-Za-z0-9 | head -c32);
 DATA_DIR='/var/www/data'
 CACHE_DIR='/var/www/cache'
-APPS_DIR='/var/www/html/apps'
+APPS_DIR='/var/www/html/quartzmap/apps'
 
 #Create certificate for use by postgres
 
