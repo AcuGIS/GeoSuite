@@ -572,7 +572,7 @@ s|<Directory "/var/www/html/|<Directory "/var/www/html/quartzmap/|' < installer/
 
  	sed -i.save '
 s/#DefaultRoot~/DefaultRoot ~/
-s/# RequireValidShelloff/RequireValidShell off/' /etc/proftpd/proftpd.conf
+s/# RequireValidShell\s*off/RequireValidShell off/' /etc/proftpd/proftpd.conf
 
 	
 	systemctl enable proftpd
@@ -589,8 +589,11 @@ CMD_EOF
 	echo "${APP_DB} pass: ${APP_DB_PASS}" >> /root/auth.txt
 
 	mkdir -p "${APPS_DIR}"
+	mkdir -p "${APPS_DIR}/js"
+	mkdir -p "${APPS_DIR}/css"
 	mkdir -p "${CACHE_DIR}"
 	mkdir -p "${DATA_DIR}"
+	mkdir -p "${DATA_DIR}/qgis"
 
 	chown -R www-data:www-data "${APPS_DIR}"
 	chown -R www-data:www-data "${CACHE_DIR}"
@@ -625,7 +628,7 @@ CAT_EOF
 	groupadd qatusers
 
 	# install ftp user creation script
-	for f in create_ftp_user delete_ftp_user update_ftp_user; do
+	for f in create_ftp_user delete_ftp_user update_ftp_user quartz_crontab; do
 		cp installer/${f}.sh /usr/local/bin/
 		chown www-data:www-data /usr/local/bin/${f}.sh
 		chmod 0550 /usr/local/bin/${f}.sh
@@ -636,6 +639,15 @@ CAT_EOF
 CAT_EOF
 	popd
 	
+	# add quartz user for cron updates
+	useradd -s /usr/sbin/nologin -M -d /var/www -G www-data quartz
+
+	# create empty cron file
+	touch "$DATA_DIR/quartz.crontab"
+	chown www-data:www-data "$DATA_DIR/quartz.crontab"
+
+	# save 1Gb of space
+	apt-get -y clean all
 	rm -rf quartzmap-web-client-main/
 }
 
