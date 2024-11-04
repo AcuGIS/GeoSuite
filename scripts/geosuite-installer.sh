@@ -635,7 +635,7 @@ CAT_EOF
 	done
 
 	cat >/etc/sudoers.d/q2w <<CAT_EOF
-	www-data ALL = NOPASSWD: /usr/local/bin/create_ftp_user.sh, /usr/local/bin/delete_ftp_user.sh, /usr/local/bin/update_ftp_user.sh
+www-data ALL = NOPASSWD: /usr/local/bin/create_ftp_user.sh, /usr/local/bin/delete_ftp_user.sh, /usr/local/bin/update_ftp_user.sh, /usr/local/bin/quartz_crontab.sh
 CAT_EOF
 	popd
 	
