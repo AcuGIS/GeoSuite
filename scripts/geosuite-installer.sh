@@ -514,10 +514,25 @@ function install_quartzmap(){
 	rm -f /tmp/main.zip
 
 	pushd quartzmap-web-client-main/
+
+        apt-get -y install apache2 php-{pgsql,zip,gd,simplexml,curl,fpm} \
+	proftpd libapache2-mod-fcgid postfix python3-certbot-apache gdal-bin \
+	r-base r-base-dev r-cran-{raster,htmlwidgets,plotly,rnaturalearthdata,rjson,skimr} \
+	texlive-latex-base texlive-latex-recommended texlive-xetex cron
+
+apt-get install --no-install-suggests --no-install-recommends texlive-latex-extra
+	
+
+	# compile leaflet package from CRAN
+	R --no-save <<R_EOF
+install.packages( c('leaflet', 'leaflet.extras', 'rpostgis', 'R3port', 'rnaturalearth'))
+R_EOF
+
+
 	
 	# 1. Install packages (assume PG is preinstalled)
-	apt-get -y install apache2 php-{pgsql,zip,gd,simplexml,curl,fpm} \
-		proftpd libapache2-mod-fcgid postfix python3-certbot-apache gdal-bin
+	# apt-get -y install apache2 php-{pgsql,zip,gd,simplexml,curl,fpm} \
+		# proftpd libapache2-mod-fcgid postfix python3-certbot-apache gdal-bin
 
 	# setup apache
 	a2enmod ssl headers expires fcgid cgi
