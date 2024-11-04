@@ -508,6 +508,7 @@ CAT_EOF
 function install_quartzmap(){
 	touch /root/auth.txt
 	export DEBIAN_FRONTEND=noninteractive
+	RELEASE=$(lsb_release -cs)
 	
 	wget -P/tmp https://github.com/AcuGIS/quartzmap-web-client/archive/refs/heads/main.zip
 	unzip /tmp/main.zip
@@ -515,13 +516,20 @@ function install_quartzmap(){
 
 	pushd quartzmap-web-client-main/
 
-        apt-get -y install apache2 php-{pgsql,zip,gd,simplexml,curl,fpm} \
-	proftpd libapache2-mod-fcgid postfix python3-certbot-apache gdal-bin \
-	r-base r-base-dev r-cran-{raster,htmlwidgets,plotly,rnaturalearthdata,rjson,skimr} \
-	texlive-latex-base texlive-latex-recommended texlive-xetex cron
+  apt-get -y install apache2 php-{pgsql,zip,gd,simplexml,curl,fpm} \
+		proftpd libapache2-mod-fcgid postfix python3-certbot-apache gdal-bin \
+		r-base r-base-dev r-cran-{raster,htmlwidgets,plotly,rnaturalearthdata,rjson} \
+		texlive-latex-base texlive-latex-recommended texlive-xetex cron
 
-apt-get install --no-install-suggests --no-install-recommends texlive-latex-extra
+	apt-get -y install --no-install-suggests --no-install-recommends texlive-latex-extra
 	
+	if [ "${RELEASE}" == 'jammy' ]; then
+		R --no-save <<R_EOF
+install.packages( c('skimr'))
+R_EOF
+	else
+		apt-get -y install r-cran-skimr
+	fi
 
 	# compile leaflet package from CRAN
 	R --no-save <<R_EOF
