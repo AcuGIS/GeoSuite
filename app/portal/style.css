@@ -1,3 +1,7 @@
+.session_login.form-signin>.ui--img.img-title {
+    display: none;
+}
+
 h2.form-signin-heading {
   display: none !important; 
 }
