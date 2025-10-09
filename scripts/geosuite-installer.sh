@@ -154,9 +154,11 @@ function install_postgis_pkgs(){
 
 
 function install_webmin(){
-  echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list
-  wget --quiet -qO - http://www.webmin.com/jcameron-key.asc | apt-key add -
-  apt-get -y update
+  wget --no-check-certificate -O webmin-setup-repo.sh https://raw.githubusercontent.com/webmin/webmin/master/webmin-setup-repo.sh
+  chmod +x webmin-setup-repo.sh
+  ./webmin-setup-repo.sh --stable
+  rm -f webmin-setup-repo.sh
+
   apt-get -y install webmin
 	
 	mkdir -p /etc/webmin/authentic-theme
