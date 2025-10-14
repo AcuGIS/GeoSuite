@@ -154,10 +154,13 @@ function install_postgis_pkgs(){
 
 
 function install_webmin(){
-  wget --no-check-certificate -O webmin-setup-repo.sh https://raw.githubusercontent.com/webmin/webmin/master/webmin-setup-repo.sh
-  chmod +x webmin-setup-repo.sh
-  ./webmin-setup-repo.sh --stable
-  rm -f webmin-setup-repo.sh
+
+wget -q -O webmin-setup-repo.sh https://raw.githubusercontent.com/webmin/webmin/master/webmin-setup-repo.sh
+chmod +x webmin-setup-repo.sh
+yes | ./webmin-setup-repo.sh --stable
+rm -f webmin-setup-repo.sh
+apt-get update
+apt-get install -y --install-recommends webmin
 
   apt-get -y install webmin
 	
