@@ -471,7 +471,7 @@ function install_geolite(){
     	#rm -f /tmp/main.zip
 	#fi
 
-	pushd geolite-main
+	pushd /tmp/GeoSuite-master/geolite-main
 	    ./installer/app-install.sh ${GEOLITE_DEMO} /var/www/html/geolite
 	popd
 
