@@ -4,7 +4,7 @@ APP_DB='geolite'
 APP_DB_PASS=$(< /dev/urandom tr -dc _A-Za-z0-9 | head -c32);
 ADMIN_APP_PASS='geolite';
 
-WWW_DIR='/var/www/html'
+WWW_DIR='/var/www/html/geolite'
 DATA_DIR='/var/www/data'
 #CACHE_DIR='/var/www/cache'
 WITH_DEMO='false'
@@ -29,9 +29,9 @@ if [ $# -ge 1 ] && [ "$1" -eq '--with-demo' ]; then
 fi
 
 if [ $# -eq 1 ]; then
-	WWW_DIR="${1}"
+	="${1}"
 fi
-mkdir -p "${WWW_DIR}"
+mkdir -p "${}"
 
 # 1. Install packages (assume PG is preinstalled)
 apt-get -y install apache2 libapache2-mod-php libapache2-mod-fcgid php-{pgsql,mbstring,xml,zip,gd,curl} \
@@ -64,20 +64,20 @@ const DB_PORT = 5432;
 const DB_SCMA='public';
 
 const SESS_USR_KEY = 'qgis_user';
-const WWW_DIR = '${WWW_DIR}';
+const  = '${}';
 const DATA_DIR = "${DATA_DIR}";
 CAT_EOF
 
 mkdir -p "${DATA_DIR}/uploads"
 
-#mkdir -p "${WWW_DIR}/downloads"
-#mkdir -p "${WWW_DIR}/temp"
+#mkdir -p "${}/downloads"
+#mkdir -p "${}/temp"
 
 chown -R www-data:www-data "${DATA_DIR}"
 
-cp -r . ${WWW_DIR}/
-chown -R www-data:www-data ${WWW_DIR}
-rm -rf ${WWW_DIR}/{installer}
+cp -r . ${}/
+chown -R www-data:www-data ${}
+rm -rf ${}/{installer}
 
 PHP_VER=$(php -version | head -n 1 | cut -f2 -d' ' | cut -f1,2 -d.)
 
@@ -94,7 +94,7 @@ if [ ${WITH_DEMO} == 'true' ]; then
 psql -d ${APP_DB} < installer/demo/demo.sql
 CMD_EOF
     cp -r installer/demo/data/uploads      ${DATA_DIR}/
-    cp -r installer/demo/assets/thumbnails ${WWW_DIR}/geolite/assets/
+    cp -r installer/demo/assets/thumbnails ${}/geolite/assets/
 fi
 
 # save 1Gb of space
