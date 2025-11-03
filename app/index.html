@@ -1,187 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AcuGIS | GeoServer Cluster</title>
+  <meta name="description" content="Landing page for AcuGIS GeoServer cluster" />
+  <link rel="icon" href="assets/img/favicon.ico" />
 
-  <title>AcuGIS | GeoSuite</title>
-  <meta content="AcuGIS GeoSuite - A complete Open Source GIS Stack" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="assets/img/favicon.ico" rel="icon">
-
-  <!-- Google Fonts -->
+  <!-- Materialize CSS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="assets/css/style.css" rel="stylesheet">
+  <style>
+    :root {
+      --brand-gradient: linear-gradient(135deg, #1E88E5 0%, #42A5F5 100%); /* Material Blue */
+      --brand-main: #1E88E5;
+      --brand-light: #42A5F5;
+      --brand-dark: #1565C0;
+    }
+    body { font-family: Roboto, system-ui, -apple-system, Segoe UI, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+    .brand-gradient { background: var(--brand-gradient); }
+    .brand-text { background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
-	
-	
+    /* App bar spacing */
+    .app-header { position: sticky; top: 0; z-index: 1000; backdrop-filter: saturate(180%) blur(6px); }
+    .app-header .nav-wrapper { background: rgba(255,255,255,0.9); }
+    .app-header .brand-logo { font-weight: 700; letter-spacing: .2px; }
 
-  
+    /* Hero */
+    .hero { padding: 5rem 0 3rem; }
+    .hero h1 { font-weight: 700; margin-bottom: .6rem; }
+    .hero p { font-size: 1.15rem; color: #455a64; }
+    .hero-illustration { max-width: 520px; width: 100%;}
+
+    /* Cards */
+    .action-card .card-content { min-height: 130px; }
+    .action-card .material-icons { font-size: 2rem; }
+
+    /* Footer */
+    footer.page-footer { padding-top: 16px; }
+    .footer-links a { display: inline-flex; align-items: center; gap: 8px; }
+
+    /* Small helpers */
+    .chip-pill { border-radius: 9999px; }
+
+nav {
+    color: #fff;
+    background-color: #fff;
+    width: 100%;
+    height: 56px;
+    line-height: 56px;
+}
+  </style>
 </head>
+<body class="grey lighten-5">
+  <!-- App Bar -->
+  <header class="app-header">
+    <nav class="z-depth-1">
+      <div class="nav-wrapper container">
+        <a href="#" class="brand-logo black-text">AcuGIS</a>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger black-text"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li><a class="black-text" href="#">Dashboard</a></li>
+          <li><a class="black-text" href="https://suite.docs.acugis.com" target="_blank" rel="noopener">Docs</a></li>
+          <li><a class="waves-effect waves-light btn-small blue" href="https://www.sylternwmts.com:10000" target="_blank" rel="noopener"><i class="material-icons left">login</i>Login</a></li>
+        </ul>
+      </div>
+    </nav>
 
-<body>
-
-  
-
-  <header id="header" class="header d-flex align-items-center">
-
-    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
-        
-        <h1>AcuGIS</h1>
-      </a>
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a href="#" class="active">Dashboard</a></li>
-          <li><a href="get-started.html">Quick Start</a></li>
-          <li><a href="/latest" target="_blank">Docs</a></li>
-	  <li><a href="https://MYLOCALHOST:10000">Login</a></li>	
-         
-
-      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-
-    </div>
+    <!-- Mobile Nav -->
+    <ul class="sidenav" id="nav-mobile">
+      <li><a href="#"><i class="material-icons left">dashboard</i>Dashboard</a></li>
+      <li><a href="https://suite.docs.acugis.com" target="_blank" rel="noopener"><i class="material-icons left">description</i>Docs</a></li>
+      <li><a href="https://MYLOCALHOST:10000" target="_blank" rel="noopener"><i class="material-icons left">login</i>Login</a></li>
+    </ul>
   </header>
 
-  
-  <section id="hero" class="hero">
-    <div class="container position-relative">
-      <div class="row gy-5" data-aos="fade-in">
-        <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
-          <h2>AcuGIS <span>GeoSuite</span></h2>
-          <p>A New Route to OpenSource GIS</p>
-          <div class="d-flex justify-content-center justify-content-lg-start">
-            
-          </div>
-        </div>
-        <div class="col-lg-6 order-1 order-lg-2">
-          <img src="assets/img/map.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="100" style="width: 75%">
-
-        </div>
-      </div>
-    </div>
-
-    
-  </section>
-  
-
-  <main id="main">
-
-    
-    
-  </main>
-  <footer id="footer" class="footer">
-
+  <!-- Hero -->
+  <section class="hero">
     <div class="container">
-      <div class="row gy-4">
-        <div class="col-lg-3 col-md-12 footer-info">
-          <a href="index.html" class="logo d-flex align-items-center">
-            <span>Get Started</span>
-          </a>
-          <p>Click Quick Start on top menu or select a topic at right <br></p>
-          <div class="social-links d-flex mt-4">
-            <a href="https://github.com/AcuGIS/GeoSuite" class="twitter"><i class="bi bi-github"></i></a>
-            
+      <div class="row valign-wrapper">
+        <div class="col s12 m7">
+          <div class="chip chip-pill white z-depth-1"><span class="brand-text" style="padding:0 .5rem; font-weight:600">GeoServer</span>&nbsp; Dedicated</div>
+          <h1 class="black-text">GeoSuite</h1>
+          <p>Access GeoServer, the control panel, and documentation using the shortcuts below.</p>
+          <div class="section">
+            <a href="/geoserver" class="btn-large waves-effect blue"><i class="material-icons left">map</i>Open GeoServer</a>
+            <a href="https://MYLOCALHOST:10000" target="_blank" rel="noopener" class="btn-large waves-effect white black-text" style="margin-left:.5rem"><i class="material-icons left">settings</i>Control Panel</a>
+          </div>
+        </div>
+        <div class="col s12 m5 center">
+          <img class="hero-illustration" src="assets/img/map.png" alt="Map illustration" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Actions / Links -->
+  <main>
+    <div class="container">
+      <div class="row">
+        <!-- GeoServer Card -->
+        <div class="col s12 m6 l4">
+          <div class="card action-card hoverable">
+            <div class="card-content">
+              <span class="card-title"><i class="material-icons left">public</i>GeoServer</span>
+              <p>Manage layers, styles, and services (WMS/WFS/WMTS).</p>
+            </div>
+            <div class="card-action">
+              <a class="blue-text text-darken-1" href="/geoserver">
+                Access GeoServer<i class="material-icons right">arrow_forward</i>
+              </a>
+            </div>
           </div>
         </div>
 
-        <div class="col-lg-2 col-6 footer-links">
-          <h4>PostGIS</h4>
-          <ul>
-			  
-
-            <li><a href="latest/components/createdb/" target="_blank">Create Database</a></li>
-            <li><a href="latest/components/postgis/" target="_blank">Enable PostGIS</a></li>
-	    <li><a href="latest/components/shp2pgsql/#tutorial-load-shp-files" target="_blank">Loading Data (shp2pgsql)</a></li>
-	    <li><a href="latest/components/osm2pgsql/index.html" target="_blank">Loading Data (osm2pgsql)</a></li>
-
-            
-          </ul>
-        </div>
-	  
-		  <div class="col-lg-2 col-6 footer-links">
-          <h4>GeoServer</h4>
-          <ul>
-           <li><a href="/geoserver">GeoServer</a></li>
-            <li><a href="latest/geoserver/workspace/" target="_blank">Create Workspace</a></li>
-            <li><a href="latest/geoserver/store/" target="_blank">Create Store</a></li>
-            <li><a href="latest/geoserver/layer/" target="_blank">Create Layer</a></li>
-          </ul>
-        </div>
-		  
-		  
-		  
-
-
-
-
-        <div class="col-lg-2 col-6 footer-links">
-          <h4>QGIS</h4>
-          <ul>
-          <li><a href="https://geosuite.docs.acugis.com/en/latest/qgis/home.html" target="_blank">Intro</a></li>			  
-	    <li><a href="https://geosuite.docs.acugis.com/en/latest/qgis/qgis.html" target="_blank">Create Project</a></li>
-            <li><a href="https://geosuite.docs.acugis.com/en/latest/qgis/pgservice.html" target="_blank">pg_service.conf</a></li>
-            <li><a href="https://geosuite.docs.acugis.com/en/latest/qgis/plugins.html" target="_blank">Plugins</a></li>
-
-
-            
-          </ul>
+        <!-- Control Panel Card -->
+        <div class="col s12 m6 l4">
+          <div class="card action-card hoverable">
+            <div class="card-content">
+              <span class="card-title"><i class="material-icons left">tune</i>Control Panel</span>
+              <p>Server administration, logs, and service controls.</p>
+            </div>
+            <div class="card-action">
+              <a class="blue-text text-darken-1" href="https://MYLOCALHOST:10000" target="_blank" rel="noopener">
+                Access<i class="material-icons right">open_in_new</i>
+              </a>
+            </div>
+          </div>
         </div>
 
-
-
-
-
-
-
-        
-        <div class="col-lg-2 col-6 footer-links">
-          <h4>QuartzMap</h4>
-          <ul>
-          <li><a href="https://geosuite.docs.acugis.com/en/latest/quartzmap/quickstart.html" target="_blank">Quick Start</a></li>			  
-	    <li><a href="https://geosuite.docs.acugis.com/en/latest/quartzmap/quick-dynamic.html" target="_blank">Connect to PostGIS</a></li>
-            <li><a href="https://geosuite.docs.acugis.com/en/latest/quartzmap/geoserver.html" target="_blank">Connect to GeoServer</a></li>
-            <li><a href="https://geosuite.docs.acugis.com/en/latest/quartzmap/createdb.html" target="_blank">Create Database</a></li>
-
-
-            
-          
-            
-          </ul>
+        <!-- Docs Card -->
+        <div class="col s12 m6 l4">
+          <div class="card action-card hoverable">
+            <div class="card-content">
+              <span class="card-title"><i class="material-icons left">menu_book</i>Docs</span>
+              <p>Guides for setup, best practices, and troubleshooting.</p>
+            </div>
+            <div class="card-action">
+              <a class="blue-text text-darken-1" href="https://suite.docs.acugis.com" target="_blank" rel="noopener">
+                View Docs<i class="material-icons right">open_in_new</i>
+              </a>
+            </div>
+          </div>
         </div>
-
       </div>
     </div>
+  </main>
 
-    <div class="container mt-4">
-      <div class="copyright">
-        &copy; 2025 <strong><span>AcuGIS</span></strong>. Cited, Inc.  All Rights Reserved
+  <!-- Footer -->
+  <footer class="page-footer white z-depth-1">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m4">
+          <h6 class="black-text" style="font-weight:700">Get Started</h6>
+          <p class="grey-text text-darken-1">Login to GeoServer or the Control Panel.</p>
+        </div>
+        <div class="col s6 m3 footer-links">
+          <h6 class="black-text">GeoServer</h6>
+          <ul>
+            <li><a class="blue-text text-darken-1" href="/geoserver"><i class="material-icons tiny">arrow_forward</i>Access GeoServer</a></li>
+          </ul>
+        </div>
+        <div class="col s6 m3 footer-links">
+          <h6 class="black-text">Control Panel</h6>
+          <ul>
+            <li><a class="blue-text text-darken-1" href="https://MYLOCALHOST:10000" target="_blank" rel="noopener"><i class="material-icons tiny">open_in_new</i>Access</a></li>
+          </ul>
+        </div>
+        <div class="col s12 m2 footer-links">
+          <h6 class="black-text">Docs</h6>
+          <ul>
+            <li><a class="blue-text text-darken-1" href="https://suite.docs.acugis.com" target="_blank" rel="noopener"><i class="material-icons tiny">menu_book</i>Docs</a></li>
+          </ul>
+        </div>
       </div>
-      
     </div>
-
+    <div class="divider"></div>
+    <div class="container" style="padding: 12px 0;">
+      <div class="grey-text text-darken-1" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+        <span>� 2026 <strong class="black-text">AcuGIS</strong>. Cited, Inc. All Rights Reserved</span>
+        <span class="grey-text">GeoServer Cluster</span>
+      </div>
+    </div>
   </footer>
 
-  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-
-
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/js/web.js"></script>
-
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const sidenavs = document.querySelectorAll('.sidenav');
+      M.Sidenav.init(sidenavs, {});
+    });
+  </script>
 </body>
-
 </html>
