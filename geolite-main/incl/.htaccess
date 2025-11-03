@@ -1,0 +1,6 @@
+# Deny direct access to files in the incl directory
+# This prevents users from accessing configuration files directly via browser
+
+Order Deny,Allow
+Deny from all
+
