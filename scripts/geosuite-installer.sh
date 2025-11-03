@@ -25,7 +25,9 @@ APP_DB='quartz'
 APP_DB_PASS=$(< /dev/urandom tr -dc _A-Za-z0-9 | head -c32);
 DATA_DIR='/var/www/data'
 CACHE_DIR='/var/www/cache'
-APPS_DIR='/var/www/html/quartzmap/apps'
+APPS_DIR='/var/www/html/apps'
+
+GEOLITE_DEMO=''
 
 #Create certificate for use by postgres
 
@@ -136,7 +138,7 @@ function install_bootstrap_app(){
 		unzip /tmp/master.zip -d/tmp
 	fi
 
- 	cp -r /tmp/GeoSuite-master/app/* /var/www/html/
+	cp -r /tmp/GeoSuite-master/app/* /var/www/html/
 	chown -R www-data:www-data /var/www/html
 	mv /tmp/GeoSuite-master/app/data /opt/
 
@@ -144,7 +146,9 @@ function install_bootstrap_app(){
 	
 	#update app
 	find /var/www/html -type f -not -path "/var/www/html/latest/*" -name "*.html" -exec sed -i.save "s/MYLOCALHOST/${HNAME}/g" {} \;
-	
+
+	cp app/index.html /var/www/html/
+	cp app/assets/img/map.png /var/www/html/assets/img/
 }
 
 
@@ -371,26 +375,11 @@ function menu(){
 		apt-get install -y whiptail
 	fi
 
-	SUITE_FLAVOR=$(whiptail --title "GeoSuite Installer" --menu \
-									"Select the GeoSuite version you want to install:" 20 78 4 \
-									"GeoSuite Standalone" " " \
-									"GeoSuite with QuartzMap" " " 3>&1 1>&2 2>&3)
-	
-	exitstatus=$?
-	if [ $exitstatus != 0 ]; then
-		echo "GeoSuite installation cancelled."
-		exit 1
-	fi
-	
 	# set options based on flavor we have
-	case ${SUITE_FLAVOR} in
-		"GeoSuite Standalone")
-			;;
-		"GeoSuite with QuartzMap")
-			STEPS+=("Installing QGIS Server" "Installing QuartzMap")
-			CMDS+=("install_qgis_server" "install_quartzmap")
-			;;
-	esac
+	SUITE_FLAVOR='GeoSuite with GeoLite'
+	STEPS+=("Installing GeoLite")
+	CMDS+=("install_geolite")
+	#DASHBOARD_DIR='/var/www/html/dashboard'
 
 	whiptail --title "Hostname is $(hostname -f)" --yesno \
 		--yes-button "Continue" --no-button "Quit" \
@@ -407,8 +396,14 @@ function menu(){
 	exitstatus=$?
 	if [ $exitstatus == 0 ]; then
 			BUILD_SSL='yes'
-			STEPS+=("Provisioning SSL")
-			CMDS+=('provision_ssl')
+	fi
+	
+	whiptail --title "GeoLite demo" --yesno \
+		"Install demos for GeoLite ?" 8 78
+	
+	exitstatus=$?
+	if [ $exitstatus == 0 ]; then
+    	GEOLITE_DEMO='-with-demo'
 	fi
 	
 	# enable error flag
@@ -428,8 +423,6 @@ function install_deps(){
 	apt-add-repository -y universe
 
 	apt-get -y install wget unzip apache2 bzip2 rename php libapache2-mod-php php-pgsql
-		
-	sed -i.save "/<VirtualHost /a\ ServerName ${HNAME}" /etc/apache2/sites-available/default-ssl.conf
 	
 	# Get Tomcat latest version and set CATALINA_HOME
 	TOMCAT_VER=$(wget -q -O- --no-check-certificate https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR}/ | sed -n "s|.*<a href=\"v\(${TOMCAT_MAJOR}\.[0-9.]\+\)/\">v.*|\1|p" | sort -V | tail -n 1)
@@ -466,194 +459,24 @@ function whiptail_gauge(){
 }
 
 function provision_ssl(){
-	
-	certbot -n --apache --agree-tos --email hostmaster@${HNAME} --no-eff-email -d ${HNAME}
-	
-	cat /etc/letsencrypt/live/${HNAME}/cert.pem > /etc/webmin/miniserv.pem
-	cat /etc/letsencrypt/live/${HNAME}/privkey.pem >> /etc/webmin/miniserv.pem
-	echo "extracas=/etc/letsencrypt/live/${HNAME}/fullchain.pem" >> /etc/webmin/miniserv.conf
-	
-	systemctl restart webmin apache2
+	/bin/bash /tmp/build-ssl.sh || true
 }
 
-function install_qgis_server(){
-  RELEASE=$(lsb_release -cs)
-
-	#3.4.x Madeira LTR
-  echo "deb [trusted=yes] https://qgis.org/ubuntu-ltr/ ${RELEASE} main" > /etc/apt/sources.list.d/qgis.list
-
-  wget -qO - https://qgis.org/downloads/qgis-2021.gpg.key | gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/qgis-archive.gpg --import
-  chmod a+r /etc/apt/trusted.gpg.d/qgis-archive.gpg
-
-	apt-get update -y || true
-  apt-get install -y qgis-server python-qgis
-	
-	if [ -d /etc/logrotate.d ]; then
-		cat >/etc/logrotate.d/qgisserver <<CAT_EOF
-/var/log/qgisserver.log {
-	su www-data www-data
-	size 100M
-	notifempty
-	missingok
-	rotate 3
-	daily
-	compress
-	create 660 www-data www-data
-}
-CAT_EOF
-	fi
-	
-	mkdir -p ${DATA_DIR}/qgis
-	chown www-data:www-data ${DATA_DIR}/qgis
-	
-	touch /var/log/qgisserver.log
-	chown www-data:www-data /var/log/qgisserver.log
-}
-
-function install_quartzmap(){
+function install_geolite(){
 	touch /root/auth.txt
 	export DEBIAN_FRONTEND=noninteractive
-	RELEASE=$(lsb_release -cs)
 	
-	wget -P/tmp https://github.com/AcuGIS/quartzmap-web-client/archive/refs/heads/main.zip
-	unzip /tmp/main.zip
-	rm -f /tmp/main.zip
+	#if [ ! -d geolite-main ]; then
+    	#wget -P/tmp https://github.com/AcuGIS/GeoLite/archive/refs/heads/main.zip
+    	#unzip /tmp/main.zip
+    	#rm -f /tmp/main.zip
+	#fi
 
-	pushd quartzmap-web-client-main/
-
-  apt-get -y install apache2 php-{pgsql,zip,gd,simplexml,curl,fpm} \
-		proftpd libapache2-mod-fcgid postfix python3-certbot-apache gdal-bin \
-		r-base r-base-dev r-cran-{raster,htmlwidgets,plotly,rnaturalearthdata,rjson} \
-		texlive-latex-base texlive-latex-recommended texlive-xetex cron
-
-	apt-get -y install --no-install-suggests --no-install-recommends texlive-latex-extra
-	
-	if [ "${RELEASE}" == 'jammy' ]; then
-		R --no-save <<R_EOF
-install.packages( c('skimr'))
-R_EOF
-	else
-		apt-get -y install r-cran-skimr
-	fi
-
-	# compile leaflet package from CRAN
-	R --no-save <<R_EOF
-install.packages( c('leaflet', 'leaflet.extras', 'rpostgis', 'R3port', 'rnaturalearth'))
-R_EOF
-
-
-	
-	# 1. Install packages (assume PG is preinstalled)
-	# apt-get -y install apache2 php-{pgsql,zip,gd,simplexml,curl,fpm} \
-		# proftpd libapache2-mod-fcgid postfix python3-certbot-apache gdal-bin
-
-	# setup apache
-	a2enmod ssl headers expires fcgid cgi
-	
-	sed 's|<Directory "/">|<Directory "/quartzmap">|
-s/DirectoryIndex index.php/DirectoryIndex index.php index.html/
-s|<Directory "/var/www/html/|<Directory "/var/www/html/quartzmap/|' < installer/apache2.conf > /etc/apache2/sites-available/default-ssl.conf
-
-	sed "s|\$DATA_DIR|$DATA_DIR|" < installer/qgis_apache2.conf > /etc/apache2/sites-available/qgis.conf
-
-	for f in default-ssl 000-default; do
-		sed -i.save "s/#ServerName example.com/ServerName ${HNAME}/" /etc/apache2/sites-available/${f}.conf
-	done
-
-	a2ensite 000-default default-ssl qgis
-	a2disconf serve-cgi-bin
-
-	# switch to mpm_event to server faster and use HTTP2
-	PHP_VER=$(php -version | head -n 1 | cut -f2 -d' ' | cut -f1,2 -d.)
-	a2enmod proxy_fcgi setenvif http2
-	a2enconf php${PHP_VER}-fpm
-	a2dismod php${PHP_VER}
-	a2dismod mpm_prefork
-	a2enmod mpm_event
-
-	systemctl reload apache2
-
-	#certbot --apache --agree-tos --email hostmaster@${HNAME} --no-eff-email -d ${HNAME}
-
- 	sed -i.save '
-s/#DefaultRoot~/DefaultRoot ~/
-s/# RequireValidShell\s*off/RequireValidShell off/' /etc/proftpd/proftpd.conf
-
-	
-	systemctl enable proftpd
-	systemctl restart proftpd
-
-	# 2. Create db
-	su postgres <<CMD_EOF
-	createdb ${APP_DB}
-	createuser -sd ${APP_DB}
-	psql -c "alter user ${APP_DB} with password '${APP_DB_PASS}'"
-	psql -c "ALTER DATABASE ${APP_DB} OWNER TO ${APP_DB}"
-CMD_EOF
-
-	echo "${APP_DB} pass: ${APP_DB_PASS}" >> /root/auth.txt
-
-	mkdir -p "${APPS_DIR}"
-	mkdir -p "${APPS_DIR}/js"
-	mkdir -p "${APPS_DIR}/css"
-	mkdir -p "${CACHE_DIR}"
-	mkdir -p "${DATA_DIR}"
-	mkdir -p "${DATA_DIR}/qgis"
-
-	chown -R www-data:www-data "${APPS_DIR}"
-	chown -R www-data:www-data "${CACHE_DIR}"
-	chown -R www-data:www-data "${DATA_DIR}"
-
-	# sync service needs +w to apps/1/images dir
-	chmod -R g+w "${APPS_DIR}"
-
-	cat >admin/incl/const.php <<CAT_EOF
-	<?php
-	define("DB_HOST", "localhost");
-	define("DB_NAME", "${APP_DB}");
-	define("DB_USER", "${APP_DB}");
-	define("DB_PASS", "${APP_DB_PASS}");
-	define("DB_PORT", 5432);
-	define("DB_SCMA", 'public');
-	define("APPS_DIR", "${APPS_DIR}");
-	define("CACHE_DIR", "${CACHE_DIR}");
-	define("DATA_DIR", "${DATA_DIR}");
-	define("SUPER_ADMIN_ID", 1);
-	define("SESS_USR_KEY", 'quartz_user');
-	?>
-CAT_EOF
-
-	cp -r . /var/www/html/quartzmap
-	chown -R www-data:www-data /var/www/html
-	rm -rf /var/www/html/quartzmap/installer
-
-	systemctl restart apache2
-
-	# create group for all FTP users
-	groupadd qatusers
-
-	# install ftp user creation script
-	for f in create_ftp_user delete_ftp_user update_ftp_user quartz_crontab; do
-		cp installer/${f}.sh /usr/local/bin/
-		chown www-data:www-data /usr/local/bin/${f}.sh
-		chmod 0550 /usr/local/bin/${f}.sh
-	done
-
-	cat >/etc/sudoers.d/q2w <<CAT_EOF
-www-data ALL = NOPASSWD: /usr/local/bin/create_ftp_user.sh, /usr/local/bin/delete_ftp_user.sh, /usr/local/bin/update_ftp_user.sh, /usr/local/bin/quartz_crontab.sh
-CAT_EOF
+	pushd geolite-main
+	    ./installer/app-install.sh ${GEOLITE_DEMO} /var/www/html/geolite
 	popd
-	
-	# add quartz user for cron updates
-	useradd -s /usr/sbin/nologin -M -d /var/www -G www-data quartz
 
-	# create empty cron file
-	touch "$DATA_DIR/quartz.crontab"
-	chown www-data:www-data "$DATA_DIR/quartz.crontab"
-
-	# save 1Gb of space
-	apt-get -y clean all
-	rm -rf quartzmap-web-client-main/
+	rm -rf geolite-main
 }
 
 ################################################################################
@@ -691,7 +514,15 @@ for mod in ${WEBMIN_MODS}; do
 	CMDS+=("install_${mod}_module")
 done
 
+if [ ${BUILD_SSL} == 'yes' ]; then
+	STEPS+=("Provisioning SSL")
+	CMDS+=('provision_ssl')
+fi
+
 # -------------------- #
 menu;
 whiptail_gauge;
 info_for_user
+
+# save 1Gb of space
+apt-get -y clean all
