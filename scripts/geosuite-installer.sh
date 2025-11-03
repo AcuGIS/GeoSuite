@@ -472,6 +472,7 @@ function install_geolite(){
 	#fi
 
 	pushd /tmp/GeoSuite-master/geolite-main
+	    chmod installer/app-install.sh
 	    ./installer/app-install.sh ${GEOLITE_DEMO} /var/www/html/geolite
 	popd
 
