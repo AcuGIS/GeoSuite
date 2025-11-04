@@ -470,7 +470,7 @@ function install_geolite(){
 	
 	pushd /tmp/GeoSuite-master/geolite-main
 	    chmod +x installer/app-install.sh
-	    ./installer/app-install.sh /var/www/html/app
+	    ./installer/app-install.sh /var/www/html/geolite
 	popd
 
 	rm -rf geolite-main
