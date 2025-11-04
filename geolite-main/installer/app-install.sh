@@ -6,7 +6,6 @@ ADMIN_APP_PASS='geolite';
 
 WWW_DIR='/var/www/html/geolite'
 DATA_DIR='/var/www/data'
-#CACHE_DIR='/var/www/cache'
 WITH_DEMO='false'
 
 HNAME=$(hostname -f)
@@ -39,6 +38,8 @@ apt-get -y install apache2 libapache2-mod-php libapache2-mod-fcgid php-{pgsql,mb
     python3 python3-psycopg2
 
 a2enmod ssl headers expires fcgid cgi rewrite
+
+mkdir /var/www/html/geolite
 
 ADMIN_APP_PASS_ENCODED=$(php -r "echo password_hash('${ADMIN_APP_PASS}', PASSWORD_DEFAULT);")
 sed -i.save "s|ADMIN_APP_PASS|${ADMIN_APP_PASS_ENCODED}|" installer/init.sql
