@@ -196,7 +196,6 @@ EOF
 
 
 
-
 function install_postgis_module(){
 
 	pushd /tmp/GeoSuite-master/modules/
@@ -400,11 +399,10 @@ function menu(){
 	
 	whiptail --title "GeoLite " --yesno \
 		"Install s for GeoLite ?" 8 78
-	
-	if [[ $exitstatus == 0 ]]; then
-  GEOLITE_DEMO='--with-demo'
+	exitstatus=$?
+	if [ $exitstatus == 0 ]; then
+	  GEOLITE_DEMO='--with-demo'
 	fi
-
 	
 	# enable error flag
 	set -e
