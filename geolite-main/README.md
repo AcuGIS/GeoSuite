@@ -148,7 +148,6 @@ GeoLite/
 ├── logout.php             # Logout handler
 ├── index.php              # Main page with saved maps cards
 ├── map_builder.php        # Map builder interface
-├── map_template.php       # Map HTML template generator
 ├── view_map.php           # Display individual saved maps
 ├── dashboards.php         # Dashboard library (list all dashboards)
 ├── dashboard_builder.php  # Dashboard builder/editor interface
@@ -156,7 +155,8 @@ GeoLite/
 ├── incl/
 │   ├── Auth.php           # Authentication functions
 │   ├── Config.php         # GeoServer configuration
-│   └── Database.php       # PostgreSQL & dashboard database functions
+│   |── Database.php       # PostgreSQL & dashboard database functions
+├   |── map_template.php   # Map HTML template generator
 └── README.md             # This file
 ```
 

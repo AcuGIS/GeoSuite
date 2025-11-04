@@ -10,7 +10,7 @@ require_once 'incl/const.php';
 require_once 'incl/Auth.php';
 require_once 'incl/Config.php';
 require_once 'incl/Database.php';
-require_once 'map_template.php';
+require_once 'incl/map_template.php';
 
 // Require authentication
 requireAuth();

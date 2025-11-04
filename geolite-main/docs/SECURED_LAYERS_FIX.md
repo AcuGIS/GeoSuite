@@ -23,7 +23,7 @@ A PHP proxy endpoint that:
 - Forwards the request to GeoServer using cURL with authentication
 - Returns the response to the browser
 
-#### 2. `map_template.php` (OpenLayers-based maps)
+#### 2. `incl/map_template.php` (OpenLayers-based maps)
 - **WMS Layer Requests**: Changed to use `geoserver_proxy.php` instead of direct GeoServer URL
 - **GetCapabilities Requests**: Updated to use proxy for layer extent queries
 - **GetFeatureInfo Requests**: Updated to use proxy for popup feature info

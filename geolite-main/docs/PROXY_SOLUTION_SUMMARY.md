@@ -19,7 +19,7 @@ Instead of trying to add headers in the browser (which causes CORS issues), we c
 - Returns map tiles, feature info, capabilities, etc.
 
 ### Modified Files:
-1. **map_template.php** - OpenLayers maps now use proxy
+1. **incl/map_template.php** - OpenLayers maps now use proxy
 2. **view_dashboard.php** - Leaflet dashboards now use proxy
 3. **dashboard_builder.php** - Dashboard builder now uses proxy
 

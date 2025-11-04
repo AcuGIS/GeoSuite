@@ -12,7 +12,7 @@ I've successfully added attribute filtering functionality to your GeoLite applic
 ### 2. Backend PHP Files
 - **incl/Database.php**: Updated to handle filters parameter in saveMap() and updateMap()
 - **map_builder.php**: Added filter UI and processing for map creation/editing
-- **map_template.php**: Added filter panel UI and JavaScript for dynamic filtering
+- **incl/map_template.php**: Added filter panel UI and JavaScript for dynamic filtering
 - **view_map.php**: Updated to pass filters from database to template
 
 ### 3. Documentation
