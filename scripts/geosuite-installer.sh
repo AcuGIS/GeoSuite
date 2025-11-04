@@ -398,12 +398,12 @@ function menu(){
 			BUILD_SSL='yes'
 	fi
 	
-	whiptail --title "GeoLite demo" --yesno \
-		"Install demos for GeoLite ?" 8 78
+	whiptail --title "GeoLite " --yesno \
+		"Install s for GeoLite ?" 8 78
 	
 	exitstatus=$?
 	if [ $exitstatus == 0 ]; then
-    	GEOLITE_DEMO='-with-demo'
+    	GEOLITE_='-with-'
 	fi
 	
 	# enable error flag
@@ -470,7 +470,7 @@ function install_geolite(){
 	
 	pushd /tmp/GeoSuite-master/geolite-main
 	    chmod +x installer/app-install.sh
-	    ./installer/app-install.sh ${GEOLITE_DEMO} /var/www/html/app
+	    ./installer/app-install.sh /var/www/html/app
 	popd
 
 	rm -rf geolite-main
