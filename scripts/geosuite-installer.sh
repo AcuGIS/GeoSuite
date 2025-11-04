@@ -403,7 +403,7 @@ function menu(){
 	
 	exitstatus=$?
 	if [ $exitstatus == 0 ]; then
-    	GEOLITE_='-with-demo'
+    	GEOLITE_='--with-demo'
 	fi
 	
 	# enable error flag
