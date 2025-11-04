@@ -1,0 +1,444 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<!-- Mirrored from geosuite.docs.acugis.com/en/latest/geoserver/tomcat/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 13 Jul 2023 23:22:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Apache Tomcat &mdash; AcuGIS GeoSuite 0.4.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+<!-- AcuGIS 1 -->
+  
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="../../../../_/static/javascript/readthedocs-doc-embed.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Create a Workspace" href="../workspace/index.html" />
+    <link rel="prev" title="Overview" href="../geoservers/index.html" /> 
+
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="../../../../_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "geoserver/tomcat/index", "programming_language": "perl", "project": "geosuite", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_rtd_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="../../../../_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+
+
+                                                                <div id="header" style="position: fixed; height: 70px; padding-bottom: 20px; overflow: hidden; background-color: #28728d;  display: block; z-index: 1000; width: 100%;">
+        <div class="acugis_geosuite" style="color:#fff!important; padding-left:30px; font-size:26px; padding-top: 20px;"><a href="https://geosuite.docs.acugis.com/" style="color:#fff!important; text-decoration:none!important">AcuGIS GeoSuite</a></div>
+
+      </div>
+
+
+  
+
+                                                                
+  
+                                                                
+
+   
+</div>
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        
+        <div id="header2"> </div>
+        
+        
+        
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation" style="padding-top: 45px;">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout.html">Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webmin.html">Control Panel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webmin.html#removing-the-control-panel">Removing the Control Panel</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PostGIS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../components/createdb/index.html">Create Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../components/postgresql/index.html">PostgreSQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../components/postgis/index.html">PostGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../components/pgrouting/index.html">PgRouting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../components/shp2pgsql/index.html">shp2pgsql</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../components/osm2pgsql/index.html">osm2pgsql</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../components/raster2pgsql/index.html">raster2pgsql</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GeoServer</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../admin/index.html">Access</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoservers/index.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Apache Tomcat</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#layout">Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#starting-and-stopping">Starting and Stopping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#service">Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version">Version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tomcat-users">Tomcat Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setenv-sh">setenv.sh</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../workspace/index.html">Create a Workspace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../store/index.html">Create Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layer/index.html">Add Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shp/index.html">Load ESRI Shapefile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../styles/index.html">Styles</a></li>
+</ul>
+<p class="caption"><span class="caption-text">pg_tileserv</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../components/pgtileserv/index.html">pg_tileserv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../components/pgfeatureserv/index.html">pg_featureserv</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Database Operations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../database/snapshot/index.html">Database Snapshots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../database/clone/index.html">Clone Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../database/restore/index.html">Restore Database</a></li>
+</ul>
+<p class="caption"><span class="caption-text">QGIS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../qgis/home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../qgis/pgservice.html">pg_service.conf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../qgis/qgis.html">Create a QGIS Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../qgis/publish.html">Publish Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../qgis/style-only.html">Publish Styles Only</a></li>
+</ul>
+<p class="caption"><span class="caption-text">LeafletJS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../apps/choropleth.html">Leaflet Choropleth App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apps/geojson.html">Leaflet GeoJson</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apps/php.html">Leaflet and PHP</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/documents.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/css.html">CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/nagios.html">Nagios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/support.html">Project Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/commercial.html">Commercial Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index-2.html">AcuGIS GeoSuite</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index-2.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Apache Tomcat</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/AcuGIS/GeoSuite/blob/master/docs/geoserver/tomcat/index.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="apache-tomcat">
+<h1><a class="toc-backref" href="#id1">Apache Tomcat</a><a class="headerlink" href="#apache-tomcat" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#apache-tomcat" id="id1">Apache Tomcat</a><ul>
+<li><a class="reference internal" href="#layout" id="id2">Layout</a></li>
+<li><a class="reference internal" href="#starting-and-stopping" id="id3">Starting and Stopping</a></li>
+<li><a class="reference internal" href="#service" id="id4">Service</a></li>
+<li><a class="reference internal" href="#version" id="id5">Version</a></li>
+<li><a class="reference internal" href="#tomcat-users" id="id6">Tomcat Users</a></li>
+<li><a class="reference internal" href="#setenv-sh" id="id7">setenv.sh</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="layout">
+<h2><a class="toc-backref" href="#id2">Layout</a><a class="headerlink" href="#layout" title="Permalink to this headline">¶</a></h2>
+<p>The Apache Tomcat (CATALINA) home directory is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">tomcat</span><span class="o">/</span><span class="n">apache</span><span class="o">-</span><span class="n">tomcat</span><span class="o">-</span><span class="n">v</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>Where apache-tomcat-v is the version installed.</p>
+<p>The CATALINA_HOME variable is set both in the Tomcat init script as well as setenv.sh files.</p>
+</div>
+<div class="section" id="starting-and-stopping">
+<h2><a class="toc-backref" href="#id3">Starting and Stopping</a><a class="headerlink" href="#starting-and-stopping" title="Permalink to this headline">¶</a></h2>
+<p>There are two ways to start/stop/restart Tomcat.</p>
+<ol class="arabic simple">
+<li>Via Module, using the Stop/Start/Restart buttons as shown below:</li>
+</ol>
+<blockquote>
+<div><img alt="../../_images/tomcat-functions.png" src="../../_images/tomcat-functions.png" />
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>Via SSH, using the following commands</li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">systemctl { start | stop | restart | status } tomcat</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>If Tomcat is not responding, you can also issue, as root</li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pkill -9 java</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="service">
+<h2><a class="toc-backref" href="#id4">Service</a><a class="headerlink" href="#service" title="Permalink to this headline">¶</a></h2>
+<p>Tomcat runs as a system service.</p>
+<p>The service file is located at /etc/systemd/system/tomcat.service</p>
+<p>The content of the tomcat.service file are below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>Unit<span class="o">]</span>
+<span class="nv">Description</span><span class="o">=</span>Tomcat<span class="w"> </span><span class="si">${</span><span class="nv">TOMCAT_VER</span><span class="si">}</span>
+<span class="nv">After</span><span class="o">=</span>multi-user.target
+
+<span class="o">[</span>Service<span class="o">]</span>
+<span class="nv">User</span><span class="o">=</span>tomcat
+<span class="nv">Group</span><span class="o">=</span>tomcat
+
+<span class="nv">WorkingDirectory</span><span class="o">=</span><span class="si">${</span><span class="nv">CATALINA_HOME</span><span class="si">}</span>
+<span class="nv">Type</span><span class="o">=</span>forking
+<span class="nv">Restart</span><span class="o">=</span>always
+
+<span class="nv">EnvironmentFile</span><span class="o">=</span>/etc/environment
+
+<span class="nv">ExecStart</span><span class="o">=</span><span class="nv">$CATALINA_HOME</span>/bin/startup.sh
+<span class="nv">ExecStop</span><span class="o">=</span><span class="nv">$CATALINA_HOME</span>/bin/shutdown.sh<span class="w"> </span><span class="m">60</span><span class="w"> </span>-force
+
+<span class="o">[</span>Install<span class="o">]</span>
+<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</pre></div>
+</div>
+<p>Any changes to the system file should be followed by</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>systemctl<span class="w"> </span>daemon-reload
+</pre></div>
+</div>
+</div>
+<div class="section" id="version">
+<h2><a class="toc-backref" href="#id5">Version</a><a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h2>
+<p>By default, Tomcat 9.x latest is used</p>
+</div>
+<div class="section" id="tomcat-users">
+<h2><a class="toc-backref" href="#id6">Tomcat Users</a><a class="headerlink" href="#tomcat-users" title="Permalink to this headline">¶</a></h2>
+<p>On installation, random passwords are generated for both the admin and manager roles.</p>
+<p>The passwords can be found at  /home/tomcat/apache-tomcat-version/conf/tomcat-users.xml</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&#39;1.0&#39; encoding=&#39;utf-8&#39;?&gt;</span>
+<span class="nt">&lt;tomcat-users&gt;</span>
+<span class="nt">&lt;role</span><span class="w"> </span><span class="na">rolename=</span><span class="s">&quot;manager-gui&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;user</span><span class="w"> </span><span class="na">username=</span><span class="s">&quot;manager&quot;</span><span class="w"> </span><span class="na">password=</span><span class="s">&quot;aupiZ0GlzHAaC5-8GgL2gAi7XNuEiTE0&quot;</span><span class="w"> </span><span class="na">roles=</span><span class="s">&quot;manager-gui&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;role</span><span class="w"> </span><span class="na">rolename=</span><span class="s">&quot;admin-gui&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;user</span><span class="w"> </span><span class="na">username=</span><span class="s">&quot;admin&quot;</span><span class="w"> </span><span class="na">password=</span><span class="s">&quot;67Jyz1EdDXmmFfOL9DOBFzuwr17MUgLa&quot;</span><span class="w"> </span><span class="na">roles=</span><span class="s">&quot;manager-gui,admin-gui&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/tomcat-users&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setenv-sh">
+<h2><a class="toc-backref" href="#id7">setenv.sh</a><a class="headerlink" href="#setenv-sh" title="Permalink to this headline">¶</a></h2>
+<p>The setenv.sh file is located at /home/tomcat/apache-tomcat-version/bin/setenv.sh</p>
+<p>The default parameters set by GeoSuite are:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">CATALINA_PID</span><span class="o">=</span><span class="s">&quot;/home/tomcat/apache-tomcat-9.0.76/temp/tomcat.pid&quot;</span>
+<span class="n">JAVA_OPTS</span><span class="o">=</span><span class="s">&quot;${JAVA_OPTS} -server -Djava.awt.headless=true -Dorg.geotools.shapefile.datetime=false -XX:+UseParallelGC -XX:ParallelGCThreads=4 -Dfile.encoding=UTF8 -Duser.timezone=UTC -Djavax.servlet.request.encoding=UTF-8 -Djavax.servlet.response.encoding=UTF-8 -DGEOSERVER_CSRF_DISABLED=true -DPRINT_BASE_URL=http://localhost:8080/geoserver/pdf -Dgwc.context.suffix=gwc&quot;</span>
+<span class="n">JAVA_OPTS</span><span class="o">=</span><span class="s">&quot;$JAVA_OPTS -Dgeostore-ovr=file:///home/tomcat/apache-tomcat-9.0.76/conf/geostore-datasource.properties&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../workspace/index.html" class="btn btn-neutral float-right" title="Create a Workspace" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../geoservers/index.html" class="btn btn-neutral float-left" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright acugis
+      <span class="commit">
+        Revision <code>db2a027e</code>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="../../index.html">latest</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="http://geosuite.docs.acugis.com/_/downloads/en/latest/pdf/">pdf</a></dd>
+        
+          <dd><a href="http://geosuite.docs.acugis.com/_/downloads/en/latest/htmlzip/">html</a></dd>
+        
+          <dd><a href="http://geosuite.docs.acugis.com/_/downloads/en/latest/epub/">epub</a></dd>
+        
+      </dl>
+      <dl>
+        
+        <dt>On Read the Docs</dt>
+          <dd>
+            <a href="http://readthedocs.org/projects/geosuite/?fromdocs=geosuite">Project Home</a>
+          </dd>
+          <dd>
+            <a href="http://readthedocs.org/builds/geosuite/?fromdocs=geosuite">Builds</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+   
+
+</body>
+
+<!-- Mirrored from geosuite.docs.acugis.com/en/latest/geoserver/tomcat/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 13 Jul 2023 23:22:22 GMT -->
+</html>

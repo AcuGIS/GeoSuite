@@ -1,0 +1,850 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>AcuGIS GeoSuite | Quick Start</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.ico" rel="icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+	
+<style>
+	
+	.green {
+    color:#008374
+}
+	</style>
+ 
+</head>
+
+<body>
+
+  
+
+  <header id="header" class="header d-flex align-items-center">
+
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        
+        <h1>AcuGIS</h1>
+      </a>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html">Dashboard</a></li>
+          <li><a href="#" class="active">Quick Start</a></li>
+          <li><a href="/latest" target="_blank">Docs</a></li>
+			  <li><a href="https://geolite.acugis.com:10000">Login</a></li>	
+
+         
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+    </div>
+  </header>
+  
+
+  <main id="main">
+	  
+	  
+            
+	  
+	  
+	  
+  <section id="faq-start" class="faq">
+      <div class="container" data-aos="fade-up">
+		  
+		 
+			  
+			  
+
+          <div class="col-lg-12" align="center">
+			  <p class="tabpage-header" style="font-family: 'Proxima Nova', 'Open Sans', Helvetica, Arial, sans-serif; text-align: center;
+    text-transform: uppercase; letter-spacing: 3px; color: #333; font-size: 1.0em; margin-top: 5px; margin-bottom: 30px;">QUICK START</p>
+
+            <div class="content px-xl-5" align="center" style="width: 50%">
+				
+				<div class="tabpage-content">
+            <div class="row" align="left">
+              <div class="col-xs-12 col-sm-6 col-sm-offset-1 col-md-5 col-md-offset-2" style="display:inline-block;">
+                <p class="get_started_text">AcuGIS Open GeoSuite builds a full OpenSource GIS stack for managing, deploying and building GIS applications.</p>
+				  <p class="get_started_text">Open GeoSuite reflects new technologies such as pg_tileserv and MapStore2. Follow below in sequence.</p>
+                
+              </div>
+              <div class="col-xs-12 col-sm-5 col-md-3" style="text-align: center;">
+                <img class="get_started_img" src="assets/img/getstarted_img.png"/>
+				  
+              </div>
+            </div>
+				
+		      </div>
+          </div>
+  </div><br><br><br>
+        <div class="row gy-4">
+          <div class="col-lg-4">
+            <div class="content px-xl-5">
+              <h3><!--Get Started <br>--> <i class="bi bi-database-lock green"></i> <strong>SSL</strong></h3>
+              <p>
+                <!--Secure your installation with SSL via Certbot.-->
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+            <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
+       
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
+                    
+                    Secure Your Installation
+                  </button>
+                </h3>
+                <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                      If you have not already done so, and are using a valid hostname, issue below to provision SSL:<br><br>
+					  <code>
+					  wget https://raw.githubusercontent.com/AcuGIS/geosuite/master/scripts/build-ssl.sh && chmod +x build-ssl.sh && ./build-ssl</code><br><br>
+					  
+					   
+                  </div>
+                </div>
+              </div><!-- # Faq item-->	
+				
+            </div>
+          </div>
+        </div>
+		  
+		  
+		  
+		  
+		  
+		  
+
+      </div>
+	 </div>
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+</section><!-- End Frequently Asked Questions Section -->
+	  
+
+		
+		
+		   
+	  
+	  
+    <!-- ======= Get Started PostGIS ======= -->
+    <section id="faq-postgis" class="faq">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="content px-xl-5">
+              <h3><!--Get Started <br>--> <i class="bi bi-database-check green"></i>  <strong>Prepare Data</strong></h3>
+              <p>
+                <!--Enable PostGIS and get GIS data for use in our examples.-->
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+
+            <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
+                    
+                   Create a Database
+                  </button>
+                </h3>
+                <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+              Create a database, 'geodb'.  We'll use this database to enable PostGIS and load GIS data.
+					  
+              You can do so in several ways:   <br><br>			  
+					   <ul>
+						   <li>	<a href="https://geosuite.readthedocs.io/en/latest/components/postgis/index.html#installing-postgis" target="_blank">Create a Database Using Command Line (PSQL) </a></li>
+						   
+					  <li>	<a href="https://geosuite.readthedocs.io/en/latest/components/postgis/index.html#installing-postgis" target="_blank">Create a Database Using your control panel</a></li>
+						   
+						   
+					  </ul>
+						   
+						   <br><br>
+					  Note: You can also create a database using PGAdmin or any other compatible client</li>
+					  				  
+					  
+					  
+					  
+					  
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-enable">
+                   
+                    Enable PostGIS
+                  </button>
+                </h3>
+                <div id="faq-content-enable" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                   
+					   You can enable PostGIS on your database using either the Command Line or your Control Panel: <br><br>
+					   <ul>
+					   
+						   <li>	 <a href="https://geosuite.readthedocs.io/en/latest/components/postgis/index.html#installing-postgis" target="_blank">Enable PostGIS using Command Line (PSQL) </a></li>
+						   
+					  <li>	<a href="https://geosuite.readthedocs.io/en/latest/components/postgis/index.html#installing-postgis" target="_blank">Enable PostGIS using your Control Panel</a></li>	<br><br>
+						
+					</ul>
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              
+
+             
+
+              
+				
+				
+				
+				
+				
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Frequently Asked Questions Section -->
+	  
+	  
+	  
+	   <!-- ======= Get Started PostGIS ======= -->
+    <section id="faq-geopostgis" class="faq">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="content px-xl-5">
+              <h3><i class="bi bi-database-fill-up green"></i><strong>Load Data</strong></h3>
+              <p>
+                <!--Load your data into PostGIS and GeoServer-->
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+
+            <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-c">
+                    
+                    Load Chicago Data (shp2pgsql)
+                  </button>
+                </h3>
+                <div id="faq-content-c" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    <a href="latest/components/shp2pgsql/index.html#tutorial-load-shp-files"  target="_blank">Load the Chicago Neighborhood and Parks data into PostGIS</a>.
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-d">
+                    Load Andorra Data (osm2ogsql)
+                  </button>
+                </h3>
+                <div id="faq-content-d" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    <a href="latest/components/osm2pgsql/index.html#load-via-osm-file-loader" target="_blank">Load the Andorra data into PostGIS</a>.
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+				
+				<div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-e">
+                    List Database and Tables
+                  </button>
+                </h3>
+                <div id="faq-content-e" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    <a href="latest/components/createdb/index.html#list-databases" target="_blank">List database tables using psql</a>
+                  </div>
+                </div>
+              </div>
+
+              
+
+             
+
+             
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+		
+		
+		
+		
+		
+		
+	  
+	  
+	  
+    <section id="faq-geoservers" class="faq">
+      <div class="container" data-aos="fade-up">
+        <div class="row gy-4">
+          <div class="col-lg-4">
+            <div class="content px-xl-5">
+              <h3><i class="bi bi-map green"></i><strong>GeoServer</strong></h3>
+              <!--<p>Workspace, Store, and Layer</p>-->
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-f">                    
+                   Workspace, Store, and Layer
+                  </button>
+                </h3>
+                <div id="faq-content-f" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    <ul>
+			<li><a href="latest/geoserver/workspace/index.html" target="_blank">Create a Workspace</a></li>
+			<li><a href="latest/geoserver/store/index.html" target="_blank">Create a Store</a></li>
+			<li><a href="latest/geoserver/layer/index.html" target="_blank">Create a Layer</a></li>
+	            </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-g">
+                                       Load a Shapefile
+                  </button>
+                </h3>
+                <div id="faq-content-g" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    <a href="latest/geoserver/shp/index.html" target="_blank">Create a Store from an ESRI Shapefile</a>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-h">
+                    Create a Style
+                  </button>
+                </h3>
+                <div id="faq-content-h" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+					  <a href="latest/geoserver/styles/index.html" target="_blank">Create and edit Styles</a> 
+					  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  <!--Disableg3w
+	  
+
+    <section id="faq-g3w" class="faq">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="content px-xl-5">
+              <h3><i class="bi bi-map green"></i>&nbsp;  <strong>G3W-Suite</strong></h3>
+              <p>
+                Create a Workspace, Store, and Layer
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+
+            <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-f">
+                    
+                    Create a Workspace, Store, and Layer
+                  </button>
+                </h3>
+                <div id="faq-content-f" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    <ul>
+					  <li>Create a <a href="https://data.cityofchicago.org/browse?limitTo=maps" target="_blank">Workspace</a></li>
+					 <li>Create a <a href="https://data.cityofchicago.org/browse?limitTo=maps" target="_blank">Store</a></li>
+						 <li>Create a <a href="https://data.cityofchicago.org/browse?limitTo=maps" target="_blank">Layer</a></li>
+						<br>
+						
+						</ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-g">
+                    
+                    Load a Shapefile
+                  </button>
+                </h3>
+                <div id="faq-content-g" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Create a Store from an <a href="https://data.cityofchicago.org/browse?limitTo=maps" target="_blank">ESRI Shapefile</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-h">
+                    Create a Style
+                  </button>
+                </h3>
+                <div id="faq-content-h" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                  </div>
+                </div>
+              </div>
+
+              
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+	  
+	 <!-- --> 
+
+
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	   <!-- Disable Maptore2 --> 
+    <section id="faq-mapstore2" class="faq">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="content px-xl-5">
+              <h3><i class="bi bi-map-fill green"></i>&nbsp;  <strong>Mapstore2</strong></h3>
+              <p>
+                Create a map and dashboard
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+
+            <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-i">
+                    Create a Map
+                  </button>
+                </h3>
+                <div id="faq-content-i" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    <a href="latest/maptools/mapstore2/map.html" target="_blank">Create a Map</a> with MapStore2
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-j">
+                    Create a Dashboard
+                  </button>
+                </h3>
+                <div id="faq-content-j" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    <a href="latest/maptools/mapstore2/dashboard.html" target="_blank">Create a Dashboard</a> with MapStore2
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-k">
+                    Manage Users and Groups
+                  </button>
+                </h3>
+                <div id="faq-content-k" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Manage <a href="latest/maptools/mapstore2/users.html" target="_blank"> Users and Groups</a>
+                  </div>
+                </div>
+              </div>
+
+              
+
+              
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+	  <!--  -->
+	  
+	  
+	      <section id="faq-webgis" class="faq">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="content px-xl-5">
+              <h3><i class="bi bi-brush green"></i>&nbsp;  <strong>QGIS</strong></h3>
+              <p>
+                Get Started with QGIS
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+
+            <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-l">
+                    
+                    The PostgreSQL Service File
+                  </button>
+                </h3>
+                <div id="faq-content-l" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Create a <a href="latest/qgis/pgservice.html" target="_blank">pg_service.conf file</a>
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-m">
+					Create a QGIS Project                  </button>
+                </h3>
+                <div id="faq-content-m" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                     Create a <a href="latest/qgis/qgis.html" target="_blank">QGIS Map Project</a>
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-n">
+                    Publish Layers to GeoServer
+                  </button>
+                </h3>
+                <div id="faq-content-n" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                   <a href="latest/qgis/publish.html" target="_blank">Publish Layers GeoServer</a> using GeoCat Bridge
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-o">
+                    
+                    Publish Styles to GeoServer
+                  </button>
+                </h3>
+                <div id="faq-content-o" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Create a <a href="latest/qgis/style-only.html" target="_blank">Publish Styles to GeoServer</a> using GeoCat Bridge
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Frequently Asked Questions Section -->
+		
+		
+		<section id="faq-serv" class="faq">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="content px-xl-5">
+              <h3><i class="bi bi-brush green"></i>&nbsp;  <strong>More</strong></h3>
+              <p>
+                LeafletJS, pg_tileserv and pg_featursrv
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+
+            <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-za">
+                    
+                    pg_tileserv
+                  </button>
+                </h3>
+                <div id="faq-content-za" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Getting started with <a href="/latest/components/pgtileserv/index.html" target="_blank">pg_tileserv</a>
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-zb">
+					 pg_featureserv                 </button>
+                </h3>
+                <div id="faq-content-zb" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                     Getting started with <a href="latest/components/pgfeatureserv/index.html" target="_blank">pg_featureserv</a>
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-zc">
+                    Leafletjs Choropleth App
+                  </button>
+                </h3>
+                <div id="faq-content-zc" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+					  
+					  <ul>
+					  <li>Leafletjs Choropleth App with <a href="latest/apps/choropleth.html" target="_blank">pg_featureserv</a></li>
+					 <li>Leafletjs Choropleth App with <a href="latest/apps/choropleth.html#using-geoserver" target="_blank">GeoServer</a></li>
+						 
+						<br>						
+						</ul>
+					  
+                   
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-zd">
+                    
+                    Leafletjs and PHP
+                  </button>
+                </h3>
+                <div id="faq-content-zd" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Leafletjs <a href="latest/apps/php.html" target="_blank">and PHP</a>
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Frequently Asked Questions Section -->
+	  
+	  
+	  
+	  
+   
+
+  </main>
+
+ 
+ <footer id="footer" class="footer">
+
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-3 col-md-12 footer-info">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span>Get Started</span>
+          </a>
+          <p>Click Quick Start on top menu or select a topic at right <br></p>
+          <div class="social-links d-flex mt-4">
+            <a href="https://github.com/AcuGIS/GeoSuite" class="twitter"><i class="bi bi-github"></i></a>
+            
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>PostGIS</h4>
+          <ul>
+			  
+
+            <li><a href="latest/components/createdb/" target="_blank">Create Database</a></li>
+            <li><a href="latest/components/postgis/" target="_blank">Enable PostGIS</a></li>
+	    <li><a href="latest/components/shp2pgsql/#tutorial-load-shp-files" target="_blank">Loading Data (shp2pgsql)</a></li>
+	    <li><a href="http://geolite.acugis.com:7800">pg_tileserv</a></li>
+            
+          </ul>
+        </div>
+<!-- <!-- Disable GeoServer -->		  
+		  <div class="col-lg-2 col-6 footer-links">
+          <h4>GeoServer</h4>
+          <ul>
+           <li><a href="/geoserver">GeoServer</a></li>
+            <li><a href="latest/geoserver/workspace/" target="_blank">Create Workspace</a></li>
+            <li><a href="latest/geoserver/store/" target="_blank">Create Store</a></li>
+            <li><a href="latest/geoserver/layer/" target="_blank">Create Layer</a></li>
+          </ul>
+        </div>
+		  
+<!-- <!-- Disable Geoserver END -->		  
+		  
+
+<!-- <!-- Disable Maptore2 -->
+
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>MapStore2</h4>
+          <ul>
+            <li><a href="/mapstore">MapStore2</a></li>
+            <li><a href="latest/maptools/mapstore2/access.html" target="_blank">Admin Access</a></li>
+            <li><a href="latest/maptools/mapstore2/map.html" target="_blank">Create Map</a></li>
+            <li><a href="latest/maptools/mapstore2/dashboard.html" target="_blank">Create Dashboard</a></li>
+          </ul>
+        </div>
+
+<!-- <!-- Disable Maptore2 END -->
+
+
+
+<!-- Enable g3w
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>G3W-Suite</h4>
+          <ul>
+            <li><a href="latest/g3w/home.html" target="_blank">Intro</a></li>
+            <li><a href="latest/g3w/pgservice.html" target="_blank">pgservice</a></li>
+            <li><a href="latest/g3w/qgis.html" target="_blank">qgis</a></li>
+            <li><a href="latest/g3w/groups.html" target="_blank">Create Groups</a></li>
+            <li><a href="latest/g3w/projects.html" target="_blank">Create Projects</a></li>
+          </ul>
+        </div>
+
+Enable g3w -->
+
+
+
+        
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>QGIS</h4>
+          <ul>
+          <li><a href="latest/qgis/pgservice.html" target="_blank">The pg_service.conf File</a></li>			  
+	    <li><a href="latest/qgis/qgis.html" target="_blank">Create Project</a></li>
+            <li><a href="en/latest/qgis/style-only.html" target="_blank">Publish Styles</a></li>
+            <li><a href="LeafletChoropleth.html" target="_blank">Leafletjs Choropleth</a></li>
+          
+            
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container mt-4">
+      <div class="copyright">
+        &copy; 2023 <strong><span>AcuGIS</span></strong>. Cited, Inc.  All Rights Reserved
+      </div>
+      
+    </div>
+
+  </footer>
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
+
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/js/web.js"></script>
+
+</body>
+
+</html>

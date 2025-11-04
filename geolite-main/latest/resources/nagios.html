@@ -1,0 +1,508 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<!-- Mirrored from geosuite.docs.acugis.com/en/latest/resources/nagios.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 13 Jul 2023 23:23:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Nagios &mdash; AcuGIS GeoSuite 0.4.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+<!-- AcuGIS 1 -->
+  
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="../../../_/static/javascript/readthedocs-doc-embed.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Project Support" href="support.html" />
+    <link rel="prev" title="Security" href="security.html" /> 
+
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="../../../_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "resources/nagios", "programming_language": "perl", "project": "geosuite", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_rtd_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="../../../_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+
+
+                                                                <div id="header" style="position: fixed; height: 70px; padding-bottom: 20px; overflow: hidden; background-color: #28728d;  display: block; z-index: 1000; width: 100%;">
+        <div class="acugis_geosuite" style="color:#fff!important; padding-left:30px; font-size:26px; padding-top: 20px;"><a href="https://geosuite.docs.acugis.com/" style="color:#fff!important; text-decoration:none!important">AcuGIS GeoSuite</a></div>
+
+      </div>
+
+
+  
+
+                                                                
+  
+                                                                
+
+   
+</div>
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        
+        <div id="header2"> </div>
+        
+        
+        
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation" style="padding-top: 45px;">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout.html">Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../webmin.html">Control Panel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../webmin.html#removing-the-control-panel">Removing the Control Panel</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PostGIS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/createdb/index.html">Create Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/postgresql/index.html">PostgreSQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/postgis/index.html">PostGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/pgrouting/index.html">PgRouting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/shp2pgsql/index.html">shp2pgsql</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/osm2pgsql/index.html">osm2pgsql</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/raster2pgsql/index.html">raster2pgsql</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GeoServer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/admin/index.html">Access</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/geoservers/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/tomcat/index.html">Apache Tomcat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/workspace/index.html">Create a Workspace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/store/index.html">Create Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/layer/index.html">Add Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/shp/index.html">Load ESRI Shapefile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/styles/index.html">Styles</a></li>
+</ul>
+<p class="caption"><span class="caption-text">pg_tileserv</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/pgtileserv/index.html">pg_tileserv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/pgfeatureserv/index.html">pg_featureserv</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Database Operations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../database/snapshot/index.html">Database Snapshots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../database/clone/index.html">Clone Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../database/restore/index.html">Restore Database</a></li>
+</ul>
+<p class="caption"><span class="caption-text">QGIS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../qgis/home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qgis/pgservice.html">pg_service.conf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qgis/qgis.html">Create a QGIS Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qgis/publish.html">Publish Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qgis/style-only.html">Publish Styles Only</a></li>
+</ul>
+<p class="caption"><span class="caption-text">LeafletJS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../apps/choropleth.html">Leaflet Choropleth App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apps/geojson.html">Leaflet GeoJson</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apps/php.html">Leaflet and PHP</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="documents.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="css.html">CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Nagios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Project Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commercial.html">Commercial Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index-2.html">AcuGIS GeoSuite</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index-2.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Nagios</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/AcuGIS/GeoSuite/blob/master/docs/resources/nagios.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="nagios">
+<h1>Nagios<a class="headerlink" href="#nagios" title="Permalink to this headline">¶</a></h1>
+<p>If you wish to set up monitoring for your instance, you can do so with our Nagios Module:</p>
+<p><a class="reference external" href="https://github.com/cited/nagios-webmin-module">https://github.com/cited/nagios-webmin-module</a></p>
+<p>Nagios and nrpe client are produced by <a class="reference external" href="https://www.nagios.com/">Nagios</a></p>
+<p><a class="reference external" href="https://exchange.nagios.org/">Nagios Exchange</a> provides plugins, addons, docs, extensions and other tools</p>
+<p>Below are some of the main sections for setting up basic monitoring.</p>
+<p>nagiso.cfg to register our geosuite.cfg file</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>You<span class="w"> </span>can<span class="w"> </span>specify<span class="w"> </span>individual<span class="w"> </span>object<span class="w"> </span>config<span class="w"> </span>files<span class="w"> </span>as<span class="w"> </span>shown<span class="w"> </span>below:
+<span class="go">cfg_file=/usr/local/nagios/etc/objects/commands.cfg</span>
+
+<span class="gp"># </span>Definitions<span class="w"> </span><span class="k">for</span><span class="w"> </span>monitoring<span class="w"> </span>the<span class="w"> </span><span class="nb">local</span><span class="w"> </span><span class="o">(</span>Linux<span class="o">)</span><span class="w"> </span>host
+<span class="go">cfg_file=/usr/local/nagios/etc/objects/geosuite.cfg</span>
+</pre></div>
+</div>
+<p>commands.cfg</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Monitor<span class="w"> </span>GeoServer:<span class="w"> </span>Monitor<span class="w"> </span>web<span class="w"> </span>page<span class="w"> </span><span class="k">in</span><span class="w"> </span>addition<span class="w"> </span>to<span class="w"> </span>Tomcat<span class="w"> </span>to<span class="w"> </span>insure<span class="w"> </span>GeoServer<span class="w"> </span>is<span class="w"> </span>accessible
+
+<span class="go">define command {</span>
+<span class="go">    command_name   geoserver_URL</span>
+<span class="go">    command_line   /usr/local/nagios/libexec/check_http_content -U &quot;http://domain.com/geoserver/web/&quot; -m &quot;Welcome&quot;</span>
+
+<span class="go">}</span>
+
+<span class="gp"># </span>Monitor<span class="w"> </span>PostgreSQL<span class="w"> </span>using<span class="w"> </span>the<span class="w"> </span>check_postgres.pl<span class="w"> </span>plugin:
+
+<span class="go">define command {</span>
+<span class="go">     command_name    check_postgres_connection</span>
+<span class="go">     command_line    /usr/local/nagios/libexec/check_postgres.pl  --dbservice=$HOSTADDRESS$ --action=connection</span>
+<span class="go"> }</span>
+
+<span class="gp"># </span>Monitor<span class="w"> </span>disk<span class="w"> </span>usage<span class="w"> </span>using<span class="w"> </span>custom<span class="w"> </span>script,<span class="w"> </span>check_diskspace<span class="w"> </span><span class="o">(</span>script<span class="w"> </span>is<span class="w"> </span>below<span class="o">)</span>
+
+<span class="go">define command {</span>
+<span class="go">    command_name    check_diskspace</span>
+<span class="go">    command_line    $USER1$/check_nrpe -H $HOSTADDRESS$ -c check_diskspace</span>
+</pre></div>
+</div>
+<p>geosuite.cfg file</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Using<span class="w"> </span>Slack<span class="w"> </span>plugin<span class="w"> </span>to<span class="w"> </span>get<span class="w"> </span>notifications<span class="w"> </span>on<span class="w"> </span>Slack<span class="w"> </span>channel
+<span class="gp"># </span>Using<span class="w"> </span>check_diskspace<span class="w"> </span><span class="o">(</span>see<span class="w"> </span>next<span class="w"> </span>section<span class="o">)</span>
+
+<span class="go">define host {</span>
+<span class="go">    use                          linux-server</span>
+<span class="go">    host_name                    geosuite</span>
+<span class="go">    alias                        geosuite</span>
+<span class="go">    address                      192.1.2.3</span>
+<span class="go">    register                     1</span>
+<span class="go">}</span>
+
+<span class="go">define service {</span>
+<span class="go">  host_name                       geosuite</span>
+<span class="go">  service_description             PING</span>
+<span class="go">  check_command                   check_ping!100.0,20%!500.0,60%</span>
+<span class="go">  max_check_attempts              2</span>
+<span class="go">  check_interval                  2</span>
+<span class="go">  retry_interval                  2</span>
+<span class="go">  check_period                    24x7</span>
+<span class="go">  check_freshness                 1</span>
+<span class="go">  contact_groups                  admins,slack</span>
+<span class="go">  notification_interval           2</span>
+<span class="go">  notification_period             24x7</span>
+<span class="go">  notifications_enabled           1</span>
+<span class="go">  register                        1</span>
+<span class="go">}</span>
+
+<span class="go">define service {</span>
+<span class="go">  host_name                       geosuite</span>
+<span class="go">  service_description             Disk Space</span>
+<span class="go">  check_command                   check_diskspace</span>
+<span class="go">  max_check_attempts              2</span>
+<span class="go">  check_interval                  2</span>
+<span class="go">  retry_interval                  2</span>
+<span class="go">  check_period                    24x7</span>
+<span class="go">  check_freshness                 1</span>
+<span class="go">  contact_groups                  admins,slack</span>
+<span class="go">  notification_interval           2</span>
+<span class="go">  notification_period             24x7</span>
+<span class="go">  notifications_enabled           1</span>
+<span class="go">  register                        1</span>
+<span class="go">}</span>
+
+<span class="go">define service {</span>
+<span class="go">  host_name                       geosuite</span>
+<span class="go">  service_description             Check SSH</span>
+<span class="go">  check_command                   check_ssh!-p 48316</span>
+<span class="go">  max_check_attempts              2</span>
+<span class="go">  check_interval                  2</span>
+<span class="go">  retry_interval                  2</span>
+<span class="go">  check_period                    24x7</span>
+<span class="go">  check_freshness                 1</span>
+<span class="go">  contact_groups                  admins,slack</span>
+<span class="go">  notification_interval           2</span>
+<span class="go">  notification_period             24x7</span>
+<span class="go">  notifications_enabled           1</span>
+<span class="go">  register                        1</span>
+<span class="go">}</span>
+
+<span class="go">define service {</span>
+<span class="go">  host_name                       geosuite</span>
+<span class="go">  service_description             Check HTTP</span>
+<span class="go">  check_command                   check_http</span>
+<span class="go">  max_check_attempts              2</span>
+<span class="go">  check_interval                  2</span>
+<span class="go">  retry_interval                  2</span>
+<span class="go">  check_period                    24x7</span>
+<span class="go">  check_freshness                 1</span>
+<span class="go">  contact_groups                  admins,slack</span>
+<span class="go">  notification_interval           2</span>
+<span class="go">  notification_period             24x7</span>
+<span class="go">  notifications_enabled           1</span>
+<span class="go">  register                        1</span>
+<span class="go">}</span>
+
+<span class="go">define service {</span>
+<span class="go">  host_name                       geosuite</span>
+<span class="go">  service_description             Check PostgreSQL</span>
+<span class="go">  check_command                   check_postgres_connection</span>
+<span class="go">  max_check_attempts              2</span>
+<span class="go">  check_interval                  2</span>
+<span class="go">  retry_interval                  2</span>
+<span class="go">  check_period                    24x7</span>
+<span class="go">  check_freshness                 1</span>
+<span class="go">  contact_groups                  admins,slack</span>
+<span class="go">  notification_interval           2</span>
+<span class="go">  notification_period             24x7</span>
+<span class="go">  notifications_enabled           1</span>
+<span class="go">  register                        1</span>
+<span class="go">}</span>
+
+
+<span class="go">define service {</span>
+<span class="go">  host_name                       geosuite</span>
+<span class="go">  service_description             GeoServer Status</span>
+<span class="go">  check_command                   geoserver_URL</span>
+<span class="go">  max_check_attempts              2</span>
+<span class="go">  check_interval                  2</span>
+<span class="go">  retry_interval                  2</span>
+<span class="go">  check_period                    24x7</span>
+<span class="go">  check_freshness                 1</span>
+<span class="go">  contact_groups                  admins,slackmins</span>
+<span class="go">  notification_interval           2</span>
+<span class="go">  notification_period             24x7</span>
+<span class="go">  notifications_enabled           1</span>
+<span class="go">  register                        1</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>You can find the PostgreSQL monitor plugin on Nagios Exchange.</p>
+<p>For disk usage monitoring, you can use our check_diskspace script below:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span>!/bin/bash
+
+<span class="go">chkuse=$(df -h |grep &#39;/&#39; |grep -v &#39;VolGroup&#39; |awk &#39;{if ($6 == &quot;&quot;) print $4,$5; else print $5,$6;}&#39;)</span>
+
+<span class="go">echo &quot;${chkuse}&quot; | grep -o &#39;[0-9]*&#39; | while read mounts</span>
+<span class="go">do</span>
+<span class="go">    if [ $mounts -gt 98 ]</span>
+<span class="go">      then</span>
+<span class="go">      echocrit=$(echo &quot;${chkuse}&quot; | grep $mounts)</span>
+<span class="go">      echo $crit &quot;CRITICAL&quot;</span>
+<span class="go">      exit 2</span>
+<span class="go">    elif [ $mounts -gt 95 ]</span>
+<span class="go">      then</span>
+<span class="go">      echowarn=$(echo &quot;${chkuse}&quot; | grep $mounts)</span>
+<span class="go">      echo $warn &quot;WARNING&quot;</span>
+<span class="go">      exit 1</span>
+<span class="go">    fi</span>
+<span class="go">done</span>
+
+<span class="go">wait</span>
+<span class="go">rc=$?</span>
+
+<span class="go">if [ $rc -eq 0 ]; then</span>
+<span class="go">    echo &quot;OK&quot;</span>
+<span class="go">fi</span>
+
+<span class="go">exit ${rc}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="support.html" class="btn btn-neutral float-right" title="Project Support" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="security.html" class="btn btn-neutral float-left" title="Security" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright acugis
+      <span class="commit">
+        Revision <code>db2a027e</code>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="../index.html">latest</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="http://geosuite.docs.acugis.com/_/downloads/en/latest/pdf/">pdf</a></dd>
+        
+          <dd><a href="http://geosuite.docs.acugis.com/_/downloads/en/latest/htmlzip/">html</a></dd>
+        
+          <dd><a href="http://geosuite.docs.acugis.com/_/downloads/en/latest/epub/">epub</a></dd>
+        
+      </dl>
+      <dl>
+        
+        <dt>On Read the Docs</dt>
+          <dd>
+            <a href="http://readthedocs.org/projects/geosuite/?fromdocs=geosuite">Project Home</a>
+          </dd>
+          <dd>
+            <a href="http://readthedocs.org/builds/geosuite/?fromdocs=geosuite">Builds</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+   
+
+</body>
+
+<!-- Mirrored from geosuite.docs.acugis.com/en/latest/resources/nagios.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 13 Jul 2023 23:23:25 GMT -->
+</html>

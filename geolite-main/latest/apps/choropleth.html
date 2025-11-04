@@ -1,0 +1,513 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<!-- Mirrored from geosuite.docs.acugis.com/en/latest/apps/choropleth.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 13 Jul 2023 23:23:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Leaflet Choropleth App &mdash; AcuGIS GeoSuite 0.4.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+<!-- AcuGIS 1 -->
+  
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="../../../_/static/javascript/readthedocs-doc-embed.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Leaflet GeoJson" href="geojson.html" />
+    <link rel="prev" title="Publish Styles Only" href="../qgis/style-only.html" /> 
+
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="../../../_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "apps/choropleth", "programming_language": "perl", "project": "geosuite", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_rtd_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="../../../_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+
+
+                                                                <div id="header" style="position: fixed; height: 70px; padding-bottom: 20px; overflow: hidden; background-color: #28728d;  display: block; z-index: 1000; width: 100%;">
+        <div class="acugis_geosuite" style="color:#fff!important; padding-left:30px; font-size:26px; padding-top: 20px;"><a href="https://geosuite.docs.acugis.com/" style="color:#fff!important; text-decoration:none!important">AcuGIS GeoSuite</a></div>
+
+      </div>
+
+
+  
+
+                                                                
+  
+                                                                
+
+   
+</div>
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        
+        <div id="header2"> </div>
+        
+        
+        
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation" style="padding-top: 45px;">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout.html">Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../webmin.html">Control Panel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../webmin.html#removing-the-control-panel">Removing the Control Panel</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PostGIS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/createdb/index.html">Create Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/postgresql/index.html">PostgreSQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/postgis/index.html">PostGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/pgrouting/index.html">PgRouting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/shp2pgsql/index.html">shp2pgsql</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/osm2pgsql/index.html">osm2pgsql</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/raster2pgsql/index.html">raster2pgsql</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GeoServer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/admin/index.html">Access</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/geoservers/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/tomcat/index.html">Apache Tomcat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/workspace/index.html">Create a Workspace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/store/index.html">Create Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/layer/index.html">Add Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/shp/index.html">Load ESRI Shapefile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geoserver/styles/index.html">Styles</a></li>
+</ul>
+<p class="caption"><span class="caption-text">pg_tileserv</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/pgtileserv/index.html">pg_tileserv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components/pgfeatureserv/index.html">pg_featureserv</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Database Operations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../database/snapshot/index.html">Database Snapshots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../database/clone/index.html">Clone Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../database/restore/index.html">Restore Database</a></li>
+</ul>
+<p class="caption"><span class="caption-text">QGIS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../qgis/home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qgis/pgservice.html">pg_service.conf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qgis/qgis.html">Create a QGIS Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qgis/publish.html">Publish Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qgis/style-only.html">Publish Styles Only</a></li>
+</ul>
+<p class="caption"><span class="caption-text">LeafletJS</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Leaflet Choropleth App</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#intro">Intro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#choropleth-maps">Choropleth Maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#featuresrv-url">featuresrv URL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#querying-features">Querying Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#relative-values">Relative Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#print">Print</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-geoserver">Using GeoServer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="geojson.html">Leaflet GeoJson</a></li>
+<li class="toctree-l1"><a class="reference internal" href="php.html">Leaflet and PHP</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../resources/documents.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/css.html">CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/nagios.html">Nagios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/support.html">Project Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/commercial.html">Commercial Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index-2.html">AcuGIS GeoSuite</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index-2.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Leaflet Choropleth App</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/AcuGIS/GeoSuite/blob/master/docs/apps/choropleth.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="leaflet-choropleth-app">
+<h1><a class="toc-backref" href="#id1">Leaflet Choropleth App</a><a class="headerlink" href="#leaflet-choropleth-app" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#leaflet-choropleth-app" id="id1">Leaflet Choropleth App</a><ul>
+<li><a class="reference internal" href="#intro" id="id2">Intro</a></li>
+<li><a class="reference internal" href="#choropleth-maps" id="id3">Choropleth Maps</a></li>
+<li><a class="reference internal" href="#featuresrv-url" id="id4">featuresrv URL</a></li>
+<li><a class="reference internal" href="#querying-features" id="id5">Querying Features</a></li>
+<li><a class="reference internal" href="#relative-values" id="id6">Relative Values</a></li>
+<li><a class="reference internal" href="#print" id="id7">Print</a></li>
+<li><a class="reference internal" href="#using-geoserver" id="id8">Using GeoServer</a></li>
+<li><a class="reference internal" href="#documentation" id="id9">Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="intro">
+<h2><a class="toc-backref" href="#id2">Intro</a><a class="headerlink" href="#intro" title="Permalink to this headline">¶</a></h2>
+<p>GeoSuite includes a Leaflet Choropleth map using your pg_featurserv installation</p>
+<p>The map can be access via:</p>
+<blockquote>
+<div><a class="reference external" href="http://domain.com/LeafletChoropleth.html">http://domain.com/LeafletChoropleth.html</a></div></blockquote>
+<p>It should appear as below:</p>
+<img alt="../_images/ChoroplethApp.png" src="../_images/ChoroplethApp.png" />
+<img alt="../_images/spacer.png" src="../_images/spacer.png" />
+<p>This map uses Leafletjs and the Leaflet Choropleth Plugin:</p>
+<blockquote>
+<div><a class="reference external" href="https://github.com/timwis/leaflet-choropleth">https://github.com/timwis/leaflet-choropleth</a></div></blockquote>
+</div>
+<div class="section" id="choropleth-maps">
+<h2><a class="toc-backref" href="#id3">Choropleth Maps</a><a class="headerlink" href="#choropleth-maps" title="Permalink to this headline">¶</a></h2>
+<p>A Choropleth map renders coloring based on user defined ranges.</p>
+<p>In the demo map, GDP is used to determine country coloring.</p>
+<p>At top right, a legend is displayed that shows the color range</p>
+<img alt="../_images/gdp-1.png" src="../_images/gdp-1.png" />
+<img alt="../_images/spacer.png" src="../_images/spacer.png" />
+<p>This metric we are using (gdp_md), along with the color and steps between is passed via the choroplethLayer as below:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Add GeoJSON</span>
+<span class="gp">        $</span>.getJSON<span class="o">(</span>full_url,<span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="o">(</span>geojson<span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<span class="go">          var choroplethLayer = L.choropleth(geojson, {</span>
+<span class="go">            valueProperty: &#39;gdp_md&#39;,</span>
+<span class="go">            scale: [&#39;#fbfad4&#39;, &#39;green&#39;],</span>
+<span class="go">            steps: 5,</span>
+<span class="go">            mode: &#39;q&#39;,</span>
+<span class="go">            style: {</span>
+<span class="go">              color: &#39;#fff&#39;,</span>
+<span class="go">              weight: 2,</span>
+<span class="go">              fillOpacity: 0.8</span>
+</pre></div>
+</div>
+<p>The js for our Legend is below and updating the choropleth metric requires only updating the display name:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Add legend</span>
+<span class="go">          var legend = L.control({ position: &#39;topright&#39; })</span>
+<span class="go">          legend.onAdd = function (map) {</span>
+<span class="go">            var div = L.DomUtil.create(&#39;div&#39;, &#39;info legend&#39;)</span>
+<span class="go">            var limits = choroplethLayer.options.limits</span>
+<span class="go">            var colors = choroplethLayer.options.colors</span>
+<span class="go">            var labels = []</span>
+
+<span class="go">            // Add min &amp; max</span>
+<span class="go">            div.innerHTML = `</span>
+<span class="go">                &lt;div class=&quot;labels&quot;&gt;</span>
+<span class="go">                    &lt;div class=&quot;quarter1&quot;&gt;` + limits[0] + `&lt;/div&gt;</span>
+<span class="go">                    &lt;div class=&quot;quarter2&quot;&gt;` + Math.round(((limits[limits.length - 1]-limits[0])*.25)+limits[0]) + `&lt;/div&gt;</span>
+<span class="go">                    &lt;div class=&quot;quarter3&quot;&gt;` + Math.round(((limits[limits.length - 1]-limits[0])*.75)+limits[0]) + `&lt;/div&gt;</span>
+<span class="go">                                &lt;div class=&quot;quarter4&quot;&gt;` + limits[limits.length - 1] + `&lt;/div&gt;</span>
+<span class="go">                        &lt;/div&gt;`</span>
+
+<span class="go">            limits.forEach(function (limit, index) {</span>
+<span class="go">              labels.push(&#39;&lt;li style=&quot;background-color: &#39; + colors[index] + &#39;&quot;&gt;&lt;/li&gt;&#39;)</span>
+<span class="go">            })</span>
+
+<span class="go">            div.innerHTML += &#39;&lt;ul&gt;&#39; + labels.join(&#39;&#39;) + &#39;&lt;/ul&gt; &lt;span&gt;&#39;+humanize(&#39;Median GDP&#39;)+&#39;&lt;/span&gt;&#39;</span>
+
+<span class="go">            return div</span>
+<span class="go">          }</span>
+<span class="go">          legend.addTo(map);</span>
+<span class="go">        });</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="featuresrv-url">
+<h2><a class="toc-backref" href="#id4">featuresrv URL</a><a class="headerlink" href="#featuresrv-url" title="Permalink to this headline">¶</a></h2>
+<p>If you need to change the url for any reason, go to /var/www/html/LeafletChoroDemo.html and edit line 155:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">var full_url = &quot;https://&lt;YourIP&gt;:9001/collections/public.countries/items.json?limit=100&amp;continent=Europe&quot;;</span>
+</pre></div>
+</div>
+<p>Change &lt;YourIP&gt; to your server IP or hostname.</p>
+<p>Note: If you are not using SSL, update the line to use ‘HTTP’ and port to 9000</p>
+</div>
+<div class="section" id="querying-features">
+<h2><a class="toc-backref" href="#id5">Querying Features</a><a class="headerlink" href="#querying-features" title="Permalink to this headline">¶</a></h2>
+<p>In our demo app, we are only limiting the number of items retured (100) and the continent (Europe):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">var full_url = &quot;http://carmen.webgis1.com:9000/collections/public.countries/items.json?limit=100&amp;continent=Europe&quot;;</span>
+</pre></div>
+</div>
+<p>As you can see, this results in a large number of Properies being displayed on click.</p>
+<p>We can change this using the pg_featurserv query parameters.</p>
+<p>Let’s add below to limit the Properties displayed to country name, estimated population, and gdp:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&amp;properties=name,pop_est,gdp_md</span>
+</pre></div>
+</div>
+<p>Our url now becomes:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">var full_url = &quot;http://carmen.webgis1.com:9000/collections/public.countries/items.json?limit=100&amp;continent=Europe&amp;properties=name,pop_est,gdp_md&quot;;</span>
+</pre></div>
+</div>
+<p>Clicking on the map, the properties now becomes more manageable:</p>
+<img alt="../_images/query-2.png" src="../_images/query-2.png" />
+<img alt="../_images/spacer.png" src="../_images/spacer.png" />
+</div>
+<div class="section" id="relative-values">
+<h2><a class="toc-backref" href="#id6">Relative Values</a><a class="headerlink" href="#relative-values" title="Permalink to this headline">¶</a></h2>
+<p>It’s important to note that while properties are the value from the database the Choropleth function shows values relative to our query.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">var full_url = &quot;http://carmen.webgis1.com:9000/collections/public.countries/items.json?limit=100&amp;continent=Europe&amp;properties=name,pop_est,gdp_md&quot;;</span>
+</pre></div>
+</div>
+<p>If we look at the shading for Belarus, for example, it’s GDP is rendered relative to the items (Europe, in our case)</p>
+<img alt="../_images/belarus.png" src="../_images/belarus.png" />
+<img alt="../_images/spacer.png" src="../_images/spacer.png" />
+<p>Let’s now change our Query to remove ‘&amp;continent=Europe’ and increase the limit to 500 to include all countries</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">var full_url = &quot;http://carmen.webgis1.com:9000/collections/public.countries/items.json?limit=500&amp;properties=name,pop_est,gdp_md&quot;;</span>
+</pre></div>
+</div>
+<p>As we can see, the GDP for Belarus relative to the world (and not just Europe) shows a deeper shade of green,as do the other countries of Europe as we are now seeing GDP relative to all countries and not just Europe.</p>
+<img alt="../_images/belarus-3.png" src="../_images/belarus-3.png" />
+<img alt="../_images/spacer.png" src="../_images/spacer.png" />
+</div>
+<div class="section" id="print">
+<h2><a class="toc-backref" href="#id7">Print</a><a class="headerlink" href="#print" title="Permalink to this headline">¶</a></h2>
+<p>Printing for the demo app is enabled by the leaflet.browser.print plugin:</p>
+<blockquote>
+<div><a class="reference external" href="https://github.com/Igor-Vladyka/leaflet.browser.print">https://github.com/Igor-Vladyka/leaflet.browser.print</a></div></blockquote>
+<p>The print plugin offers Portrait, Landscape, Auto, and Custom options</p>
+<p><strong>1.  Click the print icona and select Auto</strong></p>
+<img alt="../_images/print.png" src="../_images/print.png" />
+<img alt="../_images/spacer.png" src="../_images/spacer.png" />
+<p><strong>2. On click a new window will open atop the current window as below.  Select “Save as PDF” from the dropdown.</strong></p>
+<img alt="../_images/print-page.png" src="../_images/print-page.png" />
+<img alt="../_images/spacer.png" src="../_images/spacer.png" />
+<p><strong>3. Depending on your device, you may have additional print/save options as well</strong></p>
+<img alt="../_images/print-options.png" src="../_images/print-options.png" />
+<img alt="../_images/spacer.png" src="../_images/spacer.png" />
+</div>
+<div class="section" id="using-geoserver">
+<h2><a class="toc-backref" href="#id8">Using GeoServer</a><a class="headerlink" href="#using-geoserver" title="Permalink to this headline">¶</a></h2>
+<p>As you may have noticed, our map requires only a json feed.</p>
+<p>In the demo, we are using pg_featurserv, but we can change this to GeoServer with 3 simple changes:</p>
+<p><strong>1. In your GeoServer instance, go to Layer Preview and select GeoJson under WFS for the USA Popular layer</strong></p>
+<img alt="../_images/json-1.png" src="../_images/json-1.png" />
+<img alt="../_images/spacer.png" src="../_images/spacer.png" />
+<p><strong>2. Substiture the full url for pg_featurserv url</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">var full_url = &quot;http://domain.com/geoserver/topp/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=topp:states&amp;maxFeatures=50&amp;outputFormat=application/json&quot;;</span>
+</pre></div>
+</div>
+<p><strong>3. Update line 159 to FAMILIES</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">valueProperty: &#39;FAMILIES&#39;,</span>
+</pre></div>
+</div>
+<p><strong>4. Update line 208 to FAMILIES</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">div.innerHTML += &#39;&lt;ul&gt;&#39; + labels.join(&#39;&#39;) + &#39;&lt;/ul&gt; &lt;span&gt;&#39;+humanize(&#39;FAMILIES&#39;)+&#39;&lt;/span&gt;&#39;</span>
+</pre></div>
+</div>
+<p><strong>5. Refreshing the page should now show our USA Population layer with FAMILIES as you metric:</strong></p>
+<img alt="../_images/geoserver-1.png" src="../_images/geoserver-1.png" />
+<img alt="../_images/spacer.png" src="../_images/spacer.png" />
+</div>
+<div class="section" id="documentation">
+<h2><a class="toc-backref" href="#id9">Documentation</a><a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://access.crunchydata.com/documentation/pg_featureserv/latest/">https://access.crunchydata.com/documentation/pg_featureserv/latest/</a></p>
+<p><a class="reference external" href="https://github.com/timwis/leaflet-choropleth">https://github.com/timwis/leaflet-choropleth</a></p>
+<p><a class="reference external" href="https://github.com/CrunchyData/pg_featureserv">https://github.com/CrunchyData/pg_featureserv</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="geojson.html" class="btn btn-neutral float-right" title="Leaflet GeoJson" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../qgis/style-only.html" class="btn btn-neutral float-left" title="Publish Styles Only" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright acugis
+      <span class="commit">
+        Revision <code>db2a027e</code>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="../index.html">latest</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="http://geosuite.docs.acugis.com/_/downloads/en/latest/pdf/">pdf</a></dd>
+        
+          <dd><a href="http://geosuite.docs.acugis.com/_/downloads/en/latest/htmlzip/">html</a></dd>
+        
+          <dd><a href="http://geosuite.docs.acugis.com/_/downloads/en/latest/epub/">epub</a></dd>
+        
+      </dl>
+      <dl>
+        
+        <dt>On Read the Docs</dt>
+          <dd>
+            <a href="http://readthedocs.org/projects/geosuite/?fromdocs=geosuite">Project Home</a>
+          </dd>
+          <dd>
+            <a href="http://readthedocs.org/builds/geosuite/?fromdocs=geosuite">Builds</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+   
+
+</body>
+
+<!-- Mirrored from geosuite.docs.acugis.com/en/latest/apps/choropleth.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 13 Jul 2023 23:23:24 GMT -->
+</html>

@@ -1,0 +1,516 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<!-- Mirrored from geosuite.docs.acugis.com/en/latest/components/postgresql/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 13 Jul 2023 23:22:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PostgreSQL &mdash; AcuGIS GeoSuite 0.4.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+<!-- AcuGIS 1 -->
+  
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="../../../../_/static/javascript/readthedocs-doc-embed.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="PostGIS" href="../postgis/index.html" />
+    <link rel="prev" title="Create Database" href="../createdb/index.html" /> 
+
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="../../../../_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "components/postgresql/index", "programming_language": "perl", "project": "geosuite", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_rtd_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="../../../../_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+
+
+                                                                <div id="header" style="position: fixed; height: 70px; padding-bottom: 20px; overflow: hidden; background-color: #28728d;  display: block; z-index: 1000; width: 100%;">
+        <div class="acugis_geosuite" style="color:#fff!important; padding-left:30px; font-size:26px; padding-top: 20px;"><a href="https://geosuite.docs.acugis.com/" style="color:#fff!important; text-decoration:none!important">AcuGIS GeoSuite</a></div>
+
+      </div>
+
+
+  
+
+                                                                
+  
+                                                                
+
+   
+</div>
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        
+        <div id="header2"> </div>
+        
+        
+        
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation" style="padding-top: 45px;">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout.html">Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webmin.html">Control Panel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webmin.html#removing-the-control-panel">Removing the Control Panel</a></li>
+</ul>
+<p class="caption"><span class="caption-text">PostGIS</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../createdb/index.html">Create Database</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">PostgreSQL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#repository-manager">Repository Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#file-locations">File Locations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-pg-hba-conf-file">The pg_hba.conf File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-postgresql-conf-file">The postgresql.conf File</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basic-commands">Basic Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#connecting-to-postgresql">Connecting to PostgreSQL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#psql">PSQL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../postgis/index.html">PostGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pgrouting/index.html">PgRouting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shp2pgsql/index.html">shp2pgsql</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../osm2pgsql/index.html">osm2pgsql</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../raster2pgsql/index.html">raster2pgsql</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GeoServer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../geoserver/admin/index.html">Access</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../geoserver/geoservers/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../geoserver/tomcat/index.html">Apache Tomcat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../geoserver/workspace/index.html">Create a Workspace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../geoserver/store/index.html">Create Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../geoserver/layer/index.html">Add Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../geoserver/shp/index.html">Load ESRI Shapefile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../geoserver/styles/index.html">Styles</a></li>
+</ul>
+<p class="caption"><span class="caption-text">pg_tileserv</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pgtileserv/index.html">pg_tileserv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pgfeatureserv/index.html">pg_featureserv</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Database Operations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../database/snapshot/index.html">Database Snapshots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../database/clone/index.html">Clone Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../database/restore/index.html">Restore Database</a></li>
+</ul>
+<p class="caption"><span class="caption-text">QGIS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../qgis/home.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../qgis/pgservice.html">pg_service.conf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../qgis/qgis.html">Create a QGIS Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../qgis/publish.html">Publish Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../qgis/style-only.html">Publish Styles Only</a></li>
+</ul>
+<p class="caption"><span class="caption-text">LeafletJS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../apps/choropleth.html">Leaflet Choropleth App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apps/geojson.html">Leaflet GeoJson</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apps/php.html">Leaflet and PHP</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/documents.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/css.html">CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/nagios.html">Nagios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/support.html">Project Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/commercial.html">Commercial Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index-2.html">AcuGIS GeoSuite</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index-2.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>PostgreSQL</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/AcuGIS/GeoSuite/blob/master/docs/components/postgresql/index.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="postgresql">
+<h1><a class="toc-backref" href="#id1">PostgreSQL</a><a class="headerlink" href="#postgresql" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#postgresql" id="id1">PostgreSQL</a><ul>
+<li><a class="reference internal" href="#repository-manager" id="id2">Repository Manager</a></li>
+<li><a class="reference internal" href="#file-locations" id="id3">File Locations</a></li>
+<li><a class="reference internal" href="#the-pg-hba-conf-file" id="id4">The pg_hba.conf File</a></li>
+<li><a class="reference internal" href="#the-postgresql-conf-file" id="id5">The postgresql.conf File</a><ul>
+<li><a class="reference internal" href="#basic-commands" id="id6">Basic Commands</a><ul>
+<li><a class="reference internal" href="#connecting-to-postgresql" id="id7">Connecting to PostgreSQL</a></li>
+<li><a class="reference internal" href="#psql" id="id8">PSQL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="repository-manager">
+<h2><a class="toc-backref" href="#id2">Repository Manager</a><a class="headerlink" href="#repository-manager" title="Permalink to this headline">¶</a></h2>
+<p>The Repository installer and manager allows you to install your selected version of the PostgreSQL Repository.</p>
+<p>It can be access via the Pg Installer tab as shown below:</p>
+<img alt="../../_images/postgresql-tab.png" src="../../_images/postgresql-tab.png" />
+<p>You can also use the manager to install and update packages as well.</p>
+<p>As certain packages require EPEL for CentOS, the EPEL repository is installed as well when installing on CentOS.</p>
+<img alt="../../_images/pgsql-installer.png" src="../../_images/pgsql-installer.png" />
+</div>
+<div class="section" id="file-locations">
+<h2><a class="toc-backref" href="#id3">File Locations</a><a class="headerlink" href="#file-locations" title="Permalink to this headline">¶</a></h2>
+<p>The PostgreSQL config direcotry is located at:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">postgresql</span><span class="o">/</span><span class="mi">15</span><span class="o">/</span><span class="n">main</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-pg-hba-conf-file">
+<h2><a class="toc-backref" href="#id4">The pg_hba.conf File</a><a class="headerlink" href="#the-pg-hba-conf-file" title="Permalink to this headline">¶</a></h2>
+<p>On installation via the Wizard, PostgreSQL is configured for use with SSL and uses scram-sha-256 authentication for all users and databases.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">local</span><span class="w">   </span>all<span class="w"> </span>all<span class="w">                                 </span>trust
+host<span class="w">    </span>all<span class="w"> </span>all<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w">       </span><span class="m">255</span>.255.255.255<span class="w"> </span>trust
+host<span class="w">    </span>all<span class="w"> </span>all<span class="w"> </span><span class="m">0</span>.0.0.0/0<span class="w">                       </span>scram-sha-256
+host<span class="w">    </span>all<span class="w"> </span>all<span class="w"> </span>::1/128<span class="w">                         </span>scram-sha-256
+hostssl<span class="w"> </span>all<span class="w"> </span>all<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w">       </span><span class="m">255</span>.255.255.255<span class="w"> </span>scram-sha-256
+hostssl<span class="w"> </span>all<span class="w"> </span>all<span class="w"> </span><span class="m">0</span>.0.0.0/0<span class="w">                       </span>scram-sha-256
+hostssl<span class="w"> </span>all<span class="w"> </span>all<span class="w"> </span>::1/128<span class="w">                         </span>scram-sha-256
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-postgresql-conf-file">
+<h2><a class="toc-backref" href="#id5">The postgresql.conf File</a><a class="headerlink" href="#the-postgresql-conf-file" title="Permalink to this headline">¶</a></h2>
+<p>On installation via the Wizard, PostgreSQL is configured to accept connections on all interfaces as well as SSL connections.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#------------------------------------------------------------------------------</span>
+<span class="c1"># CONNECTIONS AND AUTHENTICATION</span>
+<span class="c1">#------------------------------------------------------------------------------</span>
+
+<span class="c1"># - Connection Settings -</span>
+
+<span class="nv">listen_addresses</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;*&#39;</span>
+<span class="o">)</span>
+
+
+<span class="c1"># - SSL -</span>
+
+<span class="nv">ssl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>on
+</pre></div>
+</div>
+<p>Above are excepts.</p>
+<p>On installation, the native PostgreSQL Database Server module is also activated.</p>
+<p>It is located under Servers &gt; PostgreSQL Database Server</p>
+<img alt="../../_images/PostgreSQL-Webmin.png" src="../../_images/PostgreSQL-Webmin.png" />
+<div class="section" id="basic-commands">
+<h3><a class="toc-backref" href="#id6">Basic Commands</a><a class="headerlink" href="#basic-commands" title="Permalink to this headline">¶</a></h3>
+<p>Below are some basic PSQL commands.</p>
+<p>PostgreSQL documentation, both from PostgreSQL.org and other sources, is extensive.</p>
+<p><a class="reference external" href="https://www.postgresql.org/docs/current/tutorial.html">https://www.postgresql.org/docs/current/tutorial.html</a></p>
+<p><a class="reference external" href="https://www.postgresqltutorial.com/">https://www.postgresqltutorial.com/</a></p>
+<div class="section" id="connecting-to-postgresql">
+<h4><a class="toc-backref" href="#id7">Connecting to PostgreSQL</a><a class="headerlink" href="#connecting-to-postgresql" title="Permalink to this headline">¶</a></h4>
+<p>There are a number of options for viewing your PostgreSQL data.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>PSQL command line</li>
+<li>PgAdmin</li>
+<li>Control Panel</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="psql">
+<h4><a class="toc-backref" href="#id8">PSQL</a><a class="headerlink" href="#psql" title="Permalink to this headline">¶</a></h4>
+<p>Connect via SSH and su to postgres</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">root@demo:# </span>su<span class="w"> </span>-<span class="w"> </span>postgres
+</pre></div>
+</div>
+<p>Start psql</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">postgres@demo:~$ </span>psql
+<span class="go">psql (15.3 (Ubuntu 15.3-1.pgdg22.04+1))</span>
+<span class="go">Type &quot;help&quot; for help.</span>
+</pre></div>
+</div>
+<p>List all databases using the ‘\l’ command</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">postgres=# \l</span>
+<span class="go">                                              List of databases</span>
+<span class="go">    Name    |  Owner   | Encoding | Collate |  Ctype  | ICU Locale | Locale Provider |   Access privileges</span>
+<span class="go">------------+----------+----------+---------+---------+------------+-----------------+-----------------------</span>
+<span class="go"> geostore   | postgres | UTF8     | C.UTF-8 | C.UTF-8 |            | libc            |</span>
+<span class="go"> geodb      | geouser  | UTF8     | C.UTF-8 | C.UTF-8 |            | libc            |</span>
+<span class="go"> postgisftw | pgis     | UTF8     | C.UTF-8 | C.UTF-8 |            | libc            |</span>
+<span class="go"> postgres   | postgres | UTF8     | C.UTF-8 | C.UTF-8 |            | libc            |</span>
+<span class="go"> template0  | postgres | UTF8     | C.UTF-8 | C.UTF-8 |            | libc            | =c/postgres          +</span>
+<span class="go">            |          |          |         |         |            |                 | postgres=CTc/postgres</span>
+<span class="go"> template1  | postgres | UTF8     | C.UTF-8 | C.UTF-8 |            | libc            | =c/postgres          +</span>
+<span class="go">            |          |          |         |         |            |                 | postgres=CTc/postgres</span>
+<span class="gp gp-VirtualEnv">(5 rows)</span>
+</pre></div>
+</div>
+<p>Connect to target database (in this case, postgisftw) using the ‘\c’ command</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">postgres=# \c postgisftw</span>
+<span class="go">You are now connected to database &quot;postgisftw&quot; as user &quot;postgres&quot;.</span>
+</pre></div>
+</div>
+<p>List tables in database using the ‘\dt’ command</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go"> postgisftw=# \dt</span>
+<span class="go">               List of relations</span>
+<span class="go"> Schema |       Name        | Type  |  Owner</span>
+<span class="go">--------+-------------------+-------+----------</span>
+<span class="go"> public | configuration     | table | pgis</span>
+<span class="go"> public | countries         | table | pgis</span>
+<span class="go"> public | pointsofinterest  | table | pgis</span>
+<span class="go"> public | spatial_ref_sys   | table | postgres</span>
+<span class="go"> public | ways              | table | pgis</span>
+<span class="go"> public | ways_vertices_pgr | table | pgis</span>
+<span class="gp gp-VirtualEnv">(6 rows)</span>
+</pre></div>
+</div>
+<p>Select country name from the countries table, limited to 10:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">postgisftw=# select name from countries limit 10;</span>
+<span class="go">           name</span>
+<span class="go">--------------------------</span>
+<span class="go"> Zimbabwe</span>
+<span class="go"> Zambia</span>
+<span class="go"> Montserrat</span>
+<span class="go"> Yemen</span>
+<span class="go"> Vanuatu</span>
+<span class="go"> Uruguay</span>
+<span class="go"> Vietnam</span>
+<span class="go"> Micronesia</span>
+<span class="go"> Venezuela</span>
+<span class="go"> Vatican</span>
+<span class="go"> (10 rows)</span>
+</pre></div>
+</div>
+<p>Select country name from the countries table, limited to 10, sorting acecnded:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">postgisftw=# select name from countries order by name ASC limit 10;</span>
+<span class="go">       name</span>
+<span class="go">-------------------</span>
+<span class="go"> Afghanistan</span>
+<span class="go"> Albania</span>
+<span class="go"> Algeria</span>
+<span class="go"> American Samoa</span>
+<span class="go"> Andorra</span>
+<span class="go"> Angola</span>
+<span class="go"> Anguilla</span>
+<span class="go"> Antarctica</span>
+<span class="go"> Antigua and Barb.</span>
+<span class="go"> Argentina</span>
+<span class="gp gp-VirtualEnv">(10 rows)</span>
+</pre></div>
+</div>
+<p>postgisftw=#</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../postgis/index.html" class="btn btn-neutral float-right" title="PostGIS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../createdb/index.html" class="btn btn-neutral float-left" title="Create Database" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright acugis
+      <span class="commit">
+        Revision <code>db2a027e</code>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="../../index.html">latest</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="http://geosuite.docs.acugis.com/_/downloads/en/latest/pdf/">pdf</a></dd>
+        
+          <dd><a href="http://geosuite.docs.acugis.com/_/downloads/en/latest/htmlzip/">html</a></dd>
+        
+          <dd><a href="http://geosuite.docs.acugis.com/_/downloads/en/latest/epub/">epub</a></dd>
+        
+      </dl>
+      <dl>
+        
+        <dt>On Read the Docs</dt>
+          <dd>
+            <a href="http://readthedocs.org/projects/geosuite/?fromdocs=geosuite">Project Home</a>
+          </dd>
+          <dd>
+            <a href="http://readthedocs.org/builds/geosuite/?fromdocs=geosuite">Builds</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+   
+
+</body>
+
+<!-- Mirrored from geosuite.docs.acugis.com/en/latest/components/postgresql/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 13 Jul 2023 23:22:03 GMT -->
+</html>
