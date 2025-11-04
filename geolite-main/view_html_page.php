@@ -41,7 +41,7 @@ try {
         <style>
             body { margin: 0; padding: 0; }
             .return-header {
-                background: #696969;
+                background: #fff;
                 padding: 10px 20px;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
                 position: sticky;
@@ -162,7 +162,7 @@ try {
     <body>
         <div class="return-header d-flex justify-content-between align-items-center">
             <div style="width: 100px;"></div>
-            <h1 class="page-title">' . htmlspecialchars($page['title']) . '</h1>
+            <h1 class="page-title" style="color:#333">' . htmlspecialchars($page['title']) . '</h1>
             <a href="index.php" class="return-btn">
                 <i class="bi bi-arrow-left"></i> Return
             </a>

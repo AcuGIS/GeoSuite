@@ -99,12 +99,12 @@ ob_end_flush();
 }
 
         body {
-            background: var(--md-surface-variant);
+            background: #fff;
             min-height: 100vh;
             padding: 0;
         }
         .header {
-            background: var(--md-surface);
+            background: whitesmoke;
             border-radius: 0;
             padding: 1.5rem; 
             margin-bottom: 1.5rem;
@@ -144,6 +144,12 @@ ob_end_flush();
             box-shadow: var(--elev-card-hover);
             transform: translateY(-2px);
         }
+        .clickable-card {
+            cursor: pointer;
+        }
+        .clickable-card:hover {
+            cursor: pointer;
+        }
         .card-header-custom {
             background: var(--md-surface);
             border-bottom: 1px solid var(--md-outline);
@@ -177,8 +183,9 @@ ob_end_flush();
             color: #999;
             margin-top: auto;
             padding-top: 8px;
-            border-top: 1px solid #eee;
+            border-top: 0px solid #eee;
             line-height: 1.3;
+            display:none;
         }
         .card-actions {
             display: flex;
@@ -237,6 +244,13 @@ ob_end_flush();
             background-color: #f8f9fa;
             color: #333;
         }
+        .dropdown-menu-custom {
+            position: relative;
+            z-index: 1000;
+        }
+        .dropdown-menu-custom a {
+            cursor: pointer;
+        }
         .dropdown-item-custom i {
             width: 16px;
             text-align: center;
@@ -262,7 +276,7 @@ ob_end_flush();
             margin-bottom: 30px;
         }
         .create-btn {
-            background: #fff;
+            background: whitesmoke;
             border: none;
             padding: 12px 10px;
             border-radius: 25px;
@@ -357,7 +371,7 @@ ob_end_flush();
   padding: 12px;  /* was 20px */
 }
 .card-header-custom {
-  padding: 8px;   /* was 12px */
+  padding: 12px;   
 }
 .card-header-custom h3 {
   font-size: 0.9rem;  /* smaller title */
@@ -741,7 +755,7 @@ body.search-panel-open {
                     </div>
                     <?php foreach ($maps as $map): ?>
                         <div class="col-md-6 col-lg-3">
-                        <div class="map-card" data-category-id="<?= $map['category_id'] ?? '' ?>">
+                        <div class="map-card clickable-card" data-category-id="<?= $map['category_id'] ?? '' ?>" data-href="view_map.php?id=<?php echo $map['id']; ?>">
                             <div class="card-header-custom">
                                 <h3><i class="bi bi-geo-alt-fill"></i> <?php echo htmlspecialchars($map['title']); ?></h3>
                             </div>
@@ -774,13 +788,10 @@ body.search-panel-open {
                                         <div><i class="bi bi-clock-history"></i> Updated: <?php echo date('M j, Y g:i A', strtotime($map['updated_at'])); ?></div>
                                     <?php endif; ?>
                                 </div>
+                                <?php if (canEdit('map', $map['id']) || canDelete('map', $map['id'])): ?>
                                 <div class="card-actions">
-                                    <a href="view_map.php?id=<?php echo $map['id']; ?>" class="btn btn-primary btn-view">
-                                        <i class="bi bi-eye"></i> View
-                                    </a>
-                                    <?php if (canEdit('map', $map['id']) || canDelete('map', $map['id'])): ?>
                                     <div class="dropdown">
-                                        <button class="dropdown-toggle-custom" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button class="dropdown-toggle-custom" type="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="event.stopPropagation();">
                                             <i class="bi bi-three-dots"></i>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-custom">
@@ -793,8 +804,8 @@ body.search-panel-open {
                                             <?php endif; ?>
                                         </ul>
                                     </div>
-                                    <?php endif; ?>
                                 </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -802,7 +813,7 @@ body.search-panel-open {
 
                     <?php foreach ($dashboards as $dashboard): ?>
                         <div class="col-md-6 col-lg-3">
-                        <div class="dashboard-card" data-category-id="<?= $dashboard['category_id'] ?? '' ?>">
+                        <div class="dashboard-card clickable-card" data-category-id="<?= $dashboard['category_id'] ?? '' ?>" data-href="view_dashboard.php?id=<?php echo $dashboard['id']; ?>">
                             <div class="card-header-custom">
                                 <h3><i class="bi bi-speedometer2"></i> <?php echo htmlspecialchars($dashboard['title']); ?></h3>
                             </div>
@@ -835,13 +846,10 @@ body.search-panel-open {
                                         <div><i class="bi bi-clock-history"></i> Updated: <?php echo date('M j, Y g:i A', strtotime($dashboard['updated_at'])); ?></div>
                                     <?php endif; ?>
                                 </div>
+                                <?php if (canEdit('dashboard', $dashboard['id']) || canDelete('dashboard', $dashboard['id'])): ?>
                                 <div class="card-actions">
-                                    <a href="view_dashboard.php?id=<?php echo $dashboard['id']; ?>" class="btn btn-primary btn-view">
-                                        <i class="bi bi-eye"></i> View
-                                    </a>
-                                    <?php if (canEdit('dashboard', $dashboard['id']) || canDelete('dashboard', $dashboard['id'])): ?>
                                     <div class="dropdown">
-                                        <button class="dropdown-toggle-custom" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button class="dropdown-toggle-custom" type="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="event.stopPropagation();">
                                             <i class="bi bi-three-dots"></i>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-custom">
@@ -854,8 +862,8 @@ body.search-panel-open {
                                             <?php endif; ?>
                                         </ul>
                                     </div>
-                                    <?php endif; ?>
                                 </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -863,7 +871,7 @@ body.search-panel-open {
 
                     <?php foreach ($documents as $doc): ?>
                         <div class="col-md-6 col-lg-3">
-                        <div class="map-card" data-category-id="<?= $doc['category_id'] ?? '' ?>">
+                        <div class="map-card clickable-card" data-category-id="<?= $doc['category_id'] ?? '' ?>" data-href="view_document.php?id=<?php echo $doc['id']; ?>" data-target="_blank">
                             <div class="card-header-custom">
                                 <h3><i class="bi bi-file-earmark"></i> <?php echo htmlspecialchars($doc['title']); ?></h3>
                             </div>
@@ -896,13 +904,10 @@ body.search-panel-open {
                                     <div><i class="bi bi-calendar3"></i> Created: <?php echo date('M j, Y g:i A', strtotime($doc['created_at'])); ?></div>
                                 </div>
 
+                                <?php if (canEdit('document', $doc['id']) || canDelete('document', $doc['id'])): ?>
                                 <div class="card-actions">
-                                    <a href="view_document.php?id=<?php echo $doc['id']; ?>" class="btn btn-primary btn-view" target="_blank">
-                                        <i class="bi bi-download"></i> Download
-                                    </a>
-                                    <?php if (canEdit('document', $doc['id']) || canDelete('document', $doc['id'])): ?>
                                     <div class="dropdown">
-                                        <button class="dropdown-toggle-custom" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button class="dropdown-toggle-custom" type="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="event.stopPropagation();">
                                             <i class="bi bi-three-dots"></i>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-custom">
@@ -912,8 +917,8 @@ body.search-panel-open {
                                             <?php endif; ?>
                                         </ul>
                                     </div>
-                                    <?php endif; ?>
                                 </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -921,7 +926,7 @@ body.search-panel-open {
 
                     <?php foreach ($htmlPages as $page): ?>
                         <div class="col-md-6 col-lg-3">
-                        <div class="map-card" data-category-id="<?= $page['category_id'] ?? '' ?>">
+                        <div class="map-card clickable-card" data-category-id="<?= $page['category_id'] ?? '' ?>" data-href="view_html_page.php?id=<?php echo $page['id']; ?>">
                             <div class="card-header-custom">
                                 <h3><i class="bi bi-file-code"></i> <?php echo htmlspecialchars($page['title']); ?></h3>
                             </div>
@@ -954,13 +959,10 @@ body.search-panel-open {
                                         <div><i class="bi bi-clock-history"></i> Updated: <?php echo date('M j, Y g:i A', strtotime($page['updated_at'])); ?></div>
                                     <?php endif; ?>
                                 </div>
+                                <?php if (canEdit('html_page', $page['id']) || canDelete('html_page', $page['id'])): ?>
                                 <div class="card-actions">
-                                    <a href="view_html_page.php?id=<?php echo $page['id']; ?>" class="btn btn-primary btn-view">
-                                        <i class="bi bi-eye"></i> View
-                                    </a>
-                                    <?php if (canEdit('html_page', $page['id']) || canDelete('html_page', $page['id'])): ?>
                                     <div class="dropdown">
-                                        <button class="dropdown-toggle-custom" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button class="dropdown-toggle-custom" type="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="event.stopPropagation();">
                                             <i class="bi bi-three-dots"></i>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-custom">
@@ -970,8 +972,8 @@ body.search-panel-open {
                                             <?php endif; ?>
                                         </ul>
                                     </div>
-                                    <?php endif; ?>
                                 </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -1339,6 +1341,34 @@ body.search-panel-open {
             const searchInput = document.getElementById('searchInput');
             const filterCheckboxes = document.querySelectorAll('.filter-checkbox input[type="checkbox"]');
             const categoryFilter = document.getElementById('categoryFilter');
+            
+            // Make cards clickable
+            document.querySelectorAll('.clickable-card').forEach(function(card) {
+                card.addEventListener('click', function(e) {
+                    // Don't navigate if clicking on dropdown or dropdown menu
+                    if (e.target.closest('.dropdown') || e.target.closest('.dropdown-menu')) {
+                        return;
+                    }
+                    
+                    const href = card.getAttribute('data-href');
+                    const target = card.getAttribute('data-target');
+                    
+                    if (href) {
+                        if (target === '_blank') {
+                            window.open(href, '_blank');
+                        } else {
+                            window.location.href = href;
+                        }
+                    }
+                });
+            });
+            
+            // Prevent dropdown menu clicks from triggering card navigation
+            document.querySelectorAll('.dropdown-menu-custom a').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
             
             // Search on input
             searchInput.addEventListener('input', performSearch);
