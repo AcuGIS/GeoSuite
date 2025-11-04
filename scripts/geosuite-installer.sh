@@ -465,15 +465,9 @@ function install_geolite(){
 	touch /root/auth.txt
 	export DEBIAN_FRONTEND=noninteractive
 	
-	#if [ ! -d geolite-main ]; then
-    	#wget -P/tmp https://github.com/AcuGIS/GeoLite/archive/refs/heads/main.zip
-    	#unzip /tmp/main.zip
-    	#rm -f /tmp/main.zip
-	#fi
-
 	pushd /tmp/GeoSuite-master/geolite-main
 	    chmod +x installer/app-install.sh
-	    ./installer/app-install.sh ${GEOLITE_DEMO} /var/www/html/geolite
+	    ./installer/app-install.sh ${GEOLITE_DEMO} /var/www/html/app
 	popd
 
 	rm -rf geolite-main
