@@ -423,6 +423,8 @@ function install_deps(){
 	apt-add-repository -y universe
 
 	apt-get -y install wget unzip apache2 bzip2 rename php libapache2-mod-php php-pgsql
+	sed -i.save "/<VirtualHost /a\ ServerName ${HNAME}" /etc/apache2/sites-available/000-default.conf
+	a2ensite 000-default
 	
 	# Get Tomcat latest version and set CATALINA_HOME
 	TOMCAT_VER=$(wget -q -O- --no-check-certificate https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR}/ | sed -n "s|.*<a href=\"v\(${TOMCAT_MAJOR}\.[0-9.]\+\)/\">v.*|\1|p" | sort -V | tail -n 1)
