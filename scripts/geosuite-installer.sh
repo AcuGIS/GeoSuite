@@ -465,16 +465,33 @@ function provision_ssl(){
 }
 
 function install_geolite(){
-	touch /root/auth.txt
-	export DEBIAN_FRONTEND=noninteractive
-	
-	pushd /tmp/GeoSuite-master/geolite-main
-	    chmod +x installer/app-install.sh
-	    ./installer/app-install.sh ${GEOLITE_DEMO} /var/www/html/geolite
-	popd
+  set -euo pipefail
+  touch /root/auth.txt
+  export DEBIAN_FRONTEND=noninteractive
 
-	rm -rf geolite-main
+  local SRC="/tmp/GeoSuite-master/geolite-main"
+  local DEST="/var/www/html/geolite"
+
+  # sanity checks
+  if [[ ! -d "$SRC" ]]; then
+    echo "Error: GeoLite source not found at $SRC"
+    exit 1
+  fi
+  if [[ ! -f "$SRC/installer/app-install.sh" ]]; then
+    echo "Error: $SRC/installer/app-install.sh missing"
+    exit 1
+  fi
+  chmod +x "$SRC/installer/app-install.sh"
+
+  # run quietly and capture a log for troubleshooting
+  pushd "$SRC" >/dev/null
+  ./installer/app-install.sh ${GEOLITE_DEMO:+$GEOLITE_DEMO} "$DEST" 2>&1 | tee /tmp/geolite-install.log
+  popd >/dev/null
+
+  # keep sources for re-runs; if you really want to delete them, use the absolute path:
+  # rm -rf "/tmp/GeoSuite-master/geolite-main"
 }
+
 
 ################################################################################
 
