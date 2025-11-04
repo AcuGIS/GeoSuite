@@ -403,7 +403,7 @@ function menu(){
 	
 	exitstatus=$?
 	if [ $exitstatus == 0 ]; then
-    	GEOLITE_='-with-'
+    	GEOLITE_='-with-demo'
 	fi
 	
 	# enable error flag
@@ -470,7 +470,7 @@ function install_geolite(){
 	
 	pushd /tmp/GeoSuite-master/geolite-main
 	    chmod +x installer/app-install.sh
-	    ./installer/app-install.sh /var/www/html/geolite
+	    ./installer/app-install.sh ${GEOLITE_DEMO} /var/www/html/geolite
 	popd
 
 	rm -rf geolite-main
