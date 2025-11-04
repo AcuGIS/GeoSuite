@@ -7,7 +7,7 @@ ADMIN_APP_PASS='geolite';
 WWW_DIR='/var/www/html/geolite'
 DATA_DIR='/var/www/data'
 #CACHE_DIR='/var/www/cache'
-WITH_DEMO='false'
+WITH_DEMO='true'
 
 HNAME=$(hostname -f)
 
@@ -23,8 +23,8 @@ if [ ! -d installer ]; then
 	exit 1
 fi
 
-if [ $# -ge 1 ] && [ "$1" -eq '--with-demo' ]; then
-    WITH_DEMO='true'
+if [ $# -ge 1 ] && [ "$1" -eq '--no-demo' ]; then
+    WITH_DEMO='false'
     shift;
 fi
 

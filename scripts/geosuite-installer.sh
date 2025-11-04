@@ -27,8 +27,6 @@ DATA_DIR='/var/www/data'
 CACHE_DIR='/var/www/cache'
 APPS_DIR='/var/www/html/apps'
 
-GEOLITE_DEMO=''
-
 #Create certificate for use by postgres
 
 function make_cert_key(){
@@ -397,14 +395,6 @@ function menu(){
 			BUILD_SSL='yes'
 	fi
 	
-	whiptail --title "GeoLite " --yesno \
-		"Install demos for GeoLite ?" 8 78
-
-	exitstatus=$?
-	if [ $exitstatus == 0 ]; then
-	  GEOLITE_DEMO='--with-demo'
-	fi
-	
 	# enable error flag
 	set -e
 	
@@ -483,7 +473,7 @@ function install_geolite(){
 
   # run quietly and capture a log for troubleshooting
   pushd "$SRC" >/dev/null
-  ./installer/app-install.sh ${GEOLITE_DEMO:+$GEOLITE_DEMO} 2>&1 | tee /tmp/geolite-install.log
+  ./installer/app-install.sh 2>&1 | tee /tmp/geolite-install.log
   popd >/dev/null
 
   # keep sources for re-runs; if you really want to delete them, use the absolute path:
