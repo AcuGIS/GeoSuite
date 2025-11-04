@@ -190,19 +190,10 @@ function install_geoserver_module(){
 	ProxyPreserveHost On
 </Location>
 EOF
-
-cat >/etc/apache2/sites-available/000-default.conf <<CMD_EOF
-  <VirtualHost *:80>
-    ServerAdmin webmaster@localhost
-    ServerName ${HNAME}
-    DocumentRoot /var/www/html
-
-    ErrorLog \${APACHE_LOG_DIR}/error.log
-    CustomLog \${APACHE_LOG_DIR}/access.log combined    
-  </VirtualHost>  
-EOF  
+  
 	echo -e "repo_ver=${PG_VER}\n" > /etc/webmin/geoserver/repo_ver.txt
 }
+
 
 
 
