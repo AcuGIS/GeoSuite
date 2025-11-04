@@ -398,7 +398,8 @@ function menu(){
 	fi
 	
 	whiptail --title "GeoLite " --yesno \
-		"Install s for GeoLite ?" 8 78
+		"Install demos for GeoLite ?" 8 78
+
 	exitstatus=$?
 	if [ $exitstatus == 0 ]; then
 	  GEOLITE_DEMO='--with-demo'
