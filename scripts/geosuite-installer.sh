@@ -469,7 +469,6 @@ function install_geolite(){
   export DEBIAN_FRONTEND=noninteractive
 
   local SRC="/tmp/GeoSuite-master/geolite-main"
-  local DEST="/var/www/html/geolite"
 
   # sanity checks
   if [[ ! -d "$SRC" ]]; then
@@ -484,7 +483,7 @@ function install_geolite(){
 
   # run quietly and capture a log for troubleshooting
   pushd "$SRC" >/dev/null
-  ./installer/app-install.sh ${GEOLITE_DEMO:+$GEOLITE_DEMO} "$DEST" 2>&1 | tee /tmp/geolite-install.log
+  ./installer/app-install.sh ${GEOLITE_DEMO:+$GEOLITE_DEMO} 2>&1 | tee /tmp/geolite-install.log
   popd >/dev/null
 
   # keep sources for re-runs; if you really want to delete them, use the absolute path:

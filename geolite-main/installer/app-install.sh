@@ -4,7 +4,7 @@ APP_DB='geolite'
 APP_DB_PASS=$(< /dev/urandom tr -dc _A-Za-z0-9 | head -c32);
 ADMIN_APP_PASS='geolite';
 
-WWW_DIR='/var/www/html'
+WWW_DIR='/var/www/html/geolite'
 DATA_DIR='/var/www/data'
 #CACHE_DIR='/var/www/cache'
 WITH_DEMO='false'
