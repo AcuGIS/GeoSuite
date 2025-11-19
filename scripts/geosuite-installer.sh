@@ -444,6 +444,7 @@ function whiptail_gauge(){
 	
 	step=$(cat /tmp/step)
 	if [ $step != $((MAX_STEPS-1)) ]; then
+		let step=step+1
 		echo "Installation failed at step $step. Check /tmp/${CMDS[$step]}.log for errors!"
 		exit 1
 	fi
