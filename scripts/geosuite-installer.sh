@@ -485,11 +485,8 @@ function install_geolite(){
 ################################################################################
 
 declare -x STEPS=(
-  'Checking Requirements...'
-  'Installing Demo Data....'
 	'Installing Libraries....'
 	'Installing LeafletJS Apps...'
-	'Setting Up Users...'
 	'Installing PostgreSQL Repository....'
 	'Installing PostGIS Packages....'
 	'Installing Java....'
