@@ -451,7 +451,7 @@ function whiptail_gauge(){
 }
 
 function provision_ssl(){
-	/bin/bash /tmp/build-ssl.sh || true
+    bash /tmp/GeoSuite-master/scripts/build-ssl.sh || true
 }
 
 function install_geolite(){
