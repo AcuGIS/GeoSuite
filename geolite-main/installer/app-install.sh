@@ -94,7 +94,7 @@ if [ ${WITH_DEMO} == 'true' ]; then
 psql -d ${APP_DB} < installer/demo/demo.sql
 CMD_EOF
     cp -r installer/demo/data/uploads      ${DATA_DIR}/
-    cp -r installer/demo/assets/thumbnails ${WWW_DIR}/geolite/assets/
+    cp -r installer/demo/assets/thumbnails ${WWW_DIR}/assets/
 fi
 
 # save 1Gb of space
