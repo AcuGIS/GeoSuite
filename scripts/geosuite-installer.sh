@@ -392,7 +392,9 @@ function menu(){
 	
 	exitstatus=$?
 	if [ $exitstatus == 0 ]; then
-			BUILD_SSL='yes'
+		BUILD_SSL='yes'
+		STEPS+=("Provisioning SSL")
+		CMDS+=('provision_ssl')
 	fi
 	
 	# enable error flag
@@ -513,11 +515,6 @@ for mod in ${WEBMIN_MODS}; do
 	STEPS+=("${mod} module")
 	CMDS+=("install_${mod}_module")
 done
-
-if [ ${BUILD_SSL} == 'yes' ]; then
-	STEPS+=("Provisioning SSL")
-	CMDS+=('provision_ssl')
-fi
 
 # -------------------- #
 menu;
